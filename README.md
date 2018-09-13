@@ -1,2 +1,2 @@
 # gedcom-parser
-SSW-555 Agile Methods GEDCOM Parser Project
+SSW-555 GEDCOM Parser Project
