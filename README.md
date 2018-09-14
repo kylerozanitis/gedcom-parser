@@ -40,4 +40,11 @@ Has not been define yet.
 
 This project is for Agile Methods for Software Engineering (SSW 555)
 
+#### Participants for this Team project are:
+
+1. Kshiti Rana
+2. Jose Lara
+3. Kyle Rozanitis
+4. Pratik Shah
+
 ----
