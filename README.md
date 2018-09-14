@@ -1,2 +1,43 @@
-# gedcom-parser
+# GEDCOM Parser
 SSW-555 GEDCOM Parser Project
+
+### Description:
+The propose of this application is to extract data from a GEDCOM file and create a family tree.
+
+### What you need to run this code for the first time: 
+
+#### From the Terminal
+1. Clone Repo:
+    - git clone https://github.com/kylerozanitis/gedcom-parser.git
+2. Activate the virtual Enviorment:
+    - source venv/bin/activate
+3. Install dependencies: 
+    - pip install -r requirements.txt
+4. Run program:
+    - python app.py
+    
+### What you need to run this code going Forward: 
+1. Activate the virtual Enviorment:
+    - source venv/bin/activate
+2. Pull from repo: 
+    - git pull origin master
+3. Run program:
+    - python app.py
+    
+#### If installing a package using pip:
+    - Run pip freeze >> requirements.txt
+
+#### If installing a package listed on requirements.txt:
+    - Run pip install -r requirements.txt
+
+
+#### Software Requirement Specification for project:
+
+Has not been define yet.
+
+
+----
+
+This project is for Agile Methods for Software Engineering (SSW 555)
+
+----
