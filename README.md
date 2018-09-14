@@ -5,7 +5,7 @@ SSW-555 GEDCOM Parser Project
 The propose of this application is to extract data from a GEDCOM file and create a family tree.
 
 ### Project Documents:
-- [Project Dynamics](https://docs.google.com/document/d/1LiciV9Ie4mz37JO7DJmIULuh8Z7eJJ04hmHaDiUNLjU/edit)
+- [Project Dynamics](https://docs.google.com/document/d/1LiciV9Ie4mz37JO7DJmIULuh8Z7eJJ04hmHaDiUNLjU/edit?usp=sharing)
 
 ### What you need to run this code for the first time: 
 
