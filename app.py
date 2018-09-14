@@ -15,9 +15,8 @@
 # Library imports
 from prettytable import PrettyTable
 
-def main():
-    """Main Fuction program Execution"""
-
+def create_table():
+    """Example Function for PrettyTable"""
     tbl = PrettyTable()
     tbl.field_names = ["City name", "Area", "Population", "Annual Rainfall"]
 
@@ -29,7 +28,18 @@ def main():
     tbl.add_row(["Melbourne", 1566, 3806092, 646.9])
     tbl.add_row(["Perth", 5386, 1554769, 869.4])
 
+    # return tbl
+    if __name__ == '__main__':
+        return tbl
+    else:
+        return 1
+
+def main():
+    """Main Function program Execution"""
+
+    tbl = create_table()
     print(tbl)
+
 
 if __name__ == '__main__':
     main()
