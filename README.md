@@ -33,7 +33,8 @@ The propose of this application is to extract data from a GEDCOM file and create
 #### If installing a package listed on requirements.txt:
     - Run pip install -r requirements.txt
 
-
+#### For SQLite Installation Go to our Wiki Pages: 
+    - [Here](https://github.com/kylerozanitis/gedcom-parser/wiki/SQLite)
 #### Software Requirement Specification for project:
 
 Has not been define yet.
