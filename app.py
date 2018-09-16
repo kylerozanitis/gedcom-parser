@@ -15,7 +15,7 @@
 # Library imports
 from prettytable import PrettyTable
 import os
-from classes import individualPerson
+from classes import individualPerson, familyClass
 
 individual_data = dict()
 family_data = dict()
@@ -44,6 +44,7 @@ def read_data_file(file_name):
 
 def data_parser(data):
     current_individual = ""
+    current_family = ""
     current_tag = ""
     for item in data:
         if item[0] == "0" and len(item) < 3:
@@ -63,6 +64,22 @@ def data_parser(data):
         elif item[0] == "2" and item[1] == "DATE":
             i1 = individual_data[current_individual]
             i1.current_tag = item[2:]
+        
+        elif item[0] == "0" and item[2] == "FAM":
+            current_family = item[1]
+            family_data[current_family] = familyClass(current_family)
+        elif item[0] == "1" and item[1] in ["HUSB", "WIFE"]:
+            f1 = family_data[current_family]
+            current_tag = item[1].lower()
+            f1.current_tag = item[2]
+        elif item[0] == "1" and item[1] == "CHIL":
+            f1 = family_data[current_family]
+            current_tag = item[1].lower()
+            f1.current_tag.append(item[2])
+        elif item[0] == "1" and item[1] in ["MARR", "DIV"]:
+            current_tag = item[1].lower()
+            f1 = family_data[current_family]
+            f1.current_tag = item[2:]
 
 
 def create_table():
