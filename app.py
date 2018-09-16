@@ -15,6 +15,10 @@
 # Library imports
 from prettytable import PrettyTable
 
+
+
+
+
 def create_table():
     """Example Function for PrettyTable"""
     tbl = PrettyTable()
@@ -40,7 +44,7 @@ def main():
     """Main Function program Execution"""
 
     tbl = create_table()
-    print(tbl)
+    read_data_file('My_Family.ged')
 
 
 if __name__ == '__main__':
