@@ -10,7 +10,7 @@ class TestTable(unittest.TestCase):
 
 
     def test_hello(self):
-        self.assertEqual('hello','hello', True)
+        self.assertEqual('hello','Hello', True)
 
 if __name__ == '__main__':
     print('Running unit tests')
