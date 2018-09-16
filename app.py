@@ -120,45 +120,63 @@ def data_parser_try(data):
         elif each[1] == "CHIL":
             family_dict[each[1]].append(each[2])
 
-
 def data_parser(data):
+    """ Reads through the passed-in clean data and creates individuals and
+    families from the classes.py file. All individuals have a UID, name, birth,
+    and sex, and may also have death date, famc, or fams. Families have an FID,
+    married date, husband ID, wife ID, and a list of children IDs, and may have
+    a divorced date as well. """
     current_individual = ""
     current_family = ""
-    current_tag = ""
     for item in data:
         if item[0] == "0" and len(item) < 3:
             continue
-        elif item[0] == "0" and item[2] == "INDI":
-            current_individual = item[1]
+        elif item[0] == "0" and item[1] == "INDI":
+            current_individual = item[2]
             individual_data[current_individual] = individualPerson(current_individual)
         elif item[0] == "1" and item[1] in ["NAME", "SEX", "FAMC", "FAMS"]:
             i1 = individual_data[current_individual]
-            current_tag = item[1].lower()
-            i1.current_tag = item[2:]
-        elif item[0] == "1" and item[1] == ["BIRT", "DEAT"]:
-            current_tag = item[1].lower()
+            if item[1] == "NAME":
+                i1.name = " ".join(item[2:])
+            elif item[1] == "SEX":
+                i1.sex = item[2]
+            elif item[1] == "FAMC":
+                famc_list = i1.famc
+                famc_list.append(item[2])
+                i1.famc = famc_list
+            else:
+                fams_list = i1.fams
+                fams_list.append(item[2])
+                i1.fams = fams_list
+        elif item[0] == "1" and item[1] == "DEAT":
             i1 = individual_data[current_individual]
-            if current_tag == "DEAT":
-                i1.alive = False
+            i1.alive = False
         elif item[0] == "2" and item[1] == "DATE":
             i1 = individual_data[current_individual]
-            i1.current_tag = item[2:]
+            if i1.alive == True:
+                i1.birt = " ".join(item[2:])
+            else:
+                i1.deat = " ".join(item[2:])
         
-        elif item[0] == "0" and item[2] == "FAM":
-            current_family = item[1]
+        elif item[0] == "0" and item[1] == "FAM":
+            current_family = item[2]
             family_data[current_family] = familyClass(current_family)
         elif item[0] == "1" and item[1] in ["HUSB", "WIFE"]:
             f1 = family_data[current_family]
-            current_tag = item[1].lower()
-            f1.current_tag = item[2]
+            if item[1] == "HUSB":
+                f1.husb = item[2]
+            else:
+                f1.wife = item[2]           
         elif item[0] == "1" and item[1] == "CHIL":
             f1 = family_data[current_family]
-            current_tag = item[1].lower()
-            f1.current_tag.append(item[2])
+            children_list = f1.chil
+            children_list.append(item[2])
+            f1.chil = children_list
         elif item[0] == "1" and item[1] in ["MARR", "DIV"]:
-            current_tag = item[1].lower()
-            f1 = family_data[current_family]
-            f1.current_tag = item[2:]
+            if item[1] == "MARR":
+                f1.marr = " ".join(item[2:])
+            else:
+                f1.marr = " ".join(item[2:])
 
 
 def create_table():

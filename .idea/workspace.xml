@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db51b9b8-127c-4883-9a88-da68848b25d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
     </list>
@@ -22,8 +22,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="110" column="30" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
+            <state relative-caret-position="339">
+              <caret line="80" column="16" lean-forward="true" selection-end-line="212" />
               <folding>
                 <element signature="e#346#381#0" expanded="true" />
               </folding>
@@ -252,8 +252,8 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32971507" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32971507" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32971507" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32971507" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32971507" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32971507" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4979757" visible="true" weight="0.1765135" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
@@ -699,8 +699,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="110" column="30" selection-start-line="110" selection-start-column="30" selection-end-line="110" selection-end-column="30" />
+        <state relative-caret-position="339">
+          <caret line="80" column="16" lean-forward="true" selection-end-line="212" />
           <folding>
             <element signature="e#346#381#0" expanded="true" />
           </folding>

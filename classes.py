@@ -19,10 +19,8 @@ class familyClass(object):
     particular family. """
     def __init__(self, fid):
         self.fid = fid
-        self.marr = 'NA'  # marriage event for family
-        self.husb = 'NA'  # for husband in family
-        self.husbandName = 'NA' # name of husband
-        self.wife = ''  # for wife in family
-        self.wifeName = None # for name of the wife
-        self.children = []  # for child in family
+        self.marr = "NA"  # marriage event for family
+        self.husb = "NA"  # for husband in family
+        self.wife = "NA"  # for wife in family
+        self.chil = []  # for child in family
         self.div = None  # divorce event in family
