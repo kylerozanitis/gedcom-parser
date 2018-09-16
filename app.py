@@ -16,7 +16,31 @@
 from prettytable import PrettyTable
 
 
+def read_data_file(file_name):
+    """Read GEDCOM files Strip data into a tuple of list"""
 
+    try:
+        open(file_name, "r")
+
+    except FileNotFoundError:
+        print(file_name, "file cannot be opened!")
+
+    except IOError:
+        print('Please check that file is not corrupted.')
+
+    else:
+        # if file opens successfully
+        with open(file_name, 'r') as file_opened:
+            # reading data from file
+            each_line = file_opened.readlines()
+
+
+            if len(each_line) == 0:
+                raise ValueError('{} is empty'.format(file_name))
+            else:
+                data_values = tuple([e.strip('\n').split(' ') for e in each_line])
+
+            return data_values
 
 
 def create_table():
@@ -44,7 +68,7 @@ def main():
     """Main Function program Execution"""
 
     tbl = create_table()
-    read_data_file('My_Family.ged')
+    print(read_data_file('My_Family.ged'))
 
 
 if __name__ == '__main__':
