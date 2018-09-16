@@ -41,7 +41,7 @@ def read_data_file(file_name):
                     data_values = tuple([e.strip('\n').split(' ') for e in each_line])
                 return data_values
     else:
-        raise IOError('{} must be a .ged file'.format(file_name))
+        return OSError('{} must be a .ged file'.format(file_name))
 
 
 def data_parser(data):
