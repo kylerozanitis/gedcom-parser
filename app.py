@@ -120,6 +120,8 @@ def data_parser_try(data):
         elif each[1] == "CHIL":
             family_dict[each[1]].append(each[2])
 
+    return family, individual
+
 def data_parser(data):
     """ Reads through the passed-in clean data and creates individuals and
     families from the classes.py file. All individuals have a UID, name, birth,
@@ -204,8 +206,15 @@ def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
-    # data_parser(raw_data)
-    data_parser_try(raw_data)
+    data_parser(raw_data)
+    fam, ind = data_parser_try(raw_data)
+
+    for i in ind:
+        print(i)
+
+    for f in fam:
+        print(f)
+
 
 
 if __name__ == '__main__':
