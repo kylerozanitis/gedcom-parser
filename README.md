@@ -8,6 +8,7 @@ The propose of this application is to extract data from a GEDCOM file and create
 
 ### Project Documents:
 - [Project Dynamics](https://docs.google.com/document/d/1LiciV9Ie4mz37JO7DJmIULuh8Z7eJJ04hmHaDiUNLjU/edit?usp=sharing)
+- [Project TeamReport](https://docs.google.com/spreadsheets/d/1us0exyqWN44Vzv-KPL4uGvqmSXhvsfQAMt_RRJsoyYM/edit?usp=sharing)
 
 ### What you need to run this code for the first time: 
 
