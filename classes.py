@@ -1,4 +1,4 @@
-""" This file takes contains classes for the Indivual and Family. """
+""" This file takes contains classes for the Individual and Family. """
 
 
 class individualPerson(object):

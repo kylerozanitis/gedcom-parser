@@ -15,7 +15,7 @@
 # Library imports
 from prettytable import PrettyTable
 import os
-from "class.py" import individualPerson
+from classes import individualPerson
 
 individual_data = dict()
 family_data = dict()
