@@ -35,8 +35,6 @@ def create_table():
     else:
         return 1
 
-def hello():
-    return 'hello'
 
 def main():
     """Main Function program Execution"""
