@@ -146,10 +146,8 @@ def create_table():
 def main():
     """Main Function program Execution"""
 
-    tbl = create_table()
     raw_data = read_data_file('My_Family.ged')
-    clean_data(raw_data)
-    # data_parser(raw_data)
+    data_parser(raw_data)
 
 
 if __name__ == '__main__':
