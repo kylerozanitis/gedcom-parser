@@ -1,0 +1,118 @@
+0 HEAD Project 01: Genaration of Imaginary Family Tree
+0 HEAD Name: Kshiti Rana
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE KrishnaPatel
+1 DATE 31 AUG 2018
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Kshiti Rana
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Krishna /Patel/
+2 GIVN Krishna
+2 SURN Patel
+2 _MARNM Patel
+1 SEX M
+1 BIRT
+2 DATE 10 JAN 1989
+1 FAMS @F1@
+1 FAMS @F2@
+1 FAMC @F3@
+0 @I2@ INDI
+1 NAME Vasudev /Patel/
+2 GIVN Vasudev
+2 SURN Patel
+2 _MARNM Patel
+1 SEX M
+1 BIRT
+2 DATE 27 NOV 1964
+1 FAMS @F3@
+0 @I3@ INDI
+1 NAME Yashoda /Patel/
+2 GIVN Yashoda
+2 SURN Patel
+2 _MARNM Patel
+1 SEX F
+1 BIRT
+2 DATE 18 APR 1968
+1 FAMS @F3@
+0 @I4@ INDI
+1 NAME Sita /Patel/
+2 GIVN Sita
+2 SURN Patel
+2 _MARNM Patel
+1 SEX F
+1 BIRT
+2 DATE 20 AUG 1991
+1 FAMC @F3@
+0 @I5@ INDI
+1 NAME Radha /Patel/
+2 GIVN Radha
+2 SURN Patel
+2 _MARNM Patel
+1 SEX F
+1 BIRT
+2 DATE 6 JUN 1990
+1 FAMS @F1@
+0 @I6@ INDI
+1 NAME Yamini /Patel/
+2 GIVN Yamini
+2 SURN Patel
+2 _MARNM Patel
+1 SEX F
+1 BIRT
+2 DATE 10 SEP 1989
+1 DEAT Y
+2 DATE 28 OCT 1998
+1 FAMS @F2@
+0 @I7@ INDI
+1 NAME Rishabh /Patel/
+2 GIVN Rishabh
+2 SURN Patel
+2 _MARNM Patel
+1 SEX M
+1 BIRT
+2 DATE 6 JUN 1997
+1 FAMC @F2@
+0 @I8@ INDI
+1 NAME Man /Patel/
+2 GIVN Man
+2 SURN Patel
+2 _MARNM Patel
+1 SEX M
+1 BIRT
+2 DATE 9 JUL 1999
+1 FAMC @F1@
+0 @I9@ INDI
+1 NAME Mina /Patel/
+2 GIVN Mina
+2 SURN Patel
+2 _MARNM Patel
+1 SEX F
+1 BIRT
+2 DATE 25 SEP 2001
+1 FAMC @F1@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I5@
+1 CHIL @I8@
+1 CHIL @I9@
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I1@
+1 WIFE @I6@
+1 CHIL @I7@
+1 _CURRENT N
+0 @F3@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 CHIL @I4@
+1 _CURRENT Y
+0 TRLR
