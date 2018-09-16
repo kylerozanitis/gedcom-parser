@@ -28,11 +28,15 @@ def create_table():
     tbl.add_row(["Melbourne", 1566, 3806092, 646.9])
     tbl.add_row(["Perth", 5386, 1554769, 869.4])
 
+
     # return tbl
     if __name__ == '__main__':
         return tbl
     else:
         return 1
+
+def hello():
+    return 'hello'
 
 def main():
     """Main Function program Execution"""
