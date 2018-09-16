@@ -82,6 +82,11 @@ def clean_data(data):
 
 
 def data_parser(data):
+    """ Reads through the passed-in clean data and creates individuals and
+    families from the classes.py file. All individuals have a UID, name, birth,
+    and sex, and may also have death date, famc, or fams. Families have an FID,
+    married date, husband ID, wife ID, and a list of children IDs, and may have
+    a divorced date as well. """
     current_individual = ""
     current_family = ""
     for item in data:
