@@ -1,13 +1,13 @@
-
-
 class individual:
 
     family = dict()
 
-    def __init__(self):
-        self.name
-        self.gender
-        self.birthdate
-        self.death
+    def __init__(self, id, name, gender, birthdate, death):
+        self._id = id
+        self.name = name
+        self.gender = gender
+        self.birthdate = birthdate
+        self.death = death
+
 
 
