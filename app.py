@@ -39,9 +39,47 @@ def read_data_file(file_name):
                     raise ValueError('{} is empty'.format(file_name))
                 else:
                     data_values = tuple([e.strip('\n').split(' ') for e in each_line])
-                return data_values
+                return clean_data(data_values)
     else:
         return OSError('{} must be a .ged file'.format(file_name))
+
+def clean_data(data):
+    """Cleans data and returns only valid tags data in a tuple"""
+
+    # LIST OF VALID TAGS
+    VALID_TAGS = ('INDI', 'NAME', 'SEX',
+            'BIRT', 'DEAT', 'FAMC',
+            'FAMS', 'FAM', 'MARR',
+            'HUSB', 'WIFE', 'CHIL',
+            'DIV', 'DATE', 'HEAD',
+            'TRLR', 'NOTE')
+
+    # list of tags with invalid data
+    KNOWN_INVALID_TAGS = ('id', 'invalid', ' ')
+
+    new_list = []
+
+    for val in data:
+        # Checks of known invalid data
+        if (len(val) >= 3 and val[2] in KNOWN_INVALID_TAGS):
+            # if invalid continue
+            pass
+
+        # Basic manipulation to fix compatibility on INDI and id tags
+        elif len(val) >= 3 and val[2] in VALID_TAGS:
+            val.insert(1, val[2])
+            val.pop(3)
+            new_list.append(val)
+
+        # if tags are valid
+        elif val[1] in VALID_TAGS:
+            new_list.append(val)
+
+        else:
+            pass
+
+    return tuple(new_list)
+
 
 
 def data_parser(data):
@@ -110,7 +148,8 @@ def main():
 
     tbl = create_table()
     raw_data = read_data_file('My_Family.ged')
-    data_parser(raw_data)
+    clean_data(raw_data)
+    # data_parser(raw_data)
 
 
 if __name__ == '__main__':
