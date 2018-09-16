@@ -60,6 +60,7 @@ def clean_data(data):
     new_list = []
 
     for val in data:
+
         # Checks of known invalid data
         if (len(val) >= 3 and val[2] in KNOWN_INVALID_TAGS):
             # if invalid continue
@@ -76,10 +77,48 @@ def clean_data(data):
             new_list.append(val)
 
         else:
+            # if invalid continue
             pass
 
     return tuple(new_list)
 
+def data_parser_try(data):
+    """Check if tag is individual or family and create a dictionary for each and add them to correspondent list"""
+    individual = []
+    family = []
+    individual_dict = dict()
+    family_dict = dict()
+    indi_or_fam_tag = ""
+
+    for each in data:
+        if each[1] in ("INDI", "FAM"):
+
+            if each[1] == "INDI":
+                individual_dict = {"ID": each[2], "NAME": '', "SEX": '', "BIRT": '', "DEAT": ''}
+                indi_or_fam_tag = each[1]
+                individual.append(individual_dict)
+            if each[1] == "FAM":
+                family_dict = {"ID": each[2], "MARR": '', "HUSB": '', "WIFE": '', "CHIL": [], "DIV": ''}
+                family.append(family_dict)
+
+        elif each[1] in ("NAME", "SEX"):
+            individual_dict[each[1]] = " ".join(each[2:])
+
+        elif each[1] in ("BIRT", "DEAT", "MARR", "DIV"):
+            this_tag = each[1]
+
+        elif each[1] in ("DATE"):
+            if indi_or_fam_tag == 'INDI':
+                individual_dict[this_tag] = " ".join(each[2:])
+
+            elif indi_or_fam_tag == 'FAM':
+                family_dict[this_tag] = " ".join(each[2:])
+
+        elif each[1] in ("HUSB", "WIFE"):
+            family_dict[each[1]] = " ".join(each[2:])
+
+        elif each[1] == "CHIL":
+            family_dict[each[1]].append(each[2])
 
 
 def data_parser(data):
@@ -147,7 +186,8 @@ def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
-    data_parser(raw_data)
+    # data_parser(raw_data)
+    data_parser_try(raw_data)
 
 
 if __name__ == '__main__':

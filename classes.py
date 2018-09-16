@@ -1,6 +1,5 @@
 """ This file takes contains classes for the Individual and Family. """
 
-
 class individualPerson(object):
     """ This class uses the user's ID (UID), name, birthday, and sex to create
     an instance of an individual. """
