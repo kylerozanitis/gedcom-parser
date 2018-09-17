@@ -230,7 +230,7 @@ def main():
     #print(individual_data)
     #print(family_data)
 
-    t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Alive','Death','Child','Spouse'])
+    """t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Alive','Death','Child','Spouse'])
     for key in individual_data.keys():
         indv_person = individualPerson(key)
         t.add_row([indv_person.uid, indv_person.name, indv_person.sex, indv_person.birt, indv_person.alive, indv_person.deat, indv_person.famc, indv_person.fams])
@@ -240,7 +240,7 @@ def main():
     for key in family_data.keys():
         fam_data = familyClass(key)
         t.add_row([fam_data.fid, fam_data.marr, fam_data.husb, fam_data.wife, fam_data.chil, fam_data.div])
-    print (t)    
+    print (t) """   
 
 
 if __name__ == '__main__':
