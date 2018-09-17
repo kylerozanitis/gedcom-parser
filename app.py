@@ -10,11 +10,11 @@
 #       Pratik Shah
 #
 #   This program is the main Function for our GEDCOM program.
-#   For now it uses Pretty table with Dummy Data to display it
+#   For now it uses PrettyTable with Dummy Data to display it
 
 # Library imports
-from prettytable import PrettyTable
 import os
+from prettytable import PrettyTable
 from classes import individualPerson, familyClass
 
 individual_data = dict()
@@ -82,13 +82,12 @@ def clean_data(data):
 
     return tuple(new_list)
 
-
 def data_parser(data):
     """ Reads through the passed-in clean data and creates individuals and
-    families from the classes.py file. All individuals have a UID, name, birth,
-    and sex, and may also have death date, famc, or fams. Families have an FID,
-    married date, husband ID, wife ID, and a list of children IDs, and may have
-    a divorced date as well. """
+    families from the classes.py file. All individuals have an User ID, name, birth,
+    and sex, and may also have death date, famc, or fams. Families have an Family ID,
+    married date, husband ID, husband name, wife ID, wife name, and a list of children IDs.
+    Families may have a divorced date as well. """
     current_individual = ""
     current_family = ""
     current_tag = ""
