@@ -131,11 +131,11 @@ def data_parser(data):
     a divorced date as well. """
     current_individual = ""
     current_family = ""
+    current_tag = ""
     for item in data:
-        if item[0] == "0" and len(item) < 3:
-            continue
-        elif item[0] == "0" and item[1] == "INDI":
+        if item[0] == "0" and item[1] == "INDI":
             current_individual = item[2]
+            current_tag = item[1]
             individual_data[current_individual] = individualPerson(current_individual)
         elif item[0] == "1" and item[1] in ["NAME", "SEX", "FAMC", "FAMS"]:
             i1 = individual_data[current_individual]
@@ -154,7 +154,7 @@ def data_parser(data):
         elif item[0] == "1" and item[1] == "DEAT":
             i1 = individual_data[current_individual]
             i1.alive = False
-        elif item[0] == "2" and item[1] == "DATE":
+        elif item[0] == "2" and item[1] == "DATE" and current_tag == "INDI":
             i1 = individual_data[current_individual]
             if i1.alive == True:
                 i1.birt = " ".join(item[2:])
@@ -163,6 +163,7 @@ def data_parser(data):
         
         elif item[0] == "0" and item[1] == "FAM":
             current_family = item[2]
+            current_tag = item[1]
             family_data[current_family] = familyClass(current_family)
         elif item[0] == "1" and item[1] in ["HUSB", "WIFE"]:
             f1 = family_data[current_family]
@@ -175,11 +176,12 @@ def data_parser(data):
             children_list = f1.chil
             children_list.append(item[2])
             f1.chil = children_list
-        elif item[0] == "1" and item[1] in ["MARR", "DIV"]:
-            if item[1] == "MARR":
+        elif item[0] == "2" and item[1] == "DATE" and current_tag == "FAM":
+            f1 = family_data[current_family]
+            if f1.marr == "NA":
                 f1.marr = " ".join(item[2:])
             else:
-                f1.marr = " ".join(item[2:])
+                f1.div = " ".join(item[2:])            
 
 
 def create_table_individual(data):
