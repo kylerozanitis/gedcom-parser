@@ -28,7 +28,7 @@ class familyClass(object):
         self.wife_id = "NA"
         self.wife = "NA"  # for wife in family
         self.chil = []  # for child in family
-        self.div = None  # divorce event in family
+        self.div = "NA"  # divorce event in family
 
     def pt_row(self):
-       return [self.fid, self.div, self.marr, self.husb_id, self.husb, self.wife_id, self.wife, self.chil]
+       return [self.fid, self.marr, self.div, self.husb_id, self.husb, self.wife_id, self.wife, self.chil]
