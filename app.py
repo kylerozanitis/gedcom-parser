@@ -131,11 +131,11 @@ def data_parser(data):
     a divorced date as well. """
     current_individual = ""
     current_family = ""
-    current_tag = ""
     for item in data:
-        if item[0] == "0" and item[1] == "INDI":
+        if item[0] == "0" and len(item) < 3:
+            continue
+        elif item[0] == "0" and item[1] == "INDI":
             current_individual = item[2]
-            current_tag = item[1]
             individual_data[current_individual] = individualPerson(current_individual)
         elif item[0] == "1" and item[1] in ["NAME", "SEX", "FAMC", "FAMS"]:
             i1 = individual_data[current_individual]
@@ -154,7 +154,7 @@ def data_parser(data):
         elif item[0] == "1" and item[1] == "DEAT":
             i1 = individual_data[current_individual]
             i1.alive = False
-        elif item[0] == "2" and item[1] == "DATE" and current_tag == "INDI":
+        elif item[0] == "2" and item[1] == "DATE":
             i1 = individual_data[current_individual]
             if i1.alive == True:
                 i1.birt = " ".join(item[2:])
@@ -163,29 +163,27 @@ def data_parser(data):
         
         elif item[0] == "0" and item[1] == "FAM":
             current_family = item[2]
-            current_tag = item[1]
             family_data[current_family] = familyClass(current_family)
         elif item[0] == "1" and item[1] in ["HUSB", "WIFE"]:
             f1 = family_data[current_family]
             if item[1] == "HUSB":
-                f1.husb = item[2]
+                f1.husb_id, f1.husb = item[2], individual_data[item[2]].name
             else:
-                f1.wife = item[2]           
+                f1.wife_id, f1.wife = item[2], individual_data[item[2]].name        
         elif item[0] == "1" and item[1] == "CHIL":
             f1 = family_data[current_family]
             children_list = f1.chil
             children_list.append(item[2])
             f1.chil = children_list
-        elif item[0] == "2" and item[1] == "DATE" and current_tag == "FAM":
-            f1 = family_data[current_family]
-            if f1.marr == "NA":
+        elif item[0] == "1" and item[1] in ["MARR", "DIV"]:
+            if item[1] == "MARR":
                 f1.marr = " ".join(item[2:])
             else:
-                f1.div = " ".join(item[2:])            
+                f1.marr = " ".join(item[2:])
 
 
 def create_table_individual(data):
-    """Example Function for PrettyTable"""
+    """Function to display individual's data using PrettyTable"""
 
     tbl = PrettyTable()
     tbl.field_names = ["ID", "Name", "Gender", "Birthdate", "Age", "Alive", "Death", "Child", "Spouse"]
@@ -211,14 +209,14 @@ def create_table_family(data):
         return tbl
     else:
         return 1
-    
+
 
 def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
     data_parser(raw_data)
-    #fam, ind = data_parser_try(raw_data)
+    fam, ind = data_parser_try(raw_data)
 
     #print(create_table_individual(ind))
     #print(create_table_family(fam))
@@ -237,10 +235,10 @@ def main():
         t.add_row(obj.pt_row())
     print (t)
 
-    t = PrettyTable(['ID', 'Marriage', 'Husband', 'Wife','Children','Divorce'])
+    t = PrettyTable(['ID', 'Divorced', 'Marriage', 'Husband ID', 'Husband', 'Wife ID', 'Wife','Children'])
     for obj in family_data.values():
         t.add_row(obj.pt_row())
-    print (t) 
+    print (t)
 
 
 if __name__ == '__main__':
