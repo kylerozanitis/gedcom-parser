@@ -16,7 +16,6 @@
 from prettytable import PrettyTable
 import os
 from classes import individualPerson, familyClass
-from _collections import defaultdict
 
 individual_data = dict()
 family_data = dict()
