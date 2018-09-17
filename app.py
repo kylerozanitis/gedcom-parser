@@ -215,11 +215,11 @@ def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
-    #data_parser(raw_data)
-    fam, ind = data_parser_try(raw_data)
+    data_parser(raw_data)
+    #fam, ind = data_parser_try(raw_data)
 
-    print(create_table_individual(ind))
-    print(create_table_family(fam))
+    #print(create_table_individual(ind))
+    #print(create_table_family(fam))
 
     """for i in ind:
         print("individual: ", i)
@@ -230,6 +230,17 @@ def main():
     #print(individual_data)
     #print(family_data)
 
+    t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Alive','Death','Child','Spouse'])
+    for key in individual_data.keys():
+        indv_person = individualPerson(key)
+        t.add_row([indv_person.uid, indv_person.name, indv_person.sex, indv_person.birt, indv_person.alive, indv_person.deat, indv_person.famc, indv_person.fams])
+    print (t)
+
+    t = PrettyTable(['ID', 'Marriage', 'Husband', 'Wife','Children','Divorce'])
+    for key in family_data.keys():
+        fam_data = familyClass(key)
+        t.add_row([fam_data.fid, fam_data.marr, fam_data.husb, fam_data.wife, fam_data.chil, fam_data.div])
+    print (t)    
 
 
 if __name__ == '__main__':
