@@ -87,8 +87,8 @@ def data_parser_try(data):
     """Check if tag is individual or family and create a dictionary for each and add them to correspondent list"""
     individual = []
     family = []
-    individual_dict = defaultdict(str)
-    family_dict = defaultdict(str)
+    individual_dict = defaultdict(lambda: defaultdict(str))
+    family_dict = defaultdict(lambda: defaultdict(str))
     indi_or_fam_tag = ""
 
     for each in data:
@@ -186,39 +186,31 @@ def create_table_individual(data):
     """Example Function for PrettyTable"""
 
     tbl = PrettyTable()
-    tbl.field_names = ["ID", "Name", "Gender", "Birthdate", "Death"]
+    tbl.field_names = ["ID", "Name", "Gender", "Birthdate", "Age", "Alive", "Death", "Child", "Spouse"]
 
     for d in data:
-        # tbl.add_row([d['ID'], d['NAME'], d['SEX'], d['BIRT'], d['AGE'],d['ALIVE'], d['DEAT'], d['CHILD'], d['SPOUSE']])
-        tbl.add_row([d['ID'], d['NAME'], d['SEX'], d['BIRT'], d['DEAT']])
+        tbl.add_row([ d.get('ID', "N/A"), d.get('NAME', "N/A"), d.get('SEX', "N/A"), d.get('BIRT', "N/A"), d.get('AGE', "N/A"),  d.get('ALIVE', "N/A"),  d.get('DEAT', "N/A"),  d.get('CHILD', "N/A"),  d.get('SPOUSE', "N/A")])
 
 
-    # return tbl
-    if __name__ == '__main__':
-        return tbl
-    else:
-        return 1
+    return tbl
 
 
 
 def main():
     """Main Function program Execution"""
 
-    FAMILY_FIELDS = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
-
-
     raw_data = read_data_file('My_Family.ged')
     # fam, ind = data_parser(raw_data)
     fam, ind = data_parser_try(raw_data)
 
     print(create_table_individual(ind))
+    # print(create_table_family(fam))
 
     for i in ind:
         print("individual: ", i)
 
     for f in fam:
         print("Fam: ", f)
-
 
 
 
