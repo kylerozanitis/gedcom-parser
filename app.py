@@ -196,26 +196,39 @@ def create_table_individual(data):
     else:
         return 1
 
+def create_table_family(data):
+    """Function to display family's data using PrettyTable"""
 
+    tbl = PrettyTable()
+    tbl.field_names = ["ID", "Marriage", "Husband ID", "Wife ID", "Children", "Divorced"]
+
+    for d in data:
+        tbl.add_row([ d.get('ID', " "), d.get('MARR', " "), d.get('HUSB', " "), d.get('WIFE', " "), d.get('CHIL', " "),  d.get('DIV', " ")])
+
+    if __name__ == '__main__':
+        return tbl
+    else:
+        return 1
+    
 
 def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
-    data_parser(raw_data)
+    #data_parser(raw_data)
     fam, ind = data_parser_try(raw_data)
 
     print(create_table_individual(ind))
-    # print(create_table_family(fam))
+    print(create_table_family(fam))
 
-    for i in ind:
+    """for i in ind:
         print("individual: ", i)
 
     for f in fam:
-        print("Fam: ", f)
+        print("Fam: ", f)"""
 
-    print(individual_data)
-    print(family_data)
+    #print(individual_data)
+    #print(family_data)
 
 
 
