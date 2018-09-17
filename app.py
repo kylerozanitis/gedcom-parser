@@ -83,45 +83,6 @@ def clean_data(data):
 
     return tuple(new_list)
 
-def data_parser_try(data):
-    """Check if tag is individual or family and create a dictionary for each and add them to correspondent list"""
-    individual = []
-    family = []
-    individual_dict = defaultdict(lambda: defaultdict(str))
-    family_dict = defaultdict(lambda: defaultdict(str))
-    indi_or_fam_tag = ""
-
-    for each in data:
-        if each[1] in ("INDI", "FAM"):
-
-            if each[1] == "INDI":
-                individual_dict = {"ID": each[2], "NAME": '', "SEX": '', "BIRT": '', "DEAT": ''}
-                indi_or_fam_tag = each[1]
-                individual.append(individual_dict)
-            if each[1] == "FAM":
-                family_dict = {"ID": each[2], "MARR": '', "HUSB": '', "WIFE": '', "CHIL": [], "DIV": ''}
-                family.append(family_dict)
-
-        elif each[1] in ("NAME", "SEX"):
-            individual_dict[each[1]] = " ".join(each[2:])
-
-        elif each[1] in ("BIRT", "DEAT", "MARR", "DIV"):
-            this_tag = each[1]
-
-        elif each[1] in ("DATE"):
-            if indi_or_fam_tag == 'INDI':
-                individual_dict[this_tag] = " ".join(each[2:])
-
-            elif indi_or_fam_tag == 'FAM':
-                family_dict[this_tag] = " ".join(each[2:])
-
-        elif each[1] in ("HUSB", "WIFE"):
-            family_dict[each[1]] = " ".join(each[2:])
-
-        elif each[1] == "CHIL":
-            family_dict[each[1]].append(each[2])
-
-    return family, individual
 
 def data_parser(data):
     """ Reads through the passed-in clean data and creates individuals and
@@ -182,53 +143,12 @@ def data_parser(data):
                 f1.marr = " ".join(item[2:])
 
 
-def create_table_individual(data):
-    """Function to display individual's data using PrettyTable"""
-
-    tbl = PrettyTable()
-    tbl.field_names = ["ID", "Name", "Gender", "Birthdate", "Age", "Alive", "Death", "Child", "Spouse"]
-
-    for d in data:
-        tbl.add_row([ d.get('ID', " "), d.get('NAME', " "), d.get('SEX', " "), d.get('BIRT', " "), d.get('AGE', " "),  d.get('ALIVE', " "),  d.get('DEAT', " "),  d.get('CHILD', " "),  d.get('SPOUSE', " ")])
-
-    if __name__ == '__main__':
-        return tbl
-    else:
-        return 1
-
-def create_table_family(data):
-    """Function to display family's data using PrettyTable"""
-
-    tbl = PrettyTable()
-    tbl.field_names = ["ID", "Marriage", "Husband ID", "Wife ID", "Children", "Divorced"]
-
-    for d in data:
-        tbl.add_row([ d.get('ID', " "), d.get('MARR', " "), d.get('HUSB', " "), d.get('WIFE', " "), d.get('CHIL', " "),  d.get('DIV', " ")])
-
-    if __name__ == '__main__':
-        return tbl
-    else:
-        return 1
-
 
 def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
     data_parser(raw_data)
-    fam, ind = data_parser_try(raw_data)
-
-    #print(create_table_individual(ind))
-    #print(create_table_family(fam))
-
-    """for i in ind:
-        print("individual: ", i)
-
-    for f in fam:
-        print("Fam: ", f)"""
-
-    #print(individual_data)
-    #print(family_data)
 
     t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Alive','Death','Child','Spouse'])
     for obj in individual_data.values():
