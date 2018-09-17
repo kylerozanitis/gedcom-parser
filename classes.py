@@ -1,10 +1,11 @@
-""" This file takes contains classes for the Individual and Family. """
+""" This file has 2 classes for the parser
+1 for individuals and 1 for families"""
 
 class individualPerson(object):
-    """ This class uses the user's ID (UID), name, birthday, and sex to create
-    an instance of an individual. """
+    """ This class creates instance of an individual using all the details
+    like name, bithdate, sex,death date etc"""
     def __init__(self, uid):
-        self.uid = uid  #umoque id of individual person
+        self.uid = uid  #unique id of individual person
         self.name = "NA" # name of individual person
         self.birt = "NA" # Date of birthday of individual person
         self.sex = "NA" # sex of individual person
@@ -18,14 +19,14 @@ class individualPerson(object):
 
 
 class familyClass(object):
-    """ This class uses the family's ID (FID) to store information about a
-    particular family. """
+    """ This class stores information about each famiy using unique ID
+    for particular family. """
     def __init__(self, fid):
         self.fid = fid
         self.marr = "NA"  # marriage event for family
-        self.husb_id = "NA"
+        self.husb_id = "NA" #husband's id
         self.husb = "NA"  # for husband in family
-        self.wife_id = "NA"
+        self.wife_id = "NA" #wife's id
         self.wife = "NA"  # for wife in family
         self.chil = []  # for child in family
         self.div = "NA"  # divorce event in family

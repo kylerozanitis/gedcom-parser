@@ -149,12 +149,14 @@ def main():
     raw_data = read_data_file('My_Family.ged')
     data_parser(raw_data)
 
+    print('Individuals')
     t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Alive','Death','Child','Spouse'])
     for obj in individual_data.values():
         t.add_row(obj.pt_row())
     print (t)
 
-    t = PrettyTable(['ID', 'Marriage', 'Divorced', 'Husband ID', 'Husband', 'Wife ID', 'Wife','Children'])
+    print('Families')
+    t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
     for obj in family_data.values():
         t.add_row(obj.pt_row())
     print (t)
