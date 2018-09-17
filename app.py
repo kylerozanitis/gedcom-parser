@@ -16,9 +16,10 @@
 from prettytable import PrettyTable
 import os
 from classes import individualPerson, familyClass
+from _collections import defaultdict
 
-individual_data = dict()
-family_data = dict()
+individual_data = defaultdict(lambda: defaultdict(str))
+family_data = defaultdict(lambda: defaultdict(str))
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
@@ -86,8 +87,8 @@ def data_parser_try(data):
     """Check if tag is individual or family and create a dictionary for each and add them to correspondent list"""
     individual = []
     family = []
-    individual_dict = dict()
-    family_dict = dict()
+    individual_dict = defaultdict(str)
+    family_dict = defaultdict(str)
     indi_or_fam_tag = ""
 
     for each in data:
@@ -181,18 +182,15 @@ def data_parser(data):
                 f1.marr = " ".join(item[2:])
 
 
-def create_table():
+def create_table_individual(data):
     """Example Function for PrettyTable"""
-    tbl = PrettyTable()
-    tbl.field_names = ["City name", "Area", "Population", "Annual Rainfall"]
 
-    tbl.add_row(["Adelaide", 1295, 1158259, 600.5])
-    tbl.add_row(["Brisbane", 5905, 1857594, 1146.4])
-    tbl.add_row(["Darwin", 112, 120900, 1714.7])
-    tbl.add_row(["Hobart", 1357, 205556, 619.5])
-    tbl.add_row(["Sydney", 2058, 4336374, 1214.8])
-    tbl.add_row(["Melbourne", 1566, 3806092, 646.9])
-    tbl.add_row(["Perth", 5386, 1554769, 869.4])
+    tbl = PrettyTable()
+    tbl.field_names = ["ID", "Name", "Gender", "Birthdate", "Death"]
+
+    for d in data:
+        # tbl.add_row([d['ID'], d['NAME'], d['SEX'], d['BIRT'], d['AGE'],d['ALIVE'], d['DEAT'], d['CHILD'], d['SPOUSE']])
+        tbl.add_row([d['ID'], d['NAME'], d['SEX'], d['BIRT'], d['DEAT']])
 
 
     # return tbl
@@ -202,18 +200,25 @@ def create_table():
         return 1
 
 
+
 def main():
     """Main Function program Execution"""
 
+    FAMILY_FIELDS = ["ID", "Married", "Divorced", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+
+
     raw_data = read_data_file('My_Family.ged')
-    data_parser(raw_data)
+    # fam, ind = data_parser(raw_data)
     fam, ind = data_parser_try(raw_data)
 
+    print(create_table_individual(ind))
+
     for i in ind:
-        print(i)
+        print("individual: ", i)
 
     for f in fam:
-        print(f)
+        print("Fam: ", f)
+
 
 
 
