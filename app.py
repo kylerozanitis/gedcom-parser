@@ -18,8 +18,8 @@ import os
 from classes import individualPerson, familyClass
 from _collections import defaultdict
 
-individual_data = defaultdict(lambda: defaultdict(str))
-family_data = defaultdict(lambda: defaultdict(str))
+individual_data = dict()
+family_data = dict()
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
@@ -189,10 +189,12 @@ def create_table_individual(data):
     tbl.field_names = ["ID", "Name", "Gender", "Birthdate", "Age", "Alive", "Death", "Child", "Spouse"]
 
     for d in data:
-        tbl.add_row([ d.get('ID', "N/A"), d.get('NAME', "N/A"), d.get('SEX', "N/A"), d.get('BIRT', "N/A"), d.get('AGE', "N/A"),  d.get('ALIVE', "N/A"),  d.get('DEAT', "N/A"),  d.get('CHILD', "N/A"),  d.get('SPOUSE', "N/A")])
+        tbl.add_row([ d.get('ID', " "), d.get('NAME', " "), d.get('SEX', " "), d.get('BIRT', " "), d.get('AGE', " "),  d.get('ALIVE', " "),  d.get('DEAT', " "),  d.get('CHILD', " "),  d.get('SPOUSE', " ")])
 
-
-    return tbl
+    if __name__ == '__main__':
+        return tbl
+    else:
+        return 1
 
 
 
@@ -200,7 +202,7 @@ def main():
     """Main Function program Execution"""
 
     raw_data = read_data_file('My_Family.ged')
-    # fam, ind = data_parser(raw_data)
+    data_parser(raw_data)
     fam, ind = data_parser_try(raw_data)
 
     print(create_table_individual(ind))
@@ -211,6 +213,9 @@ def main():
 
     for f in fam:
         print("Fam: ", f)
+
+    print(individual_data)
+    print(family_data)
 
 
 
