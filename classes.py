@@ -12,7 +12,7 @@ class individualPerson(object):
         self.alive = True # person alive or dead
         self.famc = [] # family id where individual is a child
         self.fams = [] # family id where individual is parent
-       
+
     def pt_row(self):
        return [self.uid, self.name, self.sex, self.birt, self.alive, self.deat, self.famc, self.fams]
 
@@ -23,10 +23,12 @@ class familyClass(object):
     def __init__(self, fid):
         self.fid = fid
         self.marr = "NA"  # marriage event for family
+        self.husb_id = "NA"
         self.husb = "NA"  # for husband in family
+        self.wife_id = "NA"
         self.wife = "NA"  # for wife in family
         self.chil = []  # for child in family
         self.div = None  # divorce event in family
-       
+
     def pt_row(self):
-       return [self.fid, self.marr, self.husb, self.wife, self.chil, self.div]
+       return [self.fid, self.div, self.marr, self.husb_id, self.husb, self.wife_id, self.wife, self.chil]
