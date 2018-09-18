@@ -15,6 +15,7 @@ class individualPerson(object):
         self.sex = "NA" # sex of individual person
         self.deat = "NA" # Date of death of individual person
         self.alive = True # person alive or dead
+        self.age = 0
         self.famc = [] # family id where individual is a child
         self.fams = [] # family id where individual is parent
 
@@ -33,7 +34,11 @@ class individualPerson(object):
 
 
     def pt_row(self):
-       return [self.uid, self.name, self.sex, self.birt, self.age, self.alive, self.deat, self.famc, self.fams]
+        if len(self.famc) == 0:
+            self.famc = 'NA'
+        if len(self.fams) == 0:
+            self.fams = 'NA'
+        return [self.uid, self.name, self.sex, self.birt, self.age, self.alive, self.deat, self.famc, self.fams]
 
 
 class familyClass(object):
@@ -53,4 +58,6 @@ class familyClass(object):
         self.div = "NA"  # divorce event in family
 
     def pt_row(self):
-       return [self.fid, self.marr, self.div, self.husb_id, self.husb, self.wife_id, self.wife, self.chil]
+        if len(self.chil) == 0:
+            self.chil = 'NA'
+        return [self.fid, self.marr, self.div, self.husb_id, self.husb, self.wife_id, self.wife, self.chil]
