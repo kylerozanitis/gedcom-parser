@@ -92,8 +92,11 @@ def data_parser(data):
     current_family = ""
     current_tag = ""
     for item in data:
+        indi_id = ''
+        fam_id = ''
         if item[0] == "0" and item[1] == "INDI":
-            current_individual = item[2]
+            indi_id = item[2].strip('@')
+            current_individual = indi_id
             current_tag = item[1]
             individual_data[current_individual] = individualPerson(current_individual)
         elif item[0] == "1" and item[1] in ["NAME", "SEX", "FAMC", "FAMS"]:
@@ -104,11 +107,11 @@ def data_parser(data):
                 i1.sex = item[2]
             elif item[1] == "FAMC":
                 famc_list = i1.famc
-                famc_list.append(item[2])
+                famc_list.append(item[2].strip('@'))
                 i1.famc = famc_list
             else:
                 fams_list = i1.fams
-                fams_list.append(item[2])
+                fams_list.append(item[2].strip('@'))
                 i1.fams = fams_list
         elif item[0] == "1" and item[1] == "DEAT":
             i1 = individual_data[current_individual]
@@ -121,19 +124,20 @@ def data_parser(data):
                 i1.deat = " ".join(item[2:])
         
         elif item[0] == "0" and item[1] == "FAM":
-            current_family = item[2]
+            fam_id = item[2].strip('@')
+            current_family = fam_id
             current_tag = item[1]
             family_data[current_family] = familyClass(current_family)
         elif item[0] == "1" and item[1] in ["HUSB", "WIFE"]:
             f1 = family_data[current_family]
             if item[1] == "HUSB":
-                f1.husb_id, f1.husb = item[2], individual_data[item[2]].name
+                f1.husb_id, f1.husb = item[2].strip('@'), individual_data[item[2].strip('@')].name
             else:
-                f1.wife_id, f1.wife = item[2], individual_data[item[2]].name        
+                f1.wife_id, f1.wife = item[2].strip('@'), individual_data[item[2].strip('@')].name        
         elif item[0] == "1" and item[1] == "CHIL":
             f1 = family_data[current_family]
             children_list = f1.chil
-            children_list.append(item[2])
+            children_list.append(item[2].strip('@'))
             f1.chil = children_list
         elif item[0] == "2" and item[1] in ["DATE"] and current_tag == "FAM":
             if f1.marr == "NA":
