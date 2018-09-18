@@ -1,5 +1,68 @@
 # Lib Imports
 import re
+import os
+
+def read_data_file(file_name):
+    """Read GEDCOM file & strip data into a tuple of lists"""
+    filename = os.fsdecode(file_name)
+    if filename.endswith(".ged"):
+        try:
+            open(filename, "r")
+        except FileNotFoundError:
+            print(filename, "file cannot be opened!")
+        except IOError:
+            print('Please check that file is not corrupted.')
+        else:
+            # if file opens successfully
+            with open(filename, 'r') as file_opened:
+                # reading data from file
+                each_line = file_opened.readlines()
+                if len(each_line) == 0:
+                    raise ValueError('{} is empty'.format(file_name))
+                else:
+                    data_values = tuple([e.strip('\n').split(' ') for e in each_line])
+                return clean_data(data_values)
+    else:
+        return OSError('{} must be a .ged file'.format(file_name))
+
+def clean_data(data):
+    """Cleans data and returns only valid tags data in a tuple"""
+
+    # LIST OF VALID TAGS
+    VALID_TAGS = ('INDI', 'NAME', 'SEX',
+            'BIRT', 'DEAT', 'FAMC',
+            'FAMS', 'FAM', 'MARR',
+            'HUSB', 'WIFE', 'CHIL',
+            'DIV', 'DATE', 'HEAD',
+            'TRLR', 'NOTE')
+
+    # list of tags with invalid data
+    KNOWN_INVALID_TAGS = ('id', 'invalid', ' ')
+
+    new_list = []
+
+    for val in data:
+
+        # Checks of known invalid data
+        if (len(val) >= 3 and val[2] in KNOWN_INVALID_TAGS):
+            # if invalid continue
+            pass
+
+        # Basic manipulation to fix compatibility on INDI and id tags
+        elif len(val) >= 3 and val[2] in VALID_TAGS:
+            val.insert(1, val[2])
+            val.pop(3)
+            new_list.append(val)
+
+        # if tags are valid
+        elif val[1] in VALID_TAGS:
+            new_list.append(val)
+
+        else:
+            # if invalid continue
+            pass
+
+    return tuple(new_list)
 
 def validate_date_format(date_to_match):
     """Function takes a date and checks if the format is 'd MON YYYY' returns true if it matches false if it doesn't"""
@@ -22,7 +85,5 @@ def change_date_format(date):
     temp = date.split(" ")
     date_month = month_dict.get(temp[1])
 
-    return temp[2] + "/" + date_month + "/" +temp[0]
+    return temp[2]+'-'+date_month+'-'+temp[0]
 
-
-print(change_date_format("07 MAY 1924"))

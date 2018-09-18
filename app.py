@@ -13,74 +13,13 @@
 #   For now it uses PrettyTable with Dummy Data to display it
 
 # Library imports
-import os
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
+from helperFunctions import read_data_file
 
 individual_data = dict()
 family_data = dict()
 
-def read_data_file(file_name):
-    """Read GEDCOM file & strip data into a tuple of lists"""
-    filename = os.fsdecode(file_name)
-    if filename.endswith(".ged"):
-        try:
-            open(filename, "r")
-        except FileNotFoundError:
-            print(filename, "file cannot be opened!")
-        except IOError:
-            print('Please check that file is not corrupted.')
-        else:
-            # if file opens successfully
-            with open(filename, 'r') as file_opened:
-                # reading data from file
-                each_line = file_opened.readlines()
-                if len(each_line) == 0:
-                    raise ValueError('{} is empty'.format(file_name))
-                else:
-                    data_values = tuple([e.strip('\n').split(' ') for e in each_line])
-                return clean_data(data_values)
-    else:
-        return OSError('{} must be a .ged file'.format(file_name))
-
-def clean_data(data):
-    """Cleans data and returns only valid tags data in a tuple"""
-
-    # LIST OF VALID TAGS
-    VALID_TAGS = ('INDI', 'NAME', 'SEX',
-            'BIRT', 'DEAT', 'FAMC',
-            'FAMS', 'FAM', 'MARR',
-            'HUSB', 'WIFE', 'CHIL',
-            'DIV', 'DATE', 'HEAD',
-            'TRLR', 'NOTE')
-
-    # list of tags with invalid data
-    KNOWN_INVALID_TAGS = ('id', 'invalid', ' ')
-
-    new_list = []
-
-    for val in data:
-
-        # Checks of known invalid data
-        if (len(val) >= 3 and val[2] in KNOWN_INVALID_TAGS):
-            # if invalid continue
-            pass
-
-        # Basic manipulation to fix compatibility on INDI and id tags
-        elif len(val) >= 3 and val[2] in VALID_TAGS:
-            val.insert(1, val[2])
-            val.pop(3)
-            new_list.append(val)
-
-        # if tags are valid
-        elif val[1] in VALID_TAGS:
-            new_list.append(val)
-
-        else:
-            # if invalid continue
-            pass
-
-    return tuple(new_list)
 
 def data_parser(data):
     """ Reads through the passed-in clean data and creates individuals and
@@ -122,6 +61,9 @@ def data_parser(data):
                 i1.birt = " ".join(item[2:])
             else:
                 i1.deat = " ".join(item[2:])
+
+            i1.age = i1.get_age()
+
         
         elif item[0] == "0" and item[1] == "FAM":
             fam_id = item[2].strip('@')
@@ -153,7 +95,7 @@ def main():
     data_parser(raw_data)
 
     print('Individuals')
-    t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Alive','Death','Child','Spouse'])
+    t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Age','Alive','Death','Child','Spouse'])
     for obj in individual_data.values():
         t.add_row(obj.pt_row())
     print (t)
