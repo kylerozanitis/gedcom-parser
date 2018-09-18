@@ -91,7 +91,7 @@ def data_parser(data):
 def main():
     """Main Function program Execution"""
 
-    raw_data = read_data_file('My_Family.ged')
+    raw_data = read_data_file('familytree.ged')
     data_parser(raw_data)
 
     print('Individuals')
