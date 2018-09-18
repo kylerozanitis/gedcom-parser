@@ -124,7 +124,7 @@ def data_parser(data):
             else:
                 i1.deat = " ".join(item[2:])
             provided_date = datetime.strptime(str(" ".join(item[2:])),'%d %b %Y').strftime('%Y-%m-%d')
-            index = 'Death'
+            #index = 'Death'
             i1.age = i1.calculate_age('Death', provided_date)
         
         elif item[0] == "0" and item[1] == "FAM":
