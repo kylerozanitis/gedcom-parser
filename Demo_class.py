@@ -1,6 +1,7 @@
 """ This file takes contains classes for the Individual and Family. """
 
 from datetime import datetime
+from helperFunctions import validate_date_format
 
 
 class individualPerson(object):
@@ -17,7 +18,7 @@ class individualPerson(object):
         self.famc = [] # family id where individual is a child
         self.fams = [] # family id where individual is parent
 
-    def calculate_age(self,index,tagged_date):
+    def calculate_age(self, index, tagged_date):
         if index == 'Death':
             birt = datetime.strptime(self.birt,'%Y-%m-%d')
             provided_date = datetime.strptime(tagged_date, '%Y-%m-%d')
