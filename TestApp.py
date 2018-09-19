@@ -1,9 +1,20 @@
 import unittest
 from helperFunctions import change_date_format, validate_date_format
+from classes import individualPerson
 
-class TestTable(unittest.TestCase):
-    """Unit test will be define here"""
-    pass
+class TestindividualPerson(unittest.TestCase):
+    """Unit test for individualPerson class"""
+
+    individual = individualPerson('I123')
+    def test_get_age(self):
+        individual = individualPerson('I123')
+        individual.birt = '7 MAY 2017'
+        self.assertEqual(1, individual.get_age(), True)
+
+        individual = individualPerson('I456')
+        individual.birt = '10 SEP 1998'
+        self.assertEqual(20, individual.get_age(), False)
+
 
 
 class TestHelperFunctions(unittest.TestCase):

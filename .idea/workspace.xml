@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db51b9b8-127c-4883-9a88-da68848b25d3" name="Default" comment="" />
+    <list default="true" id="db51b9b8-127c-4883-9a88-da68848b25d3" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,13 +14,50 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/gedcom_parser$app.coverage" NAME="app Coverage Results" MODIFIED="1537295102948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/gedcom_parser$Unittests_in_TestApp_py.coverage" NAME="Unittests in TestApp.py Coverage Results" MODIFIED="1537205325380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/gedcom_parser$app.coverage" NAME="app Coverage Results" MODIFIED="1537387472674" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/gedcom_parser$Unittests_in_TestApp_py.coverage" NAME="Unittests in TestApp.py Coverage Results" MODIFIED="1537388105941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/gedcom_parser$helperFunctions.coverage" NAME="helperFunctions Coverage Results" MODIFIED="1537284224370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/gedcom_parser$Demo_app.coverage" NAME="Demo_app Coverage Results" MODIFIED="1537287954330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="helperFunctions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/helperFunctions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1140">
+              <caret line="76" column="22" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="22" />
+              <folding>
+                <element signature="e#14#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestApp.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TestApp.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classes.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/classes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -45,10 +86,10 @@
         <option value="$PROJECT_DIR$/Individual.py" />
         <option value="$PROJECT_DIR$/Demo_class.py" />
         <option value="$PROJECT_DIR$/Demo_app.py" />
-        <option value="$PROJECT_DIR$/classes.py" />
         <option value="$PROJECT_DIR$/helperFunctions.py" />
         <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/TestApp.py" />
+        <option value="$PROJECT_DIR$/classes.py" />
       </list>
     </option>
   </component>
@@ -206,34 +247,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 45m 05s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 07m 38s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 45m 13s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 07m 48s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 45m 21s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 08m 09s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 45m 52s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 08m 27s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 46m 04s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 08m 40s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 46m 48s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 08m 47s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 46m 57s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 09m 02s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 47m 19s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 09m 36s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 48m 25s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 10m 05s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 15h 48m 40s.xml">
+    <history-entry file="Unittests_in_TestApp_py - 2018.09.19 at 16h 12m 00s.xml">
       <configuration name="Unittests in TestApp.py" configurationId="tests" />
     </history-entry>
   </component>
@@ -248,14 +289,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="26" width="1413" height="834" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32971507" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32971507" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32971507" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32971507" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32971507" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32971507" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32971507" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4979757" visible="true" weight="0.29540482" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
@@ -640,29 +682,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158">
-          <caret lean-forward="true" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/helperFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1058">
+        <state relative-caret-position="1140">
           <caret line="76" column="22" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="22" />
+          <folding>
+            <element signature="e#14#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestApp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+        <state relative-caret-position="177">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
