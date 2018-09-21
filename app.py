@@ -15,7 +15,7 @@
 # Library imports
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
-from helperFunctions import read_data_file
+from helperFunctions import read_data_file, deceased_list
 
 individual_data = dict()
 family_data = dict()
@@ -91,7 +91,7 @@ def data_parser(data):
 def main():
     """Main Function program Execution"""
 
-    raw_data = read_data_file('familytree.ged')
+    raw_data = read_data_file('My_family.ged')
     data_parser(raw_data)
 
     print('Individuals')
@@ -105,6 +105,11 @@ def main():
     for obj in family_data.values():
         t.add_row(obj.pt_row())
     print (t)
+
+    # Get list of individuals who passed
+    for person in deceased_list(individual_data):
+        print("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
+
 
 
 if __name__ == '__main__':
