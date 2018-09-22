@@ -1,5 +1,5 @@
 import unittest
-from helperFunctions import change_date_format, validate_date_format
+from helperFunctions import change_date_format, validate_date_format, deceased_list
 from classes import individualPerson
 
 class TestindividualPerson(unittest.TestCase):
@@ -29,6 +29,29 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(change_date_format('7 MAY 2018'), '2018-05-7', True)
         self.assertNotEqual(change_date_format('7 MAY 2018'), '2018/05/7', True)
         self.assertNotEqual(change_date_format('7 MAY 2018'), '2018/05/07', True)
+
+    def test_deceased_list(self):
+        ind_dict = dict()
+
+        individual = individualPerson('I123')
+        individual.alive = False
+        ind_dict[individual.uid] = individual
+
+        individual2 = individualPerson('I456')
+        ind_dict[individual2.uid] = individual2
+
+        self.assertEqual(len(deceased_list(ind_dict)), 1, True)
+
+        individual3 = individualPerson('I789')
+        ind_dict[individual2.uid] = individual3
+        individual3.alive = False
+        self.assertEqual(len(deceased_list(ind_dict)), 2, True)
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
