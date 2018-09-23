@@ -1,9 +1,7 @@
 # Lib Imports
 import re
 import os
-from datetime import datetime, timedelta
-#import timestring
-#from dateutil.relativedelta import *
+from datetime import datetime
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""

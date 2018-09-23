@@ -43,9 +43,19 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(deceased_list(ind_dict)), 1, True)
 
         individual3 = individualPerson('I789')
-        ind_dict[individual2.uid] = individual3
+        ind_dict[individual3.uid] = individual3
         individual3.alive = False
         self.assertEqual(len(deceased_list(ind_dict)), 2, True)
+
+        individual4 = individualPerson('I987')
+        ind_dict[individual4.uid] = individual4
+        individual4.alive = True
+        self.assertEqual(len(deceased_list(ind_dict)), 2, True)
+
+        individual5 = individualPerson('I744')
+        ind_dict[individual5.uid] = individual5
+        individual5.alive = False
+        self.assertEqual(len(deceased_list(ind_dict)), 3, True)
 
     def test_agemorethan150(self):
 
