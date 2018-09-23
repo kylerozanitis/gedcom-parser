@@ -1,6 +1,9 @@
 # Lib Imports
 import re
 import os
+from datetime import datetime, timedelta
+import timestring
+#from dateutil.relativedelta import *
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
@@ -97,3 +100,23 @@ def deceased_list(individual_data):
             items.append(individual)
 
     return items
+
+def agemorethan_150(status,dob,age):
+    flag = True
+    today = datetime.now()
+    #print('Today-',today)
+    if validate_date_format(dob):
+        bdate = change_date_format(dob).split('-')
+    birth = '-'.join(bdate)
+    #print(birth)
+    #birth = timestring.Date(dob)
+    birth = datetime.strptime(birth, '%Y-%m-%d')
+    #print('birth-',birth)
+    if status:
+        if birth < today and age < 150:
+            flag = True
+        else:
+            flag = False
+    else:
+        flag = False
+    return flag

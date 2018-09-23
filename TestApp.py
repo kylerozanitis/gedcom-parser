@@ -1,5 +1,5 @@
 import unittest
-from helperFunctions import change_date_format, validate_date_format, deceased_list
+from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from classes import individualPerson
 
 class TestindividualPerson(unittest.TestCase):
@@ -47,7 +47,18 @@ class TestHelperFunctions(unittest.TestCase):
         individual3.alive = False
         self.assertEqual(len(deceased_list(ind_dict)), 2, True)
 
+    def test_agemorethan150(self):
 
+        person1_dob = '17 AUG 1954'
+        person1_age = 89
+        person1_status = True
+        #status = agemorethan_150(person1_dob,person1_age)
+        self.assertTrue(agemorethan_150(person1_status,person1_dob,person1_age))
+
+        person2_dob = '23 SEP 1921'
+        person2_age = 152
+        person2_status = False
+        self.assertFalse(agemorethan_150(person2_status,person2_dob,person2_age))
 
 
 

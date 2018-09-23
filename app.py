@@ -15,7 +15,7 @@
 # Library imports
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
-from helperFunctions import read_data_file, deceased_list
+from helperFunctions import read_data_file, deceased_list, agemorethan_150
 
 individual_data = dict()
 family_data = dict()
@@ -109,6 +109,11 @@ def main():
     # Get list of individuals who passed
     for person in deceased_list(individual_data):
         print("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
+    
+    
+    for person in individual_data.values():
+        print('person name:',person.name,' - ',agemorethan_150(person.alive,person.birt,person.age))
+        
 
 
 
