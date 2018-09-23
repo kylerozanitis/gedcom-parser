@@ -2,8 +2,7 @@
 import re
 import os
 from datetime import datetime, timedelta
-#import timestring
-#from dateutil.relativedelta import *
+
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
@@ -108,8 +107,6 @@ def agemorethan_150(status,dob,age):
     if validate_date_format(dob):
         bdate = change_date_format(dob).split('-')
     birth = '-'.join(bdate)
-    #print(birth)
-    #birth = timestring.Date(dob)
     birth = datetime.strptime(birth, '%Y-%m-%d')
     #print('birth-',birth)
     if status:
