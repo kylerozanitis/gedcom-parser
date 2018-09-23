@@ -1,7 +1,12 @@
 # Lib Imports
 import re
 import os
+<<<<<<< HEAD
 from datetime import datetime
+=======
+from datetime import datetime, timedelta
+
+>>>>>>> 58501c4193ba25f38642786c6d4cf511efad88d5
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
@@ -106,15 +111,12 @@ def agemorethan_150(status,dob,age):
     if validate_date_format(dob):
         bdate = change_date_format(dob).split('-')
     birth = '-'.join(bdate)
-    #print(birth)
-    #birth = timestring.Date(dob)
     birth = datetime.strptime(birth, '%Y-%m-%d')
     #print('birth-',birth)
-    if status:
-        if birth <= today and age < 150:
-            flag = True
-        else:
-            flag = False
+    if status == False and birth <= today and age < 150:
+        flag = True
+    elif status == True and birth <= today and age <150:
+        flag = True
     else:
         flag = False
     return flag
