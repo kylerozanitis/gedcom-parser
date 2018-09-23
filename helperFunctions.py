@@ -112,11 +112,10 @@ def agemorethan_150(status,dob,age):
     #birth = timestring.Date(dob)
     birth = datetime.strptime(birth, '%Y-%m-%d')
     #print('birth-',birth)
-    if status:
-        if birth <= today and age < 150:
-            flag = True
-        else:
-            flag = False
+    if status == False and birth <= today and age < 150:
+        flag = True
+    elif status == True and birth <= today and age <150:
+        flag = True
     else:
         flag = False
     return flag
