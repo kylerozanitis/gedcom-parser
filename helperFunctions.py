@@ -6,6 +6,7 @@ from datetime import datetime
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
+
     filename = os.fsdecode(file_name)
     if filename.endswith(".ged"):
         try:
@@ -101,14 +102,18 @@ def deceased_list(individual_data):
     return items
 
 def agemorethan_150(status,dob,age):
+    """Function Returns true or false is the individual is older the 150 yrs old
+        it takes 3 parameters: status of person (if alive or not) DOB, and its Age """
+
     flag = True
     today = datetime.now()
-    #print('Today-',today)
+
     if validate_date_format(dob):
         bdate = change_date_format(dob).split('-')
+
     birth = '-'.join(bdate)
     birth = datetime.strptime(birth, '%Y-%m-%d')
-    #print('birth-',birth)
+
     if status == False and birth <= today and age < 150:
         flag = True
     elif status == True and birth <= today and age <150:
