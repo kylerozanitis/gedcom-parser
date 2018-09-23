@@ -87,3 +87,13 @@ def change_date_format(date):
 
     return temp[2]+'-'+date_month+'-'+temp[0]
 
+
+def deceased_list(individual_data):
+    """ This function takes a dictionary list loops through the individual list to get the people that has passed away and returns a list of individuals"""
+
+    items = []
+    for individual in individual_data.values():
+        if not individual.is_alive():
+            items.append(individual)
+
+    return items

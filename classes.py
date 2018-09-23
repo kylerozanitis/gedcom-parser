@@ -19,7 +19,12 @@ class individualPerson(object):
         self.famc = [] # family id where individual is a child
         self.fams = [] # family id where individual is parent
 
+    def is_alive(self):
+        """Returns if the person is alive as True or False if not """
+        return self.alive
+
     def get_age(self):
+        """Returns the age of the individual"""
         if validate_date_format(self.birt):
             birth_year, birth_month, birth_day = change_date_format(self.birt).split('-')
 
@@ -31,6 +36,14 @@ class individualPerson(object):
                 age = (int(death_year) - int(birth_year) - ((int(death_month), int(death_day)) < (int(birth_month), int(birth_day))))
 
         return age
+
+    def set_birthdate(self, date):
+        """Sets the birthdate for an individual, it call valid_date_format from helperFunctions to ensure birthday is in right format"""
+
+        if validate_date_format(self.birt):
+            self.birt = date
+        else:
+            raise ValueError('Invalid date!')
 
 
     def pt_row(self):
