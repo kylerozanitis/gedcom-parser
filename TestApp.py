@@ -50,20 +50,33 @@ class TestHelperFunctions(unittest.TestCase):
     def test_agemorethan150(self):
 
         person1_dob = '17 AUG 1954'
-        person1_age = 89
-        person1_status = True
+        person1_age = 64
+        person1_isalive = True
         #status = agemorethan_150(person1_dob,person1_age)
-        self.assertTrue(agemorethan_150(person1_status,person1_dob,person1_age))
+        self.assertTrue(agemorethan_150(person1_isalive,person1_dob,person1_age))
 
         person2_dob = '23 SEP 1921'
         person2_age = 152
-        person2_status = False
-        self.assertFalse(agemorethan_150(person2_status,person2_dob,person2_age))
+        person2_isalive = False
+        self.assertFalse(agemorethan_150(person2_isalive,person2_dob,person2_age))
 
+        person3_dob = '23 SEP 2018'
+        person3_age = 0
+        person3_status = True
+        result = str(agemorethan_150(person3_status,person3_dob,person3_age))
+        self.assertEqual(result,'True')
 
+        person4_dob = '01 JAN 1688'
+        person4_age = 330
+        person4_isalive = False
+        result4 = str(agemorethan_150(person4_isalive,person4_dob,person4_age))
+        self.assertNotEqual(result4,'True')
 
-
-
+        person5_dob = '01 JAN 1988'
+        person5_age = 30
+        person5_isalive = False
+        result5 = str(agemorethan_150(person5_isalive,person5_dob,person5_age))
+        self.assertIs(result5,'False')
 
 if __name__ == '__main__':
     unittest.main()

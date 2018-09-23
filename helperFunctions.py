@@ -113,7 +113,7 @@ def agemorethan_150(status,dob,age):
     birth = datetime.strptime(birth, '%Y-%m-%d')
     #print('birth-',birth)
     if status:
-        if birth < today and age < 150:
+        if birth <= today and age < 150:
             flag = True
         else:
             flag = False
