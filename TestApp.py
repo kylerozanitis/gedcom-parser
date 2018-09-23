@@ -86,7 +86,7 @@ class TestHelperFunctions(unittest.TestCase):
         person5_age = 30
         person5_isalive = False
         result5 = str(agemorethan_150(person5_isalive,person5_dob,person5_age))
-        self.assertIs(result5,'False')
+        self.assertIs(result5,'True')
 
 if __name__ == '__main__':
     unittest.main()
