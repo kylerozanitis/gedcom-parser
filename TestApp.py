@@ -1,6 +1,6 @@
 import unittest
-from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150, check_marriage_before_divorce
-from classes import individualPerson, familyClass
+from helperFunctions import read_data_file, change_date_format, validate_date_format, deceased_list,agemorethan_150
+from helperFunctions import check_marriage_before_divorce, death_before_birthfrom classes import individualPerson, familyClass
 
 class TestindividualPerson(unittest.TestCase):
     """Unit test for individualPerson class"""
@@ -144,6 +144,17 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 3, True)
         self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5", "F6"], True)
+        
+    def test_birth_before_death(self):
+        """ Unit test for US03 -- Birth should occur before death of an individual """
+        raw_data = read_data_file('My_Family.ged')
+        data_parser(raw_data)
 
+        self.assertEqual(death_before_birth(individual_data), ['I7', 'I10'])
+        self.assertNotEqual(death_before_birth(individual_data), ['I1', 'I16'])
+        self.assertIsNotNone(death_before_birth(individual_data))
+        self.assertIsNot(death_before_birth(individual_data), "")
+        self.assertListEqual(death_before_birth(individual_data), ['I7', 'I10'])
+        
 if __name__ == '__main__':
     unittest.main()
