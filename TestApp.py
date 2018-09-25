@@ -1,6 +1,6 @@
 import unittest
-from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
-from classes import individualPerson
+from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150, check_marriage_before_divorce
+from classes import individualPerson, familyClass
 
 class TestindividualPerson(unittest.TestCase):
     """Unit test for individualPerson class"""
@@ -93,6 +93,50 @@ class TestHelperFunctions(unittest.TestCase):
         person5_isalive = False
         result5 = str(agemorethan_150(person5_isalive,person5_dob,person5_age))
         self.assertIs(result5,'True')
+
+    def test_check_marriage_before_divorce(self):
+        """ Unit test for checking that marriage occured before divorce """
+        fam_dict = {}
+
+        family = familyClass("F1")
+        family.marr = "1 JAN 2000"
+        family.div = "1 JAN 2005"
+        fam_dict[family.fid] = family
+
+        self.assertNotEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+
+        family2 = familyClass("F2")
+        family2.marr = "1 JAN 2005"
+        family2.div = "1 JAN 2000"
+        fam_dict[family2.fid] = family2
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2"], True)
+
+        family3 = familyClass("F3")
+        family3.marr = "1 JAN 2000"
+        family3.div = "1 JAN 2000"
+        fam_dict[family3.fid] = family3
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2"], True)
+
+        family4 = familyClass("F4")
+        family4.marr = "1 JAN 2000"
+        family4.div = "NA"
+        fam_dict[family4.fid] = family4
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2"], True)
+
+        family5 = familyClass("F5")
+        family5.marr = "1 DEC 2000"
+        family5.div = "30 NOV 2000"
+        fam_dict[family5.fid] = family5
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 2, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5"], True)
+
 
 if __name__ == '__main__':
     unittest.main()
