@@ -137,6 +137,13 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 2, True)
         self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5"], True)
 
+        family6 = familyClass("F6")
+        family6.marr = "NA"
+        family6.div = "1 JAN 2020"
+        fam_dict[family6.fid] = family6
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 3, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5", "F6"], True)
 
 if __name__ == '__main__':
     unittest.main()

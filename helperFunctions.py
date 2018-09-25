@@ -131,7 +131,9 @@ def check_marriage_before_divorce(family_data):
     problem_families = []
 
     for family in family_data.values():
-        if family.div != "NA":
+        if family.marr == "NA":
+            problem_families.append(family.fid)
+        elif family.div != "NA":
             marr = change_date_format(family.marr).split("-")
             marriage = "-".join(marr)
             marriage_date = datetime.strptime(marriage, "%Y-%m-%d")
