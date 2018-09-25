@@ -15,7 +15,7 @@
 # Library imports
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
-from helperFunctions import read_data_file, deceased_list, agemorethan_150
+from helperFunctions import read_data_file, deceased_list, agemorethan_150, check_marriage_before_divorce
 
 individual_data = dict()
 family_data = dict()
@@ -113,9 +113,11 @@ def main():
     
     for person in individual_data.values():
         print('person name:',person.name,' - ',agemorethan_150(person.alive,person.birt,person.age))
-        
-
-
+    
+    # Return list of families with divorce occuring before marriage
+    problem_families = check_marriage_before_divorce(family_data)
+    if len(problem_families) > 0:
+        return problem_families
 
 if __name__ == '__main__':
     main()

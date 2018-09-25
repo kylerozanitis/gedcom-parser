@@ -78,7 +78,7 @@ def validate_date_format(date_to_match):
 
 
 def change_date_format(date):
-    """Function takes a date and changes the format from 'd MON YYYY' to 'YYYY/MM/dd' """
+    """Function takes a date and changes the format from 'd MON YYYY' to 'YYYY-MM-dd' """
 
     month_dict = {"JAN": "01", "FEB": "02", "MAR": "03",
                   "APR": "04", "MAY": "05", "JUN": "06",
@@ -121,3 +121,26 @@ def agemorethan_150(status,dob,age):
     else:
         flag = False
     return flag
+
+
+def check_marriage_before_divorce(family_data):
+    """ US04 - Marriage should occur before divorce of spouses, and divorce can
+    only occur after marriage; Program takes a Family ID (FID), ensures the
+    wedding took place before the divorce. """
+    
+    problem_families = []
+
+    for family in family_data.values():
+        if family.div != "NA":
+            marr = change_date_format(family.marr).split("-")
+            marriage = "-".join(marr)
+            marriage_date = datetime.strptime(marriage, "%Y-%m-%d")
+            
+            div = change_date_format(family.div).split("-")
+            divorce = "-".join(div)
+            divorce_date = datetime.strptime(divorce, "%Y-%m-%d")
+            
+            if marriage_date > divorce_date:
+                problem_families.append(family.fid)
+        
+    return problem_families
