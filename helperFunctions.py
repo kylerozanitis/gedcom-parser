@@ -146,3 +146,30 @@ def check_marriage_before_divorce(family_data):
                 problem_families.append(family.fid)
         
     return problem_families
+
+def death_before_birth(individual_data):
+    """US03 -- Birth should occur before death of an individual --- Program uses individual's 
+       birth date and death date to validate if birth occured before death. It returns a list of 
+       uid of the individuals whose death date occurs before birth date along with a flag indicator
+       to print error messages"""
+    error_entries = []
+    flag = 0
+    for uid, individual in individual_data.items():
+        if individual.birt != 'NA' and individual.deat != 'NA':
+            temp1 = change_date_format(individual.birt).split("-")
+            indi_birt = "-".join(temp1)
+            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+            temp2 = change_date_format(individual.deat).split("-")
+            indi_deat = "-".join(temp2)
+            indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
+
+            if indi_birth_date > indi_deat_date:
+                flag = 1
+                error_entries.append(individual.uid)
+
+        if individual.birt == 'NA' and individual.deat != 'NA':
+            flag = 2
+            error_entries.append(individual.uid)
+            
+    return error_entries, flag

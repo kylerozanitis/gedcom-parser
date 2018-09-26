@@ -15,7 +15,8 @@
 # Library imports
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
-from helperFunctions import read_data_file, deceased_list, agemorethan_150, check_marriage_before_divorce
+from helperFunctions import read_data_file, deceased_list, agemorethan_150
+from helperFunctions import check_marriage_before_divorce, death_before_birth
 
 individual_data = dict()
 family_data = dict()
@@ -93,11 +94,24 @@ def main():
 
     raw_data = read_data_file('My_family.ged')
     data_parser(raw_data)
+    
+    # US03 -- Birth should occur before death of an individual
+    error_entries, flag = death_before_birth(individual_data)
 
-    print('Individuals')
     t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Age','Alive','Death','Child','Spouse'])
     for obj in individual_data.values():
-        t.add_row(obj.pt_row())
+        if obj.uid in error_entries:
+            """The details of the individuals whose death occurs before birth will not be printed in the table as
+               the given birth and death date will calculate a negative age and neagtive age of an individual is 
+               not possible"""
+            if flag == 1:
+                print("Error! Death date of UID:" + obj.uid + " cannot occur before birth date")
+            if flag == 2:
+                print("Error! " + obj.uid + " cannot have a death date without a birth date")
+            continue
+        else:
+            t.add_row(obj.pt_row())
+    print('Individuals')
     print (t)
 
     print('Families')
