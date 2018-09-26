@@ -159,6 +159,11 @@ class TestHelperFunctions(unittest.TestCase):
         indi_I10.birt = "25 AUG 1980"
         indi_I10.deat = "13 MAR 1955"
         indi_dict[indi_I10.uid] = indi_I10
+        
+        indi_I12 = individualPerson("I12")
+        indi_I12.birt = "25 AUG 1920"
+        indi_I12.deat = "13 MAR 1955"
+        indi_dict[indi_I12.uid] = indi_I12
 
         self.assertEqual(death_before_birth(indi_dict), (['I7', 'I10'], 1))
         self.assertNotEqual(death_before_birth(indi_dict), (['I1', 'I6'], 2))
