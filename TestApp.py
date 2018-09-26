@@ -1,6 +1,12 @@
 import unittest
+<<<<<<< HEAD
 from helperFunctions import change_date_format, validate_date_format, deceased_list, agemorethan_150
 from classes import individualPerson
+=======
+from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
+from helperFunctions import check_marriage_before_divorce, death_before_birth
+from classes import individualPerson, familyClass
+>>>>>>> fb59dbb7c60f605454f718ab757df2bd043283fe
 
 class TestindividualPerson(unittest.TestCase):
     """Unit test for individualPerson class"""
@@ -94,5 +100,81 @@ class TestHelperFunctions(unittest.TestCase):
         result5 = str(agemorethan_150(person5_isalive,person5_dob,person5_age))
         self.assertIs(result5,'True')
 
+    def test_check_marriage_before_divorce(self):
+        """ Unit test for checking that marriage occured before divorce """
+        fam_dict = {}
+
+        family = familyClass("F1")
+        family.marr = "1 JAN 2000"
+        family.div = "1 JAN 2005"
+        fam_dict[family.fid] = family
+
+        self.assertNotEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+
+        family2 = familyClass("F2")
+        family2.marr = "1 JAN 2005"
+        family2.div = "1 JAN 2000"
+        fam_dict[family2.fid] = family2
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2"], True)
+
+        family3 = familyClass("F3")
+        family3.marr = "1 JAN 2000"
+        family3.div = "1 JAN 2000"
+        fam_dict[family3.fid] = family3
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2"], True)
+
+        family4 = familyClass("F4")
+        family4.marr = "1 JAN 2000"
+        family4.div = "NA"
+        fam_dict[family4.fid] = family4
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 1, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2"], True)
+
+        family5 = familyClass("F5")
+        family5.marr = "1 DEC 2000"
+        family5.div = "30 NOV 2000"
+        fam_dict[family5.fid] = family5
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 2, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5"], True)
+
+        family6 = familyClass("F6")
+        family6.marr = "NA"
+        family6.div = "1 JAN 2020"
+        fam_dict[family6.fid] = family6
+
+        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 3, True)
+        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5", "F6"], True)
+        
+    def test_birth_before_death(self):
+        """ Unit test for US03 -- Birth should occur before death of an individual """
+        indi_dict = {}
+
+        indi_I7 = individualPerson("I7")
+        indi_I7.birt = "1 JUL 2000"
+        indi_I7.deat = "5 DEC 1995"
+        indi_dict[indi_I7.uid] = indi_I7
+
+        indi_I10 = individualPerson("I10")
+        indi_I10.birt = "25 AUG 1980"
+        indi_I10.deat = "13 MAR 1955"
+        indi_dict[indi_I10.uid] = indi_I10
+        
+        indi_I12 = individualPerson("I12")
+        indi_I12.birt = "25 AUG 1920"
+        indi_I12.deat = "13 MAR 1955"
+        indi_dict[indi_I12.uid] = indi_I12
+
+        self.assertEqual(death_before_birth(indi_dict), (['I7', 'I10'], 1))
+        self.assertNotEqual(death_before_birth(indi_dict), (['I1', 'I6'], 2))
+        self.assertIsNotNone(death_before_birth(indi_dict))
+        self.assertIsNot(death_before_birth(indi_dict), "")
+        self.assertCountEqual(death_before_birth(indi_dict), (['I7', 'I10'], 1))
+        
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(exit=False,verbosity=2)
