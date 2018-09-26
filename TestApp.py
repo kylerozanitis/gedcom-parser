@@ -1,12 +1,9 @@
 import unittest
-<<<<<<< HEAD
-from helperFunctions import change_date_format, validate_date_format, deceased_list, agemorethan_150
-from classes import individualPerson
-=======
+
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, death_before_birth
 from classes import individualPerson, familyClass
->>>>>>> fb59dbb7c60f605454f718ab757df2bd043283fe
+
 
 class TestindividualPerson(unittest.TestCase):
     """Unit test for individualPerson class"""
