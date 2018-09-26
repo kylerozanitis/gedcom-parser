@@ -150,11 +150,11 @@ class TestHelperFunctions(unittest.TestCase):
         raw_data = read_data_file('My_Family.ged')
         data_parser(raw_data)
 
-        self.assertEqual(death_before_birth(individual_data), ['I7', 'I10'])
-        self.assertNotEqual(death_before_birth(individual_data), ['I1', 'I16'])
+        self.assertEqual(death_before_birth(individual_data), (['I7', 'I10'], 1))
+        self.assertNotEqual(death_before_birth(individual_data), (['I1', 'I6'], 2))
         self.assertIsNotNone(death_before_birth(individual_data))
         self.assertIsNot(death_before_birth(individual_data), "")
-        self.assertListEqual(death_before_birth(individual_data), ['I7', 'I10'])
+        self.assertCountEqual(death_before_birth(individual_data), (['I7', 'I10'], 1))
         
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(exit=False,verbosity=2)
