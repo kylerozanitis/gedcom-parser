@@ -173,3 +173,35 @@ def death_before_birth(individual_data):
             error_entries.append(individual.uid)
             
     return error_entries, flag
+
+def divorce_before_death(family_data,individual_data):
+    #flag = True
+    prob_family = []
+
+    for family in family_data.values():
+        if family.div != 'NA':
+            husband = None
+            wife = None
+            div = change_date_format(family.div).split('-')
+            div_d = '-'.join(div)
+            divorce_date = datetime.strptime(div_d,'%Y-%m-%d')
+
+            for individual in individual_data.values():
+                if individual.uid == family.husb_id:
+                    husband = individual
+                if individual.uid == family.wife_id:
+                    wife = individual
+            if husband.alive == False:
+                husb_deat = change_date_format(husband.deat).split('-')
+                h_deat = '-'.join(husb_deat)
+                husb_death = datetime.strptime(h_deat,'%Y-%m-%d')
+                if divorce_date > husb_death:
+                    print(husb_death,'is less than',divorce_date)
+                    prob_family.append(family.fid)
+            if wife.alive == False:
+                wife_deat = change_date_format(wife.deat).split('-')
+                w_deat = '-'.join(wife_deat)
+                wife_death = datetime.strptime(w_deat,'%Y-%m-%d')
+                if divorce_date > wife_death:
+                    prob_family.append(family.fid)
+    return prob_family
