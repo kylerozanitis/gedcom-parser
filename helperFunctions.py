@@ -4,6 +4,7 @@ import os
 
 from datetime import datetime
 
+
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
 
@@ -27,6 +28,7 @@ def read_data_file(file_name):
                 return clean_data(data_values)
     else:
         return OSError('{} must be a .ged file'.format(file_name))
+
 
 def clean_data(data):
     """Cleans data and returns only valid tags data in a tuple"""
@@ -67,6 +69,7 @@ def clean_data(data):
 
     return tuple(new_list)
 
+
 def validate_date_format(date_to_match):
     """Function takes a date and checks if the format is 'd MON YYYY' returns true if it matches false if it doesn't"""
 
@@ -90,6 +93,7 @@ def change_date_format(date):
 
     return temp[2]+'-'+date_month+'-'+temp[0]
 
+
 def check_spouses_exist(family_data):
     """ Function to check that both a wife and husband exist and remove them
     from the dictionary if not. """
@@ -104,9 +108,10 @@ def check_spouses_exist(family_data):
 
     return family_data
 
+
 def deceased_list(individual_data):
-    """ This function takes a dictionary list loops through the individual list to get the people that
-    has passed away and returns a list of individuals"""
+    """US29 - List deceased. This function takes a dictionary list loops through the individual
+    list to get the people that has passed away and returns a list of individuals"""
 
     items = []
     for individual in individual_data.values():
@@ -117,7 +122,10 @@ def deceased_list(individual_data):
 
 
 def birth_before_marriage(family_data, individual_data):
-    """Checks for birth before marriages if marriage happens before birth, individual will be removed from family"""
+    """US02 - Birth should occur before Marriage of either spouse -
+    Checks for birth before marriages if marriage happens before birth,
+    individual will be removed from family"""
+
     problematic_item = []
     for fam in family_data.values():
         if fam.marr is not "NA":
@@ -132,9 +140,8 @@ def birth_before_marriage(family_data, individual_data):
     return family_data
 
 
-
-def agemorethan_150(status,dob,age):
-    """Function Returns true or false is the individual is older the 150 yrs old
+def agemorethan_150(status, dob, age):
+    """US07 - Function Returns true or false is the individual is older the 150 yrs old
         it takes 3 parameters: status of person (if alive or not) DOB, and its Age """
 
     flag = True
@@ -155,7 +162,6 @@ def agemorethan_150(status,dob,age):
     return flag
 
 
-
 def check_two_dates(first_Event, event_to_compare_date):
     """This function checks two events first_event (Example Birth) happened
     before the event_to_compare_date (example death or marriage), it uses validate_format() and change date format"""
@@ -169,7 +175,6 @@ def check_two_dates(first_Event, event_to_compare_date):
         return False
     else:
         raise ValueError('check dates, format is invalid.')
-
 
 
 def check_marriage_before_divorce(family_data):
@@ -195,6 +200,7 @@ def check_marriage_before_divorce(family_data):
                 problem_families.append(family.fid)
         
     return problem_families
+
 
 def check_marriage_before_death(family_data, individual_data):
     """ US05 - Marriage should occur before death of either spouse; Program
@@ -233,6 +239,7 @@ def check_marriage_before_death(family_data, individual_data):
                     problem_families.append(family.fid)
     
     return problem_families
+
 
 def death_before_birth(individual_data):
     """US03 -- Birth should occur before death of an individual --- Program uses individual's 

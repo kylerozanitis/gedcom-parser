@@ -24,7 +24,7 @@ class individualPerson(object):
         return self.alive
 
     def get_age(self):
-        """Returns the age of the individual"""
+        """US27 - Individual Age. Returns the age of the individual"""
         if validate_date_format(self.birt):
             birth_year, birth_month, birth_day = change_date_format(self.birt).split('-')
 
