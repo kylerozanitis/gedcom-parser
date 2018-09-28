@@ -16,7 +16,8 @@
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
-from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, death_before_birth
+from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
+from helperFunctions import death_before_birth
 
 individual_data = dict()
 family_data = dict()
@@ -94,6 +95,9 @@ def main():
 
     raw_data = read_data_file('My_family.ged')
     data_parser(raw_data)
+
+    # Check that each family has a husband and a wife
+    check_spouses_exist(family_data)
     
     # US03 -- Birth should occur before death of an individual
     error_entries, flag = death_before_birth(individual_data)

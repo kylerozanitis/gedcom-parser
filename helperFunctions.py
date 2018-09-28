@@ -90,6 +90,18 @@ def change_date_format(date):
 
     return temp[2]+'-'+date_month+'-'+temp[0]
 
+def check_spouses_exist(family_data):
+    """ Function to check that both a wife and husband exist and remove them
+    from the dictionary if not. """
+
+    problem_families = []
+
+    for family in family_data.values():
+        if family.husb_id == "NA" or family.wife_id == "NA":
+            problem_families.append(family.fid)
+    for family in problem_families:
+        family_data.pop(family)
+
 def deceased_list(individual_data):
     """ This function takes a dictionary list loops through the individual list to get the people that has passed away and returns a list of individuals"""
 
