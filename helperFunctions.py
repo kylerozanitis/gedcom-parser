@@ -102,6 +102,8 @@ def check_spouses_exist(family_data):
     for family in problem_families:
         family_data.pop(family)
 
+    return family_data
+
 def deceased_list(individual_data):
     """ This function takes a dictionary list loops through the individual list to get the people that has passed away and returns a list of individuals"""
 

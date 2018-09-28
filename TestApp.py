@@ -1,12 +1,8 @@
 import unittest
 
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
-<<<<<<< HEAD
-from helperFunctions import check_marriage_before_divorce, death_before_birth, check_two_dates
-=======
-from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
+from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth
->>>>>>> d27ead0e002fc8e7971adf0c1941b7c7f342a3cf
 from classes import individualPerson, familyClass
 
 
