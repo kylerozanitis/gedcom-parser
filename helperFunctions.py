@@ -90,7 +90,6 @@ def change_date_format(date):
 
     return temp[2]+'-'+date_month+'-'+temp[0]
 
-
 def deceased_list(individual_data):
     """ This function takes a dictionary list loops through the individual list to get the people that has passed away and returns a list of individuals"""
 
@@ -122,7 +121,6 @@ def agemorethan_150(status,dob,age):
         flag = False
     return flag
 
-
 def check_marriage_before_divorce(family_data):
     """ US04 - Marriage should occur before divorce of spouses, and divorce can
     only occur after marriage; Program takes a Family ID (FID), ensures the
@@ -145,6 +143,44 @@ def check_marriage_before_divorce(family_data):
             if marriage_date > divorce_date:
                 problem_families.append(family.fid)
         
+    return problem_families
+
+def check_marriage_before_death(family_data, individual_data):
+    """ US05 - Marriage should occur before death of either spouse; Program
+    takes the family and individual dictionaries. For each family, the program
+    checks if either spouse is dead and if so, checks that the marriage date
+    occured before the death date of that spouse. A list of problem families
+    is returned from this function. """
+
+    problem_families = []
+
+    for family in family_data.values():
+        if family.marr == "NA":
+            problem_families.append(family.fid)
+        else:
+            husband = individual_data[family.husb_id]
+            wife = individual_data[family.wife_id]
+
+            marr = change_date_format(family.marr).split("-")
+            marriage = "-".join(marr)
+            marriage_date = datetime.strptime(marriage, "%Y-%m-%d")
+
+            if husband.is_alive == False:
+                deat = change_date_format(husband.deat).split("-")
+                death = "-".join(deat)
+                death_date = datetime.strptime(death, "%Y-%m-%d")
+
+                if death_date < marriage_date:
+                    problem_families.append(family.fid)
+
+            elif wife.is_alive == False:
+                deat = change_date_format(wife.deat).split("-")
+                death = "-".join(deat)
+                death_date = datetime.strptime(death, "%Y-%m-%d")
+
+                if death_date < marriage_date:
+                    problem_families.append(family.fid)
+    
     return problem_families
 
 def death_before_birth(individual_data):
