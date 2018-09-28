@@ -133,7 +133,7 @@ def agemorethan_150(status,dob,age):
         flag = False
     return flag
 
-<<<<<<< HEAD
+
 
 def check_two_dates(first_Event, event_to_compare_date):
     """This function checks two events first_event (Example Birth) happened
@@ -151,9 +151,6 @@ def check_two_dates(first_Event, event_to_compare_date):
 
 
 
-
-=======
->>>>>>> d27ead0e002fc8e7971adf0c1941b7c7f342a3cf
 def check_marriage_before_divorce(family_data):
     """ US04 - Marriage should occur before divorce of spouses, and divorce can
     only occur after marriage; Program takes a Family ID (FID), ensures the

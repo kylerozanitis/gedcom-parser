@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db51b9b8-127c-4883-9a88-da68848b25d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helperFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/helperFunctions.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,11 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helperFunctions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="125" selection-start-line="125" selection-end-line="137" selection-end-column="59" />
-              <folding>
-                <marker date="1538150419602" expanded="true" signature="4179:4331" ph="..." />
-              </folding>
+            <state relative-caret-position="270">
+              <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
             </state>
           </provider>
         </entry>
@@ -63,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/TestApp.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="177" selection-start-line="177" selection-end-line="177" />
+              <caret line="289" selection-start-line="289" selection-end-line="289" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -126,8 +121,8 @@
         <option value="$PROJECT_DIR$/Demo_app.py" />
         <option value="$PROJECT_DIR$/classes.py" />
         <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/helperFunctions.py" />
         <option value="$PROJECT_DIR$/TestApp.py" />
+        <option value="$PROJECT_DIR$/helperFunctions.py" />
       </list>
     </option>
   </component>
@@ -335,21 +330,21 @@
     <frame x="16" y="23" width="1413" height="834" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4979757" visible="true" weight="0.33479214" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4979757" visible="true" weight="0.33479214" />
       <window_info id="Structure" order="1" sideWeight="0.5020243" side_tool="true" weight="0.27530953" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32971507" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32884097" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32884097" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39891452" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32971507" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32884097" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32884097" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32971507" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32884097" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32884097" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -443,7 +438,7 @@
     <entry file="file://$PROJECT_DIR$/TestApp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
-          <caret line="177" selection-start-line="177" selection-end-line="177" />
+          <caret line="289" selection-start-line="289" selection-end-line="289" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -462,11 +457,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/helperFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="125" selection-start-line="125" selection-end-line="137" selection-end-column="59" />
-          <folding>
-            <marker date="1538150419602" expanded="true" signature="4179:4331" ph="..." />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="152" lean-forward="true" selection-start-line="152" selection-end-line="152" />
         </state>
       </provider>
     </entry>
