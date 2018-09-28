@@ -96,6 +96,9 @@ def main():
     raw_data = read_data_file('My_family.ged')
     data_parser(raw_data)
 
+    raw_data = read_data_file('familytree.ged')
+    data_parser(raw_data)
+
     # Check that each family has a husband and a wife
     check_spouses_exist(family_data)
     
