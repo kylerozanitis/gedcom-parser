@@ -48,31 +48,31 @@ class TestHelperFunctions(unittest.TestCase):
         family.wife_id = "I2"
         fam_dict[family.fid] = family
 
-        check_spouses_exist(fam_dict)
-        self.assertEqual(len(fam_dict), 1)
-        self.assertEqual(fam_dict.keys(), ["F1"])
+        value = check_spouses_exist(fam_dict)
+        self.assertEqual(len(value), 1)
+        self.assertEqual(list(value.keys()), ["F1"])
 
         family2 = familyClass("F2")
         family2.husb_id = "I3"
         family2.wife_id = "NA"
         fam_dict[family2.fid] = family2
 
-        self.assertEqual(fam_dict.keys(), ["F1", "F2"])
+        self.assertEqual(list(fam_dict.keys()), ["F1", "F2"])
 
         check_spouses_exist(fam_dict)
         self.assertEqual(len(fam_dict), 1)
-        self.assertEqual(fam_dict.keys(), ["F1"])
+        self.assertEqual(list(fam_dict.keys()), ["F1"])
 
         family3 = familyClass("F3")
         family3.husb_id = "NA"
         family3.wife_id = "I6"
         fam_dict[family3.fid] = family3
 
-        self.assertEqual(fam_dict.keys(), ["F1", "F3"])
+        self.assertEqual(list(fam_dict.keys()), ["F1", "F3"])
 
         check_spouses_exist(fam_dict)
         self.assertEqual(len(fam_dict), 1)
-        self.assertEqual(fam_dict.keys(), ["F1"])
+        self.assertEqual(list(fam_dict.keys()), ["F1"])
 
     def test_deceased_list(self):
         """Unit test to validate return of list of deceased people"""
