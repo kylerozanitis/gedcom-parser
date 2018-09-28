@@ -1,7 +1,7 @@
 import unittest
 
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
-from helperFunctions import check_marriage_before_divorce, death_before_birth
+from helperFunctions import check_marriage_before_divorce, death_before_birth, check_two_dates
 from classes import individualPerson, familyClass
 
 
@@ -172,6 +172,19 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertIsNotNone(death_before_birth(indi_dict))
         self.assertIsNot(death_before_birth(indi_dict), "")
         self.assertCountEqual(death_before_birth(indi_dict), (['I7', 'I10'], 1))
-        
+
+    def test_check_two_dates(self):
+        """ Unit testing events before another happened """
+
+        birth = "25 AUG 1920"
+        death = "13 MAR 1955"
+        marriage = "21 APR 1999"
+
+        self.assertTrue(check_two_dates(birth, death), True)
+        self.assertFalse(check_two_dates(marriage, death), True)
+        self.assertFalse(check_two_dates(marriage, birth), True)
+
+
+
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
