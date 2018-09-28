@@ -105,7 +105,8 @@ def check_spouses_exist(family_data):
     return family_data
 
 def deceased_list(individual_data):
-    """ This function takes a dictionary list loops through the individual list to get the people that has passed away and returns a list of individuals"""
+    """ This function takes a dictionary list loops through the individual list to get the people that
+    has passed away and returns a list of individuals"""
 
     items = []
     for individual in individual_data.values():
@@ -113,6 +114,24 @@ def deceased_list(individual_data):
             items.append(individual)
 
     return items
+
+
+def birth_before_marriage(family_data, individual_data):
+    """Checks for birth before marriages if marriage happens before birth, individual will be removed from family"""
+    problematic_item = []
+    for fam in family_data.values():
+        if fam.marr is not "NA":
+            ind = individual_data[fam.husb_id]
+            if not check_two_dates(ind.birt, fam.marr):
+                problematic_item.append(fam)
+
+    if len(problematic_item) > 0:
+        for i in problematic_item:
+            del family_data[i.fid]
+
+    return family_data
+
+
 
 def agemorethan_150(status,dob,age):
     """Function Returns true or false is the individual is older the 150 yrs old

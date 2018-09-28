@@ -2,7 +2,7 @@ import unittest
 
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
-from helperFunctions import death_before_birth
+from helperFunctions import death_before_birth, birth_before_marriage
 from classes import individualPerson, familyClass
 
 
@@ -18,7 +18,6 @@ class TestindividualPerson(unittest.TestCase):
         individual = individualPerson('I456')
         individual.birt = '10 SEP 1998'
         self.assertEqual(20, individual.get_age(), False)
-
 
 
 class TestHelperFunctions(unittest.TestCase):
@@ -291,6 +290,52 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertTrue(check_two_dates(birth, death), True)
         self.assertFalse(check_two_dates(marriage, death), True)
         self.assertFalse(check_two_dates(marriage, birth), True)
+
+
+    def test_birth_before_marriage(self):
+        """ Unit testing to check birth before marriages """
+        fam_dict = {}
+        ind_dict = {}
+
+        individual = individualPerson("I1")
+        individual.uid = "I1"
+        individual.is_alive = True
+        individual.birt = "1 JAN 2001"
+        ind_dict[individual.uid] = individual
+
+        individual2 = individualPerson("I2")
+        individual2.uid = "I2"
+        individual2.is_alive = True
+        individual2.birt = "1 JAN 2010"
+        ind_dict[individual2.uid] = individual2
+
+        family = familyClass("F1")
+        family.husb_id = "I1"
+        family.wife_id = "I2"
+        family.marr = "1 JAN 2000"
+        fam_dict[family.fid] = family
+
+        self.assertEqual(len(birth_before_marriage(fam_dict, ind_dict)), 0, True)
+
+        individual = individualPerson("I3")
+        individual.uid = "I3"
+        individual.is_alive = True
+        individual.birt = "20 OCT 1990"
+        ind_dict[individual.uid] = individual
+
+        individual2 = individualPerson("I4")
+        individual2.uid = "I4"
+        individual2.is_alive = True
+        individual2.birt = "1 JAN 1991"
+        ind_dict[individual2.uid] = individual2
+
+        family = familyClass("F2")
+        family.husb_id = "I3"
+        family.wife_id = "I4"
+        family.marr = "1 JAN 2000"
+        fam_dict[family.fid] = family
+
+        self.assertEqual(len(birth_before_marriage(fam_dict, ind_dict)), 1, True)
 
 
 

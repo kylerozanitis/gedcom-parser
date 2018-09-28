@@ -17,7 +17,7 @@ from prettytable import PrettyTable
 from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
-from helperFunctions import death_before_birth
+from helperFunctions import death_before_birth, birth_before_marriage
 
 individual_data = dict()
 family_data = dict()
@@ -116,7 +116,7 @@ def main():
         else:
             t.add_row(obj.pt_row())
     print('Individuals')
-    print (t)
+    print(t)
 
     print('Families')
     t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
@@ -141,6 +141,15 @@ def main():
     spouse_dead_before_marriage = check_marriage_before_death(family_data, individual_data)
     if len(spouse_dead_before_marriage) > 0:
         print("Families with divorce date occuring before death of a spouse:", spouse_dead_before_marriage)
+
+
+
+    # Checks for birth before marriages if marriage happens before birth, individual will be removed from family
+    print('\n\nChecks for birth before marriages if marriage happens before birth, individual will be removed from family')
+    t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
+    for obj in (birth_before_marriage(family_data, individual_data)).values():
+        t.add_row(obj.pt_row())
+    print (t)
 
 if __name__ == '__main__':
     main()
