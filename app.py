@@ -16,8 +16,12 @@
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
+<<<<<<< HEAD
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage
+=======
+from helperFunctions import check_marriage_before_divorce, death_before_birth,divorce_before_death
+>>>>>>> US06
 
 individual_data = dict()
 family_data = dict()
@@ -135,6 +139,10 @@ def main():
     for person in individual_data.values():
         print('person name:',person.name,' - ',agemorethan_150(person.alive,person.birt,person.age))
     
+    #divorce before death
+    prob_family = divorce_before_death(family_data,individual_data)
+    print("prob_family",prob_family)
+
     # Return list of families with divorce occuring before marriage
     problem_families = check_marriage_before_divorce(family_data)
     if len(problem_families) > 0:
@@ -154,5 +162,6 @@ def main():
         t.add_row(obj.pt_row())
     print (t)
 
+    
 if __name__ == '__main__':
     main()
