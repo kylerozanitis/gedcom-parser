@@ -2,8 +2,7 @@ import unittest
 
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
-from helperFunctions import death_before_birth, birth_before_marriage
-from helperFunctions import check_marriage_before_divorce, death_before_birth, divorce_before_death
+from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death
 from classes import individualPerson, familyClass
 
 

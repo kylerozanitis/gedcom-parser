@@ -16,12 +16,8 @@
 from prettytable import PrettyTable
 from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
-<<<<<<< HEAD
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
-from helperFunctions import death_before_birth, birth_before_marriage
-=======
-from helperFunctions import check_marriage_before_divorce, death_before_birth,divorce_before_death
->>>>>>> US06
+from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death
 
 individual_data = dict()
 family_data = dict()
