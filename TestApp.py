@@ -1,7 +1,7 @@
 import unittest
 
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
-from helperFunctions import check_marriage_before_divorce, death_before_birth
+from helperFunctions import check_marriage_before_divorce, death_before_birth, divorce_before_death
 from classes import individualPerson, familyClass
 
 
@@ -148,6 +148,26 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 3, True)
         self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5", "F6"], True)
         
+    def test_divorce_brfore_death(self):
+        family_dict = {}
+        individual_dict = {}
+
+        family1 = familyClass('F12')
+        family1.div = '1 JAN 2009'
+        family1.husb_id = 'I11'
+        family1.wife_id = 'I10'
+        family_dict[family1.fid] = family1
+        indi1 = individualPerson('I11')
+        indi1.alive = False
+        indi1.deat = '2 MAR 2007'
+        individual_dict[indi1.uid] = indi1
+        indi2 = individualPerson('I10')
+        indi2.alive = True
+        indi2.deat = 'NA'
+        individual_dict[indi2.uid] = indi2
+
+        self.assertEqual(len(divorce_before_death(family_dict,individual_dict)), 1, True)
+
     def test_birth_before_death(self):
         """ Unit test for US03 -- Birth should occur before death of an individual """
         indi_dict = {}
