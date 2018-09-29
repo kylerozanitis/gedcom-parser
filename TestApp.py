@@ -167,6 +167,7 @@ class TestHelperFunctions(unittest.TestCase):
         individual_dict[indi2.uid] = indi2
 
         self.assertEqual(len(divorce_before_death(family_dict,individual_dict)), 1, True)
+        self.assertEqual(divorce_before_death(family_dict,individual_dict), ["F12"], True)
 
     def test_birth_before_death(self):
         """ Unit test for US03 -- Birth should occur before death of an individual """
