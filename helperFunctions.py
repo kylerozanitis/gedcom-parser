@@ -2,7 +2,7 @@
 import re
 import os
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def read_data_file(file_name):
@@ -299,3 +299,22 @@ def divorce_before_death(family_data,individual_data):
                 if divorce_date > wife_death:
                     prob_family.append(family.fid)
     return prob_family
+
+
+def event_in_last_thirty_days(date):
+    """Check for event happened in the last 30 days"""
+    if validate_date_format(date):
+        new_date = change_date_format(date)
+
+        value = new_date.split('-')
+        val = ((datetime.now().year - int(value[0])) + int(value[0]))
+
+        compare_date = "{0}-{1}-{2}".format(str(val), value[1], value[2])
+
+        if str(datetime.now().date() - timedelta(days=30)) <= compare_date:
+            return True
+        return False
+
+
+
+
