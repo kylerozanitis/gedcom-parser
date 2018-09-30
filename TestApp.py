@@ -2,7 +2,7 @@ import unittest
 
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
-from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death
+from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from classes import individualPerson, familyClass
 
 
@@ -279,6 +279,7 @@ class TestHelperFunctions(unittest.TestCase):
     def test_birth_before_death(self):
         """ Unit test for US03 -- Birth should occur before death of an individual """
         indi_dict = {}
+        fam_dict = {}
 
         indi_I7 = individualPerson("I7")
         indi_I7.birt = "1 JUL 2000"
@@ -295,12 +296,51 @@ class TestHelperFunctions(unittest.TestCase):
         indi_I12.deat = "13 MAR 1955"
         indi_dict[indi_I12.uid] = indi_I12
 
-        self.assertEqual(death_before_birth(indi_dict), (['I7', 'I10'], 1))
-        self.assertNotEqual(death_before_birth(indi_dict), (['I1', 'I6'], 2))
-        self.assertIsNotNone(death_before_birth(indi_dict))
-        self.assertIsNot(death_before_birth(indi_dict), "")
-        self.assertCountEqual(death_before_birth(indi_dict), (['I7', 'I10'], 1))
+        self.assertEqual(death_before_birth(indi_dict, fam_dict), ({'I7':['death before birth'], 'I10':['death before birth']}))
+        self.assertNotEqual(death_before_birth(indi_dict, fam_dict), ({'I1':['death before birth'], 'I6':['death before birth']}))
+        self.assertIsNotNone(death_before_birth(indi_dict, fam_dict))
+        self.assertIsNot(death_before_birth(indi_dict, fam_dict), "")
+        self.assertCountEqual(death_before_birth(indi_dict, fam_dict), ({'I7':['death before birth'], 'I10':['death before birth']}))
+        
+    def test_dates_before_currentDate(self):
+        """ Unit test for US01 -- Dates (birth, marriage, divorce, death) should not be after the current date """ 
 
+        indi_dict = {}
+        fam_dict = {}
+
+        indi_I7 = individualPerson("I7")
+        indi_I7.birt = "1 JUL 2019"
+        indi_I7.deat = "22 JUL 2060"
+        indi_dict[indi_I7.uid] = indi_I7
+        fam_F7 = familyClass("F7")
+        fam_F7.marr = "5 DEC 2050"
+        fam_dict[fam_F7.fid] = fam_F7
+
+        indi_I10 = individualPerson("I10")
+        indi_I10.birt = "25 AUG 2030"
+        indi_dict[indi_I10.uid] = indi_I10
+        fam_F10 = familyClass("F10")
+        fam_F10.marr = "11 OCT 2064"
+        fam_F10.div = "13 MAR 2065"
+        fam_dict[fam_F10.fid] = fam_F10
+        
+        indi_I12 = individualPerson("I12")
+        indi_I12.birt = "25 AUG 1920"
+        indi_I12.deat = "13 MAR 1955"
+        indi_dict[indi_I12.uid] = indi_I12
+        fam_F12 = familyClass("F12")
+        fam_F12.marr = "3 MAR 1950"
+        fam_F12.div = "27 NOV 1954"
+        fam_dict[fam_F12.fid] = fam_F12
+
+        output = {'I7':['birth', 'death'], 'I10':['birth'], 'F7':['marriage'], 'F10':['marriage', 'divorce']}
+
+        self.assertEqual(allDates_before_currentDate(indi_dict, fam_dict), (output))
+        self.assertNotEqual(allDates_before_currentDate(indi_dict, fam_dict), ({'I1':['death before birth'], 'I6':['death before birth']}))
+        self.assertIsNotNone(allDates_before_currentDate(indi_dict, fam_dict))
+        self.assertIsNot(allDates_before_currentDate(indi_dict, fam_dict), "")
+        self.assertCountEqual(allDates_before_currentDate(indi_dict, fam_dict), (output))    
+        
     def test_check_two_dates(self):
         """ Unit testing events before another happened """
 
