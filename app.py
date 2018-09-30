@@ -18,6 +18,7 @@ from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
+from helperFunctions import list_recent_births
 
 individual_data = dict()
 family_data = dict()
@@ -180,6 +181,9 @@ def main():
         t.add_row(obj.pt_row())
     print (t)
 
+    birth_recently = list_recent_births(individual_data)
+    for individual in birth_recently:
+        print(individual.birt)
     
 if __name__ == '__main__':
     main()

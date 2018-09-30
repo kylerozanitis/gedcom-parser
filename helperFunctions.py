@@ -405,6 +405,14 @@ def event_in_last_thirty_days(date):
             return True
         return False
 
+def list_recent_births(individual_data):
+    recent_birth = []
+
+    for individual in individual_data.values():
+        if event_in_last_thirty_days(individual.birt) == True:
+            recent_birth.append(individual)
+    return recent_birth
+
 
 
 
