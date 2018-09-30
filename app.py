@@ -184,6 +184,8 @@ def main():
     birth_recently = list_recent_births(individual_data)
     for individual in birth_recently:
         print(individual.birt)
+
+        
     
 if __name__ == '__main__':
     main()
