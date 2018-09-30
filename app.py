@@ -18,7 +18,7 @@ from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births
+from helperFunctions import list_recent_births, list_recent_death
 
 individual_data = dict()
 family_data = dict()
@@ -182,10 +182,29 @@ def main():
     print (t)
 
     birth_recently = list_recent_births(individual_data)
+<<<<<<< HEAD
     for individual in birth_recently:
         print(individual.birt)
 
         
     
+=======
+    if len(birth_recently) == 0:
+        print("No recent Birth")
+    else:
+        print("Total number of birth in the last 30 days: \n")
+        for individual in birth_recently:
+            print(individual.birt)
+
+
+    death_recently = list_recent_death(individual_data)
+    if len(death_recently) == 0:
+        print("No recent Death")
+    else:
+        print("Total number of Death in the last 30 days: \n")
+        for individual in death_recently:
+            print(individual.deat)
+
+>>>>>>> a2e6fe22b787b5d1ec41a65eb98151bad2e5e172
 if __name__ == '__main__':
     main()
