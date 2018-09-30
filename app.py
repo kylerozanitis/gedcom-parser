@@ -17,7 +17,7 @@ from prettytable import PrettyTable
 from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
-from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death
+from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 
 individual_data = dict()
 family_data = dict()
@@ -102,29 +102,51 @@ def main():
     # Check that each family has a husband and a wife
     check_spouses_exist(family_data)
     
-    # US03 -- Birth should occur before death of an individual
-    error_entries, flag = death_before_birth(individual_data)
-
+    """
+    US01 - Dates (birth, marriage, divorce, death) should not be after the current date
+    US03 - Birth should occur before death of an individual
+    Here, implementation of US03 calls implementation of US01. Hence, first the dates are checked if they are
+    occuring before the current date (US01) and then the birth dates and death dates are compared to check if
+    birth dates occur before the death date (US03).
+    Also, all_error_entries is a dictionary that contains ids of individuals and families with a list of string
+    elements. These individuals and families are removed from the pretty table and an error message is print using
+    the sting values in the list.
+    """
+    all_error_entries = death_before_birth(individual_data, family_data)
     t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Age','Alive','Death','Child','Spouse'])
     for obj in individual_data.values():
-        if obj.uid in error_entries:
-            """The details of the individuals whose death occurs before birth will not be printed in the table as
-               the given birth and death date will calculate a negative age and neagtive age of an individual is 
-               not possible"""
-            if flag == 1:
-                print("Error! Death date of UID:" + obj.uid + " cannot occur before birth date")
-            if flag == 2:
-                print("Error! " + obj.uid + " cannot have a death date without a birth date")
-            continue
-        else:
+        for indi_id, error_msg in all_error_entries.items():
+            if obj.uid == indi_id:
+                for msg in error_msg:
+                    if msg == 'birth':
+                        print("Error! Birth date of UID: " + indi_id + " should occur before today's date.")
+                    elif msg == 'death':
+                        print("Error! Death date of UID: " + indi_id + " should occur before today's date.")
+                    elif msg == 'death before birth':
+                        print("Error! Death date of UID: " + indi_id + " cannot occur before birth date.")
+                    else:
+                        print("Error! UID: " + indi_id + "cannot have a death date without a birth date")
+    for obj in individual_data.values():
+        if obj.uid not in all_error_entries.keys():                
             t.add_row(obj.pt_row())
     print('Individuals')
-    print(t)
-
-    print('Families')
+    print (t)
+    
     t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
     for obj in family_data.values():
-        t.add_row(obj.pt_row())
+        for fam_id, error_msg in all_error_entries.items():
+            if obj.fid == fam_id:
+                for msg in error_msg:
+                    if msg == 'marriage':
+                        print("Error! Marriage date of UID: " + fam_id + " should occur before today's date.")
+                    elif msg == 'divorce':
+                        print("Error! Divorce date of UID: " + fam_id + " should occur before today's date.")
+                    else:
+                        print("Error! UID: " + fam_id + "cannot have a divorce date without a marriage date.")
+    for obj in family_data.values():
+        if obj.fid not in all_error_entries.keys():          
+            t.add_row(obj.pt_row())
+    print('Families')
     print (t)
 
     # Get list of individuals who passed

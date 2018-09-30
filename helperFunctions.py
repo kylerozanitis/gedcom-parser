@@ -86,7 +86,11 @@ def change_date_format(date):
     month_dict = {"JAN": "01", "FEB": "02", "MAR": "03",
                   "APR": "04", "MAY": "05", "JUN": "06",
                   "JUL": "07", "AUG": "08", "SEP": "09",
-                  "OCT": "10", "NOV": "11","DEC": "12" }
+                  "OCT": "10", "NOV": "11", "DEC": "12",
+                  "Jan": "01", "Feb": "02", "Mar": "03",
+                  "Apr": "04", "May": "05", "Jun": "06",
+                  "Jul": "07", "Aug": "08", "Sep": "09",
+                  "Oct": "10", "Nov": "11", "Dec": "12" }
 
     temp = date.split(" ")
     date_month = month_dict.get(temp[1])
@@ -241,13 +245,15 @@ def check_marriage_before_death(family_data, individual_data):
     return problem_families
 
 
-def death_before_birth(individual_data):
-    """US03 -- Birth should occur before death of an individual --- Program uses individual's 
-       birth date and death date to validate if birth occured before death. It returns a list of 
-       uid of the individuals whose death date occurs before birth date along with a flag indicator
-       to print error messages"""
-    error_entries = []
-    flag = 0
+def death_before_birth(individual_data, family_data):
+    """
+    US03 - Birth should occur before death of an individual - This fucntion calls US01 to check if the dates
+    are ocuuring before the current date and then uses individual's birth date and death date to validate if 
+    birth occured before death. It returns a dictionary containing the id and a list of string value to print error
+    messages
+    """
+    birth_error = []
+    all_error_entries = allDates_before_currentDate(individual_data, family_data)
     for uid, individual in individual_data.items():
         if individual.birt != 'NA' and individual.deat != 'NA':
             temp1 = change_date_format(individual.birt).split("-")
@@ -259,14 +265,98 @@ def death_before_birth(individual_data):
             indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
 
             if indi_birth_date > indi_deat_date:
-                flag = 1
-                error_entries.append(individual.uid)
-
-        if individual.birt == 'NA' and individual.deat != 'NA':
-            flag = 2
-            error_entries.append(individual.uid)
+                if uid in all_error_entries.keys():
+                    for error_list in all_error_entries.values():
+                        error_list.append('death before birth')
+                    all_error_entries[uid] = error_list
+                else:
+                    birth_error.append('death before birth')
+                    all_error_entries[uid] = birth_error
+            birth_error = []
             
-    return error_entries, flag
+    return all_error_entries
+
+def allDates_before_currentDate(individual_data, family_data):
+    """
+    US01 - Dates (birth, marriage, divorce, death) should not be after the current date- This fucntion checks if  
+    current date occurs after all the birth dates, marriage dates, divorce dates and death dates. It returns a 
+    dictionary containing the id and a list of string value to print error messages
+    """
+    current_date = datetime.today().strftime('%d %b %Y')
+    temp1 = change_date_format(current_date).split("-")
+    temp2 = "-".join(temp1)
+    today_date = datetime.strptime(temp2, "%Y-%m-%d")
+
+    currentDate_compare_error = dict()
+    indi_status_list = []
+    fam_status_list = []
+    for uid, individual in individual_data.items():
+        if individual.birt != 'NA' and individual.deat != 'NA':
+            temp1 = change_date_format(individual.birt).split("-")
+            indi_birt = "-".join(temp1)
+            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+            temp2 = change_date_format(individual.deat).split("-")
+            indi_deat = "-".join(temp2)
+            indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
+
+            if indi_birth_date > today_date:
+                indi_status_list.append('birth')
+            if indi_deat_date > today_date:
+                indi_status_list.append('death')
+
+        elif individual.birt != 'NA' and individual.deat == 'NA':
+            temp1 = change_date_format(individual.birt).split("-")
+            indi_birt = "-".join(temp1)
+            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+            if indi_birth_date > today_date:
+                indi_status_list.append('birth')
+
+        else:
+            indi_status_list.append('not born')
+            
+        if len(indi_status_list) == 0:
+            continue
+        else:
+            currentDate_compare_error[uid] = indi_status_list
+            indi_status_list = []
+
+
+    for fid, family in family_data.items():
+        if family.marr != 'NA' and family.div != 'NA':
+            temp1 = change_date_format(family.marr).split("-")
+            fam_marr = "-".join(temp1)
+            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
+
+            temp1 = change_date_format(family.div).split("-")
+            fam_div = "-".join(temp1)
+            fam_div_date = datetime.strptime(fam_div, "%Y-%m-%d")
+            
+            if fam_marr_date > today_date:
+                fam_status_list.append('marriage')
+            if fam_div_date > today_date:
+                fam_status_list.append('divorce')
+                
+        elif family.marr != 'NA' and family.div == 'NA':
+            temp1 = change_date_format(family.marr).split("-")
+            fam_marr = "-".join(temp1)
+            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
+
+            if fam_marr_date > today_date:
+                fam_status_list.append('marriage')
+
+        else:
+            fam_status_list.append('not married')
+
+        if len(fam_status_list) == 0:
+            continue
+        else:
+            currentDate_compare_error[fid] = fam_status_list
+            fam_status_list = []
+
+
+    return currentDate_compare_error
 
 def divorce_before_death(family_data,individual_data):
     #flag = True
