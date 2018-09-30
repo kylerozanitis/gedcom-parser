@@ -393,35 +393,34 @@ def divorce_before_death(family_data,individual_data):
 
 def event_in_last_thirty_days(date):
     """Check for event happened in the last 30 days"""
+
     if validate_date_format(date):
         new_date = change_date_format(date)
-
         values = new_date.split('-')
+
         val = ((datetime.now().year - int(values[0])) + int(values[0]))
         compare_date = "{0}-{1}-{2}".format(str(val), values[1], values[2])
 
-        if str(datetime.now().date() - timedelta(days=30)) <= compare_date:
+        if str(datetime.now().date() - timedelta(days=30)) <= compare_date and values[0] == str(datetime.now().year):
             return True
         return False
 
-def recent_birth_date(date):
-    """if birthday happened within 30 days"""
-    if validate_date_format(date):
-        new_date = change_date_format(date)
-
-        if abs(int(datetime.now().date() - new_date)) <= 30:
-            return True
-        else:
-            return False
 
 def list_recent_births(individual_data):
+    """return list of birthdays happened in the last 30 days"""
     recent_birth = []
 
     for individual in individual_data.values():
-        if recent_birth_date(individual.birt) == True:
+        if event_in_last_thirty_days(individual.birt):
             recent_birth.append(individual)
     return recent_birth
 
 
+def list_recent_death(individual_data):
+    """return list of death happened in the last 30 days"""
+    recent_death = []
 
-
+    for individual in individual_data.values():
+        if event_in_last_thirty_days(individual.deat):
+            recent_death.append(individual)
+    return recent_death
