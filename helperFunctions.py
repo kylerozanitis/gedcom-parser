@@ -359,7 +359,12 @@ def allDates_before_currentDate(individual_data, family_data):
     return currentDate_compare_error
 
 def divorce_before_death(family_data,individual_data):
-    #flag = True
+    """
+    US06 - Divorce can only occure before death of both spouses
+    This functions takes individual data and family data data as input and 
+    for dead person checks if the date of death is after date of divorce if its false
+    it will return list of families with problem
+    """
     prob_family = []
 
     for family in family_data.values():
@@ -407,7 +412,11 @@ def event_in_last_thirty_days(date):
 
 
 def list_recent_births(individual_data):
-    """return list of birthdays happened in the last 30 days"""
+    """
+    US35 - List all people in a GEDCOM file who were born in the last 30 days
+    This fucntion will take individual data as input and 
+    return list of birthdays happened in the last 30 days
+    """
     recent_birth = []
 
     for individual in individual_data.values():
@@ -417,7 +426,11 @@ def list_recent_births(individual_data):
 
 
 def list_recent_death(individual_data):
-    """return list of death happened in the last 30 days"""
+    """
+    US36 - List all people in a GEDCOM file who died in the last 30 days
+    This function takes individual data as input and 
+    return list of death happened in the last 30 days
+    """
     recent_death = []
 
     for individual in individual_data.values():
@@ -434,8 +447,10 @@ def fewer_than15_siblings(family_data):
     return fid_list
 
 def check_unique_ids(individual_data, family_data):
-    """ US22 Unique IDs - All individual IDs should be unique and all 
-    family IDs should be unique """
+    """ 
+    US22 Unique IDs - All individual IDs should be unique and all 
+    family IDs should be unique
+    """
 
     individual_ids = []
     problem_uids = []
