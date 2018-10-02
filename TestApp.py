@@ -3,7 +3,7 @@ import unittest
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings
+from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids
 from classes import individualPerson, familyClass
 
 
@@ -455,6 +455,30 @@ class TestHelperFunctions(unittest.TestCase):
         family.chil = []
         fam_dict[family.fid] = family
         self.assertEqual(fewer_than15_siblings(fam_dict), [])
+
+    def test_check_unique_ids(self):
+        """ Test cases for US22 - Unique IDs - All individual IDs should be
+        unique and all family IDs should be unique. """
+        indi_dict = {}
+        fam_dict = {}
+
+        i1 = individualPerson('I1')
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson('I2')
+        indi_dict[i2.uid] = i2
+
+        family = familyClass("F1")
+        fam_dict[family.fid] = family
+
+        family2 = familyClass("F2")
+        fam_dict[family2.fid] = family2
+
+        self.assertEqual(check_unique_ids(indi_dict, fam_dict), ([], []))
+        self.assertNotEqual(check_unique_ids(indi_dict, fam_dict), (["I2"], ["F2"]))
+        self.assertIsNotNone(check_unique_ids(indi_dict, fam_dict))
+        self.assertIsNot(check_unique_ids(indi_dict, fam_dict), (["I2"], ["F2"]))
+
     
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
