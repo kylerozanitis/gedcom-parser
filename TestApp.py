@@ -443,18 +443,27 @@ class TestHelperFunctions(unittest.TestCase):
         family.chil = ['i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7', 'i8', 'i9', 'i10', 'i11', 'i12', 'i13', 'i14', 'i15', 'i16']
         fam_dict[family.fid] = family
         self.assertEqual(fewer_than15_siblings(fam_dict), ['F2'])
+        self.assertNotEqual(fewer_than15_siblings(fam_dict), ['F4', 'F7', 'F9'])
+        self.assertIsNotNone(fewer_than15_siblings)
+        self.assertIsNot(fewer_than15_siblings(fam_dict), ['F4', 'F7', 'F9'])
 
         fam_dict = dict()
         family = familyClass("F1")
         family.chil = ['i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7', 'i8', 'i9', 'i10', 'i11', 'i12', 'i13', 'i14', 'i15']
         fam_dict[family.fid] = family
         self.assertEqual(fewer_than15_siblings(fam_dict), [])
+        self.assertNotEqual(fewer_than15_siblings(fam_dict), ['F4', 'F7', 'F9'])
+        self.assertIsNotNone(fewer_than15_siblings)
+        self.assertIsNot(fewer_than15_siblings(fam_dict), ['F4', 'F7', 'F9'])
 
         fam_dict = dict()
         family = familyClass("F3")
         family.chil = []
         fam_dict[family.fid] = family
         self.assertEqual(fewer_than15_siblings(fam_dict), [])
+        self.assertNotEqual(fewer_than15_siblings(fam_dict), ['F4', 'F7', 'F9'])
+        self.assertIsNotNone(fewer_than15_siblings)
+        self.assertIsNot(fewer_than15_siblings(fam_dict), ['F4', 'F7', 'F9'])
 
     def test_check_unique_ids(self):
         """ Test cases for US22 - Unique IDs - All individual IDs should be

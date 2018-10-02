@@ -208,7 +208,7 @@ def main():
     if len(fewer_siblings) > 0:
         print("Families with more than 15 siblings: " + fewer_siblings)
     else:
-        print("Families have fewer than 15 siblings")
+        print("All families have fewer than 15 siblings")
 
     # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
     problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
