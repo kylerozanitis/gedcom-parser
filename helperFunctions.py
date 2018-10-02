@@ -432,3 +432,27 @@ def fewer_than15_siblings(family_data):
         if len(obj.chil) > 15:
             fid_list.append(fid)
     return fid_list
+
+def check_unique_ids(individual_data, family_data):
+    """ US22 Unique IDs - All individual IDs should be unique and all 
+    family IDs should be unique """
+
+    individual_ids = []
+    problem_uids = []
+
+    for uid in individual_data.keys():
+        if uid in individual_ids:
+            problem_uids.append(uid)
+        else:
+            individual_ids.append(uid)
+
+    family_ids = []
+    problem_fids = []
+
+    for fid in family_data.keys():
+        if fid in family_ids:
+            problem_fids.append(fid)
+        else:
+            family_ids.append(fid)
+    
+    return problem_uids, problem_fids
