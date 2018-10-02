@@ -424,3 +424,11 @@ def list_recent_death(individual_data):
         if event_in_last_thirty_days(individual.deat):
             recent_death.append(individual)
     return recent_death
+
+def fewer_than15_siblings(family_data):
+    """ US15 -- There should be fewer than 15 siblings in a family""" 
+    fid_list = []
+    for fid, obj in family_data.items():
+        if len(obj.chil) > 15:
+            fid_list.append(fid)
+    return fid_list
