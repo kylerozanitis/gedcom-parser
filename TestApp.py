@@ -402,7 +402,6 @@ class TestHelperFunctions(unittest.TestCase):
     def test_recent_deaths(self):
         """ Unit Test for Checking recent deaths """
         indi_dict = {}
-        recent_death = []
         i1 = individualPerson('I1')
         i1.uid = 'I1'
         i1.deat = '29 SEP 2018'
@@ -418,7 +417,6 @@ class TestHelperFunctions(unittest.TestCase):
     def test_recent_births(self):
         """ Unit Test for Checking recent births """
         indi_dict = {}
-        recent_death = []
         i1 = individualPerson('I11')
         i1.uid = 'I11'
         i1.birt = '29 SEP 2017'
