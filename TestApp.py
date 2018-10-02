@@ -3,7 +3,7 @@ import unittest
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births,list_recent_death
+from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings
 from classes import individualPerson, familyClass
 
 
@@ -436,7 +436,25 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(len(list_recent_births(indi_dict)),1,True)
 
+    def test_fewer_than15_siblings(self):
+        "Test cases -- US15 -- There should be fewer than 15 siblings in a family"
+        fam_dict = dict()
+        family = familyClass("F2")
+        family.chil = ['i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7', 'i8', 'i9', 'i10', 'i11', 'i12', 'i13', 'i14', 'i15', 'i16']
+        fam_dict[family.fid] = family
+        self.assertEqual(fewer_than15_siblings(fam_dict), ['F2'])
 
+        fam_dict = dict()
+        family = familyClass("F1")
+        family.chil = ['i1', 'i2', 'i3', 'i4', 'i5', 'i6', 'i7', 'i8', 'i9', 'i10', 'i11', 'i12', 'i13', 'i14', 'i15']
+        fam_dict[family.fid] = family
+        self.assertEqual(fewer_than15_siblings(fam_dict), [])
 
+        fam_dict = dict()
+        family = familyClass("F3")
+        family.chil = []
+        fam_dict[family.fid] = family
+        self.assertEqual(fewer_than15_siblings(fam_dict), [])
+    
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)

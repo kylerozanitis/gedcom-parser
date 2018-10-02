@@ -18,7 +18,7 @@ from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births, list_recent_death
+from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings
 
 individual_data = dict()
 family_data = dict()
@@ -182,13 +182,11 @@ def main():
     print (t)
 
     birth_recently = list_recent_births(individual_data)
-<<<<<<< HEAD
     for individual in birth_recently:
         print(individual.birt)
 
         
     
-=======
     if len(birth_recently) == 0:
         print("No recent Birth")
     else:
@@ -205,6 +203,13 @@ def main():
         for individual in death_recently:
             print(individual.deat)
 
->>>>>>> a2e6fe22b787b5d1ec41a65eb98151bad2e5e172
+    # US15 -- There should be fewer than 15 siblings in a family 
+    fewer_siblings = fewer_than15_siblings(family_data)
+    if len(fewer_siblings) > 0:
+        print("Families with more than 15 siblings: " + fewer_siblings)
+    else:
+        print("Families have fewer than 15 siblings")
+    
+
 if __name__ == '__main__':
     main()
