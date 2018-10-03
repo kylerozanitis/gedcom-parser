@@ -471,3 +471,36 @@ def check_unique_ids(individual_data, family_data):
             family_ids.append(fid)
     
     return problem_uids, problem_fids
+
+
+def is_anniversary_in_next_thirty_days(date):
+    """ Check for a date to see if happening within the next 30 days
+        must pass a date in the format of yyyy-mm-dd
+        Function returns: True or False
+    """
+    if validate_date_format(date):
+        new_date = change_date_format(date)
+        values = new_date.split('-')
+
+        val = ((datetime.now().year - int(values[0])) + int(values[0]))
+        compare_date = "{0}-{1}-{2}".format(str(val), values[1], values[2])
+
+    if str(datetime.now().date()) <= compare_date <= str(datetime.now().date() + timedelta(days=30)):
+        return True
+    return False
+
+
+def list_upcoming_birthdays(individual_data):
+    """
+        US38 - List upcoming birthdays
+        Returns a list of individuals birthdays within the next 30 days, takes a dictionary of individuals
+        Parameters: dictionary data of individuals
+        Function Calls: is_anniversary_in_next_thirty_days() passing a date
+    """
+    list_birthdays = []
+    for ind in individual_data.values():
+        if is_anniversary_in_next_thirty_days(ind.birt):
+            list_birthdays.append(ind)
+
+    return list_birthdays
+

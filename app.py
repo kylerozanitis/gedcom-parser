@@ -18,7 +18,8 @@ from classes import individualPerson, familyClass
 from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids
+from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
+
 
 individual_data = dict()
 family_data = dict()
@@ -64,10 +65,8 @@ def data_parser(data):
                 i1.birt = " ".join(item[2:])
             else:
                 i1.deat = " ".join(item[2:])
-
             i1.age = i1.get_age()
 
-        
         elif item[0] == "0" and item[1] == "FAM":
             fam_id = item[2].strip('@')
             current_family = fam_id
@@ -185,8 +184,6 @@ def main():
     for individual in birth_recently:
         print(individual.birt)
 
-        
-    
     if len(birth_recently) == 0:
         print("No recent Birth")
     else:
@@ -221,6 +218,18 @@ def main():
         print("IDs attached to more than one family:" + problem_fams)
     else:
         print("Families have unique IDs")
+
+
+    # List of recent Birthday
+    data = list_upcoming_birthdays(individual_data)
+    if len(data) is not 0:
+        print("upcoming birthday for: ")
+        for birthdays in data:
+            print(birthdays.name)
+    else:
+        print('No upcoming birthday in the next 30 days.')
+
+
 
 if __name__ == '__main__':
     main()

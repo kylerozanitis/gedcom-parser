@@ -3,7 +3,7 @@ import unittest
 from helperFunctions import change_date_format, validate_date_format, deceased_list,agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids
+from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
 from classes import individualPerson, familyClass
 
 
@@ -485,6 +485,34 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertNotEqual(check_unique_ids(indi_dict, fam_dict), (["I2"], ["F2"]))
         self.assertIsNotNone(check_unique_ids(indi_dict, fam_dict))
         self.assertIsNot(check_unique_ids(indi_dict, fam_dict), (["I2"], ["F2"]))
+
+    def test_list_upcoming_birthdays(self):
+        indi_dict = {}
+
+        i1 = individualPerson('I1')
+        i1.uid = 'I11'
+        i1.birt = '29 SEP 2017'
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson('I2')
+        i2.udi = 'I12'
+        i2.birt = '15 OCT 1955'
+        indi_dict[i2.uid] = i2
+
+        self.assertEqual(len(list_upcoming_birthdays(indi_dict)),1,True)
+
+        i3 = individualPerson('I3')
+        i3.udi = 'I3'
+        i3.birt = '30 SEP 1960'
+        indi_dict[i3.uid] = i3
+
+        i3 = individualPerson('I4')
+        i3.udi = 'I4'
+        i3.birt = '21 OCT 1989'
+        indi_dict[i3.uid] = i3
+
+        self.assertEqual(len(list_upcoming_birthdays(indi_dict)),2 ,True)
+
 
     
 if __name__ == '__main__':
