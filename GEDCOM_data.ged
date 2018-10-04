@@ -1,0 +1,162 @@
+0 HEAD
+1 SOUR Family Echo
+2 WWW http://www.familyecho.com/
+1 FILE My Family
+1 DATE 31 AUG 2018
+1 DEST ANSTFILE
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 SUBM @I1@
+2 NAME Jose Lara
+1 SUBN
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Jose /Lara/
+2 GIVN Jose
+2 SURN Lara
+2 _MARNM Lara
+1 SEX M
+1 BIRT
+2 DATE 25 OCT 1991
+2 PLAC Dominican Republic
+1 FAMS @F5@
+1 FAMC @F1@
+0 @I2@ INDI
+1 NAME Radhames /Lara/
+2 GIVN Radhames
+2 SURN Lara
+2 _MARNM Lara
+1 SEX M
+1 BIRT
+2 DATE 1 APR 1958
+1 FAMS @F1@
+1 FAMS @F2@
+0 @I3@ INDI
+1 NAME Josefina /Ortiz/
+2 GIVN Josefina
+2 SURN Ortiz
+2 _MARNM Lara
+1 SEX F
+1 BIRT
+2 DATE 19 MAR 1955
+1 FAMS @F1@
+1 FAMC @F3@
+0 @I4@ INDI
+1 NAME Darwin /Lara/
+2 GIVN Darwin
+2 SURN Lara
+2 _MARNM Lara
+1 SEX M
+1 BIRT
+2 DATE 30 OCT 1980
+2 PLAC Dominican Republic
+1 OCCU Teacher
+1 FAMS @F4@
+1 FAMC @F1@
+0 @I5@ INDI
+1 NAME Samathan /Felix/
+2 GIVN Samathan
+2 SURN Felix
+2 _MARNM Felix
+1 SEX F
+1 BIRT
+2 DATE 1 MAR 1984
+1 FAMS @F4@
+0 @I6@ INDI
+1 NAME Arturo /Ortiz/
+2 GIVN Arturo
+2 SURN Ortiz
+2 _MARNM Ortiz
+1 SEX M
+1 BIRT
+2 DATE 6 AUG 1927
+1 DEAT Y
+2 DATE 29 NOV 1985
+1 FAMS @F3@
+0 @I7@ INDI
+1 NAME Maria /Martinez/
+2 GIVN Maria
+2 SURN Martinez
+2 _MARNM Martinez
+1 SEX F
+1 BIRT
+2 DATE 2 MAR 1931
+1 DEAT Y
+2 DATE 27 JUL 1973
+1 FAMS @F3@
+0 @I8@ INDI
+1 NAME Andres /Lara/
+2 GIVN Andres
+2 SURN Lara
+2 _MARNM Lara
+1 SEX M
+1 BIRT
+2 DATE 21 DEC 2013
+1 FAMC @F5@
+0 @I9@ INDI
+1 NAME Vanessa /Castro/
+2 GIVN Vanessa
+2 SURN Castro
+2 _MARNM Lara
+1 SEX F
+1 BIRT
+2 DATE 20 OCT 1988
+2 PLAC Jersey City, NJ
+1 FAMS @F5@
+0 @I10@ INDI
+1 NAME Julia /Penagos/
+2 GIVN Julia
+2 SURN Penagos
+2 _MARNM Penagos
+1 SEX F
+1 BIRT
+2 DATE 3 JAN 1959
+2 PLAC Dominican Republic
+1 DEAT Y
+2 DATE 05 SEP 2018
+1 FAMS @F2@
+0 @I11@ INDI
+1 NAME William /Lara/
+2 GIVN William
+2 SURN Lara
+2 _MARNM Lara
+1 SEX M
+1 BIRT
+2 DATE 2 AUG 1978
+2 PLAC Dominican Republic
+1 FAMC @F2@
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 CHIL @I4@
+1 MARR
+2 DATE 14 DEC 1980
+2 PLAC Dominican Republic
+1 _CURRENT Y
+0 @F2@ FAM
+1 HUSB @I2@
+1 WIFE @I10@
+1 CHIL @I11@
+1 MARR
+2 DATE 7 AUG 1977
+2 PLAC Dominican Republic
+1 EVEN
+2 TYPE Ending
+1 _CURRENT N
+0 @F3@ FAM
+1 HUSB @I6@
+1 WIFE @I7@
+1 CHIL @I3@
+1 _CURRENT Y
+0 @F4@ FAM
+1 HUSB @I4@
+1 WIFE @I5@
+1 _CURRENT N
+0 @F5@ FAM
+1 HUSB @I1@
+1 WIFE @I9@
+1 CHIL @I8@
+1 _CURRENT N
+0 TRLR

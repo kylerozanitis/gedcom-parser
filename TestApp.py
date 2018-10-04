@@ -4,6 +4,7 @@ from helperFunctions import change_date_format, validate_date_format, deceased_l
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
+from helperFunctions import list_recent_survivals
 from classes import individualPerson, familyClass
 
 
@@ -34,8 +35,8 @@ class TestHelperFunctions(unittest.TestCase):
     def test_change_date_format(self):
         """Unit test for change date function"""
 
-        self.assertEqual(change_date_format('7 MAY 2018'), '2018-05-7', True)
-        self.assertNotEqual(change_date_format('7 MAY 2018'), '2018/05/7', True)
+        self.assertEqual(change_date_format('7 MAY 2018'), '2018-05-07', True)
+        self.assertNotEqual(change_date_format('7 MAY 2018'), '2018/05/07', True)
         self.assertNotEqual(change_date_format('7 MAY 2018'), '2018/05/07', True)
 
     def test_check_spouses_exist(self):
@@ -361,13 +362,13 @@ class TestHelperFunctions(unittest.TestCase):
 
         individual = individualPerson("I1")
         individual.uid = "I1"
-        individual.is_alive = True
+        individual.alive = True
         individual.birt = "1 JAN 2001"
         ind_dict[individual.uid] = individual
 
         individual2 = individualPerson("I2")
         individual2.uid = "I2"
-        individual2.is_alive = True
+        individual2.alive = True
         individual2.birt = "1 JAN 2010"
         ind_dict[individual2.uid] = individual2
 
@@ -381,13 +382,13 @@ class TestHelperFunctions(unittest.TestCase):
 
         individual = individualPerson("I3")
         individual.uid = "I3"
-        individual.is_alive = True
+        individual.alive = True
         individual.birt = "20 OCT 1990"
         ind_dict[individual.uid] = individual
 
         individual2 = individualPerson("I4")
         individual2.uid = "I4"
-        individual2.is_alive = True
+        individual2.alive = True
         individual2.birt = "1 JAN 1991"
         ind_dict[individual2.uid] = individual2
 
@@ -512,6 +513,43 @@ class TestHelperFunctions(unittest.TestCase):
         indi_dict[i3.uid] = i3
 
         self.assertEqual(len(list_upcoming_birthdays(indi_dict)),2 ,True)
+
+
+    def test_list_recent_survivals(self):
+        fam_dict = {}
+        ind_dict = {}
+
+        individual = individualPerson("I1")
+        individual.uid = "I1"
+        individual.alive = False
+        individual.birt = "1 JAN 1991"
+        individual.deat = "1 OCT 2018"
+        individual.name = "Fernando"
+        individual.fams = ["F1"]
+        individual.sex = "M"
+        ind_dict[individual.uid] = individual
+
+        individual2 = individualPerson("I2")
+        individual2.uid = "I2"
+        individual2.fams = ["F1"]
+        individual2.alive = True
+        individual2.birt = "1 JAN 1991"
+        individual2.name = "Laura"
+        individual2.sex = "F"
+        ind_dict[individual2.uid] = individual2
+
+        family = familyClass("F1")
+        family.husb_id = "I1"
+        family.wife_id = "I2"
+        family.chil = ["I4", "I6"]
+        family.marr = "1 JAN 2005"
+
+        fam_dict[family.fid] = family
+
+
+        self.assertEqual(len(list_recent_survivals(ind_dict, fam_dict)), 1, True)
+
+
 
 
     

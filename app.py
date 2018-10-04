@@ -19,7 +19,7 @@ from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-
+from helperFunctions import list_recent_survivals
 
 individual_data = dict()
 family_data = dict()
@@ -45,7 +45,8 @@ def data_parser(data):
         elif item[0] == "1" and item[1] in ["NAME", "SEX", "FAMC", "FAMS"]:
             i1 = individual_data[current_individual]
             if item[1] == "NAME":
-                i1.name = " ".join(item[2:])
+                name_val = " ".join(item[2:])
+                i1.name = name_val.replace('/', '')
             elif item[1] == "SEX":
                 i1.sex = item[2]
             elif item[1] == "FAMC":
@@ -99,6 +100,12 @@ def main():
     raw_data = read_data_file('familytree.ged')
     data_parser(raw_data)
 
+    raw_data = read_data_file('GEDCOM_data.ged')
+    data_parser(raw_data)
+
+    raw_data = read_data_file('FamilyTest.ged')
+    data_parser(raw_data)
+
     # Check that each family has a husband and a wife
     check_spouses_exist(family_data)
     
@@ -130,7 +137,7 @@ def main():
         if obj.uid not in all_error_entries.keys():                
             t.add_row(obj.pt_row())
     print('Individuals')
-    print (t)
+    print(t)
     
     t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
     for obj in family_data.values():
@@ -147,7 +154,7 @@ def main():
         if obj.fid not in all_error_entries.keys():          
             t.add_row(obj.pt_row())
     print('Families')
-    print (t)
+    print(t)
 
     # Get list of individuals who passed
     for person in deceased_list(individual_data):
@@ -178,35 +185,39 @@ def main():
     t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
     for obj in (birth_before_marriage(family_data, individual_data)).values():
         t.add_row(obj.pt_row())
-    print (t)
+    print(t)
 
+    print("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
     for individual in birth_recently:
         print(individual.birt)
 
     if len(birth_recently) == 0:
-        print("No recent Birth")
+        print("No recent Birth\n")
     else:
-        print("Total number of birth in the last 30 days: \n")
+        print("Total number of birth in the last 30 days: {}".format(len(birth_recently)))
         for individual in birth_recently:
-            print(individual.birt)
+            print("Name: {0}, Birth on: {1}\n".format(individual.name, individual.birt))
 
-
+    print("\nRecent Death Data")
     death_recently = list_recent_death(individual_data)
     if len(death_recently) == 0:
         print("No recent Death")
     else:
-        print("Total number of Death in the last 30 days: \n")
+        print("Total number of Death in the last 30 days: {}".format(len(death_recently)))
         for individual in death_recently:
-            print(individual.deat)
+            print("Name: {0}, Death on: {1}\n".format(individual.name, individual.deat))
 
-    # US15 -- There should be fewer than 15 siblings in a family 
+
+    # US15 -- There should be fewer than 15 siblings in a family
+    print("\nFewer than 15 siblings in a family")
     fewer_siblings = fewer_than15_siblings(family_data)
     if len(fewer_siblings) > 0:
         print("Families with more than 15 siblings: " + fewer_siblings)
     else:
         print("All families have fewer than 15 siblings")
 
+    print("\n")
     # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
     problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
     if len(problem_indis) > 0:
@@ -221,14 +232,26 @@ def main():
 
 
     # List of recent Birthday
+    print("\nRecent Birthday Data")
     data = list_upcoming_birthdays(individual_data)
     if len(data) is not 0:
-        print("upcoming birthday for: ")
+        print("\nUpcoming birthday for: ")
         for birthdays in data:
             print(birthdays.name)
     else:
         print('No upcoming birthday in the next 30 days.')
 
+    # survival from a recent death
+    print("\nRecent Death Data")
+    data = list_recent_survivals(individual_data, family_data)
+    if len(data) > 0:
+        print("\nSurvivals List:")
+        for d in data.values():
+            print("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
+                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
+
+    else:
+        print("No Recent death with survivals within last 30 days")
 
 
 if __name__ == '__main__':

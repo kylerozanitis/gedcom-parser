@@ -95,6 +95,10 @@ def change_date_format(date):
     temp = date.split(" ")
     date_month = month_dict.get(temp[1])
 
+    # if Birthday is single digit day make it two digits by adding Zero
+    if len(list(temp[0])) == 1:
+        return temp[2] + '-' + date_month + '-' + "0"+temp[0]
+
     return temp[2]+'-'+date_month+'-'+temp[0]
 
 
@@ -358,6 +362,7 @@ def allDates_before_currentDate(individual_data, family_data):
 
     return currentDate_compare_error
 
+
 def divorce_before_death(family_data,individual_data):
     """
     US06 - Divorce can only occure before death of both spouses
@@ -406,7 +411,7 @@ def event_in_last_thirty_days(date):
         val = ((datetime.now().year - int(values[0])) + int(values[0]))
         compare_date = "{0}-{1}-{2}".format(str(val), values[1], values[2])
 
-        if str(datetime.now().date() - timedelta(days=30)) <= compare_date and values[0] == str(datetime.now().year):
+        if str(datetime.now().date() + timedelta(days=-30)) <= compare_date <= str(datetime.now().date()) and values[0] == str(datetime.now().year):
             return True
         return False
 
@@ -438,6 +443,7 @@ def list_recent_death(individual_data):
             recent_death.append(individual)
     return recent_death
 
+
 def fewer_than15_siblings(family_data):
     """ US15 -- There should be fewer than 15 siblings in a family""" 
     fid_list = []
@@ -446,10 +452,11 @@ def fewer_than15_siblings(family_data):
             fid_list.append(fid)
     return fid_list
 
+
 def check_unique_ids(individual_data, family_data):
     """ 
-    US22 Unique IDs - All individual IDs should be unique and all 
-    family IDs should be unique
+        US22 Unique IDs - All individual IDs should be unique and all
+        family IDs should be unique
     """
 
     individual_ids = []
@@ -485,9 +492,43 @@ def is_anniversary_in_next_thirty_days(date):
         val = ((datetime.now().year - int(values[0])) + int(values[0]))
         compare_date = "{0}-{1}-{2}".format(str(val), values[1], values[2])
 
-    if str(datetime.now().date()) <= compare_date <= str(datetime.now().date() + timedelta(days=30)):
+    if str(datetime.now().date()) <= compare_date < str(datetime.now().date() + timedelta(days=30)):
         return True
     return False
+
+
+def list_recent_survivals(individual_data, family_data):
+    """
+        US37 - List recent survivors
+        List all living spouses and descendants of people in a GEDCOM file who died in the last 30 days
+        function calls: event_in_last_thirty_days()
+        return: survivals dictionary type
+    """
+    survivals = dict()
+
+    for ind in individual_data.values():
+        if not ind.is_alive() and event_in_last_thirty_days(ind.deat):
+            fam = dict()
+            fam['name'] = ind.name
+            fam['sex'] = ind.sex
+            fam['fam_id'] = ind.fams
+            fam['passed'] = ind.deat
+
+            for i in ind.fams:
+                val = family_data.get(i)
+                if val is not None:
+                    fam['children'] = val.chil
+                    if ind.sex == "M":
+                        fam['spouse_name'] = val.wife
+                        fam['spouse_id'] = val.wife_id
+
+                    if ind.sex == "F":
+                        fam['spouse_name'] = val.husb
+                        fam['spouse_id'] = val.husb_id
+                    survivals[ind.uid] = fam
+                del fam
+
+    return survivals
 
 
 def list_upcoming_birthdays(individual_data):
@@ -503,4 +544,5 @@ def list_upcoming_birthdays(individual_data):
             list_birthdays.append(ind)
 
     return list_birthdays
+
 
