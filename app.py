@@ -19,7 +19,7 @@ from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-from helperFunctions import list_recent_survivals
+from helperFunctions import list_recent_survivals, marriage_after_14
 
 individual_data = dict()
 family_data = dict()
@@ -253,6 +253,6 @@ def main():
     else:
         print("No Recent death with survivals within last 30 days")
 
-
+    marriage_after_14(family_data,individual_data)
 if __name__ == '__main__':
     main()
