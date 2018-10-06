@@ -4,7 +4,6 @@ import os
 
 from datetime import datetime, timedelta
 
-
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
 
@@ -47,7 +46,6 @@ def clean_data(data):
     new_list = []
 
     for val in data:
-
         # Checks of known invalid data
         if (len(val) >= 3 and val[2] in KNOWN_INVALID_TAGS):
             # if invalid continue
@@ -419,7 +417,7 @@ def event_in_last_thirty_days(date):
 def list_recent_births(individual_data):
     """
     US35 - List all people in a GEDCOM file who were born in the last 30 days
-    This fucntion will take individual data as input and 
+    This function will take individual data as input and
     return list of birthdays happened in the last 30 days
     """
     recent_birth = []
@@ -539,6 +537,7 @@ def list_upcoming_birthdays(individual_data):
         Function Calls: is_anniversary_in_next_thirty_days() passing a date
     """
     list_birthdays = []
+
     for ind in individual_data.values():
         if is_anniversary_in_next_thirty_days(ind.birt):
             list_birthdays.append(ind)

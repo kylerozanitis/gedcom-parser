@@ -249,7 +249,6 @@ def main():
         for d in data.values():
             print("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
                    """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
-
     else:
         print("No Recent death with survivals within last 30 days")
 
