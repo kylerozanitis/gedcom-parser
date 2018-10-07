@@ -544,15 +544,3 @@ def list_upcoming_birthdays(individual_data):
             list_birthdays.append(ind)
 
     return list_birthdays
-
-
-
-
-
-
-
-
-    
-
-
-

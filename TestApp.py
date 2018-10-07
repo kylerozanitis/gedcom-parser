@@ -127,7 +127,7 @@ class TestHelperFunctions(unittest.TestCase):
         person4_age = 330
         person4_isalive = False
         result4 = str(agemorethan_150(person4_isalive,person4_dob,person4_age))
-        self.assertNotEqual(result4,'True')
+        self.assertEqual(result4,'False')
 
         person5_dob = '01 JAN 1988'
         person5_age = 30
