@@ -126,6 +126,22 @@ def deceased_list(individual_data):
 
     return items
 
+def living_married_list(family_data,individual_data):
+    living_married = []
+    for family in family_data.values():
+        if family.marr != 'NA':
+            husband = None
+            wife = None
+            for indi in individual_data.values():
+                if indi.uid == family.husb_id:
+                    husband = indi
+                if indi.uid == family.wife_id:
+                    wife = indi
+            if husband.is_alive == True:
+                living_married.append(husband.uid)
+            if wife.is_alive == True:
+                living_married.append(wife.uid)
+    return living_married
 
 def birth_before_marriage(family_data, individual_data):
     """US02 - Birth should occur before Marriage of either spouse -

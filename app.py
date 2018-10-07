@@ -19,7 +19,7 @@ from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-from helperFunctions import list_recent_survivals
+from helperFunctions import list_recent_survivals, living_married_list
 
 individual_data = dict()
 family_data = dict()
@@ -160,9 +160,15 @@ def main():
     for person in deceased_list(individual_data):
         print("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
     
-    
-    for person in individual_data.values():
-        print('person name:',person.name,' - ',agemorethan_150(person.alive,person.birt,person.age))
+    # list living married
+    living_married = living_married_list(family_data, individual_data)
+    if len(living_married) > 0:
+        print("living married: ", living_married)
+    else:
+        print("living married",len(living_married))
+
+    #for person in individual_data.values():
+     #   print('person name:',person.name,' - ',agemorethan_150(person.alive,person.birt,person.age))
     
     #divorce before death
     prob_family = divorce_before_death(family_data,individual_data)
