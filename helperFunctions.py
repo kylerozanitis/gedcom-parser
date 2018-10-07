@@ -127,6 +127,10 @@ def deceased_list(individual_data):
     return items
 
 def living_married_list(family_data,individual_data):
+    """
+    US 30 List living married. This function will take family data and individual data as input
+    and list all the living married from the gedcom file and return the list
+    """
     living_married = []
     for family in family_data.values():
         if family.marr != 'NA':
@@ -139,11 +143,8 @@ def living_married_list(family_data,individual_data):
                     wife = individual
             if husband.alive == True:
                 living_married.append(husband.uid)
-                print('living marriend in hus',living_married)
             if wife.alive == True:
                 living_married.append(wife.uid)
-                print('living marriend in wif',living_married)
-    print(living_married)
     return living_married
 
 def birth_before_marriage(family_data, individual_data):
