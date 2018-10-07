@@ -145,6 +145,18 @@ def birth_before_marriage(family_data, individual_data):
 
     return family_data
 
+def convert_str_to_date(date):
+    """
+    this function is helperfunction which will 
+    take str date as input and convert it to datetime object format
+    this will use to compare date from file with current date.
+    """
+    if validate_date_format(date):
+        new_date = change_date_format(date).split('-')
+    
+    date_obj = '-'.join(new_date)
+    date_obj = datetime.strptime(date_obj, '%Y-%m-%d')
+    return date_obj
 
 def agemorethan_150(status, dob, age):
     """US07 - Function Returns true or false is the individual is older the 150 yrs old
@@ -153,12 +165,7 @@ def agemorethan_150(status, dob, age):
     flag = True
     today = datetime.now()
 
-    if validate_date_format(dob):
-        bdate = change_date_format(dob).split('-')
-
-    birth = '-'.join(bdate)
-    birth = datetime.strptime(birth, '%Y-%m-%d')
-
+    birth = convert_str_to_date(dob)
     if status == False and birth <= today and age < 150:
         flag = True
     elif status == True and birth <= today and age <150:
@@ -374,9 +381,7 @@ def divorce_before_death(family_data,individual_data):
         if family.div != 'NA':
             husband = None
             wife = None
-            div = change_date_format(family.div).split('-')
-            div_d = '-'.join(div)
-            divorce_date = datetime.strptime(div_d,'%Y-%m-%d')
+            divorce_date = convert_str_to_date(family.div)
 
             for individual in individual_data.values():
                 if individual.uid == family.husb_id:
@@ -384,16 +389,12 @@ def divorce_before_death(family_data,individual_data):
                 if individual.uid == family.wife_id:
                     wife = individual
             if husband.alive == False:
-                husb_deat = change_date_format(husband.deat).split('-')
-                h_deat = '-'.join(husb_deat)
-                husb_death = datetime.strptime(h_deat,'%Y-%m-%d')
+                husb_death = convert_str_to_date(husband.deat)
                 if divorce_date > husb_death:
                     print(husb_death,'is less than',divorce_date)
                     prob_family.append(family.fid)
             if wife.alive == False:
-                wife_deat = change_date_format(wife.deat).split('-')
-                w_deat = '-'.join(wife_deat)
-                wife_death = datetime.strptime(w_deat,'%Y-%m-%d')
+                wife_death = convert_str_to_date(wife.deat)
                 if divorce_date > wife_death:
                     prob_family.append(family.fid)
     return prob_family

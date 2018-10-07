@@ -1,0 +1,13 @@
+{
+    "python.pythonPath": "C:\\Users\\kshit\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        ".",
+        "-p",
+        "test*.py"
+    ],
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.unittestEnabled": true
+}
