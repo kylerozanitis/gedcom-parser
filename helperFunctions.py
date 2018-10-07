@@ -132,15 +132,18 @@ def living_married_list(family_data,individual_data):
         if family.marr != 'NA':
             husband = None
             wife = None
-            for indi in individual_data.values():
-                if indi.uid == family.husb_id:
-                    husband = indi
-                if indi.uid == family.wife_id:
-                    wife = indi
-            if husband.is_alive == True:
+            for individual in individual_data.values():
+                if individual.uid == family.husb_id:
+                    husband = individual
+                if individual.uid == family.wife_id:
+                    wife = individual
+            if husband.alive == True:
                 living_married.append(husband.uid)
-            if wife.is_alive == True:
+                print('living marriend in hus',living_married)
+            if wife.alive == True:
                 living_married.append(wife.uid)
+                print('living marriend in wif',living_married)
+    print(living_married)
     return living_married
 
 def birth_before_marriage(family_data, individual_data):

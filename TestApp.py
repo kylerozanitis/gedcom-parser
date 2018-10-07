@@ -4,7 +4,7 @@ from helperFunctions import change_date_format, validate_date_format, deceased_l
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-from helperFunctions import list_recent_survivals
+from helperFunctions import list_recent_survivals, living_married_list
 from classes import individualPerson, familyClass
 
 
@@ -549,6 +549,50 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(len(list_recent_survivals(ind_dict, fam_dict)), 1, True)
 
+    def test_living_married(self):
+        fam_dict = {}
+        ind_dict = {}
+
+        individual = individualPerson("I1")
+        individual.uid = "I1"
+        individual.alive = True
+        individual.deat = "NA"
+        ind_dict[individual.uid] = individual
+
+        individual2 = individualPerson("I2")
+        individual2.uid = "I2"
+        individual2.alive = True
+        individual2.deat = 'NA'
+        ind_dict[individual2.uid] = individual2
+
+        individual3 = individualPerson("I3")
+        individual3.uid = "I3"
+        individual3.alive = True
+        individual3.deat = 'NA'
+        ind_dict[individual3.uid] = individual3
+
+        individual4 = individualPerson("I4")
+        individual4.uid = "I4"
+        individual4.alive = True
+        individual4.deat = 'NA'
+        ind_dict[individual4.uid] = individual4
+
+        family = familyClass("F1")
+        family.husb_id = "I1"
+        family.wife_id = "I2"
+        family.marr = "1 JAN 2000"
+        fam_dict[family.fid] = family
+
+        family2 = familyClass("F2")
+        family2.husb_id = "I3"
+        family2.wife_id = "I4"
+        family2.marr = "1 FEB 2004"
+        fam_dict[family2.fid] = family2
+
+        self.assertEqual(len(living_married_list(fam_dict, ind_dict)), 4, True)
+        self.assertEqual(living_married_list(fam_dict, ind_dict), ['I1','I2','I3','I4'], True)
+
+        
 
 
 
