@@ -136,7 +136,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertIs(result5,'True')
 
     def test_check_marriage_before_divorce(self):
-        """ Unit test for checking that marriage occured before divorce """
+        """ Unit test for US04 for checking that marriage occured before divorce """
         
         fam_dict = {}
 
@@ -188,21 +188,21 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5", "F6"], True)
 
     def test_check_marriage_before_death(self):
-        """ Unit test for checking that marriage occured before death of
-        either spouse """
+        """ Unit test for US05 for checking that marriage occured before death
+        of either spouse """
 
         fam_dict = {}
         ind_dict = {}
 
         individual = individualPerson("I1")
         individual.uid = "I1"
-        individual.is_alive = True
+        individual.alive = True
         individual.deat = "NA"
         ind_dict[individual.uid] = individual
 
         individual2 = individualPerson("I2")
         individual2.uid = "I2"
-        individual2.is_alive = False
+        individual2.alive = False
         individual2.deat = "1 JAN 2010"
         ind_dict[individual2.uid] = individual2
 
@@ -217,13 +217,13 @@ class TestHelperFunctions(unittest.TestCase):
 
         individual3 = individualPerson("I3")
         individual3.uid = "I3"
-        individual3.is_alive = True
+        individual3.alive = True
         individual3.deat = "NA"
         ind_dict[individual3.uid] = individual3
 
         individual4 = individualPerson("I4")
         individual4.uid = "I4"
-        individual4.is_alive = False
+        individual4.alive = False
         individual4.deat = "1 JAN 1999"
         ind_dict[individual4.uid] = individual4
 
@@ -238,13 +238,13 @@ class TestHelperFunctions(unittest.TestCase):
 
         individual5 = individualPerson("I5")
         individual5.uid = "I5"
-        individual5.is_alive = True
+        individual5.alive = True
         individual5.deat = "NA"
         ind_dict[individual5.uid] = individual5
 
         individual6 = individualPerson("I6")
         individual6.uid = "I6"
-        individual6.is_alive = False
+        individual6.alive = False
         individual6.deat = "1 JAN 1999"
         ind_dict[individual6.uid] = individual6
 

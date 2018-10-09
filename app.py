@@ -97,14 +97,14 @@ def main():
     raw_data = read_data_file('My_family.ged')
     data_parser(raw_data)
 
-    raw_data = read_data_file('familytree.ged')
-    data_parser(raw_data)
+    # raw_data = read_data_file('familytree.ged')
+    # data_parser(raw_data)
 
-    raw_data = read_data_file('GEDCOM_data.ged')
-    data_parser(raw_data)
+    # raw_data = read_data_file('GEDCOM_data.ged')
+    # data_parser(raw_data)
 
-    raw_data = read_data_file('FamilyTest.ged')
-    data_parser(raw_data)
+    # raw_data = read_data_file('FamilyTest.ged')
+    # data_parser(raw_data)
 
     # Check that each family has a husband and a wife
     check_spouses_exist(family_data)
@@ -174,17 +174,30 @@ def main():
     prob_family = divorce_before_death(family_data,individual_data)
     print("prob_family",prob_family)
 
-    # Return list of families with divorce occuring before marriage
+    # US04 Print out list of families with divorce occuring before marriage
     problem_families = check_marriage_before_divorce(family_data)
     if len(problem_families) > 0:
-        print("Families with divorce date occuring before marriage:", problem_families)
+        for item in problem_families:
+            family = family_data[item]
+            if family.marr == "NA":
+                print("ERROR: FAMILY: US04: {}: Marriage date does not exist".format(family.fid))
+            else:
+                print("ERROR: FAMILY: US04: {}: Divorce date {} occurs before marriage date {}".format(family.fid, family.div, family.marr))
 
-    # Return list of families with death of a spouse occuring before marriage
-    spouse_dead_before_marriage = check_marriage_before_death(family_data, individual_data)
-    if len(spouse_dead_before_marriage) > 0:
-        print("Families with divorce date occuring before death of a spouse:", spouse_dead_before_marriage)
+    # US05 Print out list of families with death of a spouse occuring before marriage
+    prob_families = check_marriage_before_death(family_data, individual_data)
+    if len(prob_families) > 0:
+        for item in prob_families:
+            family = family_data[item]
+            husband = individual_data[family.husb_id]
+            wife = individual_data[family.wife_id]
 
-
+            if family.marr == "NA":    
+                print("ERROR: FAMILY: US05: {}: Marriage date does not exist".format(family.fid))
+            elif husband.alive == False:
+                print("ERROR: FAMILY: US05: {}: Husband death date {} occurs before marriage date {}".format(family.fid, husband.deat, family.marr))
+            elif wife.alive == False:
+                print("ERROR: FAMILY: US05: {}: Wife death date {} occurs before marriage date {}".format(family.fid, wife.deat, family.marr))
 
     # Checks for birth before marriages if marriage happens before birth, individual will be removed from family
     print('\n\nChecks for birth before marriages if marriage happens before birth, individual will be removed from family')
@@ -224,18 +237,20 @@ def main():
         print("All families have fewer than 15 siblings")
 
     print("\n")
+    
     # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
     problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
     if len(problem_indis) > 0:
-        print("IDs attached to more than one individual: " + problem_indis)
+        for individual in problem_indis:
+            print("ERROR: INDIVIDUAL: US22: {} has been used for more than one individual".format(individual))
     else:
-        print("Individuals have unique IDs")
+        print("ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries")
 
     if len(problem_fams) > 0:
-        print("IDs attached to more than one family:" + problem_fams)
+        for family in problem_fams:
+            print("ERROR: FAMILY: US22: {} has been used for more than one individual".format(family))
     else:
-        print("Families have unique IDs")
-
+        print("ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries")
 
     # List of recent Birthday
     print("\nRecent Birthday Data")
