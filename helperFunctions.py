@@ -214,7 +214,7 @@ def check_marriage_before_divorce(family_data):
     """ US04 - Marriage should occur before divorce of spouses, and divorce can
     only occur after marriage; Program takes a Family ID (FID), ensures the
     wedding took place before the divorce. """
-    
+
     problem_families = []
 
     for family in family_data.values():
@@ -231,7 +231,7 @@ def check_marriage_before_divorce(family_data):
             
             if marriage_date > divorce_date:
                 problem_families.append(family.fid)
-        
+    
     return problem_families
 
 
@@ -255,7 +255,7 @@ def check_marriage_before_death(family_data, individual_data):
             marriage = "-".join(marr)
             marriage_date = datetime.strptime(marriage, "%Y-%m-%d")
 
-            if husband.is_alive == False:
+            if husband.alive == False:
                 deat = change_date_format(husband.deat).split("-")
                 death = "-".join(deat)
                 death_date = datetime.strptime(death, "%Y-%m-%d")
@@ -263,7 +263,7 @@ def check_marriage_before_death(family_data, individual_data):
                 if death_date < marriage_date:
                     problem_families.append(family.fid)
 
-            elif wife.is_alive == False:
+            elif wife.alive == False:
                 deat = change_date_format(wife.deat).split("-")
                 death = "-".join(deat)
                 death_date = datetime.strptime(death, "%Y-%m-%d")
