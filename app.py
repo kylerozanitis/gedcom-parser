@@ -19,7 +19,7 @@ from helperFunctions import read_data_file, deceased_list, agemorethan_150
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-from helperFunctions import list_recent_survivals, living_married_list
+from helperFunctions import list_recent_survivals, living_married_list, check_marriage_status
 import sys
 
 individual_data = dict()
@@ -106,6 +106,9 @@ def main():
 
     # Check that each family has a husband and a wife
     check_spouses_exist(family_data)
+
+    # Check that each has a marriage date
+    check_marriage_status(family_data)
     
     """
     US01 - Dates (birth, marriage, divorce, death) should not be after the current date
