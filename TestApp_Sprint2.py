@@ -1,5 +1,5 @@
 import unittest
-from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays
+from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from classes import individualPerson, familyClass
 
 
@@ -110,6 +110,42 @@ class TestHelperFunctions(unittest.TestCase):
         indi_dict[i3.uid] = i3
 
         self.assertEqual(len(list_upcoming_birthdays(indi_dict)),2 ,True)
+        
+    def test_child_birth(self):
+        """Test cases for US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)"""
+        indi_dict = {}
+        fam_dict = {}
 
+        indi_I10 = individualPerson("I10")
+        indi_I10.birt = "25 AUG 1990"
+        indi_dict[indi_I10.uid] = indi_I10
+        indi_I11 = individualPerson("I11")
+        indi_I11.birt = "13 MAR 1996"
+        indi_dict[indi_I11.uid] = indi_I11
+
+        fam_F10 = familyClass("F10")
+        fam_F10.marr = "11 OCT 1995"
+        fam_F10.chil = ["I10", "I11"]
+        fam_dict[fam_F10.fid] = fam_F10
+
+        indi_I12 = individualPerson("I12")
+        indi_I12.birt = "11 OCT 1953"
+        indi_dict[indi_I12.uid] = indi_I12
+        indi_I13 = individualPerson("I13")
+        indi_I13.birt = "25 DEC 1955"
+        indi_dict[indi_I13.uid] = indi_I13
+        
+        fam_F12 = familyClass("F12")
+        fam_F12.marr = "3 MAR 1950"
+        fam_F12.div = "27 NOV 1954"
+        fam_F12.chil = ["I12", "I13"]
+        fam_dict[fam_F12.fid] = fam_F12
+
+        self.assertEqual(validate_child_birth(indi_dict, fam_dict), ({'F10': 'I10'}, {'F12': 'I13'}))
+        self.assertNotEqual(validate_child_birth(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_child_birth(indi_dict, fam_dict))
+        self.assertIsNot(validate_child_birth(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_child_birth(indi_dict, fam_dict), ({'F10': 'I10'}, {'F12': 'I13'}))
+        
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
