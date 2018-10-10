@@ -1,5 +1,5 @@
 #Lib Imports
-from dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import *
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, event_in_last_thirty_days
 from datetime import datetime, timedelta
 
