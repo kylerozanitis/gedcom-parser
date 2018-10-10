@@ -197,7 +197,7 @@ def main():
 
     # Checks for birth before marriages if marriage happens before birth, individual will be removed from family
     for obj in birth_before_marriage(family_data, individual_data):
-        print("ERROR: INDIVIDUAL: US02: {} Birth occurs before marriage".format(obj.uid))
+        print("ERROR: INDIVIDUAL: US02: {} Birth occurs before marriage".format(obj.fid))
 
 
     print("\nRecent Birthday Data")
