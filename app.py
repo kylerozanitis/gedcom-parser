@@ -228,7 +228,7 @@ def main():
         print("ERROR: FAMILY: US15: " + str(fid) + " has more than 15 siblings")
 
     # US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)
-    marr_error_entries, div_error_entries = validate_child_birth(individual_data, family_data)
+    marr_error_entries, div_error_entries = validate_child_birth(individual_data,family_data)
     for fid, uid in marr_error_entries.items():
         print("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
     for fid, uid in div_error_entries.items():
