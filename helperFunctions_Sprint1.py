@@ -227,88 +227,11 @@ def death_before_birth(individual_data, family_data):
     messages
     """
     birth_error = []
-    current_date = datetime.today().strftime('%d %b %Y')
-    temp1 = change_date_format(current_date).split("-")
-    temp2 = "-".join(temp1)
-    today_date = datetime.strptime(temp2, "%Y-%m-%d")
-
-    all_error_entries = dict()
-    indi_status_list = []
-    fam_status_list = []
+    all_error_entries = allDates_before_currentDate(individual_data, family_data)
+    
     for uid, individual in individual_data.items():
         if individual.birt != 'NA' and individual.deat != 'NA':
-            temp1 = change_date_format(individual.birt).split("-")
-            indi_birt = "-".join(temp1)
-            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
-
-            temp2 = change_date_format(individual.deat).split("-")
-            indi_deat = "-".join(temp2)
-            indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
-
-            if indi_birth_date > today_date:
-                indi_status_list.append('birth')
-            if indi_deat_date > today_date:
-                indi_status_list.append('death')
-
-        elif individual.birt != 'NA' and individual.deat == 'NA':
-            temp1 = change_date_format(individual.birt).split("-")
-            indi_birt = "-".join(temp1)
-            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
-
-            if indi_birth_date > today_date:
-                indi_status_list.append('birth')
-
-        else:
-            indi_status_list.append('not born')
-            
-        if len(indi_status_list) == 0:
-            continue
-        else:
-            all_error_entries[uid] = indi_status_list
-            indi_status_list = []
-
-    for fid, family in family_data.items():
-        if family.marr != 'NA' and family.div != 'NA':
-            temp1 = change_date_format(family.marr).split("-")
-            fam_marr = "-".join(temp1)
-            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
-
-            temp1 = change_date_format(family.div).split("-")
-            fam_div = "-".join(temp1)
-            fam_div_date = datetime.strptime(fam_div, "%Y-%m-%d")
-            
-            if fam_marr_date > today_date:
-                fam_status_list.append('marriage')
-            if fam_div_date > today_date:
-                fam_status_list.append('divorce')
-                
-        elif family.marr != 'NA' and family.div == 'NA':
-            temp1 = change_date_format(family.marr).split("-")
-            fam_marr = "-".join(temp1)
-            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
-
-            if fam_marr_date > today_date:
-                fam_status_list.append('marriage')
-
-        else:
-            fam_status_list.append('not married')
-
-        if len(fam_status_list) == 0:
-            continue
-        else:
-            all_error_entries[fid] = fam_status_list
-            fam_status_list = []
-    for uid, individual in individual_data.items():
-        if individual.birt != 'NA' and individual.deat != 'NA':
-            temp1 = change_date_format(individual.birt).split("-")
-            indi_birt = "-".join(temp1)
-            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
-
-            temp2 = change_date_format(individual.deat).split("-")
-            indi_deat = "-".join(temp2)
-            indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
-
-            if indi_birth_date > indi_deat_date:
+            if check_two_dates(individual.deat, individual.birt):
                 if uid in all_error_entries.keys():
                     for error_list in all_error_entries.values():
                         error_list.append('death before birth')
@@ -327,36 +250,19 @@ def allDates_before_currentDate(individual_data, family_data):
     dictionary containing the id and a list of string value to print error messages
     """
     current_date = datetime.today().strftime('%d %b %Y')
-    temp1 = change_date_format(current_date).split("-")
-    temp2 = "-".join(temp1)
-    today_date = datetime.strptime(temp2, "%Y-%m-%d")
-
+    
     currentDate_compare_error = dict()
     indi_status_list = []
     fam_status_list = []
     for uid, individual in individual_data.items():
         if individual.birt != 'NA' and individual.deat != 'NA':
-            temp1 = change_date_format(individual.birt).split("-")
-            indi_birt = "-".join(temp1)
-            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
-
-            temp2 = change_date_format(individual.deat).split("-")
-            indi_deat = "-".join(temp2)
-            indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
-
-            if indi_birth_date > today_date:
+            if check_two_dates(current_date, individual.birt):
                 indi_status_list.append('birth')
-            if indi_deat_date > today_date:
+            if check_two_dates(current_date, individual.deat):
                 indi_status_list.append('death')
-
         elif individual.birt != 'NA' and individual.deat == 'NA':
-            temp1 = change_date_format(individual.birt).split("-")
-            indi_birt = "-".join(temp1)
-            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
-
-            if indi_birth_date > today_date:
+            if check_two_dates(current_date, individual.birt):
                 indi_status_list.append('birth')
-
         else:
             indi_status_list.append('not born')
             
@@ -369,27 +275,13 @@ def allDates_before_currentDate(individual_data, family_data):
 
     for fid, family in family_data.items():
         if family.marr != 'NA' and family.div != 'NA':
-            temp1 = change_date_format(family.marr).split("-")
-            fam_marr = "-".join(temp1)
-            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
-
-            temp1 = change_date_format(family.div).split("-")
-            fam_div = "-".join(temp1)
-            fam_div_date = datetime.strptime(fam_div, "%Y-%m-%d")
-            
-            if fam_marr_date > today_date:
+            if check_two_dates(current_date, family.marr):
                 fam_status_list.append('marriage')
-            if fam_div_date > today_date:
-                fam_status_list.append('divorce')
-                
+            if check_two_dates(current_date, family.div):
+                fam_status_list.append('divorce')                
         elif family.marr != 'NA' and family.div == 'NA':
-            temp1 = change_date_format(family.marr).split("-")
-            fam_marr = "-".join(temp1)
-            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
-
-            if fam_marr_date > today_date:
+            if check_two_dates(current_date, family.marr):
                 fam_status_list.append('marriage')
-
         else:
             fam_status_list.append('not married')
 
@@ -398,7 +290,6 @@ def allDates_before_currentDate(individual_data, family_data):
         else:
             currentDate_compare_error[fid] = fam_status_list
             fam_status_list = []
-
 
     return currentDate_compare_error
 
