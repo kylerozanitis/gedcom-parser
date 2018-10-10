@@ -158,18 +158,17 @@ def main():
         print("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
     
     # list living married
-    living_married = living_married_list(family_data, individual_data)
+    """living_married = living_married_list(family_data, individual_data)
     if len(living_married) > 0:
         print("living married: ", living_married)
     else:
-        print("living married",len(living_married))
+        print("living married",len(living_married))"""
 
-    #for person in individual_data.values():
-     #   print('person name:',person.name,' - ',agemorethan_150(person.alive,person.birt,person.age))
+    #age more than 150
+    flag = agemorethan_150(individual_data)
     
     #divorce before death
     prob_family = divorce_before_death(family_data,individual_data)
-    print("prob_family",prob_family)
 
     # US04 Print out list of families with divorce occuring before marriage
     problem_families = check_marriage_before_divorce(family_data)

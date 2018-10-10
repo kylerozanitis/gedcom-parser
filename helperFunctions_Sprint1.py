@@ -153,20 +153,28 @@ def convert_str_to_date(date):
     date_obj = datetime.strptime(date_obj, '%Y-%m-%d')
     return date_obj
 
-def agemorethan_150(status, dob, age):
+def agemorethan_150(individual_data):
     """US07 - Function Returns true or false is the individual is older the 150 yrs old
         it takes 3 parameters: status of person (if alive or not) DOB, and its Age """
 
     flag = True
+    error_story = "US07"
     today = datetime.now()
-
-    birth = convert_str_to_date(dob)
-    if status == False and birth <= today and age < 150:
-        flag = True
-    elif status == True and birth <= today and age <150:
-        flag = True
-    else:
-        flag = False
+    for individual in individual_data.values():
+        person = individual.uid
+        birth = convert_str_to_date(individual.birt)
+        if individual.alive == False and birth <= today and individual.age > 150:
+            error_descrip="lived longer than 150 years"
+            error_location = person
+            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+            flag = True
+        elif individual.alive == True and birth <= today and individual.age > 150:
+            error_descrip="lived longer than 150 years"
+            error_location = person
+            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+            flag = True
+        else:
+            flag = False
     return flag
 
 
@@ -302,6 +310,7 @@ def divorce_before_death(family_data,individual_data):
     it will return list of families with problem
     """
     prob_family = []
+    error_story = 'US06'
 
     for family in family_data.values():
         if family.div != 'NA':
@@ -317,11 +326,16 @@ def divorce_before_death(family_data,individual_data):
             if husband.alive == False:
                 husb_death = convert_str_to_date(husband.deat)
                 if divorce_date > husb_death:
-                    print(husb_death,'is less than',divorce_date)
+                    error_descrip = "Death of Husband {} occurs before date of divorce {}".format(husband.deat,family.div)
+                    error_location = husband.uid
+                    print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
                     prob_family.append(family.fid)
             if wife.alive == False:
                 wife_death = convert_str_to_date(wife.deat)
                 if divorce_date > wife_death:
+                    error_descrip = "Death of wife {} occurs before date of divorce {}".format(wife.deat,family.div)
+                    error_location = wife.uid
+                    print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
                     prob_family.append(family.fid)
     return prob_family
 
