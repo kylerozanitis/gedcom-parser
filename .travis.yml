@@ -4,4 +4,5 @@ python:
 
 # command to run tests
 script:
- - python3 TestApp.py
+ - python3 TestApp_Sprint1.py
+ - python3 TestApp_Sprint2.py

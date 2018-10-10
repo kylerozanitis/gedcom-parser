@@ -13,15 +13,16 @@
 #   For now it uses PrettyTable with Dummy Data to display it
 
 # Library imports
-from prettytable import PrettyTable
-from classes import individualPerson, familyClass
-from helperFunctions import read_data_file, deceased_list, agemorethan_150
-from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
-from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-from helperFunctions import list_recent_survivals, living_married_list, check_marriage_status
+
+from helperFunctions_Sprint1 import read_data_file, deceased_list, agemorethan_150
+from helperFunctions_Sprint1 import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
+from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
+from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
+from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays
 import sys
 from datetime import datetime
+from prettytable import PrettyTable
+from classes import individualPerson, familyClass
 
 individual_data = dict()
 family_data = dict()
