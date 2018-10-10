@@ -159,11 +159,7 @@ def birth_before_marriage(family_data, individual_data):
             if not check_two_dates(ind.birt, fam.marr):
                 problematic_item.append(fam)
 
-    if len(problematic_item) > 0:
-        for i in problematic_item:
-            del family_data[i.fid]
-
-    return family_data
+    return problematic_item
 
 def convert_str_to_date(date):
     """

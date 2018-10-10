@@ -378,7 +378,7 @@ class TestHelperFunctions(unittest.TestCase):
         family.marr = "1 JAN 2000"
         fam_dict[family.fid] = family
 
-        self.assertEqual(len(birth_before_marriage(fam_dict, ind_dict)), 0, True)
+        self.assertEqual(len(birth_before_marriage(fam_dict, ind_dict)), 1, True)
 
         individual = individualPerson("I3")
         individual.uid = "I3"

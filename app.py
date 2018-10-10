@@ -198,11 +198,9 @@ def main():
                 print("ERROR: FAMILY: US05: {}: Wife death date {} occurs before marriage date {}".format(family.fid, wife.deat, family.marr))
 
     # Checks for birth before marriages if marriage happens before birth, individual will be removed from family
-    print('\n\nChecks for birth before marriages if marriage happens before birth, individual will be removed from family')
-    t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
-    for obj in (birth_before_marriage(family_data, individual_data)).values():
-        t.add_row(obj.pt_row())
-    print(t)
+    for obj in birth_before_marriage(family_data, individual_data):
+        print("ERROR: INDIVIDUAL: US02: {} Birth occurs before marriage".format(obj.uid))
+
 
     print("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
