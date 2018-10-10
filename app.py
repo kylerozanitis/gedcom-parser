@@ -21,6 +21,7 @@ from helperFunctions import death_before_birth, birth_before_marriage, divorce_b
 from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
 from helperFunctions import list_recent_survivals, living_married_list, check_marriage_status
 import sys
+from datetime import datetime
 
 individual_data = dict()
 family_data = dict()
@@ -110,53 +111,47 @@ def main():
     # Check that each has a marriage date
     check_marriage_status(family_data)
     
+    print('Individuals')
+    t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Age','Alive','Death','Child','Spouse'])
+    for obj in individual_data.values():
+        t.add_row(obj.pt_row())
+    print(t)
+    
+    print('Families')
+    t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
+    for obj in family_data.values():
+        t.add_row(obj.pt_row())
+    print(t)
+    
     """
     US01 - Dates (birth, marriage, divorce, death) should not be after the current date
     US03 - Birth should occur before death of an individual
-    Here, implementation of US03 calls implementation of US01. Hence, first the dates are checked if they are
+    Here, implementation of US01 is a subset of implementation of US03. First the dates are checked if they are
     occuring before the current date (US01) and then the birth dates and death dates are compared to check if
-    birth dates occur before the death date (US03).
+    birth dates occur before the death date (US03). Hence, executing US03 will also execute US01
     Also, all_error_entries is a dictionary that contains ids of individuals and families with a list of string
-    elements. These individuals and families are removed from the pretty table and an error message is print using
-    the sting values in the list.
-    """
+    elements and an error message is print using the string values in the list.
+    """ 
     all_error_entries = death_before_birth(individual_data, family_data)
-    t = PrettyTable(['ID', 'Name', 'Gender', 'Birthday','Age','Alive','Death','Child','Spouse'])
-    for obj in individual_data.values():
-        for indi_id, error_msg in all_error_entries.items():
-            if obj.uid == indi_id:
-                for msg in error_msg:
-                    if msg == 'birth':
-                        print("Error! Birth date of UID: " + indi_id + " should occur before today's date.")
-                    elif msg == 'death':
-                        print("Error! Death date of UID: " + indi_id + " should occur before today's date.")
-                    elif msg == 'death before birth':
-                        print("Error! Death date of UID: " + indi_id + " cannot occur before birth date.")
-                    else:
-                        print("Error! UID: " + indi_id + "cannot have a death date without a birth date")
-    for obj in individual_data.values():
-        if obj.uid not in all_error_entries.keys():                
-            t.add_row(obj.pt_row())
-    print('Individuals')
-    print(t)
+    current_date = datetime.today().strftime('%d %b %Y')
     
-    t = PrettyTable(['ID', 'Married', 'Divorced', 'Husband ID', 'Husband Name', 'Wife ID', 'Wife Name','Children'])
-    for obj in family_data.values():
-        for fam_id, error_msg in all_error_entries.items():
-            if obj.fid == fam_id:
-                for msg in error_msg:
-                    if msg == 'marriage':
-                        print("Error! Marriage date of UID: " + fam_id + " should occur before today's date.")
-                    elif msg == 'divorce':
-                        print("Error! Divorce date of UID: " + fam_id + " should occur before today's date.")
-                    else:
-                        print("Error! UID: " + fam_id + "cannot have a divorce date without a marriage date.")
-    for obj in family_data.values():
-        if obj.fid not in all_error_entries.keys():          
-            t.add_row(obj.pt_row())
-    print('Families')
-    print(t)
-
+    for ids, msg_list in all_error_entries.items():
+        for msg in msg_list:
+            if msg == 'birth':
+                print("ERROR: Individual: US01: " + str(ids) +" : Birthday " + str(individual_data[ids].birt) + " cannot occur before current date " + str(current_date))
+            elif msg == 'death':
+                print("ERROR: Individual: US01: " + str(ids) +" : Death date " + str(individual_data[ids].deat) + " cannot occur before current date " + str(current_date))
+            elif msg == 'marriage':
+                print("ERROR: Family: US01: " + str(ids) +" : Marriage date " + str(family_data[ids].marr) + " cannot occur before current date " + str(current_date))
+            elif msg == 'divorce':
+                print("ERROR: Family: US01: " + str(ids) +" : Divorce date " + str(family_data[ids].div) + " cannot occur before current date " + str(current_date))
+            elif msg == 'not born':
+                print("ERROR: Individual: US01: " + str(ids) + " : " + str(individual_data[ids].name) + " is not born yet")
+            elif msg == 'not married':
+                print("ERROR: Family: US01: " + str(ids) +" Not married ")
+            else:
+                print("ERROR: Individual: US03: " + str(ids) +" : Death date " + str(individual_data[ids].deat) + " cannot occur before birthday " + str(individual_data[ids].birt))
+    
     # Get list of individuals who passed
     for person in deceased_list(individual_data):
         print("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
@@ -228,12 +223,9 @@ def main():
 
 
     # US15 -- There should be fewer than 15 siblings in a family
-    print("\nFewer than 15 siblings in a family")
-    fewer_siblings = fewer_than15_siblings(family_data)
-    if len(fewer_siblings) > 0:
-        print("Families with more than 15 siblings: " + fewer_siblings)
-    else:
-        print("All families have fewer than 15 siblings")
+    fid_list = fewer_than15_siblings(family_data)
+    for fid in fid_list:
+        print("ERROR: FAMILY: US15: " + str(fid) + " has more than 15 siblings")
 
     print("\n")
     
