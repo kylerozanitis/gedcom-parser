@@ -159,7 +159,7 @@ def agemorethan_150(individual_data):
 
     flag = True
     error_story = "US07"
-    today = datetime.now()
+    #today = datetime.now()
     for individual in individual_data.values():
         person = individual.uid
         #birth = convert_str_to_date(individual.birt)

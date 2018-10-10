@@ -130,8 +130,6 @@ class TestHelperFunctions(unittest.TestCase):
         individual_dict[person3.uid] = person3
         self.assertEqual(agemorethan_150(individual_dict),True)
 
-
-
     def test_check_marriage_before_divorce(self):
         """ Unit test for US04 for checking that marriage occured before divorce """
         
