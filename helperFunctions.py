@@ -214,18 +214,8 @@ def check_marriage_before_divorce(family_data):
     problem_families = []
 
     for family in family_data.values():
-        if family.marr == "NA":
-            problem_families.append(family.fid)
-        elif family.div != "NA":
-            marr = change_date_format(family.marr).split("-")
-            marriage = "-".join(marr)
-            marriage_date = datetime.strptime(marriage, "%Y-%m-%d")
-            
-            div = change_date_format(family.div).split("-")
-            divorce = "-".join(div)
-            divorce_date = datetime.strptime(divorce, "%Y-%m-%d")
-            
-            if marriage_date > divorce_date:
+        if family.div != "NA":
+            if check_two_dates(family.div, family.marr) == True:
                 problem_families.append(family.fid)
     
     return problem_families
@@ -241,32 +231,12 @@ def check_marriage_before_death(family_data, individual_data):
     problem_families = []
 
     for family in family_data.values():
-        if family.marr == "NA":
+        husband = individual_data[family.husb_id]
+        wife = individual_data[family.wife_id]
+
+        if check_life_status(husband, family.marr) == True or check_life_status(wife, family.marr) == True:
             problem_families.append(family.fid)
-        else:
-            husband = individual_data[family.husb_id]
-            wife = individual_data[family.wife_id]
 
-            marr = change_date_format(family.marr).split("-")
-            marriage = "-".join(marr)
-            marriage_date = datetime.strptime(marriage, "%Y-%m-%d")
-
-            if husband.alive == False:
-                deat = change_date_format(husband.deat).split("-")
-                death = "-".join(deat)
-                death_date = datetime.strptime(death, "%Y-%m-%d")
-
-                if death_date < marriage_date:
-                    problem_families.append(family.fid)
-
-            elif wife.alive == False:
-                deat = change_date_format(wife.deat).split("-")
-                death = "-".join(deat)
-                death_date = datetime.strptime(death, "%Y-%m-%d")
-
-                if death_date < marriage_date:
-                    problem_families.append(family.fid)
-    
     return problem_families
 
 
@@ -560,3 +530,23 @@ def list_upcoming_birthdays(individual_data):
             list_birthdays.append(ind)
 
     return list_birthdays
+
+def check_marriage_status(family_data):
+    """ Function to check that a family does not have 'NA' listed for marr and
+    remove them from the dictionary if so. """
+
+    problem_families = []
+
+    for family in family_data.values():
+        if family.marr == "NA":
+            problem_families.append(family.fid)
+    for family in problem_families:
+        family_data.pop(family)
+
+    return family_data
+
+def check_life_status(person, marriage_date):
+    """ Function to check a person's life status and whether their death date
+    occurred before their marriage date; if yes, return True else, return False. """
+    if person.alive == False:
+        return check_two_dates(person.deat, marriage_date)
