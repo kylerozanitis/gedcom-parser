@@ -18,7 +18,7 @@ from helperFunctions_Sprint1 import read_data_file, deceased_list, agemorethan_1
 from helperFunctions_Sprint1 import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
-from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays
+from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -228,6 +228,13 @@ def main():
     for fid in fid_list:
         print("ERROR: FAMILY: US15: " + str(fid) + " has more than 15 siblings")
 
+    # US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)
+    marr_error_entries, div_error_entries = validate_child_birth(individual_data, family_data)
+    for fid, uid in marr_error_entries.items():
+        print("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
+    for fid, uid in div_error_entries.items():
+        print("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
+        
     print("\n")
     
     # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique

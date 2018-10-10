@@ -1,7 +1,7 @@
 # GEDCOM Parser
 SSW-555 GEDCOM Parser Project
 
-[![build status of organizing-code](https://travis-ci.com/kylerozanitis/gedcom-parser.svg?branch=organizing-code)](https://travis-ci.com/kylerozanitis/gedcom-parser)
+[![build status of US08](https://travis-ci.com/kylerozanitis/gedcom-parser.svg?branch=US08)](https://travis-ci.com/kylerozanitis/gedcom-parser)
 
 ### Description:
 The propose of this application is to extract data from a GEDCOM file and create a family tree.
