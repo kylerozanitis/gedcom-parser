@@ -20,6 +20,7 @@ from helperFunctions import check_marriage_before_divorce, check_marriage_before
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
 from helperFunctions import list_recent_survivals, living_married_list
+import sys
 
 individual_data = dict()
 family_data = dict()
@@ -94,17 +95,14 @@ def data_parser(data):
 def main():
     """Main Function program Execution"""
 
-    raw_data = read_data_file('My_family.ged')
+    if len(sys.argv) <= 1:
+        raise ValueError("Missing File argument please pass argument from command line")
+
+    if len(sys.argv) > 2:
+        raise ValueError("Only 1 argument accepted, 2 were given. try again.")
+
+    raw_data = read_data_file(sys.argv[1])
     data_parser(raw_data)
-
-    # raw_data = read_data_file('familytree.ged')
-    # data_parser(raw_data)
-
-    # raw_data = read_data_file('GEDCOM_data.ged')
-    # data_parser(raw_data)
-
-    # raw_data = read_data_file('FamilyTest.ged')
-    # data_parser(raw_data)
 
     # Check that each family has a husband and a wife
     check_spouses_exist(family_data)
