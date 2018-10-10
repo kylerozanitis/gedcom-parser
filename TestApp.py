@@ -4,7 +4,7 @@ from helperFunctions import change_date_format, validate_date_format, deceased_l
 from helperFunctions import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
 from helperFunctions import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids, list_upcoming_birthdays
-from helperFunctions import list_recent_survivals, living_married_list
+from helperFunctions import list_recent_survivals, living_married_list, check_marriage_status, check_life_status
 from classes import individualPerson, familyClass
 
 
@@ -178,14 +178,6 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 2, True)
         self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5"], True)
-
-        family6 = familyClass("F6")
-        family6.marr = "NA"
-        family6.div = "1 JAN 2020"
-        fam_dict[family6.fid] = family6
-
-        self.assertEqual(len(check_marriage_before_divorce(fam_dict)), 3, True)
-        self.assertEqual(check_marriage_before_divorce(fam_dict), ["F2", "F5", "F6"], True)
 
     def test_check_marriage_before_death(self):
         """ Unit test for US05 for checking that marriage occured before death
@@ -592,7 +584,49 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(living_married_list(fam_dict, ind_dict)), 4, True)
         self.assertEqual(living_married_list(fam_dict, ind_dict), ['I1','I2','I3','I4'], True)
 
-        
+    def test_check_marriage_status(self):
+        """ Unit test for checking that the marriage date for a family is not 'NA' """
+
+        fam_dict = {}
+
+        family = familyClass("F1")
+        family.marr = "1 JAN 2000"
+        fam_dict[family.fid] = family
+
+        value = check_marriage_status(fam_dict)
+        self.assertEqual(len(value), 1)
+        self.assertEqual(list(value.keys()), ["F1"])
+
+        family2 = familyClass("F2")
+        family2.marr = "NA"
+        fam_dict[family2.fid] = family2
+
+        self.assertEqual(list(fam_dict.keys()), ["F1", "F2"])
+
+        value = check_marriage_status(fam_dict)
+        self.assertEqual(len(fam_dict), 1)
+        self.assertEqual(list(fam_dict.keys()), ["F1"])
+
+    def test_check_life_status(self):
+        """ Unit test for checking a person's life status and whether their death date
+        occurred before their marriage date; if yes, return True else, return False. """
+
+        ind_dict = {}
+
+        individual = individualPerson("I1")
+        individual.uid = "I1"
+        individual.alive = False
+        individual.deat = "1 JAN 2000"
+        ind_dict[individual.uid] = individual
+
+        individual2 = individualPerson("I2")
+        individual2.uid = "I2"
+        individual2.alive = True
+        individual2.deat = "NA"
+        ind_dict[individual2.uid] = individual2
+
+        self.assertTrue(check_life_status(ind_dict["I1"], "1 JAN 2005"))
+        self.assertFalse(check_life_status(ind_dict["I2"], "1 JAN 2005"))
 
 
 
