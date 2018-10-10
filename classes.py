@@ -1,5 +1,5 @@
 from datetime import datetime
-from helperFunctions import validate_date_format, change_date_format
+from helperFunctions_Sprint1 import validate_date_format, change_date_format
 
 """ This file has 2 classes for the parser
 1 for individuals and 1 for families """
