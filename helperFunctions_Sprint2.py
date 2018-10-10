@@ -1,4 +1,5 @@
 #Lib Imports
+from dateutil.relativedelta import relativedelta
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, event_in_last_thirty_days
 from datetime import datetime, timedelta
 
@@ -86,3 +87,27 @@ def list_upcoming_birthdays(individual_data):
             list_birthdays.append(ind)
 
     return list_birthdays
+
+def validate_child_birth( individual_data,family_data):
+    """US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)"""
+    marr_error_entries = dict()
+    div_error_entries = dict()
+    for fid, family in family_data.items():
+        children_list = list(family.chil)
+        if len(children_list) > 0 and (children_list != ['N', 'A']):
+            for child in children_list:
+                for uid, individual in individual_data.items():
+                    if uid == child:
+                        if check_two_dates(individual.birt, family.marr):
+                            marr_error_entries[fid] = uid
+                        elif family.div != 'NA':
+                            if validate_date_format(family.div):
+                                fam_div_date = convert_str_to_date(family.div)
+
+                            if validate_date_format(individual.birt):
+                                indi_birth_date = convert_str_to_date(individual.birt)
+
+                            if abs((fam_div_date + relativedelta(month=9)) - indi_birth_date).days > 270:
+                                div_error_entries[fid] = uid
+
+    return marr_error_entries, div_error_entries
