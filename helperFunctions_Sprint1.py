@@ -162,19 +162,19 @@ def agemorethan_150(individual_data):
     today = datetime.now()
     for individual in individual_data.values():
         person = individual.uid
-        birth = convert_str_to_date(individual.birt)
-        if individual.alive == False and birth <= today and individual.age > 150:
+        #birth = convert_str_to_date(individual.birt)
+        if individual.alive == False and individual.age > 150:
             error_descrip="lived longer than 150 years"
             error_location = person
             print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
-            flag = True
-        elif individual.alive == True and birth <= today and individual.age > 150:
-            error_descrip="lived longer than 150 years"
-            error_location = person
-            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
-            flag = True
-        else:
             flag = False
+        elif individual.alive == True and individual.age > 150:
+            error_descrip="lived longer than 150 years"
+            error_location = person
+            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+            flag = False
+        else:
+            flag = True
     return flag
 
 

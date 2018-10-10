@@ -107,33 +107,30 @@ class TestHelperFunctions(unittest.TestCase):
     def test_agemorethan150(self):
         """Unit test to validate if the person is more than 150 yrs old"""
 
-        person1_dob = '17 AUG 1954'
-        person1_age = 64
-        person1_isalive = True
-        self.assertTrue(agemorethan_150(person1_isalive,person1_dob,person1_age))
+        individual_dict = {}
 
-        person2_dob = '23 SEP 1921'
-        person2_age = 152
-        person2_isalive = False
-        self.assertFalse(agemorethan_150(person2_isalive,person2_dob,person2_age))
+        i1 = individualPerson('I1')
+        i1.alive = True
+        i1.birt = '17 AUG 1954'
+        i1.age = 64
+        individual_dict[i1.uid] = i1
+        self.assertTrue(agemorethan_150(individual_dict))
 
-        person3_dob = '23 SEP 2018'
-        person3_age = 0
-        person3_status = True
-        result = str(agemorethan_150(person3_status,person3_dob,person3_age))
-        self.assertEqual(result,'True')
+        person2 = individualPerson('I34')
+        person2.birt = '23 SEP 1921'
+        person2.age = 152
+        person2.alive = False
+        individual_dict[person2.uid] = person2
+        self.assertFalse(agemorethan_150(individual_dict))
 
-        person4_dob = '01 JAN 1688'
-        person4_age = 330
-        person4_isalive = False
-        result4 = str(agemorethan_150(person4_isalive,person4_dob,person4_age))
-        self.assertEqual(result4,'False')
+        person3 = individualPerson('I3')
+        person3.birt = '12 JUL 1991'
+        person3.age = 27
+        person3.alive = True
+        individual_dict[person3.uid] = person3
+        self.assertEqual(agemorethan_150(individual_dict),True)
 
-        person5_dob = '01 JAN 1988'
-        person5_age = 30
-        person5_isalive = False
-        result5 = str(agemorethan_150(person5_isalive,person5_dob,person5_age))
-        self.assertIs(result5,'True')
+
 
     def test_check_marriage_before_divorce(self):
         """ Unit test for US04 for checking that marriage occured before divorce """
