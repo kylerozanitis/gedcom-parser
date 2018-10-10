@@ -3,6 +3,7 @@ import re
 import os
 
 from datetime import datetime, timedelta
+import dateutil
 
 def read_data_file(file_name):
     """Read GEDCOM file & strip data into a tuple of lists"""
@@ -248,7 +249,78 @@ def death_before_birth(individual_data, family_data):
     messages
     """
     birth_error = []
-    all_error_entries = allDates_before_currentDate(individual_data, family_data)
+    current_date = datetime.today().strftime('%d %b %Y')
+    temp1 = change_date_format(current_date).split("-")
+    temp2 = "-".join(temp1)
+    today_date = datetime.strptime(temp2, "%Y-%m-%d")
+
+    all_error_entries = dict()
+    indi_status_list = []
+    fam_status_list = []
+    for uid, individual in individual_data.items():
+        if individual.birt != 'NA' and individual.deat != 'NA':
+            temp1 = change_date_format(individual.birt).split("-")
+            indi_birt = "-".join(temp1)
+            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+            temp2 = change_date_format(individual.deat).split("-")
+            indi_deat = "-".join(temp2)
+            indi_deat_date = datetime.strptime(indi_deat, "%Y-%m-%d")
+
+            if indi_birth_date > today_date:
+                indi_status_list.append('birth')
+            if indi_deat_date > today_date:
+                indi_status_list.append('death')
+
+        elif individual.birt != 'NA' and individual.deat == 'NA':
+            temp1 = change_date_format(individual.birt).split("-")
+            indi_birt = "-".join(temp1)
+            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+            if indi_birth_date > today_date:
+                indi_status_list.append('birth')
+
+        else:
+            indi_status_list.append('not born')
+            
+        if len(indi_status_list) == 0:
+            continue
+        else:
+            all_error_entries[uid] = indi_status_list
+            indi_status_list = []
+
+    for fid, family in family_data.items():
+        if family.marr != 'NA' and family.div != 'NA':
+            temp1 = change_date_format(family.marr).split("-")
+            fam_marr = "-".join(temp1)
+            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
+
+            temp1 = change_date_format(family.div).split("-")
+            fam_div = "-".join(temp1)
+            fam_div_date = datetime.strptime(fam_div, "%Y-%m-%d")
+            
+            if fam_marr_date > today_date:
+                fam_status_list.append('marriage')
+            if fam_div_date > today_date:
+                fam_status_list.append('divorce')
+                
+        elif family.marr != 'NA' and family.div == 'NA':
+            temp1 = change_date_format(family.marr).split("-")
+            fam_marr = "-".join(temp1)
+            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
+
+            if fam_marr_date > today_date:
+                fam_status_list.append('marriage')
+
+        else:
+            fam_status_list.append('not married')
+
+        if len(fam_status_list) == 0:
+            continue
+        else:
+            all_error_entries[fid] = fam_status_list
+            fam_status_list = []
+
     for uid, individual in individual_data.items():
         if individual.birt != 'NA' and individual.deat != 'NA':
             temp1 = change_date_format(individual.birt).split("-")
@@ -550,3 +622,36 @@ def check_life_status(person, marriage_date):
     occurred before their marriage date; if yes, return True else, return False. """
     if person.alive == False:
         return check_two_dates(person.deat, marriage_date)
+    
+def validate_child_birth( individual_data,family_data):
+    """US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)"""
+    marr_error_entries = dict()
+    div_error_entries = dict()
+    for fid, family in family_data.items():
+        children_list = list(family.chil)
+        if len(children_list) > 0 and (children_list != ['N', 'A']):
+            temp1 = change_date_format(family.marr).split("-")
+            fam_marr = "-".join(temp1)
+            fam_marr_date = datetime.strptime(fam_marr, "%Y-%m-%d")
+            for child in children_list:
+                for uid, individual in individual_data.items():
+                    if uid == child:
+                        temp2 = change_date_format(individual.birt).split("-")
+                        indi_birt = "-".join(temp2)
+                        indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+                        if fam_marr_date > indi_birth_date:
+                            marr_error_entries[fid] = uid
+                        elif family.div != 'NA':
+                            temp3 = change_date_format(family.div).split("-")
+                            fam_div = "-".join(temp3)
+                            fam_div_date = datetime.strptime(fam_div, "%Y-%m-%d")
+
+                            temp2 = change_date_format(individual.birt).split("-")
+                            indi_birt = "-".join(temp2)
+                            indi_birth_date = datetime.strptime(indi_birt, "%Y-%m-%d")
+
+                            if abs((fam_div_date + relativedelta(month=9)) - indi_birth_date).days > 270:
+                                div_error_entries[fid] = uid
+
+    return marr_error_entries, div_error_entries
