@@ -29,17 +29,17 @@ def living_married_list(family_data,individual_data):
             else:
                 error_descrip = "Husband is dead"
                 error_location = family.fid
-                print('ERROR: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
             if wife.alive == True:
                 living_married.append(wife.uid)
             else:
                 error_descrip = "Wife is dead"
                 error_location = family.fid
-                print('ERROR: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
     return living_married
 
 def is_anniversary_in_next_thirty_days(date):
-    """ Check for a date to see if happening within the next 30 days
+    """ US39 Check for a date to see if happening within the next 30 days
         must pass a date in the format of yyyy-mm-dd
         Function returns: True or False
     """
@@ -125,3 +125,37 @@ def validate_child_birth( individual_data,family_data):
                                 div_error_entries[fid] = uid
 
     return marr_error_entries, div_error_entries
+
+def marriage_after_14(family_data, individual_data):
+    error_story = 'US10'
+    flag = True
+    for family in family_data.values():
+        if family.marr != 'NA':
+            husband = None
+            wife = None
+            marriage_date = convert_str_to_date(family.marr)
+            #print('marriage date',marriage_date)
+            min_birt = datetime(marriage_date.year-14, marriage_date.month, marriage_date.day)
+            #print('min birth date', min_birt)
+
+            for individual in individual_data.values():
+                if individual.uid == family.husb_id:
+                    husband = individual
+                if individual.uid == family.wife_id:
+                    wife = individual
+            if husband != None and wife != None:
+                h_birth = convert_str_to_date(husband.birt)
+                #print('husb_birth',h_birth)
+                if h_birth > min_birt:
+                    error_descrip = "Husband is married before 14 years old"
+                    error_location = family.fid
+                    print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                    flag = False
+                w_birth = convert_str_to_date(wife.birt)
+                #print('wife_birth',w_birth)
+                if w_birth > min_birt:
+                    error_descrip = "Husband is married before 14 years old"
+                    error_location = family.fid
+                    print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                    flag = False
+    return flag

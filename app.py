@@ -29,7 +29,7 @@ from sprint1 import (agemorethan_150, allDates_before_currentDate,
                      fewer_than15_siblings, list_recent_births,
                      list_recent_death)
 from sprint2 import (list_recent_survivals, list_upcoming_birthdays,
-                     living_married_list, validate_child_birth)
+                     living_married_list, validate_child_birth, marriage_after_14)
 
 individual_data = dict()
 family_data = dict()
@@ -170,10 +170,10 @@ def main():
         print("living married: ", living_married)
 
     #age more than 150
-    flag = agemorethan_150(individual_data)
+    agemorethan_150(individual_data)
     
     #divorce before death
-    prob_family = divorce_before_death(family_data,individual_data)
+    divorce_before_death(family_data,individual_data)
 
     # US04 Print out list of families with divorce occuring before marriage
     problem_families = check_marriage_before_divorce(family_data)
@@ -275,6 +275,9 @@ def main():
                    """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
     else:
         print("No Recent death with survivals within last 30 days")
+    
+    #marriage after 14
+    marriage_after_14(family_data, individual_data)
 
 if __name__ == '__main__':
     main()

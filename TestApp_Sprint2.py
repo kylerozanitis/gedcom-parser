@@ -2,7 +2,7 @@ import unittest
 
 from classes import familyClass, individualPerson
 from sprint2 import (list_recent_survivals, list_upcoming_birthdays,
-                     living_married_list, validate_child_birth)
+                     living_married_list, validate_child_birth, marriage_after_14)
 
 
 class TestHelperFunctions(unittest.TestCase):
@@ -148,6 +148,26 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertIsNotNone(validate_child_birth(indi_dict, fam_dict))
         self.assertIsNot(validate_child_birth(indi_dict, fam_dict), {'F1':'I5'})
         self.assertCountEqual(validate_child_birth(indi_dict, fam_dict), ({'F10': 'I10'}, {'F12': 'I13'}))
+
+    def test_marriage_after_14(self):
+        indi_dict = {}
+        fam_dict = {}
+        indi_I1 = individualPerson("I1")
+        indi_I1.birt = "12 JUL 1991"
+        indi_dict[indi_I1.uid] = indi_I1
+        indi_I2 = individualPerson("I2")
+        indi_I2.birt = "9 JAN 1988"
+        indi_dict[indi_I2.uid] = indi_I2
+
+        fam1 = familyClass("F1")
+        fam1.husb_id = "I2"
+        fam1.wife_id = "I1"
+        fam1.marr = "1 FEB 1995"
+        fam_dict[fam1.fid] = fam1       
+
+        self.assertFalse(marriage_after_14(fam_dict, indi_dict))
+
+
         
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
