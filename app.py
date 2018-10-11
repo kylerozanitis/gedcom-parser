@@ -14,15 +14,22 @@
 
 # Library imports
 
-from helperFunctions_Sprint1 import read_data_file, deceased_list, agemorethan_150
-from helperFunctions_Sprint1 import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
-from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
-from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 import sys
 from datetime import datetime
+
 from prettytable import PrettyTable
-from classes import individualPerson, familyClass
+
+from classes import familyClass, individualPerson
+from helperFunctions import (check_marriage_status, check_spouses_exist,
+                             read_data_file)
+from sprint1 import (agemorethan_150, allDates_before_currentDate,
+                     birth_before_marriage, check_marriage_before_death,
+                     check_marriage_before_divorce, check_unique_ids,
+                     death_before_birth, deceased_list, divorce_before_death,
+                     fewer_than15_siblings, list_recent_births,
+                     list_recent_death)
+from sprint2 import (list_recent_survivals, list_upcoming_birthdays,
+                     living_married_list, validate_child_birth)
 
 individual_data = dict()
 family_data = dict()
@@ -200,11 +207,11 @@ def main():
         print("ERROR: INDIVIDUAL: US02: {} Birth occurs before marriage".format(obj.fid))
 
 
-    print("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
     for individual in birth_recently:
         print(individual.birt)
 
+    print("\nRecent Birthday Data")
     if len(birth_recently) == 0:
         print("No recent Birth\n")
     else:

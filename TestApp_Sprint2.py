@@ -1,6 +1,8 @@
 import unittest
-from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
-from classes import individualPerson, familyClass
+
+from classes import familyClass, individualPerson
+from sprint2 import (list_recent_survivals, list_upcoming_birthdays,
+                     living_married_list, validate_child_birth)
 
 
 class TestHelperFunctions(unittest.TestCase):

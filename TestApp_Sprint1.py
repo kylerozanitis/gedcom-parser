@@ -1,11 +1,18 @@
 import unittest
 
-from helperFunctions_Sprint1 import change_date_format, validate_date_format, deceased_list,agemorethan_150
-from helperFunctions_Sprint1 import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist, check_two_dates
-from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
-from helperFunctions_Sprint1 import list_recent_births,list_recent_death, fewer_than15_siblings, check_unique_ids
-from helperFunctions_Sprint1 import check_marriage_status, check_life_status
-from classes import individualPerson, familyClass
+from classes import familyClass, individualPerson
+from helperFunctions import (change_date_format, check_life_status,
+                             check_marriage_status, check_spouses_exist,
+                             check_two_dates, read_data_file,
+                             validate_date_format)
+from sprint1 import (agemorethan_150, allDates_before_currentDate,
+                     birth_before_marriage, check_marriage_before_death,
+                     check_marriage_before_divorce, check_unique_ids,
+                     death_before_birth, deceased_list, divorce_before_death,
+                     fewer_than15_siblings, list_recent_births,
+                     list_recent_death)
+from sprint2 import (list_recent_survivals, list_upcoming_birthdays,
+                     living_married_list, validate_child_birth)
 
 
 class TestindividualPerson(unittest.TestCase):
