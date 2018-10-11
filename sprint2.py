@@ -127,6 +127,11 @@ def validate_child_birth( individual_data,family_data):
     return marr_error_entries, div_error_entries
 
 def marriage_after_14(family_data, individual_data):
+    """
+    US10 Marriage should be at least 14 years after birth of both spouses
+    this fucntion takes family and individual data as input and 
+    returns true or false based on data.
+    """
     error_story = 'US10'
     flag = True
     for family in family_data.values():
@@ -134,9 +139,7 @@ def marriage_after_14(family_data, individual_data):
             husband = None
             wife = None
             marriage_date = convert_str_to_date(family.marr)
-            #print('marriage date',marriage_date)
             min_birt = datetime(marriage_date.year-14, marriage_date.month, marriage_date.day)
-            #print('min birth date', min_birt)
 
             for individual in individual_data.values():
                 if individual.uid == family.husb_id:
@@ -145,14 +148,12 @@ def marriage_after_14(family_data, individual_data):
                     wife = individual
             if husband != None and wife != None:
                 h_birth = convert_str_to_date(husband.birt)
-                #print('husb_birth',h_birth)
                 if h_birth > min_birt:
                     error_descrip = "Husband is married before 14 years old"
                     error_location = family.fid
                     print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
                     flag = False
                 w_birth = convert_str_to_date(wife.birt)
-                #print('wife_birth',w_birth)
                 if w_birth > min_birt:
                     error_descrip = "Husband is married before 14 years old"
                     error_location = family.fid
