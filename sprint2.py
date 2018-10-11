@@ -26,8 +26,16 @@ def living_married_list(family_data,individual_data):
                     wife = individual
             if husband.alive == True:
                 living_married.append(husband.uid)
+            else:
+                error_descrip = "Husband is dead"
+                error_location = family.fid
+                print('ERROR: FAMILY:',error_story,':',str(error_location),':',error_descrip)
             if wife.alive == True:
                 living_married.append(wife.uid)
+            else:
+                error_descrip = "Wife is dead"
+                error_location = family.fid
+                print('ERROR: FAMILY:',error_story,':',str(error_location),':',error_descrip)
     return living_married
 
 def is_anniversary_in_next_thirty_days(date):
