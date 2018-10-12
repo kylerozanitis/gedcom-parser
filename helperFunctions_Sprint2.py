@@ -135,3 +135,32 @@ def check_parents_not_too_old(family_data, individual_data):
                     problem_families[family.fid] = [husband.sex, husband.uid, husband.name, husband.birt, child.uid, child.name, child.birt]
     
     return problem_families
+
+def check_multiple_births(family_data, individual_data):
+    """ US14 Multiple Births <= 5 - No more than five siblings should be born
+    at the same time """
+
+    problem_families = {} # key = family id, value = list of children ids
+
+    for family in family_data.values():
+        if family.chil != "NA" and len(family.chil) > 5:
+            problem_children = {} # key = birthday, value = list of children
+            
+            for person in family.chil:
+                child = individual_data[person]
+                child_birthday = child.birt
+
+                if child_birthday in problem_children.keys():
+                    if len(problem_children[child_birthday]) >= 5:
+                        temp_list = problem_children[child_birthday]
+                        temp_list.append(child.uid)
+                        problem_children[child_birthday] = temp_list
+                        problem_families[family.fid] = temp_list
+                    else:
+                        temp_list = problem_children[child_birthday]
+                        temp_list.append(child.uid)
+                        problem_children[child_birthday] = temp_list
+                else:
+                    problem_children[child_birthday] = [child.uid]
+                
+    return problem_families

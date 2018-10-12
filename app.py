@@ -18,7 +18,8 @@ from helperFunctions_Sprint1 import read_data_file, deceased_list, agemorethan_1
 from helperFunctions_Sprint1 import check_marriage_before_divorce, check_marriage_before_death, check_spouses_exist
 from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
-from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth, check_parents_not_too_old
+from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
+from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -280,6 +281,11 @@ def main():
             else:
                 print("ERROR: FAMILY: US12: Parent {} named {} born on {} is more than 60 years older than child {} named {} born on {} in family {}".format(v[1], v[2], v[3], v[4], v[5], v[6], k))
 
+    # US14 Multiple Births <= 5 - No more than five siblings should be born at the same time
+    problem_fams_dict = check_multiple_births(family_data, individual_data)
+    if len(problem_fams_dict) > 0:
+        for k, v in problem_fams_dict.items():
+            print("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
 
 if __name__ == '__main__':
     main()

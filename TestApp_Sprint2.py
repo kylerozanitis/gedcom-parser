@@ -1,6 +1,6 @@
 import unittest
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
-from helperFunctions_Sprint2 import check_parents_not_too_old
+from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births
 from classes import individualPerson, familyClass
 
 
@@ -243,6 +243,89 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(check_parents_not_too_old(fam_dict, indi_dict), {"F2": ["F", "I5", "Kyra", "1 JUN 1940", "I6", "Julia", "1 MAR 2010"], 
                                                                           "F3": ["M", "I7", "Ryan", "1 JAN 1929", "I9", "Kevin", "1 JUN 2010"]})
         self.assertNotEqual(check_parents_not_too_old(fam_dict, indi_dict), {})
+
+    def test_check_multiple_births(self):
+        """ Unit tests for US14 Multiple Births <= 5 - No more than five siblings should be born
+    at the same time """
+
+        indi_dict = {}
+        fam_dict = {}
+
+        i1 = individualPerson('I1')
+        i1.uid = 'I1'
+        i1.birt = '1 JAN 1980'
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson('I2')
+        i2.uid = 'I2'
+        i2.birt = '1 JAN 1980'
+        indi_dict[i2.uid] = i2
+
+        i3 = individualPerson('I3')
+        i3.uid = 'I3'
+        i3.birt = '1 JAN 1980'
+        indi_dict[i3.uid] = i3
+
+        i4 = individualPerson('I4')
+        i4.uid = 'I4'
+        i4.birt = '1 JAN 1980'
+        indi_dict[i4.uid] = i4
+
+        i5 = individualPerson('I5')
+        i5.uid = 'I5'
+        i5.birt = '1 JAN 1980'
+        indi_dict[i5.uid] = i5
+
+        i6 = individualPerson('I6')
+        i6.uid = 'I6'
+        i6.birt = '1 JAN 1980'
+        indi_dict[i6.uid] = i6
+
+        f1 = familyClass("F1")
+        f1.chil = ["I1", "I2", "I3", "I4", "I5", "I6"]
+        fam_dict[f1.fid] = f1
+
+        self.assertEqual(check_multiple_births(fam_dict, indi_dict), {"F1": ["I1", "I2", "I3", "I4", "I5", "I6"]})
+        self.assertNotEqual(check_multiple_births(fam_dict, indi_dict), {})
+
+        i7 = individualPerson('I7')
+        i7.uid = 'I7'
+        i7.birt = '1 JAN 1980'
+        indi_dict[i7.uid] = i7
+
+        i8 = individualPerson('I8')
+        i8.uid = 'I8'
+        i8.birt = '1 JAN 1980'
+        indi_dict[i8.uid] = i8
+
+        i9 = individualPerson('I9')
+        i9.uid = 'I9'
+        i9.birt = '1 JAN 1980'
+        indi_dict[i9.uid] = i9
+
+        i10 = individualPerson('I10')
+        i10.uid = 'I10'
+        i10.birt = '1 JAN 1980'
+        indi_dict[i10.uid] = i10
+
+        i11 = individualPerson('I11')
+        i11.uid = 'I11'
+        i11.birt = '1 JAN 1980'
+        indi_dict[i11.uid] = i11
+
+        i12 = individualPerson('I12')
+        i12.uid = 'I12'
+        i12.birt = '1 JAN 1985'
+        indi_dict[i12.uid] = i12
+
+        f2 = familyClass("F2")
+        f2.chil = ["I7", "I8", "I9", "I10", "I11", "I12"]
+        fam_dict[f2.fid] = f2
+
+        self.assertEqual(check_multiple_births(fam_dict, indi_dict), {"F1": ["I1", "I2", "I3", "I4", "I5", "I6"]})
+        self.assertNotEqual(check_multiple_births(fam_dict, indi_dict), {"F1": ["I1", "I2", "I3", "I4", "I5", "I6"],
+                                                                         "F2": ["I7", "I8", "I9", "I10", "I11", "I12"]})
+        self.assertNotEqual(check_multiple_births(fam_dict, indi_dict), {})
 
 
 if __name__ == '__main__':
