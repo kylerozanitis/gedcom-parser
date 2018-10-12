@@ -1,5 +1,6 @@
 import unittest
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
+from helperFunctions_Sprint2 import check_parents_not_too_old
 from classes import individualPerson, familyClass
 
 
@@ -146,6 +147,103 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertIsNotNone(validate_child_birth(indi_dict, fam_dict))
         self.assertIsNot(validate_child_birth(indi_dict, fam_dict), {'F1':'I5'})
         self.assertCountEqual(validate_child_birth(indi_dict, fam_dict), ({'F10': 'I10'}, {'F12': 'I13'}))
-        
+
+    def test_check_parents_not_too_old(self):
+        """ Unit tests for US12 Parents Not Too Old - checks that the mother is less
+        than 60 years older than her children and the father is less than 80 years
+        older than his children """
+
+        indi_dict = {}
+        fam_dict = {}
+
+        i1 = individualPerson('I1')
+        i1.sex = "M"
+        i1.uid = 'I1'
+        i1.name = "Mark"
+        i1.birt = '1 JAN 1980'
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson('I2')
+        i2.sex = "F"
+        i2.uid = 'I2'
+        i2.name = "Cecily"
+        i2.birt = '1 JUN 1980'
+        indi_dict[i2.uid] = i2
+
+        i3 = individualPerson('I3')
+        i3.uid = 'I3'
+        i3.name = "Tom"
+        i3.birt = '1 MAR 2010'
+        indi_dict[i3.uid] = i3
+
+        f1 = familyClass("F1")
+        f1.husb_id = "I1"
+        f1.wife_id = "I2"
+        f1.chil = ["I3"]
+        fam_dict[f1.fid] = f1
+
+        self.assertEqual(check_parents_not_too_old(fam_dict, indi_dict), {})
+        self.assertNotEqual(check_parents_not_too_old(fam_dict, indi_dict), {"F1": ["F", "I2", "Cecily", "1 JUN 1980", "I3", "Tom", "1 MAR 2010"]})
+
+        i4 = individualPerson('I4')
+        i4.sex = "M"
+        i4.uid = 'I4'
+        i4.name = "John"
+        i4.birt = '1 JAN 1940'
+        indi_dict[i4.uid] = i4
+
+        i5 = individualPerson('I5')
+        i5.sex = "F"
+        i5.uid = 'I5'
+        i5.name = "Kyra"
+        i5.birt = '1 JUN 1940'
+        indi_dict[i5.uid] = i5
+
+        i6 = individualPerson('I6')
+        i6.uid = 'I6'
+        i6.name = "Julia"
+        i6.birt = '1 MAR 2010'
+        indi_dict[i6.uid] = i6
+
+        f2 = familyClass("F2")
+        f2.husb_id = "I4"
+        f2.wife_id = "I5"
+        f2.chil = ["I6"]
+        fam_dict[f2.fid] = f2
+
+        self.assertEqual(check_parents_not_too_old(fam_dict, indi_dict), {"F2": ["F", "I5", "Kyra", "1 JUN 1940", "I6", "Julia", "1 MAR 2010"]})
+        self.assertNotEqual(check_parents_not_too_old(fam_dict, indi_dict), {})
+
+        i7 = individualPerson('I7')
+        i7.sex = "M"
+        i7.uid = 'I7'
+        i7.name = "Ryan"
+        i7.birt = '1 JAN 1929'
+        indi_dict[i7.uid] = i7
+
+        i8 = individualPerson('I8')
+        i8.sex = "F"
+        i8.uid = 'I8'
+        i8.name = "Amanda"
+        i8.birt = '1 JUN 1960'
+        indi_dict[i8.uid] = i8
+
+        i9 = individualPerson('I9')
+        i9.uid = 'I9'
+        i9.name = "Kevin"
+        i9.birt = '1 JUN 2010'
+        indi_dict[i9.uid] = i9
+
+        f3 = familyClass("F3")
+        f3.husb_id = "I7"
+        f3.wife_id = "I8"
+        f3.chil = ["I9"]
+        fam_dict[f3.fid] = f3
+
+        self.assertEqual(check_parents_not_too_old(fam_dict, indi_dict), {"F2": ["F", "I5", "Kyra", "1 JUN 1940", "I6", "Julia", "1 MAR 2010"], 
+                                                                          "F3": ["M", "I7", "Ryan", "1 JAN 1929", "I9", "Kevin", "1 JUN 2010"]})
+        self.assertNotEqual(check_parents_not_too_old(fam_dict, indi_dict), {})
+
+
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
