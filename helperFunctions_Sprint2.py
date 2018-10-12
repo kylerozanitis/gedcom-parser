@@ -112,3 +112,26 @@ def validate_child_birth( individual_data,family_data):
                                 div_error_entries[fid] = uid
 
     return marr_error_entries, div_error_entries
+
+def check_parents_not_too_old(family_data, individual_data):
+    """ US12 Parents Not Too Old - Mother should be less than 60 years older
+    than her children and father should be less than 80 years older than his children """
+    
+    problem_families = {} # key = family id, value = list of husband/wife id, birthdate, child id, child birthdate
+
+    for family in family_data.values():
+        husband = individual_data[family.husb_id]
+        husband_age = husband.get_age()
+        wife = individual_data[family.wife_id]
+        wife_age = wife.get_age()
+
+        if family.chil != "NA":
+            for person in family.chil:
+                child = individual_data[person]
+                child_age = child.get_age()
+                if wife_age - child_age > 60:
+                    problem_families[family.fid] = [wife.sex, wife.uid, wife.name, wife.birt, child.uid, child.name, child.birt]
+                elif husband_age - child_age > 80:
+                    problem_families[family.fid] = [husband.sex, husband.uid, husband.name, husband.birt, child.uid, child.name, child.birt]
+    
+    return problem_families
