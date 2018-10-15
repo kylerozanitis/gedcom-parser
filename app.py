@@ -207,11 +207,11 @@ def main():
         print(individual.birt)
 
     if len(birth_recently) == 0:
-        print("No recent Birth\n")
+        print("No recent Birth")
     else:
         print("Total number of birth in the last 30 days: {}".format(len(birth_recently)))
         for individual in birth_recently:
-            print("Name: {0}, Birth on: {1}\n".format(individual.name, individual.birt))
+            print("Name: {0}, Birth on: {1}".format(individual.name, individual.birt))
 
     print("\nRecent Death Data")
     death_recently = list_recent_death(individual_data)
@@ -235,8 +235,6 @@ def main():
     for fid, uid in div_error_entries.items():
         print("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
         
-    print("\n")
-    
     # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
     problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
     if len(problem_indis) > 0:
@@ -252,17 +250,16 @@ def main():
         print("ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries")
 
     # List of recent Birthday
-    print("\nRecent Birthday Data")
+    print("Upcoming Birthday Data")
     data = list_upcoming_birthdays(individual_data)
     if len(data) is not 0:
-        print("\nUpcoming birthday for: ")
+        print("Upcoming birthday for: ")
         for birthdays in data:
             print(birthdays.name)
     else:
         print('No upcoming birthday in the next 30 days.')
 
     # survival from a recent death
-    print("\nRecent Death Data")
     data = list_recent_survivals(individual_data, family_data)
     if len(data) > 0:
         print("\nSurvivals List:")
