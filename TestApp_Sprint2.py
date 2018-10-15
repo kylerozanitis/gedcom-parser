@@ -1,6 +1,6 @@
 import unittest
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
-from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births
+from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from classes import individualPerson, familyClass
 
 
@@ -326,6 +326,24 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertNotEqual(check_multiple_births(fam_dict, indi_dict), {"F1": ["I1", "I2", "I3", "I4", "I5", "I6"],
                                                                          "F2": ["I7", "I8", "I9", "I10", "I11", "I12"]})
         self.assertNotEqual(check_multiple_births(fam_dict, indi_dict), {})
+
+    def test_marriage_after_14(self):
+        indi_dict = {}
+        fam_dict = {}
+        indi_I1 = individualPerson("I1")
+        indi_I1.birt = "12 JUL 1991"
+        indi_dict[indi_I1.uid] = indi_I1
+        indi_I2 = individualPerson("I2")
+        indi_I2.birt = "9 JAN 1988"
+        indi_dict[indi_I2.uid] = indi_I2
+
+        fam1 = familyClass("F1")
+        fam1.husb_id = "I2"
+        fam1.wife_id = "I1"
+        fam1.marr = "1 FEB 1995"
+        fam_dict[fam1.fid] = fam1       
+
+        self.assertFalse(marriage_after_14(fam_dict, indi_dict))
 
 
 if __name__ == '__main__':

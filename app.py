@@ -19,7 +19,7 @@ from helperFunctions_Sprint1 import check_marriage_before_divorce, check_marriag
 from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, divorce_before_death, allDates_before_currentDate
 from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
-from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births
+from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -166,10 +166,10 @@ def main():
         print("living married",len(living_married))"""
 
     #age more than 150
-    flag = agemorethan_150(individual_data)
+    agemorethan_150(individual_data)
     
     #divorce before death
-    prob_family = divorce_before_death(family_data,individual_data)
+    divorce_before_death(family_data,individual_data)
 
     # US04 Print out list of families with divorce occuring before marriage
     problem_families = check_marriage_before_divorce(family_data)
@@ -286,6 +286,9 @@ def main():
     if len(problem_fams_dict) > 0:
         for k, v in problem_fams_dict.items():
             print("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
+
+    #marriage after 14
+    marriage_after_14(family_data, individual_data)
 
 if __name__ == '__main__':
     main()
