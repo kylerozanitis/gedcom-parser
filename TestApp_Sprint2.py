@@ -329,22 +329,30 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertNotEqual(check_multiple_births(fam_dict, indi_dict), {})
 
     def test_marriage_after_14(self):
+        """ Unit tests for US10 Marriage After 14 - Marriage should be at least
+        14 years after birth of both spouses (parents must be at least 14 years old) """
+        
         indi_dict = {}
         fam_dict = {}
+
         indi_I1 = individualPerson("I1")
+        indi_I1.sex = "M"
         indi_I1.birt = "12 JUL 1991"
         indi_dict[indi_I1.uid] = indi_I1
+        
         indi_I2 = individualPerson("I2")
+        indi_I2.sex = "F"
         indi_I2.birt = "9 JAN 1988"
         indi_dict[indi_I2.uid] = indi_I2
 
         fam1 = familyClass("F1")
-        fam1.husb_id = "I2"
-        fam1.wife_id = "I1"
+        fam1.husb_id = "I1"
+        fam1.wife_id = "I2"
         fam1.marr = "1 FEB 1995"
         fam_dict[fam1.fid] = fam1       
 
-        self.assertFalse(marriage_after_14(fam_dict, indi_dict))
+        self.assertEqual(marriage_after_14(fam_dict, indi_dict), {"I1": ["M", "F1"], "I2": ["F", "F1"]})
+        self.assertNotEqual(marriage_after_14(fam_dict, indi_dict), {"I1": ["M", "F1"]})
 
     def test_validate_childBirth_with_parentsDeath(self):
         """Test cases for US09 -- Child should be born before death of mother and before nine months after death of father"""
