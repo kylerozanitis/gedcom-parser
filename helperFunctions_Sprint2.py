@@ -1,7 +1,7 @@
 #Lib Imports
 from dateutil.relativedelta import relativedelta
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, event_in_last_thirty_days, check_two_dates
-from helperFunctions_Sprint1 import convert_str_to_date
+from helperFunctions_Sprint1 import convert_str_to_date, print_both
 from datetime import datetime, timedelta
 
 def living_married_list(family_data,individual_data):
@@ -190,12 +190,12 @@ def marriage_after_14(family_data, individual_data):
                 if h_birth > min_birt:
                     error_descrip = "Husband is married before 14 years old"
                     error_location = family.fid
-                    print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                    print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
                     flag = False
                 w_birth = convert_str_to_date(wife.birt)
                 if w_birth > min_birt:
                     error_descrip = "Husband is married before 14 years old"
                     error_location = family.fid
-                    print('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                    print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
                     flag = False
     return flag

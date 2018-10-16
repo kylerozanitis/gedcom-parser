@@ -166,12 +166,12 @@ def agemorethan_150(individual_data):
         if individual.alive == False and individual.age > 150:
             error_descrip="lived longer than 150 years"
             error_location = person
-            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+            print_both('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
             flag = False
         elif individual.alive == True and individual.age > 150:
             error_descrip="lived longer than 150 years"
             error_location = person
-            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+            print_both('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
             flag = False
         else:
             flag = True
@@ -328,14 +328,14 @@ def divorce_before_death(family_data,individual_data):
                 if divorce_date > husb_death:
                     error_descrip = "Death of Husband {} occurs before date of divorce {}".format(husband.deat,family.div)
                     error_location = husband.uid
-                    print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+                    print_both('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
                     prob_family.append(family.fid)
             if wife.alive == False:
                 wife_death = convert_str_to_date(wife.deat)
                 if divorce_date > wife_death:
                     error_descrip = "Death of wife {} occurs before date of divorce {}".format(wife.deat,family.div)
                     error_location = wife.uid
-                    print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+                    print_both('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
                     prob_family.append(family.fid)
     return prob_family
 
@@ -370,7 +370,7 @@ def list_recent_births(individual_data):
         else:
             error_descrip = "Birth {} does not occur with in last 30 days".format(individual.birt)
             error_location = individual.uid
-            print('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
+            print_both('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
         
     return recent_birth
 
@@ -443,3 +443,9 @@ def check_life_status(person, marriage_date):
     occurred before their marriage date; if yes, return True else, return False. """
     if person.alive == False:
         return check_two_dates(person.deat, marriage_date)
+
+def print_both(*args):
+    """ Function to print the text to the command line/terminal and write to a file """
+    print(*args)
+    with open("Output.txt", "a") as file_name:
+        print(*args, file=file_name)
