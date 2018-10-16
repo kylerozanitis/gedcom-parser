@@ -40,7 +40,7 @@ Families
 | F5 | 18 AUG 1984 |      NA     |    I10     | Eric Locklear  |    I4   | Angelica Martinez |                                                        NA                                                       |
 | F6 |  7 SEP 1952 |      NA     |     I6     | Henry Martinez |    I7   |    Brenda Ordon   |                                                      ['I4']                                                     |
 +----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 15 Oct 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 16 Oct 2018
 ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
 Date Passed: 14 NOV 1979 Name: Jackline Alfonso 
 Date Passed: 14 NOV 1950 Name: Brenda Ordon 
@@ -90,8 +90,7 @@ ANOMALY: FAMILY: US08: F4: Birthday 4 SEP 1985 of child I9 occurs after more tha
 ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
 ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
 
-Recent Birthday Data
-
+Upcoming Birthday Data
 Upcoming birthday for: 
 Krista Shaw
 

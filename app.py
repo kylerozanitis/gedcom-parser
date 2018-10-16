@@ -257,10 +257,10 @@ def main():
         print_both("ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries")
 
     # List of recent Birthday
-    print_both("\nRecent Birthday Data")
+    print_both("\nUpcoming Birthday Data")
     data = list_upcoming_birthdays(individual_data)
     if len(data) is not 0:
-        print_both("\nUpcoming birthday for: ")
+        print_both("Upcoming birthday for: ")
         for birthdays in data:
             print_both(birthdays.name)
     else:
