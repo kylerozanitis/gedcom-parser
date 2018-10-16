@@ -20,6 +20,7 @@ from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, d
 from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
+from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -239,6 +240,13 @@ def main():
         print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
     for fid, uid in div_error_entries.items():
         print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
+    
+    #US09 -- Child should be born before death of mother and before nine months after death of father
+    child_mother_error, child_father_error = validate_childBirth_with_parentsDeath(individual_data, family_data)
+    for fid, uid in child_mother_error.items():
+        print("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before death " + str(individual_data[uid[1]].deat) + " of mother " + str(uid[1]))
+    for fid, uid in child_father_error.items():
+        print("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before 9 months after death " + str(individual_data[uid[1]].deat) + " of father " + str(uid[1]))    
         
     print_both("\n")
     
