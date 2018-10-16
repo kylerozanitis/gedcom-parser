@@ -239,6 +239,15 @@ def main():
         print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
     for fid, uid in div_error_entries.items():
         print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
+    
+    #US09 -- Child should be born before death of mother and before nine months after death of father
+    child_mother_error, child_father_error = validate_childBirth_with_parentsDeath(individual_data, family_data)
+    print(child_father_error)
+    print(child_mother_error)
+    for fid, uid in child_mother_error.items():
+        print("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before death " + str(individual_data[uid[1]].deat) + " of mother " + str(uid[1]))
+    for fid, uid in child_father_error.items():
+        print("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before 9 months after death " + str(individual_data[uid[1]].deat) + " of father " + str(uid[1]))    
         
     print_both("\n")
     
