@@ -1,0 +1,102 @@
+GEDCOM Parser - Kyle Rozanitis, Jose Lara, Kshiti Rana, Pratik Shah 
+ 
+Individuals
++-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
+|  ID |        Name       | Gender |   Birthday  | Age | Alive |    Death    | Child  |    Spouse    |
++-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
+|  I1 |    Jack Hackley   |   M    |  7 MAY 1824 | 194 |  True |      NA     |   NA   |    ['F1']    |
+|  I2 |    Krista Shaw    |   F    | 24 OCT 1929 |  88 |  True |      NA     |   NA   | ['F1', 'F2'] |
+|  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  64 |  True |      NA     | ['F1'] | ['F3', 'F4'] |
+|  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  58 |  True |      NA     | ['F6'] | ['F3', 'F5'] |
+|  I5 |  Jackline Alfonso |   F    | 14 SEP 1955 |  24 | False | 14 NOV 1979 |   NA   |    ['F4']    |
+|  I6 |   Henry Martinez  |   M    | 15 MAY 1926 |  92 |  True |      NA     |   NA   |    ['F6']    |
+|  I7 |    Brenda Ordon   |   F    |  1 APR 1930 |  20 | False | 14 NOV 1950 |   NA   |    ['F6']    |
+|  I8 |   Maria Hackley   |   F    | 28 JUL 2020 |  -2 |  True |      NA     | ['F3'] |      NA      |
+| I22 |    Liam Hackley   |   M    | 28 JUL 2010 |  8  |  True |      NA     | ['F3'] |      NA      |
+| I23 |    Emma Hackley   |   F    | 28 JUL 2011 |  7  |  True |      NA     | ['F3'] |      NA      |
+| I24 |   Olivia Hackley  |   F    | 28 JUL 2012 |  6  |  True |      NA     | ['F3'] |      NA      |
+| I25 |    Ava Hackley    |   F    | 28 JUL 2013 |  5  |  True |      NA     | ['F3'] |      NA      |
+| I26 |   Logan Hackley   |   M    | 28 JUL 2014 |  4  |  True |      NA     | ['F3'] |      NA      |
+| I27 |   Mason Hackley   |   M    | 28 JUL 2015 |  3  |  True |      NA     | ['F3'] |      NA      |
+| I28 |    Mia Hackley    |   F    | 28 JUL 2009 |  9  |  True |      NA     | ['F3'] |      NA      |
+| I29 |   Sophia Hackley  |   F    | 28 JUL 2008 |  10 |  True |      NA     | ['F3'] |      NA      |
+| I30 |   Jacob Hackley   |   M    | 28 JUL 2007 |  11 |  True |      NA     | ['F3'] |      NA      |
+| I31 |   Amelia Hackley  |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
+| I32 |   Amara Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
+| I33 |   Silas Hackley   |   M    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
+| I34 |    Milo Hackley   |   M    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
+| I35 |    Maia Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
+| I36 |    Isla Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
+|  I9 |   Henry Hackley   |   M    |  4 SEP 1985 |  33 |  True |      NA     | ['F4'] |      NA      |
+| I10 |   Eric Locklear   |   M    | 05 OCT 2018 | -34 | False |  8 JUN 1985 |   NA   |    ['F5']    |
++-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
+Families
++----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
+| ID |   Married   |   Divorced  | Husband ID |  Husband Name  | Wife ID |     Wife Name     |                                                     Children                                                    |
++----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
+| F1 | 26 NOV 1950 |      NA     |     I1     |  Jack Hackley  |    I2   |    Krista Shaw    |                                                      ['I3']                                                     |
+| F3 |  9 JUN 1986 |      NA     |     I3     |  Adam Hackley  |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36'] |
+| F4 | 29 OCT 1982 | 28 DEC 1980 |     I3     |  Adam Hackley  |    I5   |  Jackline Alfonso |                                                      ['I9']                                                     |
+| F5 | 18 AUG 1984 |      NA     |    I10     | Eric Locklear  |    I4   | Angelica Martinez |                                                        NA                                                       |
+| F6 |  7 SEP 1952 |      NA     |     I6     | Henry Martinez |    I7   |    Brenda Ordon   |                                                      ['I4']                                                     |
++----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 15 Oct 2018
+ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
+Date Passed: 14 NOV 1979 Name: Jackline Alfonso 
+Date Passed: 14 NOV 1950 Name: Brenda Ordon 
+Date Passed: 8 JUN 1985 Name: Eric Locklear 
+ERROR: INDIVIDUAL: US07 : I1 : lived longer than 150 years
+ERROR: INDIVIDUAL: US06 : I5 : Death of wife 14 NOV 1979 occurs before date of divorce 28 DEC 1980
+ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
+ERROR: FAMILY: US05: F4: Wife death date 14 NOV 1979 occurs before marriage date 29 OCT 1982
+ERROR: FAMILY: US05: F6: Wife death date 14 NOV 1950 occurs before marriage date 7 SEP 1952
+ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
+
+Recent Birthday Data
+ERROR: INDIVIDUAL: US06 : I1 : Birth 7 MAY 1824 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I2 : Birth 24 OCT 1929 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I3 : Birth 16 AUG 1954 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I4 : Birth 30 NOV 1959 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I5 : Birth 14 SEP 1955 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I6 : Birth 15 MAY 1926 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I7 : Birth 1 APR 1930 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I8 : Birth 28 JUL 2020 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I22 : Birth 28 JUL 2010 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I23 : Birth 28 JUL 2011 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I24 : Birth 28 JUL 2012 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I25 : Birth 28 JUL 2013 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I26 : Birth 28 JUL 2014 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I27 : Birth 28 JUL 2015 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I28 : Birth 28 JUL 2009 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I29 : Birth 28 JUL 2008 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I30 : Birth 28 JUL 2007 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I31 : Birth 1 JUL 2006 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I32 : Birth 1 JUL 2006 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I33 : Birth 1 JUL 2006 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I34 : Birth 1 JUL 2006 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I35 : Birth 1 JUL 2006 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I36 : Birth 1 JUL 2006 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I9 : Birth 4 SEP 1985 does not occur with in last 30 days
+05 OCT 2018
+Total number of birth in the last 30 days: 1
+Name: Eric Locklear, Birth on: 05 OCT 2018
+
+Recent Death Data
+No recent Death
+ERROR: FAMILY: US15: F3 has more than 15 siblings
+ANOMALY: FAMILY: US08: F4: Birthday 4 SEP 1985 of child I9 occurs after more than 9 months of divorce 28 DEC 1980
+
+
+ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
+ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
+
+Recent Birthday Data
+
+Upcoming birthday for: 
+Krista Shaw
+
+Recent Death Data
+No Recent death with survivals within last 30 days
+ERROR: FAMILY: US12: Parent I1 named Jack Hackley born on 7 MAY 1824 is more than 80 years older than child I3 named Adam Hackley born on 16 AUG 1954 in family F1
+ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
+ANOMOLY: FAMILY: US10 : F5 : Husband is married before 14 years old
