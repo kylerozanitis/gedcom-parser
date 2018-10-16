@@ -243,8 +243,6 @@ def main():
     
     #US09 -- Child should be born before death of mother and before nine months after death of father
     child_mother_error, child_father_error = validate_childBirth_with_parentsDeath(individual_data, family_data)
-    print(child_father_error)
-    print(child_mother_error)
     for fid, uid in child_mother_error.items():
         print("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before death " + str(individual_data[uid[1]].deat) + " of mother " + str(uid[1]))
     for fid, uid in child_father_error.items():
