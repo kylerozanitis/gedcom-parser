@@ -171,8 +171,11 @@ def marriage_after_14(family_data, individual_data):
     this fucntion takes family and individual data as input and 
     returns true or false based on data.
     """
-    error_story = 'US10'
-    flag = True
+
+    problem_families = {} # key = spouse id, value = list of sex and family ID
+
+    # error_story = 'US10'
+    # flag = True
     for family in family_data.values():
         if family.marr != 'NA':
             husband = None
@@ -188,17 +191,19 @@ def marriage_after_14(family_data, individual_data):
             if husband != None and wife != None:
                 h_birth = convert_str_to_date(husband.birt)
                 if h_birth > min_birt:
-                    error_descrip = "Husband is married before 14 years old"
-                    error_location = family.fid
-                    print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
-                    flag = False
+                    problem_families[family.husb_id] = ["M", family.fid]
+                    # error_descrip = "Husband is married before 14 years old"
+                    # error_location = family.fid
+                    # print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                    # flag = False
                 w_birth = convert_str_to_date(wife.birt)
                 if w_birth > min_birt:
-                    error_descrip = "Husband is married before 14 years old"
-                    error_location = family.fid
-                    print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
-                    flag = False
-    return flag
+                    problem_families[family.wife_id] = ["F", family.fid]
+                    # error_descrip = "Husband is married before 14 years old"
+                    # error_location = family.fid
+                    # print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
+                    # flag = False
+    return problem_families
 
 def validate_childBirth_with_parentsDeath(individual_data, family_data):
     """US09 -- Child should be born before death of mother and before nine months after death of father"""

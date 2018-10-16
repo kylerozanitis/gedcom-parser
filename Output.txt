@@ -4,7 +4,7 @@ Individuals
 +-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
 |  ID |        Name       | Gender |   Birthday  | Age | Alive |    Death    | Child  |    Spouse    |
 +-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
-|  I1 |    Jack Hackley   |   M    |  7 MAY 1824 | 194 |  True |      NA     |   NA   |    ['F1']    |
+|  I1 |    Jack Hackley   |   M    |  7 MAY 1800 | 153 | False | 16 OCT 1953 |   NA   |    ['F1']    |
 |  I2 |    Krista Shaw    |   F    | 24 OCT 1929 |  88 |  True |      NA     |   NA   | ['F1', 'F2'] |
 |  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  64 |  True |      NA     | ['F1'] | ['F3', 'F4'] |
 |  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  58 |  True |      NA     | ['F6'] | ['F3', 'F5'] |
@@ -42,6 +42,7 @@ Families
 +----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
 ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 16 Oct 2018
 ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
+Date Passed: 16 OCT 1953 Name: Jack Hackley 
 Date Passed: 14 NOV 1979 Name: Jackline Alfonso 
 Date Passed: 14 NOV 1950 Name: Brenda Ordon 
 Date Passed: 8 JUN 1985 Name: Eric Locklear 
@@ -53,7 +54,7 @@ ERROR: FAMILY: US05: F6: Wife death date 14 NOV 1950 occurs before marriage date
 ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
 
 Recent Birthday Data
-ERROR: INDIVIDUAL: US06 : I1 : Birth 7 MAY 1824 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US06 : I1 : Birth 7 MAY 1800 does not occur with in last 30 days
 ERROR: INDIVIDUAL: US06 : I2 : Birth 24 OCT 1929 does not occur with in last 30 days
 ERROR: INDIVIDUAL: US06 : I3 : Birth 16 AUG 1954 does not occur with in last 30 days
 ERROR: INDIVIDUAL: US06 : I4 : Birth 30 NOV 1959 does not occur with in last 30 days
@@ -96,6 +97,6 @@ Krista Shaw
 
 Recent Death Data
 No Recent death with survivals within last 30 days
-ERROR: FAMILY: US12: Parent I1 named Jack Hackley born on 7 MAY 1824 is more than 80 years older than child I3 named Adam Hackley born on 16 AUG 1954 in family F1
+ERROR: FAMILY: US12: Parent I1 named Jack Hackley born on 7 MAY 1800 is more than 80 years older than child I3 named Adam Hackley born on 16 AUG 1954 in family F1
 ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
-ANOMOLY: FAMILY: US10 : F5 : Husband is married before 14 years old
+ANOMALY: FAMILY: US10: Husband I10 in Family F5 is married before 14 years old

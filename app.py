@@ -300,8 +300,14 @@ def main():
         for k, v in problem_fams_dict.items():
             print_both("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
 
-    #marriage after 14
-    marriage_after_14(family_data, individual_data)
+    # US10 Marriage After 14
+    problem_fam_dict = marriage_after_14(family_data, individual_data)
+    if len(problem_fam_dict) > 0:
+        for k, v in problem_fam_dict.items():
+            if v[0] == "M":
+                print_both("ANOMALY: FAMILY: US10: Husband {} in Family {} is married before 14 years old".format(k, v[1]))
+            else:
+                print_both("ANOMALY: FAMILY: US10: Wife {} in Family {} is married before 14 years old".format(k, v[1]))
 
 if __name__ == '__main__':
     main()
