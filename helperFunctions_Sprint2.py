@@ -199,3 +199,28 @@ def marriage_after_14(family_data, individual_data):
                     print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
                     flag = False
     return flag
+
+def validate_childBirth_with_parentsDeath(individual_data, family_data):
+    """US09 -- Child should be born before death of mother and before nine months after death of father"""
+    child_mother_error = dict()
+    child_father_error =dict()
+    for fid, family in family_data.items():
+        children_list = list(family.chil)
+        if len(children_list) > 0 and (children_list != ['N', 'A']):
+            for child in children_list:
+                fam_obj = family_data[family.fid]
+                if individual_data[fam_obj.wife_id].deat != 'NA':
+                    if check_two_dates(individual_data[fam_obj.wife_id].deat, individual_data[child].birt):
+                        child_mother_error[fid] = [child, fam_obj.wife_id]
+                        
+                if individual_data[fam_obj.husb_id].deat != 'NA':
+                    if validate_date_format(individual_data[fam_obj.husb_id].deat):
+                        father_death_date = convert_str_to_date(individual_data[fam_obj.husb_id].deat)
+
+                    if validate_date_format(individual_data[child].birt):
+                        child_birth_date = convert_str_to_date(individual_data[child].birt)
+                        
+                    if ((father_death_date + relativedelta(months=+9)) - child_birth_date).days < 0:
+                        child_father_error[fid] = [child, fam_obj.husb_id]
+                            
+    return child_mother_error, child_father_error
