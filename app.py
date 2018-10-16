@@ -20,6 +20,7 @@ from helperFunctions_Sprint1 import death_before_birth, birth_before_marriage, d
 from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer_than15_siblings, check_unique_ids, check_marriage_status
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
+from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
