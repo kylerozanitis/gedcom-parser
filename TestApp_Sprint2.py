@@ -1,6 +1,7 @@
 import unittest
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
+from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 from classes import individualPerson, familyClass
 
 
@@ -345,6 +346,88 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertFalse(marriage_after_14(fam_dict, indi_dict))
 
+    def test_validate_childBirth_with_parentsDeath(self):
+        """Test cases for US09 -- Child should be born before death of mother and before nine months after death of father"""
+        indi_dict = {}
+        fam_dict = {}
 
+        indi_I10 = individualPerson("I10")
+        indi_I10.birt = "25 AUG 1990"
+        indi_dict[indi_I10.uid] = indi_I10
+        indi_I11 = individualPerson("I11")
+        indi_I11.birt = "13 MAR 1960"
+        indi_I11.deat = "19 JUL 1990"
+        indi_dict[indi_I11.uid] = indi_I11
+        indi_I12 = individualPerson("I12")
+        indi_I12.birt = "16 DEC 1959"
+        indi_dict[indi_I12.uid] = indi_I12
+
+        fam_F10 = familyClass("F10")
+        fam_F10.marr = "11 OCT 1988"
+        fam_F10.chil = ["I10"]
+        fam_F10.husb_id = "I12"
+        fam_F10.wife_id = "I11"
+        fam_dict[fam_F10.fid] = fam_F10
+
+        self.assertEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), ({'F10': ['I10', 'I11']}, {}))
+        self.assertNotEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_childBirth_with_parentsDeath(indi_dict, fam_dict))
+        self.assertIsNot(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), ({'F10': ['I10', 'I11']}, {}))
+
+        indi_dict = {}
+        fam_dict = {}
+
+        indi_I1 = individualPerson("I1")
+        indi_I1.birt = "25 AUG 1990"
+        indi_dict[indi_I1.uid] = indi_I1
+        indi_I2 = individualPerson("I2")
+        indi_I2.birt = "13 MAR 1960"
+        indi_dict[indi_I2.uid] = indi_I2
+        indi_I3 = individualPerson("I3")
+        indi_I3.birt = "16 DEC 1959"
+        indi_I3.deat = "13 OCT 1989"
+        indi_dict[indi_I3.uid] = indi_I3
+
+        fam_F1 = familyClass("F1")
+        fam_F1.marr = "11 OCT 1988"
+        fam_F1.chil = ["I1"]
+        fam_F1.husb_id = "I3"
+        fam_F1.wife_id = "I2"
+        fam_dict[fam_F1.fid] = fam_F1
+
+        self.assertEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), ({}, {'F1': ['I1', 'I3']}))
+        self.assertNotEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_childBirth_with_parentsDeath(indi_dict, fam_dict))
+        self.assertIsNot(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), ({}, {'F1': ['I1', 'I3']}))
+
+        indi_dict = {}
+        fam_dict = {}
+
+        indi_I1 = individualPerson("I1")
+        indi_I1.birt = "25 AUG 1990"
+        indi_dict[indi_I1.uid] = indi_I1
+        indi_I2 = individualPerson("I2")
+        indi_I2.birt = "13 MAR 1960"
+        indi_dict[indi_I2.uid] = indi_I2
+        indi_I3 = individualPerson("I3")
+        indi_I3.birt = "16 DEC 1959"
+        indi_I3.deat = "13 OCT 1995"
+        indi_dict[indi_I3.uid] = indi_I3
+
+        fam_F1 = familyClass("F1")
+        fam_F1.marr = "11 OCT 1988"
+        fam_F1.chil = ["I1"]
+        fam_F1.husb_id = "I3"
+        fam_F1.wife_id = "I2"
+        fam_dict[fam_F1.fid] = fam_F1
+
+        self.assertEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), ({}, {}))
+        self.assertNotEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_childBirth_with_parentsDeath(indi_dict, fam_dict))
+        self.assertIsNot(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_childBirth_with_parentsDeath(indi_dict, fam_dict), ({}, {}))
+        
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
