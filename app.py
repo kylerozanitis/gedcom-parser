@@ -165,11 +165,11 @@ def main():
         print_both("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
     
     # list living married
-    """living_married = living_married_list(family_data, individual_data)
+    living_married = living_married_list(family_data, individual_data)
     if len(living_married) > 0:
-        print("living married: ", living_married)
+        print_both("living married: ", living_married)
     else:
-        print("living married",len(living_married))"""
+        print_both("living married",len(living_married))
 
     #age more than 150
     agemorethan_150(individual_data)

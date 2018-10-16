@@ -46,6 +46,7 @@ Date Passed: 16 OCT 1953 Name: Jack Hackley
 Date Passed: 14 NOV 1979 Name: Jackline Alfonso 
 Date Passed: 14 NOV 1950 Name: Brenda Ordon 
 Date Passed: 8 JUN 1985 Name: Eric Locklear 
+living married:  ['I2', 'I3', 'I4', 'I3', 'I4', 'I6']
 ERROR: INDIVIDUAL: US07 : I1 : lived longer than 150 years
 ERROR: INDIVIDUAL: US06 : I5 : Death of wife 14 NOV 1979 occurs before date of divorce 28 DEC 1980
 ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
@@ -86,6 +87,9 @@ Recent Death Data
 No recent Death
 ERROR: FAMILY: US15: F3 has more than 15 siblings
 ANOMALY: FAMILY: US08: F4: Birthday 4 SEP 1985 of child I9 occurs after more than 9 months of divorce 28 DEC 1980
+ERROR: FAMILY: US09: F4: Birthday 4 SEP 1985 of child I9 should be born before death 14 NOV 1979 of mother I5
+ERROR: FAMILY: US09: F6: Birthday 30 NOV 1959 of child I4 should be born before death 14 NOV 1950 of mother I7
+ERROR: FAMILY: US09: F1: Birthday 16 AUG 1954 of child I3 should be born before 9 months after death 16 OCT 1953 of father I1
 
 
 ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
