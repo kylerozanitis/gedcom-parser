@@ -313,7 +313,7 @@ def main():
     for person in single:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
     
-    #list multiple birth
+    #US32 - List multiple birth
     list_multiple_birth = multiple_births(family_data, individual_data)
     print_both('Total number of multiple births: ',len(list_multiple_birth))
     for person in list_multiple_birth:
