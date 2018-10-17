@@ -20,9 +20,9 @@ def living_married_list(family_data,individual_data):
                 if individual.uid == family.wife_id:
                     wife = individual
             if husband.alive == True:
-                living_married.append(husband.uid)
+                living_married.append(husband)
             if wife.alive == True:
-                living_married.append(wife.uid)
+                living_married.append(wife)
     return living_married
 
 def is_anniversary_in_next_thirty_days(date):

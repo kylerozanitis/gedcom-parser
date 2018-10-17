@@ -161,23 +161,10 @@ def main():
             else:
                 print_both("ERROR: Individual: US03: " + str(ids) +" : Death date " + str(individual_data[ids].deat) + " cannot occur before birthday " + str(individual_data[ids].birt))
     
-    # Get list of individuals who passed
-    for person in deceased_list(individual_data):
-        print_both("Date Passed: {0} Name: {1} ".format(person.deat, person.name ))
+    #US02 - Checks for birth before marriages if marriage happens before birth, individual will be removed from family
+    for obj in birth_before_marriage(family_data, individual_data):
+        print_both("ERROR: INDIVIDUAL: US02: {} Birth occurs before marriage".format(obj.fid))
     
-    # list living married
-    living_married = living_married_list(family_data, individual_data)
-    if len(living_married) > 0:
-        print_both("living married: ", living_married)
-    else:
-        print_both("living married",len(living_married))
-
-    #age more than 150
-    agemorethan_150(individual_data)
-    
-    #divorce before death
-    divorce_before_death(family_data,individual_data)
-
     # US04 Print out list of families with divorce occuring before marriage
     problem_families = check_marriage_before_divorce(family_data)
     if len(problem_families) > 0:
@@ -202,55 +189,44 @@ def main():
                 print_both("ERROR: FAMILY: US05: {}: Husband death date {} occurs before marriage date {}".format(family.fid, husband.deat, family.marr))
             elif wife.alive == False:
                 print_both("ERROR: FAMILY: US05: {}: Wife death date {} occurs before marriage date {}".format(family.fid, wife.deat, family.marr))
+    
+    #US06 - divorce before death
+    divorce_before_death(family_data,individual_data)
+    
+    #US07 - age more than 150
+    agemorethan_150(individual_data)
 
-    # Checks for birth before marriages if marriage happens before birth, individual will be removed from family
-    for obj in birth_before_marriage(family_data, individual_data):
-        print_both("ERROR: INDIVIDUAL: US02: {} Birth occurs before marriage".format(obj.fid))
+    #US29 - Get list of individuals who passed
+    data = deceased_list(individual_data)
+    print_both('Total number of deceased individuals: ',len(data))
+    for person in deceased_list(individual_data):
+        print_both("Name: {1} Date Passed: {0}".format(person.deat, person.name ))
 
-
-    print_both("\nRecent Birthday Data")
+    #US35 - List recent birthdays
+    #print_both("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
-    for individual in birth_recently:
-        print_both(individual.birt)
-
+    print_both('Total number of recent births: ',len(birth_recently))
     if len(birth_recently) == 0:
         print_both("No recent Birth")
     else:
-        print_both("Total number of birth in the last 30 days: {}".format(len(birth_recently)))
         for individual in birth_recently:
             print_both("Name: {0}, Birth on: {1}".format(individual.name, individual.birt))
 
-    print_both("\nRecent Death Data")
+    #US36 - List recent deaths
+    #print_both("\nRecent Death Data")
     death_recently = list_recent_death(individual_data)
+    print_both('Total number of recent deaths: ',len(death_recently))
     if len(death_recently) == 0:
         print_both("No recent Death")
     else:
-        print_both("Total number of Death in the last 30 days: {}".format(len(death_recently)))
         for individual in death_recently:
-            print_both("Name: {0}, Death on: {1}\n".format(individual.name, individual.deat))
-
+            print_both("Name: {0}, Death on: {1}".format(individual.name, individual.deat))
 
     # US15 -- There should be fewer than 15 siblings in a family
     fid_list = fewer_than15_siblings(family_data)
     for fid in fid_list:
         print_both("ERROR: FAMILY: US15: " + str(fid) + " has more than 15 siblings")
 
-    # US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)
-    marr_error_entries, div_error_entries = validate_child_birth(individual_data,family_data)
-    for fid, uid in marr_error_entries.items():
-        print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
-    for fid, uid in div_error_entries.items():
-        print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
-    
-    #US09 -- Child should be born before death of mother and before nine months after death of father
-    child_mother_error, child_father_error = validate_childBirth_with_parentsDeath(individual_data, family_data)
-    for fid, uid in child_mother_error.items():
-        print_both("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before death " + str(individual_data[uid[1]].deat) + " of mother " + str(uid[1]))
-    for fid, uid in child_father_error.items():
-        print_both("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before 9 months after death " + str(individual_data[uid[1]].deat) + " of father " + str(uid[1]))    
-        
-    print_both("\n")
-    
     # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
     problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
     if len(problem_indis) > 0:
@@ -265,43 +241,21 @@ def main():
     else:
         print_both("ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries")
 
-    # List of recent Birthday
-    print_both("\nUpcoming Birthday Data")
-    data = list_upcoming_birthdays(individual_data)
-    if len(data) is not 0:
-        print_both("Upcoming birthday for: ")
-        for birthdays in data:
-            print_both(birthdays.name)
-    else:
-        print_both('No upcoming birthday in the next 30 days.')
+    # US08 - Children should be born after marriage of parents (and not more than 9 months after their divorce)
+    marr_error_entries, div_error_entries = validate_child_birth(individual_data,family_data)
+    for fid, uid in marr_error_entries.items():
+        print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
+    for fid, uid in div_error_entries.items():
+        print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
+    
+    #US09 - Child should be born before death of mother and before nine months after death of father
+    child_mother_error, child_father_error = validate_childBirth_with_parentsDeath(individual_data, family_data)
+    for fid, uid in child_mother_error.items():
+        print_both("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before death " + str(individual_data[uid[1]].deat) + " of mother " + str(uid[1]))
+    for fid, uid in child_father_error.items():
+        print_both("ERROR: FAMILY: US09: " + str(fid) + ": Birthday " + str(individual_data[uid[0]].birt) + " of child " + str(uid[0]) + " should be born before 9 months after death " + str(individual_data[uid[1]].deat) + " of father " + str(uid[1]))    
 
-    # survival from a recent death
-    print_both("\nRecent Death Data")
-    data = list_recent_survivals(individual_data, family_data)
-    if len(data) > 0:
-        print_both("\nSurvivals List:")
-        for d in data.values():
-            print_both("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
-                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
-    else:
-        print_both("No Recent death with survivals within last 30 days")
-
-    # US12 Parents Not Too Old - Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
-    problem_families_dict = check_parents_not_too_old(family_data, individual_data)
-    if len(problem_families_dict) > 0:
-        for k, v in problem_families_dict.items():
-            if v[0] == "M":
-                print_both("ERROR: FAMILY: US12: Parent {} named {} born on {} is more than 80 years older than child {} named {} born on {} in family {}".format(v[1], v[2], v[3], v[4], v[5], v[6], k))
-            else:
-                print_both("ERROR: FAMILY: US12: Parent {} named {} born on {} is more than 60 years older than child {} named {} born on {} in family {}".format(v[1], v[2], v[3], v[4], v[5], v[6], k))
-
-    # US14 Multiple Births <= 5 - No more than five siblings should be born at the same time
-    problem_fams_dict = check_multiple_births(family_data, individual_data)
-    if len(problem_fams_dict) > 0:
-        for k, v in problem_fams_dict.items():
-            print_both("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
-
-    # US10 Marriage After 14
+    # US10 - Marriage After 14
     problem_fam_dict = marriage_after_14(family_data, individual_data)
     if len(problem_fam_dict) > 0:
         for k, v in problem_fam_dict.items():
@@ -310,12 +264,54 @@ def main():
             else:
                 print_both("ANOMALY: FAMILY: US10: Wife {} in Family {} is married before 14 years old".format(k, v[1]))
     
+    # US12 - Parents Not Too Old - Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
+    problem_families_dict = check_parents_not_too_old(family_data, individual_data)
+    if len(problem_families_dict) > 0:
+        for k, v in problem_families_dict.items():
+            if v[0] == "M":
+                print_both("ERROR: FAMILY: US12: Parent {} named {} born on {} is more than 80 years older than child {} named {} born on {} in family {}".format(v[1], v[2], v[3], v[4], v[5], v[6], k))
+            else:
+                print_both("ERROR: FAMILY: US12: Parent {} named {} born on {} is more than 60 years older than child {} named {} born on {} in family {}".format(v[1], v[2], v[3], v[4], v[5], v[6], k))
 
-    print_both("Singles over 30 data:")
-    single = single_over_30(family_data, individual_data)
-    if len(single) > 0:
-        print_both("All singles over 30: ",single)
+    # US14 - Multiple Births <= 5 - No more than five siblings should be born at the same time
+    problem_fams_dict = check_multiple_births(family_data, individual_data)
+    if len(problem_fams_dict) > 0:
+        for k, v in problem_fams_dict.items():
+            print_both("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
+
+    #US30 - list living married
+    living_married = living_married_list(family_data, individual_data)
+    print_both('Total number of living married: ',len(living_married))
+    for person in living_married:
+        print_both("ID: {0} Name: {1}".format(person.uid ,person.name))
+
+    #US37 - survival from a recent death
+    #print_both("\nRecent Death Data")
+    data = list_recent_survivals(individual_data, family_data)
+    print_both('Total number of recent survivors: ',len(data))
+    if len(data) > 0:
+        print_both("Survivals List:")
+        for d in data.values():
+            print_both("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
+                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
     else:
-        print_both("No single over 30")
+        print_both("No Recent death with survivals within last 30 days")
+
+    #US38 - List of Upcoming Birthday
+    #print_both("Upcoming Birthday Data")
+    data = list_upcoming_birthdays(individual_data)
+    print_both('Total number of Upcoming birthdays: ',len(data))
+    if len(data) is not 0:
+        for birthdays in data:
+            print_both("Name: {0}, Birth on: {1}".format(birthdays.name, birthdays.birt))
+    else:
+        print_both('No upcoming birthday in the next 30 days.')
+
+    #print_both("Singles over 30 data:")
+    single = single_over_30(family_data, individual_data)
+    print_both('Total number of singles over 30: ',len(single))
+    for person in single:
+        print_both("Name: {0} Age: {1}".format(person.name, person.age))
+    
 if __name__ == '__main__':
     main()

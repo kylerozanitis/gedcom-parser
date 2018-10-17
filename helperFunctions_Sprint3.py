@@ -18,6 +18,6 @@ def single_over_30(family_data, individual_data):
         age = individual.age
         if person not in check_status:
             if age > 30:
-                single.append(person)
+                single.append(individual)
     return single
 
