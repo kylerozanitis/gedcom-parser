@@ -20,9 +20,9 @@ def living_married_list(family_data,individual_data):
                 if individual.uid == family.wife_id:
                     wife = individual
             if husband.alive == True:
-                living_married.append(husband.uid)
+                living_married.append(husband)
             if wife.alive == True:
-                living_married.append(wife.uid)
+                living_married.append(wife)
     return living_married
 
 def is_anniversary_in_next_thirty_days(date):
@@ -174,8 +174,6 @@ def marriage_after_14(family_data, individual_data):
 
     problem_families = {} # key = spouse id, value = list of sex and family ID
 
-    # error_story = 'US10'
-    # flag = True
     for family in family_data.values():
         if family.marr != 'NA':
             husband = None
@@ -192,17 +190,11 @@ def marriage_after_14(family_data, individual_data):
                 h_birth = convert_str_to_date(husband.birt)
                 if h_birth > min_birt:
                     problem_families[family.husb_id] = ["M", family.fid]
-                    # error_descrip = "Husband is married before 14 years old"
-                    # error_location = family.fid
-                    # print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
-                    # flag = False
+                
                 w_birth = convert_str_to_date(wife.birt)
                 if w_birth > min_birt:
                     problem_families[family.wife_id] = ["F", family.fid]
-                    # error_descrip = "Husband is married before 14 years old"
-                    # error_location = family.fid
-                    # print_both('ANOMOLY: FAMILY:',error_story,':',str(error_location),':',error_descrip)
-                    # flag = False
+
     return problem_families
 
 def validate_childBirth_with_parentsDeath(individual_data, family_data):

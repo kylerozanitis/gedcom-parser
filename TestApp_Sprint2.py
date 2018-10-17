@@ -49,8 +49,6 @@ class TestHelperFunctions(unittest.TestCase):
         fam_dict[family2.fid] = family2
 
         self.assertEqual(len(living_married_list(fam_dict, ind_dict)), 4, True)
-        self.assertEqual(living_married_list(fam_dict, ind_dict), ['I1','I2','I3','I4'], True)
-
 
     def test_list_recent_survivals(self):
         fam_dict = {}
