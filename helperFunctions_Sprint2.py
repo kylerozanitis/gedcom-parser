@@ -1,7 +1,7 @@
 #Lib Imports
 from dateutil.relativedelta import relativedelta
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, event_in_last_thirty_days, check_two_dates
-from helperFunctions_Sprint1 import convert_str_to_date, print_both
+from helperFunctions_Sprint1 import convert_str_to_date
 from datetime import datetime, timedelta
 
 def living_married_list(family_data,individual_data):
