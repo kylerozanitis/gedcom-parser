@@ -317,7 +317,7 @@ def main():
     list_multiple_birth = multiple_births(family_data, individual_data)
     print_both('Total number of multiple births: ',len(list_multiple_birth))
     for person in list_multiple_birth:
-        print_both("Family id: {0} Name: {1} Birth on: {2}".format(''.join(person.famc),person.name, person.birt))
+        print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc),person.name, person.birt))
     
     
 if __name__ == '__main__':

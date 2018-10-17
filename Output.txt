@@ -83,11 +83,11 @@ Total number of singles over 30:  2
 Name: Chris Martinez Age: 58
 Name: Henry Hackley Age: 33
 Total number of multiple births:  8
-Family id: F3 Name: Amelia Hackley Birth on: 1 JUL 2006
-Family id: F3 Name: Amara Hackley Birth on: 1 JUL 2006
-Family id: F3 Name: Silas Hackley Birth on: 1 JUL 2006
-Family id: F3 Name: Milo Hackley Birth on: 1 JUL 2006
-Family id: F3 Name: Maia Hackley Birth on: 1 JUL 2006
-Family id: F3 Name: Isla Hackley Birth on: 1 JUL 2006
-Family id: F6 Name: Angelica Martinez Birth on: 30 NOV 1959
-Family id: F6 Name: Chris Martinez Birth on: 30 NOV 1959
+Family id: F3 Birth on: 1 JUL 2006 Name: Amelia Hackley
+Family id: F3 Birth on: 1 JUL 2006 Name: Amara Hackley
+Family id: F3 Birth on: 1 JUL 2006 Name: Silas Hackley
+Family id: F3 Birth on: 1 JUL 2006 Name: Milo Hackley
+Family id: F3 Birth on: 1 JUL 2006 Name: Maia Hackley
+Family id: F3 Birth on: 1 JUL 2006 Name: Isla Hackley
+Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
+Family id: F6 Birth on: 30 NOV 1959 Name: Chris Martinez

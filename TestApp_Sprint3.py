@@ -68,7 +68,21 @@ class TestHelperFunctions(unittest.TestCase):
         family.chil = ['I1','I2', 'I3', 'I4']
         fam_dict[family.fid] = family
 
-        self.assertEqual(len(multiple_births(fam_dict, ind_dict)), 3, True)
+        individual31 = individualPerson("I31")
+        individual31.uid = "I31"
+        individual31.birt = '9 JAN 1988'
+        ind_dict[individual31.uid] = individual31
+
+        individual41 = individualPerson("I41")
+        individual41.uid = "I41"
+        individual41.birt = '9 JAN 1988'
+        ind_dict[individual41.uid] = individual41
+
+        family1 = familyClass("F2")
+        family1.chil = ['I31', 'I41']
+        fam_dict[family1.fid] = family1
+
+        self.assertEqual(len(multiple_births(fam_dict, ind_dict)), 5, True)
 
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
