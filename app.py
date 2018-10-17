@@ -21,7 +21,7 @@ from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
-from helperFunctions_Sprint3 import single_over_30
+from helperFunctions_Sprint3 import single_over_30, multiple_births
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -307,11 +307,14 @@ def main():
     else:
         print_both('No upcoming birthday in the next 30 days.')
 
-    #print_both("Singles over 30 data:")
+    #US31 - List singles over 30
     single = single_over_30(family_data, individual_data)
     print_both('Total number of singles over 30: ',len(single))
     for person in single:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
+    
+    #list multiple birth
+    multiple_births(family_data, individual_data)
     
 if __name__ == '__main__':
     main()
