@@ -29,7 +29,9 @@ def multiple_births(family_data, individual_data):
     and list all the children who are born on same day from one family.
     """
     multiple_births = []
-
+    birth_dict = {} #date key and count value
+    count = 0
+    bd = ''
     for family in family_data.values():
         children = family.chil
         #print('child:',children)
@@ -43,5 +45,28 @@ def multiple_births(family_data, individual_data):
         for s in siblings:
             siblings_birth.append(s.birt)
         #print('birth',siblings_birth)
+        for s in siblings_birth:
+            if s in birth_dict.keys():
+                count += 1
+            else:
+                count = 1
+            birth_dict[s] = count
+        #print(birth_dict)
+    for i,j in birth_dict.items():
+        if j > 1:
+            bd = i
+        else:
+            continue
+        #print(bd)
+        for family in family_data.values():
+            children = family.chil
+            for individual in individual_data.values():
+                if individual.uid in children:
+                    if individual.birt == bd:
+                        multiple_births.append(individual)
+    return multiple_births
+
+    
+
         
-                
+            

@@ -314,7 +314,11 @@ def main():
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
     
     #list multiple birth
-    multiple_births(family_data, individual_data)
+    list_multiple_birth = multiple_births(family_data, individual_data)
+    print_both('Total number of multiple births: ',len(list_multiple_birth))
+    for person in list_multiple_birth:
+        print_both("Family id: {0} Name: {1} Birth on: {2}".format(''.join(person.famc),person.name, person.birt))
+    
     
 if __name__ == '__main__':
     main()
