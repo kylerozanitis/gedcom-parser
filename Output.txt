@@ -54,7 +54,7 @@ Name: Jackline Alfonso Date Passed: 14 NOV 1979
 Name: Brenda Ordon Date Passed: 14 NOV 1950
 Name: Eric Locklear Date Passed: 8 JUN 1985
 Total number of recent births:  1
-Name: Eric Locklear, Birth on: 05 OCT 2018
+Name: Eric Locklear Birth on: 05 OCT 2018
 Total number of recent deaths:  0
 No recent Death
 ERROR: FAMILY: US15: F3 has more than 15 siblings
