@@ -362,16 +362,9 @@ def list_recent_births(individual_data):
     return list of birthdays happened in the last 30 days
     """
     recent_birth = []
-    error_story = 'US35'
-
     for individual in individual_data.values():
         if event_in_last_thirty_days(individual.birt):
-            recent_birth.append(individual)
-        else:
-            error_descrip = "Birth {} does not occur with in last 30 days".format(individual.birt)
-            error_location = individual.uid
-            print_both('ERROR: INDIVIDUAL:',error_story,':',str(error_location),':',error_descrip)
-        
+            recent_birth.append(individual)        
     return recent_birth
 
 

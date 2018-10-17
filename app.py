@@ -201,7 +201,7 @@ def main():
     print_both('Total number of deceased individuals: ',len(data))
     for person in deceased_list(individual_data):
         print_both("Name: {1} Date Passed: {0}".format(person.deat, person.name ))
-
+    
     #US35 - List recent birthdays
     #print_both("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
@@ -210,7 +210,7 @@ def main():
         print_both("No recent Birth")
     else:
         for individual in birth_recently:
-            print_both("Name: {0}, Birth on: {1}".format(individual.name, individual.birt))
+            print_both("Name: {0} Birth on: {1}".format(individual.name, individual.birt))
 
     #US36 - List recent deaths
     #print_both("\nRecent Death Data")
@@ -220,7 +220,7 @@ def main():
         print_both("No recent Death")
     else:
         for individual in death_recently:
-            print_both("Name: {0}, Death on: {1}".format(individual.name, individual.deat))
+            print_both("Name: {0} Death on: {1}".format(individual.name, individual.deat))
 
     # US15 -- There should be fewer than 15 siblings in a family
     fid_list = fewer_than15_siblings(family_data)
