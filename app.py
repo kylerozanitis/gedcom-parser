@@ -21,6 +21,7 @@ from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
+from helperFunctions_Sprint3 import single_over_30
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -308,6 +309,13 @@ def main():
                 print_both("ANOMALY: FAMILY: US10: Husband {} in Family {} is married before 14 years old".format(k, v[1]))
             else:
                 print_both("ANOMALY: FAMILY: US10: Wife {} in Family {} is married before 14 years old".format(k, v[1]))
+    
 
+    print_both("Singles over 30 data:")
+    single = single_over_30(family_data, individual_data)
+    if len(single) > 0:
+        print_both("All singles over 30: ",single)
+    else:
+        print_both("No single over 30")
 if __name__ == '__main__':
     main()

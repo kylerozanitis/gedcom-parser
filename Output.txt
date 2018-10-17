@@ -40,7 +40,7 @@ Families
 | F5 | 18 AUG 1984 |      NA     |    I10     | Eric Locklear  |    I4   | Angelica Martinez |                                                        NA                                                       |
 | F6 |  7 SEP 1952 |      NA     |     I6     | Henry Martinez |    I7   |    Brenda Ordon   |                                                      ['I4']                                                     |
 +----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 16 Oct 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 17 Oct 2018
 ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
 Date Passed: 16 OCT 1953 Name: Jack Hackley 
 Date Passed: 14 NOV 1979 Name: Jackline Alfonso 
@@ -104,3 +104,5 @@ No Recent death with survivals within last 30 days
 ERROR: FAMILY: US12: Parent I1 named Jack Hackley born on 7 MAY 1800 is more than 80 years older than child I3 named Adam Hackley born on 16 AUG 1954 in family F1
 ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
 ANOMALY: FAMILY: US10: Husband I10 in Family F5 is married before 14 years old
+Singles over 30 data:
+All singles over 30:  ['I9']
