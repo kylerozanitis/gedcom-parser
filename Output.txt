@@ -104,3 +104,9 @@ Total number of Upcoming birthdays:  1
 Name: Krista Shaw, Birth on: 24 OCT 1929
 Total number of singles over 30:  1
 Name: Henry Hackley Age: 33
+ERROR: INDIVIDUAL: US07 : I34 : lived longer than 150 years
+ERROR: INDIVIDUAL: US07 : I34 : lived longer than 150 years
+ERROR: INDIVIDUAL: US06 : I11 : Death of Husband 2 MAR 2007 occurs before date of divorce 1 JAN 2009
+ERROR: INDIVIDUAL: US06 : I11 : Death of Husband 2 MAR 2007 occurs before date of divorce 1 JAN 2009
+ERROR: INDIVIDUAL: US35 : I11 : Birth 29 SEP 2017 does not occur with in last 30 days
+ERROR: INDIVIDUAL: US35 : I12 : Birth 15 AUG 2018 does not occur with in last 30 days
