@@ -198,14 +198,14 @@ def main():
 
     #US29 - Get list of individuals who passed
     data = deceased_list(individual_data)
-    print_both('Total number of deceased individuals: ',len(data))
+    print_both('US29 - Total number of deceased individuals: ',len(data))
     for person in deceased_list(individual_data):
         print_both("Name: {1} Date Passed: {0}".format(person.deat, person.name ))
     
     #US35 - List recent birthdays
     #print_both("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
-    print_both('Total number of recent births: ',len(birth_recently))
+    print_both('US35 - Total number of recent births: ',len(birth_recently))
     if len(birth_recently) == 0:
         print_both("No recent Birth")
     else:
@@ -215,7 +215,7 @@ def main():
     #US36 - List recent deaths
     #print_both("\nRecent Death Data")
     death_recently = list_recent_death(individual_data)
-    print_both('Total number of recent deaths: ',len(death_recently))
+    print_both('US36 - Total number of recent deaths: ',len(death_recently))
     if len(death_recently) == 0:
         print_both("No recent Death")
     else:
@@ -288,7 +288,7 @@ def main():
     #US37 - survival from a recent death
     #print_both("\nRecent Death Data")
     data = list_recent_survivals(individual_data, family_data)
-    print_both('Total number of recent survivors: ',len(data))
+    print_both('US37 - Total number of recent survivors: ',len(data))
     if len(data) > 0:
         print_both("Survivals List:")
         for d in data.values():
@@ -300,7 +300,7 @@ def main():
     #US38 - List of Upcoming Birthday
     #print_both("Upcoming Birthday Data")
     data = list_upcoming_birthdays(individual_data)
-    print_both('Total number of Upcoming birthdays: ',len(data))
+    print_both('US38 - Total number of Upcoming birthdays: ',len(data))
     if len(data) is not 0:
         for birthdays in data:
             print_both("Name: {0}, Birth on: {1}".format(birthdays.name, birthdays.birt))
@@ -309,13 +309,13 @@ def main():
 
     #US31 - List singles over 30
     single = single_over_30(family_data, individual_data)
-    print_both('Total number of singles over 30: ',len(single))
+    print_both('US31 - Total number of singles over 30: ',len(single))
     for person in single:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
     
     #US32 - List multiple birth
     list_multiple_birth = multiple_births(family_data, individual_data)
-    print_both('Total number of multiple births: ',len(list_multiple_birth))
+    print_both('US32 - Total number of multiple births: ',len(list_multiple_birth))
     for person in list_multiple_birth:
         print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc),person.name, person.birt))
     
