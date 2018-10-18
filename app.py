@@ -281,7 +281,7 @@ def main():
 
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
-    print_both('Total number of living married: ',len(living_married))
+    print_both('US30 - Total number of living married: ',len(living_married))
     for person in living_married:
         print_both("ID: {0} Name: {1}".format(person.uid ,person.name))
 
