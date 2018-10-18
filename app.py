@@ -21,7 +21,7 @@ from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
-from helperFunctions_Sprint3 import single_over_30, multiple_births
+from helperFunctions_Sprint3 import single_over_30, multiple_births, siblings_should_not_marry
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -315,6 +315,8 @@ def main():
     
     #list multiple birth
     multiple_births(family_data, individual_data)
+
+    siblings_should_not_marry(family_data, individual_data)
     
 if __name__ == '__main__':
     main()

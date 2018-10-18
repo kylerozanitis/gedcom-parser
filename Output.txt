@@ -17,7 +17,6 @@ Individuals
 | I11 |  William Lara  |   M    |  2 AUG 1978 |  40 |  True |      NA     | ['F2'] |      NA      |
 +-----+----------------+--------+-------------+-----+-------+-------------+--------+--------------+
 Families
-<<<<<<< HEAD
 +----+-------------+----------+------------+---------------+---------+----------------+--------------+
 | ID |   Married   | Divorced | Husband ID |  Husband Name | Wife ID |   Wife Name    |   Children   |
 +----+-------------+----------+------------+---------------+---------+----------------+--------------+
@@ -30,32 +29,6 @@ Name: Maria Martinez Date Passed: 27 JUL 1973
 Name: Julia Penagos Date Passed: 05 SEP 2018
 Total number of recent births:  0
 No recent Birth
-=======
-+----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-| ID |   Married   |   Divorced  | Husband ID |  Husband Name  | Wife ID |     Wife Name     |                                                     Children                                                    |
-+----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-| F1 | 26 NOV 1950 |      NA     |     I1     |  Jack Hackley  |    I2   |    Krista Shaw    |                                                      ['I3']                                                     |
-| F3 |  9 JUN 1986 |      NA     |     I3     |  Adam Hackley  |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36'] |
-| F4 | 29 OCT 1982 | 28 DEC 1980 |     I3     |  Adam Hackley  |    I5   |  Jackline Alfonso |                                                      ['I9']                                                     |
-| F5 | 18 AUG 1984 |      NA     |    I10     | Eric Locklear  |    I4   | Angelica Martinez |                                                        NA                                                       |
-| F6 |  7 SEP 1952 |      NA     |     I6     | Henry Martinez |    I7   |    Brenda Ordon   |                                                      ['I4']                                                     |
-+----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 17 Oct 2018
-ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
-ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
-ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
-ERROR: FAMILY: US05: F4: Wife death date 14 NOV 1979 occurs before marriage date 29 OCT 1982
-ERROR: FAMILY: US05: F6: Wife death date 14 NOV 1950 occurs before marriage date 7 SEP 1952
-ERROR: INDIVIDUAL: US06 : I5 : Death of wife 14 NOV 1979 occurs before date of divorce 28 DEC 1980
-ERROR: INDIVIDUAL: US07 : I1 : lived longer than 150 years
-Total number of deceased individuals:  4
-Name: Jack Hackley Date Passed: 16 OCT 1953
-Name: Jackline Alfonso Date Passed: 14 NOV 1979
-Name: Brenda Ordon Date Passed: 14 NOV 1950
-Name: Eric Locklear Date Passed: 8 JUN 1985
-Total number of recent births:  1
-Name: Eric Locklear Birth on: 05 OCT 2018
->>>>>>> 8806be884ad5a6f42788ce6416fdf767c3a25405
 Total number of recent deaths:  0
 No recent Death
 ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries

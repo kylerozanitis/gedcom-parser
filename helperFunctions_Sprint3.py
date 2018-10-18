@@ -43,5 +43,28 @@ def multiple_births(family_data, individual_data):
         for s in siblings:
             siblings_birth.append(s.birt)
         #print('birth',siblings_birth)
-        
-                
+
+
+def siblings_should_not_marry(family_data,  individual_data):
+    print("\n\n\nSibilings")
+    trouble_siblings = []
+
+    for ind in individual_data.values():
+        for fam in ind.fams:
+            if fam is not "N" and fam is not "A":
+                if family_data.get(fam) is not None:
+                    trouble_siblings.append(family_data.get(fam))
+                    print(family_data.get(fam))
+
+
+
+    for i in trouble_siblings:
+        print("{} {} {} {}".format(i.fid, i.husb_id, i.wife_id, i.chil))
+
+
+    # for fam in family_data.values():
+    #     for child in fam.famc:
+    #         if child is fam.husb_id or child is fam.wife_id:
+    #             trouble_siblings.append(individual_data[child])
+
+    return trouble_siblings
