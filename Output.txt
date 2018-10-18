@@ -34,7 +34,7 @@ No recent Death
 ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
 ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
 ANOMALY: FAMILY: US08: F1: Birthday 30 OCT 1980 of child I4 occurs before marriage 14 DEC 1980
-Total number of living married:  3
+US30 - Total number of living married:  3
 ID: I2 Name: Radhames Lara
 ID: I3 Name: Josefina Ortiz
 ID: I2 Name: Radhames Lara
