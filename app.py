@@ -297,7 +297,7 @@ def main():
         separate_uid = separate_uid + str(req_list[-1])
     
         for each_error_list in error_entries:
-            print("WARNING: Individual: US23: " + str(len(req_list)) + " individual(s) named " + str(each_error_list[-2]) + " born on " + str(each_error_list[-1]) + ": " + str(separate_uid))        
+            print_both("WARNING: Individual: US23: " + str(len(req_list)) + " individual(s) named " + str(each_error_list[-2]) + " born on " + str(each_error_list[-1]) + ": " + str(separate_uid))        
         
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
