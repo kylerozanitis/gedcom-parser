@@ -1,6 +1,6 @@
 import unittest
 from classes import individualPerson, familyClass
-from helperFunctions_Sprint3 import single_over_30, multiple_births
+from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_unique_name_birthdate
 
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
@@ -83,6 +83,56 @@ class TestHelperFunctions(unittest.TestCase):
         fam_dict[family1.fid] = family1
 
         self.assertEqual(len(multiple_births(fam_dict, ind_dict)), 5, True)
+        
+    def test_validate_male_lastname(self):
+        """ Test cases for US16 --- All male members of the family should have the same last name"""
+        indi_dict = {}
+        fam_dict = {}
 
+        indi_I3 = individualPerson("I3")
+        indi_I3.name = "John Hernandez"
+        indi_I3.sex = 'M'
+        indi_dict[indi_I3.uid] = indi_I3
+        indi_I4 = individualPerson("I4")
+        indi_I4.name = "Sam Jackson"
+        indi_I4.sex = 'M'
+        indi_dict[indi_I4.uid] = indi_I4
+
+        fam_F1 = familyClass("F1")
+        fam_F1.chil = ["I3", "I4"]
+        fam_F1.husb = "David Hernandez"
+        fam_F1.wife = "Sofia Martinez"
+        fam_dict[fam_F1.fid] = fam_F1
+
+        self.assertEqual(validate_male_lastname(indi_dict, fam_dict), ({'F1': ['Hernandez', 'I4', 'Jackson']}))
+        self.assertNotEqual(validate_male_lastname(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_male_lastname(indi_dict, fam_dict))
+        self.assertIsNot(validate_male_lastname(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_male_lastname(indi_dict, fam_dict), ({'F1': ['Hernandez', 'I4', 'Jackson']}))
+
+        indi_dict = {}
+        fam_dict = {}
+
+        indi_I8 = individualPerson("I8")
+        indi_I8.name = "John Hernandez"
+        indi_I8.sex = 'M'
+        indi_dict[indi_I8.uid] = indi_I8
+        indi_I9 = individualPerson("I9")
+        indi_I9.name = "Sonia Jackson"
+        indi_I9.sex = 'F'
+        indi_dict[indi_I9.uid] = indi_I9
+
+        fam_F2 = familyClass("F2")
+        fam_F2.chil = ["I9", "I9"]
+        fam_F2.husb = "David Hernandez"
+        fam_F2.wife = "Sofia Martinez"
+        fam_dict[fam_F2.fid] = fam_F2
+
+        self.assertEqual(validate_male_lastname(indi_dict, fam_dict), ({}))
+        self.assertNotEqual(validate_male_lastname(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_male_lastname(indi_dict, fam_dict))
+        self.assertIsNot(validate_male_lastname(indi_dict, fam_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_male_lastname(indi_dict, fam_dict), ({}))        
+        
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
