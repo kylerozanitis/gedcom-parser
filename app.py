@@ -21,7 +21,7 @@ from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
-from helperFunctions_Sprint3 import single_over_30, multiple_births
+from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -278,6 +278,11 @@ def main():
     if len(problem_fams_dict) > 0:
         for k, v in problem_fams_dict.items():
             print_both("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
+            
+    # US16 --- All male members of the family should have the same last name
+    invaild_lastname_error = validate_male_lastname(individual_data, family_data)
+    for fid, details in invaild_lastname_error.items():
+        print("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
 
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
