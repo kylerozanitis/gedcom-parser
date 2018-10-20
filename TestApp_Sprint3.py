@@ -1,6 +1,6 @@
 import unittest
 from classes import individualPerson, familyClass
-from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname
+from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
 
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
@@ -133,6 +133,54 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertIsNotNone(validate_male_lastname(indi_dict, fam_dict))
         self.assertIsNot(validate_male_lastname(indi_dict, fam_dict), {'F1':'I5'})
         self.assertCountEqual(validate_male_lastname(indi_dict, fam_dict), ({}))        
-        
+    
+    def test_validate_unique_name_birthdate(self):
+        """ Test cases for US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file"""
+        indi_dict = {}
+
+        indi_I3 = individualPerson("I3")
+        indi_I3.name = "John Hernandez"
+        indi_I3.birt = "15 AUG 1947"
+        indi_dict[indi_I3.uid] = indi_I3
+        indi_I4 = individualPerson("I4")
+        indi_I4.name = "Ricky Pointing"
+        indi_I4.birt = "09 NOV 1949"
+        indi_dict[indi_I4.uid] = indi_I4
+        indi_I5 = individualPerson("I5")
+        indi_I5.name = "John Hernandez"
+        indi_I5.birt = "15 AUG 1947"
+        indi_dict[indi_I5.uid] = indi_I5
+        indi_I6 = individualPerson("I6")
+        indi_I6.name = "John Hernandez"
+        indi_I6.birt = "15 AUG 1947"
+        indi_dict[indi_I6.uid] = indi_I6 
+        indi_I7 = individualPerson("I7")
+        indi_I7.name = "John Hernandez"
+        indi_I7.birt = "15 AUG 1947"
+        indi_dict[indi_I7.uid] = indi_I7        
+
+        self.assertEqual(validate_unique_name_birthdate(indi_dict), ([['I3', 'I5', 'I6', 'I7', 'John Hernandez', '1947-08-15']]))
+        self.assertNotEqual(validate_unique_name_birthdate(indi_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_unique_name_birthdate(indi_dict))
+        self.assertIsNot(validate_unique_name_birthdate(indi_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_unique_name_birthdate(indi_dict), ([['I3', 'I5', 'I6', 'I7', 'John Hernandez', '1947-08-15']]))
+
+        indi_dict = {}
+
+        indi_I8 = individualPerson("I8")
+        indi_I8.name = "John Hernandez"
+        indi_I8.birt = "15 AUG 1947"
+        indi_dict[indi_I8.uid] = indi_I8
+        indi_I9 = individualPerson("I9")
+        indi_I9.name = "Ricky Pointing"
+        indi_I9.birt = "09 FEB 1935"
+        indi_dict[indi_I9.uid] = indi_I9
+
+        self.assertEqual(validate_unique_name_birthdate(indi_dict), ([]))
+        self.assertNotEqual(validate_unique_name_birthdate(indi_dict), {'F1':'I5'})
+        self.assertIsNotNone(validate_unique_name_birthdate(indi_dict))
+        self.assertIsNot(validate_unique_name_birthdate(indi_dict), {'F1':'I5'})
+        self.assertCountEqual(validate_unique_name_birthdate(indi_dict), ([]))
+    
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
