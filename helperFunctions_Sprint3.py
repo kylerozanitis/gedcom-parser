@@ -66,7 +66,25 @@ def multiple_births(family_data, individual_data):
                         multiple_births.append(individual)
     return multiple_births
 
-    
+def validate_male_lastname(individual_data, family_data):
+    # US16 --- All male members of the family should have the same last name
+    def firstname_lastname_list(name):
+        names_list = name.split(" ")
+        return names_list
 
-        
+    invaild_lastname_error = dict()
+    fam_lastname = ""
+    for fid, family in family_data.items():
+        fam_lastname = firstname_lastname_list(family.husb)[1]
+        if len(family.chil) > 0 and family.chil != 'NA':
+            for child in family.chil:
+                if individual_data[child].sex == 'M':
+                    child_lastname = firstname_lastname_list(individual_data[child].name)[1]
+                    if fam_lastname == child_lastname:
+                        continue
+                    else:
+                        invaild_lastname_error[fid] = [fam_lastname, child, child_lastname]
+
+    return invaild_lastname_error
+
             
