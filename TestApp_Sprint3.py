@@ -1,6 +1,6 @@
 import unittest
 from classes import individualPerson, familyClass
-from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_unique_name_birthdate
+from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname
 
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
