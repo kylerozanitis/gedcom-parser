@@ -282,7 +282,7 @@ def main():
     # US16 --- All male members of the family should have the same last name
     invaild_lastname_error = validate_male_lastname(individual_data, family_data)
     for fid, details in invaild_lastname_error.items():
-        print("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
+        print_both("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
 
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
