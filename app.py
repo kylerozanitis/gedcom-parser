@@ -21,7 +21,7 @@ from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
-from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname
+from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -284,6 +284,21 @@ def main():
     for fid, details in invaild_lastname_error.items():
         print_both("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
 
+    # US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file
+    error_entries = validate_unique_name_birthdate(individual_data)
+    if len(error_entries) > 0:
+        separate_uid = ""
+        req_list = []
+        for item in error_entries:
+            for uid in item[:-2]:
+                req_list.append(uid)
+        for element in range(len(req_list) - 1):
+            separate_uid += req_list[element] + ", "
+        separate_uid = separate_uid + str(req_list[-1])
+    
+        for each_error_list in error_entries:
+            print("WARNING: Individual: US23: " + str(len(req_list)) + " individual(s) named " + str(each_error_list[-2]) + " born on " + str(each_error_list[-1]) + ": " + str(separate_uid))        
+        
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
     print_both('US30 - Total number of living married: ',len(living_married))
