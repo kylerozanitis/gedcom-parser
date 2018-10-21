@@ -45,26 +45,36 @@ def multiple_births(family_data, individual_data):
         #print('birth',siblings_birth)
 
 
+def get_spouse(family_data, fam_id, ind_id):
+    """Helper function to get the spouse from family_data it takes family dictionary, family id and individual id"""
+
+    person = family_data.get(fam_id, "NA")
+
+    if person == "NA":
+        return None
+
+    if person.husb_id == ind_id:
+        return person.wife_id
+    else:
+        return person.wife_id
+
+
+
 def siblings_should_not_marry(family_data,  individual_data):
-    print("\n\n\nSibilings")
+    """
+    US18 - Siblings should not marry
+    This function will take family data and individual data as input
+    and returns a list of siblings that are married to each other.
+    """
     trouble_siblings = []
 
     for ind in individual_data.values():
         for fam in ind.fams:
-            if fam is not "N" and fam is not "A":
-                if family_data.get(fam) is not None:
-                    trouble_siblings.append(family_data.get(fam))
-                    print(family_data.get(fam))
+            spouse = get_spouse(family_data, fam, ind.uid)
 
-
-
-    for i in trouble_siblings:
-        print("{} {} {} {}".format(i.fid, i.husb_id, i.wife_id, i.chil))
-
-
-    # for fam in family_data.values():
-    #     for child in fam.famc:
-    #         if child is fam.husb_id or child is fam.wife_id:
-    #             trouble_siblings.append(individual_data[child])
+            if spouse is not None and spouse is not ind.famc and spouse is ind.fams:
+                trouble_siblings.append(ind)
 
     return trouble_siblings
+
+

@@ -12,7 +12,7 @@ Individuals
 |  I6 |  Arturo Ortiz  |   M    |  6 AUG 1927 |  58 | False | 29 NOV 1985 |   NA   |    ['F3']    |
 |  I7 | Maria Martinez |   F    |  2 MAR 1931 |  42 | False | 27 JUL 1973 |   NA   |    ['F3']    |
 |  I8 |  Andres Lara   |   M    | 21 DEC 2013 |  4  |  True |      NA     | ['F5'] |      NA      |
-|  I9 | Vanessa Castro |   F    | 20 OCT 1988 |  29 |  True |      NA     |   NA   |    ['F5']    |
+|  I9 | Vanessa Castro |   F    | 20 OCT 1988 |  30 |  True |      NA     |   NA   |    ['F5']    |
 | I10 | Julia Penagos  |   F    |  3 JAN 1959 |  59 | False | 05 SEP 2018 |   NA   |    ['F2']    |
 | I11 |  William Lara  |   M    |  2 AUG 1978 |  40 |  True |      NA     | ['F2'] |      NA      |
 +-----+----------------+--------+-------------+-----+-------+-------------+--------+--------------+
@@ -40,10 +40,9 @@ ID: I3 Name: Josefina Ortiz
 ID: I2 Name: Radhames Lara
 Total number of recent survivors:  0
 No Recent death with survivals within last 30 days
-Total number of Upcoming birthdays:  3
+Total number of Upcoming birthdays:  2
 Name: Jose Lara, Birth on: 25 OCT 1991
 Name: Darwin Lara, Birth on: 30 OCT 1980
-Name: Vanessa Castro, Birth on: 20 OCT 1988
 Total number of singles over 30:  5
 Name: Darwin Lara Age: 37
 Name: Samathan Felix Age: 34
