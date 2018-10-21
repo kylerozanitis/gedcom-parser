@@ -56,6 +56,15 @@
 1 FAMS @F3@
 1 FAMS @F5@
 1 FAMC @F6@
+0 @I37@ INDI
+1 NAME Angelica /Martinez/
+2 GIVN Angelica
+2 SURN Martinez
+2 _MARNM Martinez
+1 SEX M
+1 BIRT
+2 DATE 30 NOV 1959
+1 FAMC @F6@
 0 @I5@ INDI
 1 NAME Jackline /Alfonso/
 2 GIVN Jackline
@@ -232,10 +241,10 @@
 2 DATE 1 JUL 2006
 1 FAMC @F3@
 0 @I9@ INDI
-1 NAME Henry /Hackley/
+1 NAME Henry /Martinez/
 2 GIVN Henry
-2 SURN Hackley
-2 _MARNM Hackley
+2 SURN Martinez
+2 _MARNM Martinez
 1 SEX M
 1 BIRT
 2 DATE 4 SEP 1985
@@ -304,6 +313,7 @@
 1 HUSB @I6@
 1 WIFE @I7@
 1 CHIL @I4@
+1 CHIL @I37@
 1 MARR
 2 DATE 7 SEP 1952
 1 _CURRENT Y

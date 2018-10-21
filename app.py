@@ -21,7 +21,8 @@ from helperFunctions_Sprint1 import list_recent_births, list_recent_death, fewer
 from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, list_upcoming_birthdays, validate_child_birth
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
-from helperFunctions_Sprint3 import single_over_30, multiple_births, siblings_should_not_marry
+from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
+
 import sys
 from datetime import datetime
 from prettytable import PrettyTable
@@ -198,14 +199,14 @@ def main():
 
     #US29 - Get list of individuals who passed
     data = deceased_list(individual_data)
-    print_both('Total number of deceased individuals: ',len(data))
+    print_both('US29 - Total number of deceased individuals: ',len(data))
     for person in deceased_list(individual_data):
         print_both("Name: {1} Date Passed: {0}".format(person.deat, person.name ))
     
     #US35 - List recent birthdays
     #print_both("\nRecent Birthday Data")
     birth_recently = list_recent_births(individual_data)
-    print_both('Total number of recent births: ',len(birth_recently))
+    print_both('US35 - Total number of recent births: ',len(birth_recently))
     if len(birth_recently) == 0:
         print_both("No recent Birth")
     else:
@@ -215,7 +216,7 @@ def main():
     #US36 - List recent deaths
     #print_both("\nRecent Death Data")
     death_recently = list_recent_death(individual_data)
-    print_both('Total number of recent deaths: ',len(death_recently))
+    print_both('US36 - Total number of recent deaths: ',len(death_recently))
     if len(death_recently) == 0:
         print_both("No recent Death")
     else:
@@ -278,17 +279,37 @@ def main():
     if len(problem_fams_dict) > 0:
         for k, v in problem_fams_dict.items():
             print_both("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
+            
+    # US16 --- All male members of the family should have the same last name
+    invaild_lastname_error = validate_male_lastname(individual_data, family_data)
+    for fid, details in invaild_lastname_error.items():
+        print_both("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
 
+    # US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file
+    error_entries = validate_unique_name_birthdate(individual_data)
+    if len(error_entries) > 0:
+        separate_uid = ""
+        req_list = []
+        for item in error_entries:
+            for uid in item[:-2]:
+                req_list.append(uid)
+        for element in range(len(req_list) - 1):
+            separate_uid += req_list[element] + ", "
+        separate_uid = separate_uid + str(req_list[-1])
+    
+        for each_error_list in error_entries:
+            print_both("WARNING: Individual: US23: " + str(len(req_list)) + " individual(s) named " + str(each_error_list[-2]) + " born on " + str(each_error_list[-1]) + ": " + str(separate_uid))        
+        
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
-    print_both('Total number of living married: ',len(living_married))
+    print_both('US30 - Total number of living married: ',len(living_married))
     for person in living_married:
         print_both("ID: {0} Name: {1}".format(person.uid ,person.name))
 
     #US37 - survival from a recent death
     #print_both("\nRecent Death Data")
     data = list_recent_survivals(individual_data, family_data)
-    print_both('Total number of recent survivors: ',len(data))
+    print_both('US37 - Total number of recent survivors: ',len(data))
     if len(data) > 0:
         print_both("Survivals List:")
         for d in data.values():
@@ -300,7 +321,7 @@ def main():
     #US38 - List of Upcoming Birthday
     #print_both("Upcoming Birthday Data")
     data = list_upcoming_birthdays(individual_data)
-    print_both('Total number of Upcoming birthdays: ',len(data))
+    print_both('US38 - Total number of Upcoming birthdays: ',len(data))
     if len(data) is not 0:
         for birthdays in data:
             print_both("Name: {0}, Birth on: {1}".format(birthdays.name, birthdays.birt))
@@ -309,14 +330,16 @@ def main():
 
     #US31 - List singles over 30
     single = single_over_30(family_data, individual_data)
-    print_both('Total number of singles over 30: ',len(single))
+    print_both('US31 - Total number of singles over 30: ',len(single))
     for person in single:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
-    
-    #list multiple birth
-    multiple_births(family_data, individual_data)
 
-    siblings_should_not_marry(family_data, individual_data)
+    #US32 - List multiple birth
+    list_multiple_birth = multiple_births(family_data, individual_data)
+    print_both('US32 - Total number of multiple births: ',len(list_multiple_birth))
+    for person in list_multiple_birth:
+        print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc),person.name, person.birt))
+
     
 if __name__ == '__main__':
     main()
