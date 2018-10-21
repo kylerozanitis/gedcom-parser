@@ -29,11 +29,7 @@ Name: Maria Martinez Date Passed: 27 JUL 1973
 Name: Julia Penagos Date Passed: 05 SEP 2018
 US35 - Total number of recent births:  0
 No recent Birth
-<<<<<<< HEAD
-Total number of recent deaths:  0
-=======
 US36 - Total number of recent deaths:  0
->>>>>>> 0a63b80e50aad554ec040be823c0377f41cc76e4
 No recent Death
 ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
 ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
@@ -44,21 +40,14 @@ ID: I3 Name: Josefina Ortiz
 ID: I2 Name: Radhames Lara
 US37 - Total number of recent survivors:  0
 No Recent death with survivals within last 30 days
-<<<<<<< HEAD
-Total number of Upcoming birthdays:  2
+US38 - Total number of Upcoming birthdays:  2
 Name: Jose Lara, Birth on: 25 OCT 1991
 Name: Darwin Lara, Birth on: 30 OCT 1980
-Total number of singles over 30:  5
-=======
-US38 - Total number of Upcoming birthdays:  3
-Name: Jose Lara, Birth on: 25 OCT 1991
-Name: Darwin Lara, Birth on: 30 OCT 1980
-Name: Vanessa Castro, Birth on: 20 OCT 1988
 US31 - Total number of singles over 30:  5
->>>>>>> 0a63b80e50aad554ec040be823c0377f41cc76e4
 Name: Darwin Lara Age: 37
 Name: Samathan Felix Age: 34
 Name: Arturo Ortiz Age: 58
 Name: Maria Martinez Age: 42
 Name: William Lara Age: 40
 US32 - Total number of multiple births:  0
+US18 - Total number of marriage with their sibling:  0
