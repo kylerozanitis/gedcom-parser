@@ -417,6 +417,7 @@ def check_unique_ids(individual_data, family_data):
     
     return problem_uids, problem_fids
 
+
 def check_marriage_status(family_data):
     """ Function to check that a family does not have 'NA' listed for marr and
     remove them from the dictionary if so. """
@@ -431,11 +432,13 @@ def check_marriage_status(family_data):
 
     return family_data
 
+
 def check_life_status(person, marriage_date):
     """ Function to check a person's life status and whether their death date
     occurred before their marriage date; if yes, return True else, return False. """
     if person.alive == False:
         return check_two_dates(person.deat, marriage_date)
+
 
 def print_both(*args):
     """ Function to print the text to the command line/terminal and write to a file """

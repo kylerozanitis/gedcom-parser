@@ -1,7 +1,7 @@
 import unittest
 from classes import individualPerson, familyClass
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
-from helperFunctions_Sprint3 import siblings_should_not_marry, get_children, get_spouse
+from helperFunctions_Sprint3 import siblings_should_not_marry, get_children, get_spouse, reject_illegal_dates
 
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
@@ -226,6 +226,13 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(get_children(fam_dict, "F2"), ["I1", "I2"], True)
         self.assertEqual(len(siblings_should_not_marry(fam_dict, ind_dict)), 2, True)
+
+    def test_reject_illegal_dates(self):
+        self.assertTrue(reject_illegal_dates('2/10/2018'), True)
+        self.assertTrue(reject_illegal_dates('6/30/2018'), True)
+
+        self.assertFalse(reject_illegal_dates('2/30/2018'), False)
+        self.assertFalse(reject_illegal_dates('6/32/2018'), False)
 
 
 if __name__ == '__main__':

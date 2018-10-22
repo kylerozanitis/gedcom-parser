@@ -1,6 +1,6 @@
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, check_two_dates
 from helperFunctions_Sprint1 import convert_str_to_date, print_both
-from collections import Counter
+import datetime
 
 def single_over_30(family_data, individual_data):
     """ US31 - List all single over 30
@@ -152,9 +152,9 @@ def get_children(family_data, fam_id):
 
 def siblings_should_not_marry(family_data,  individual_data):
     """
-    US18 - Siblings should not marry
-    This function will take family data and individual data as input
-    and returns a list of siblings that are married to each other.
+        US18 - Siblings should not marry
+        This function will take family data and individual data as input
+        and returns a list of siblings that are married to each other.
     """
     trouble_siblings = []
 
@@ -167,3 +167,15 @@ def siblings_should_not_marry(family_data,  individual_data):
 
     return trouble_siblings
 
+
+def reject_illegal_dates(date):
+    """
+        US42 - reject illegal dates
+        takes a date in format day/mm/year or 2/19/2018
+    """
+    month, day, year = date.split('/')
+    try:
+        if datetime.datetime(int(year), int(month), int(day)):
+            return True
+    except ValueError:
+        return False
