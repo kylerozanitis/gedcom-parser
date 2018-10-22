@@ -184,6 +184,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertCountEqual(validate_unique_name_birthdate(indi_dict), ([]))
 
     def test_siblings_should_not_marry(self):
+        """ Test cases for US18 --- Siblings should not marry"""
         fam_dict = {}
         ind_dict = {}
 
@@ -228,6 +229,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(siblings_should_not_marry(fam_dict, ind_dict)), 2, True)
 
     def test_reject_illegal_dates(self):
+        """ Test cases for US42 --- Reject Illegal date"""
         self.assertTrue(reject_illegal_dates('2/10/2018'), True)
         self.assertTrue(reject_illegal_dates('6/30/2018'), True)
 
