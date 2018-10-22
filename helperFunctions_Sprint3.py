@@ -156,6 +156,7 @@ def siblings_should_not_marry(family_data,  individual_data):
         This function will take family data and individual data as input
         and returns a list of siblings that are married to each other.
     """
+
     trouble_siblings = []
 
     for ind in individual_data.values():
@@ -173,6 +174,7 @@ def reject_illegal_dates(date):
         US42 - reject illegal dates
         takes a date in format day/mm/year or 2/19/2018
     """
+
     month, day, year = date.split('/')
     try:
         if datetime.datetime(int(year), int(month), int(day)):

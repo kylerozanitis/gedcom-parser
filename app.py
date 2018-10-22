@@ -335,11 +335,13 @@ def main():
     for person in single:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
 
+
     #US32 - List multiple birth
     list_multiple_birth = multiple_births(family_data, individual_data)
     print_both('US32 - Total number of multiple births: ',len(list_multiple_birth))
     for person in list_multiple_birth:
-        print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc),person.name, person.birt))
+        print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc), person.name, person.birt))
+
 
     #US18 - List Siblings should not marry
     family = siblings_should_not_marry(family_data, individual_data)
