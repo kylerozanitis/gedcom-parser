@@ -20,7 +20,7 @@ The propose of this application is to extract data from a GEDCOM file and create
 3. Install dependencies: 
     - pip install -r requirements.txt
 4. Run program:
-    - python app.py
+    - python app.py filename(eg. familytree.ged)
     
 ### What you need to run this code going Forward: 
 1. Activate the virtual Enviorment:
@@ -28,7 +28,7 @@ The propose of this application is to extract data from a GEDCOM file and create
 2. Pull from repo: 
     - git pull origin master
 3. Run program:
-    - python app.py
+    - python app.py filename(eg. familytree.ged)
     
 #### If installing a package using pip:
     - Run pip freeze >> requirements.txt
