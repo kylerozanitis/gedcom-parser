@@ -1,3 +1,6 @@
+""" This file includes the functions that were implemented in sprint 1 and any
+functions that assisted in parsing of the data """
+
 # Lib Imports
 import re
 import os

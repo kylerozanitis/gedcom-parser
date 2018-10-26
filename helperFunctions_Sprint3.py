@@ -1,3 +1,6 @@
+""" This file includes the functions that were implemented in sprint 23 """
+
+# Lib Imports
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, check_two_dates
 from helperFunctions_Sprint1 import convert_str_to_date, print_both
 import datetime
@@ -176,3 +179,20 @@ def reject_illegal_dates(date):
             return True
     except ValueError:
         return False
+
+
+def correct_gender_for_role(family_data, individual_data):
+    """ US21 - Husband in family should be male and wife in family should be female """
+
+    problem_families = {} # key = family id, value = list of reported gender, expected gender, and person id
+
+    for family in family_data.values():
+        husband = individual_data[family.husb_id]
+        wife = individual_data[family.wife_id]
+
+        if husband.sex == "F" or husband.sex == "NA":
+            problem_families[family.fid] = [husband.sex, "M", husband.uid]
+        elif wife.sex == "M" or wife.sex == "NA":
+            problem_families[family.fid] = [wife.sex, "F", wife.uid]
+
+    return problem_families

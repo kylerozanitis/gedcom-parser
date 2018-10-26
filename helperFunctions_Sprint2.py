@@ -1,3 +1,5 @@
+""" This file includes the functions that were implemented in sprint 2 """
+
 #Lib Imports
 from dateutil.relativedelta import relativedelta
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, event_in_last_thirty_days, check_two_dates

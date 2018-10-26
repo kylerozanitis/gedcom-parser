@@ -1,7 +1,7 @@
 import unittest
 from classes import individualPerson, familyClass
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
-from helperFunctions_Sprint3 import siblings_should_not_marry, get_children, get_spouse, reject_illegal_dates
+from helperFunctions_Sprint3 import siblings_should_not_marry, get_children, get_spouse, reject_illegal_dates, correct_gender_for_role
 
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
@@ -235,6 +235,85 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertFalse(reject_illegal_dates('2/30/2018'), False)
         self.assertFalse(reject_illegal_dates('6/32/2018'), False)
+
+    def test_correct_gender_for_role(self):
+        """ Unit tests for US21 Correct Gender for Role - Husband in family
+        should be male and wife in family should be female """
+
+        indi_dict = {}
+        fam_dict = {}
+
+        i1 = individualPerson('I1')
+        i1.sex = "M"
+        i1.uid = 'I1'
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson('I2')
+        i2.sex = "F"
+        i2.uid = 'I2'
+        indi_dict[i2.uid] = i2
+
+        f1 = familyClass("F1")
+        f1.husb_id = "I1"
+        f1.wife_id = "I2"
+        fam_dict[f1.fid] = f1
+
+        self.assertEqual(correct_gender_for_role(fam_dict, indi_dict), {})
+        self.assertNotEqual(correct_gender_for_role(fam_dict, indi_dict), {"F1": ["F", "M", "I1"]})
+
+        i3 = individualPerson('I3')
+        i3.sex = "F"
+        i3.uid = 'I3'
+        indi_dict[i3.uid] = i3
+
+        i4 = individualPerson('I4')
+        i4.sex = "F"
+        i4.uid = 'I4'
+        indi_dict[i4.uid] = i4
+
+        f2 = familyClass("F2")
+        f2.husb_id = "I3"
+        f2.wife_id = "I4"
+        fam_dict[f2.fid] = f2
+
+        self.assertEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"]})
+        self.assertNotEqual(correct_gender_for_role(fam_dict, indi_dict), {})
+
+        i5 = individualPerson('I5')
+        i5.sex = "M"
+        i5.uid = 'I5'
+        indi_dict[i5.uid] = i5
+
+        i6 = individualPerson('I6')
+        i6.sex = "M"
+        i6.uid = 'I6'
+        indi_dict[i6.uid] = i6
+
+        f3 = familyClass("F3")
+        f3.husb_id = "I5"
+        f3.wife_id = "I6"
+        fam_dict[f3.fid] = f3
+
+        self.assertEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"], "F3": ["M", "F", "I6"]})
+        self.assertNotEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"]})
+
+        i7 = individualPerson('I7')
+        i7.sex = "M"
+        i7.uid = 'I7'
+        indi_dict[i7.uid] = i7
+
+        i8 = individualPerson('I8')
+        i8.sex = "NA"
+        i8.uid = 'I8'
+        indi_dict[i8.uid] = i8
+
+        f4 = familyClass("F4")
+        f4.husb_id = "I7"
+        f4.wife_id = "I8"
+        fam_dict[f4.fid] = f4
+
+        self.assertEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"], "F3": ["M", "F", "I6"], "F4": ["NA", "F", "I8"]})
+        self.assertNotEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"], "F3": ["M", "F", "I6"]})
 
 
 if __name__ == '__main__':
