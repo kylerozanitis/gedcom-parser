@@ -5,12 +5,12 @@ Individuals
 |  ID |        Name       | Gender |   Birthday  | Age | Alive |    Death    | Child  |    Spouse    |
 +-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
 |  I1 |    Jack Hackley   |   M    |  7 MAY 1800 | 153 | False | 16 OCT 1953 |   NA   |    ['F1']    |
-|  I2 |    Krista Shaw    |   F    | 24 OCT 1929 |  88 |  True |      NA     |   NA   | ['F1', 'F2'] |
+|  I2 |    Krista Shaw    |   NA   | 24 OCT 1929 |  89 |  True |      NA     |   NA   | ['F1', 'F2'] |
 |  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  64 |  True |      NA     | ['F1'] | ['F3', 'F4'] |
 |  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  58 |  True |      NA     | ['F6'] | ['F3', 'F5'] |
 | I37 | Angelica Martinez |   M    | 30 NOV 1959 |  58 |  True |      NA     | ['F6'] |      NA      |
 |  I5 |  Jackline Alfonso |   F    | 14 SEP 1955 |  24 | False | 14 NOV 1979 |   NA   |    ['F4']    |
-|  I6 |   Henry Martinez  |   M    | 15 MAY 1926 |  92 |  True |      NA     |   NA   |    ['F6']    |
+|  I6 |   Henry Martinez  |   F    | 15 MAY 1926 |  92 |  True |      NA     |   NA   |    ['F6']    |
 |  I7 |    Brenda Ordon   |   F    |  1 APR 1930 |  20 | False | 14 NOV 1950 |   NA   |    ['F6']    |
 |  I8 |   Maria Hackley   |   F    | 28 JUL 2020 |  -2 |  True |      NA     | ['F3'] |      NA      |
 | I22 |    Liam Hackley   |   M    | 28 JUL 2010 |  8  |  True |      NA     | ['F3'] |      NA      |
@@ -41,7 +41,7 @@ Families
 | F5 | 18 AUG 1984 |      NA     |    I10     | Eric Locklear  |    I4   | Angelica Martinez |                                                        NA                                                       |
 | F6 |  7 SEP 1952 |      NA     |     I6     | Henry Martinez |    I7   |    Brenda Ordon   |                                                  ['I4', 'I37']                                                  |
 +----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 23 Oct 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 26 Oct 2018
 ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
 ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
 ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
@@ -79,8 +79,9 @@ ID: I4 Name: Angelica Martinez
 ID: I6 Name: Henry Martinez
 US37 - Total number of recent survivors:  0
 No Recent death with survivals within last 30 days
-US38 - Total number of Upcoming birthdays:  1
-Name: Krista Shaw, Birth on: 24 OCT 1929
+US38 - Total number of Upcoming birthdays:  0
+No upcoming birthday in the next 30 days.
+US18 - Total number of marriage with their sibling:  0
 US31 - Total number of singles over 30:  2
 Name: Angelica Martinez Age: 58
 Name: Henry Martinez Age: 33
@@ -93,4 +94,5 @@ Family id: F3 Birth on: 1 JUL 2006 Name: Maia Hackley
 Family id: F3 Birth on: 1 JUL 2006 Name: Isla Hackley
 Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
-US18 - Total number of marriage with their sibling:  0
+ANOMALY: FAMILY: US21: Spouse I2 in Family F1 gender listed as NA but expected F
+ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
