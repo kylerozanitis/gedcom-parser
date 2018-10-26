@@ -196,3 +196,32 @@ def correct_gender_for_role(family_data, individual_data):
             problem_families[family.fid] = [wife.sex, "F", wife.uid]
 
     return problem_families
+
+def unique_first_names(family_data, individual_data):
+    """ US25 - No more than one child with the same name and birth date should
+    appear in a family """
+
+    problem_families = set()
+
+    for family in family_data.values():
+        if family.chil != "NA":
+            children_list = family.chil
+
+            if len(children_list) > 1:
+                for c in children_list:
+                    child = individual_data[c]
+                    child_id = child.uid
+                    child_name = child.name
+                    child_birthday = child.birt
+
+                    for p in children_list:
+                        person = individual_data[p]
+                        person_id = person.uid
+                        person_name = person.name
+                        person_birthday = person.birt
+
+                        if child_id != person_id:
+                            if child_name == person_name and child_birthday == person_birthday:
+                                problem_families.add(family.fid)
+        
+    return problem_families
