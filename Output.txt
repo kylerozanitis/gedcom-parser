@@ -96,3 +96,4 @@ Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 ANOMALY: FAMILY: US21: Spouse I2 in Family F1 gender listed as NA but expected F
 ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
+ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name

@@ -2,6 +2,7 @@ import unittest
 from classes import individualPerson, familyClass
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
 from helperFunctions_Sprint3 import siblings_should_not_marry, get_children, get_spouse, reject_illegal_dates, correct_gender_for_role
+from helperFunctions_Sprint3 import unique_first_names
 
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
@@ -314,6 +315,56 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"], "F3": ["M", "F", "I6"], "F4": ["NA", "F", "I8"]})
         self.assertNotEqual(correct_gender_for_role(fam_dict, indi_dict), {"F2": ["F", "M", "I3"], "F3": ["M", "F", "I6"]})
+
+    def test_unique_first_names(self):
+        """ Unit tests for US25 Unique First Names - No more than one child
+        with the same name and birth date should appear in a family """
+
+        indi_dict = {}
+        fam_dict = {}
+
+        i1 = individualPerson("I1")
+        i1.uid = "I1"
+        i1.name = "Tyler"
+        i1.birt = "26 Oct 1995"
+
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson("I2")
+        i2.uid = "I2"
+        i1.name = "Quinn"
+        i1.birt = "26 Oct 1995"
+        indi_dict[i2.uid] = i2
+
+        f1 = familyClass("F1")
+        f1.chil = ["I1", "I2"]
+        fam_dict[f1.fid] = f1
+
+        self.assertEqual(unique_first_names(fam_dict, indi_dict), set())
+        self.assertNotEqual(unique_first_names(fam_dict, indi_dict), {"F1"})
+
+        indi_dict = {}
+        fam_dict = {}
+
+        i3 = individualPerson("I3")
+        i3.uid = "I3"
+        i3.name = "Ryan"
+        i3.birt = "13 Apr 1994"
+
+        indi_dict[i3.uid] = i3
+
+        i4 = individualPerson("I4")
+        i4.uid = "I4"
+        i4.name = "Ryan"
+        i4.birt = "13 Apr 1994"
+        indi_dict[i4.uid] = i4
+
+        f2 = familyClass("F2")
+        f2.chil = ["I3", "I4"]
+        fam_dict[f2.fid] = f2
+
+        self.assertEqual(unique_first_names(fam_dict, indi_dict), {"F2"})
+        self.assertNotEqual(unique_first_names(fam_dict, indi_dict), {"F1"})
 
 
 if __name__ == '__main__':
