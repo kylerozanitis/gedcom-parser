@@ -22,7 +22,7 @@ from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, 
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
-from helperFunctions_Sprint3 import siblings_should_not_marry
+from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
 
 import sys
 from datetime import datetime
@@ -329,20 +329,6 @@ def main():
     else:
         print_both('No upcoming birthday in the next 30 days.')
 
-    #US31 - List singles over 30
-    single = single_over_30(family_data, individual_data)
-    print_both('US31 - Total number of singles over 30: ',len(single))
-    for person in single:
-        print_both("Name: {0} Age: {1}".format(person.name, person.age))
-
-
-    #US32 - List multiple birth
-    list_multiple_birth = multiple_births(family_data, individual_data)
-    print_both('US32 - Total number of multiple births: ',len(list_multiple_birth))
-    for person in list_multiple_birth:
-        print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc), person.name, person.birt))
-
-
     #US18 - List Siblings should not marry
     family = siblings_should_not_marry(family_data, individual_data)
     print_both('US18 - Total number of marriage with their sibling: ', len(family))
@@ -352,6 +338,28 @@ def main():
         else:
             print_both("No Siblings are married")
 
-    
+    #US31 - List singles over 30
+    single = single_over_30(family_data, individual_data)
+    print_both('US31 - Total number of singles over 30: ',len(single))
+    for person in single:
+        print_both("Name: {0} Age: {1}".format(person.name, person.age))
+
+    #US32 - List multiple birth
+    list_multiple_birth = multiple_births(family_data, individual_data)
+    print_both('US32 - Total number of multiple births: ',len(list_multiple_birth))
+    for person in list_multiple_birth:
+        print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc), person.name, person.birt))
+
+    # US21 - Husband in family should be male and wife in family should be female
+    prob_fams_dict = correct_gender_for_role(family_data, individual_data)
+
+    if len(prob_fams_dict) > 0:
+        for k, v in prob_fams_dict.items():
+            if v[0] == "NA":
+                print_both("ANOMALY: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
+            else:
+                print_both("ERROR: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
+
+
 if __name__ == '__main__':
     main()
