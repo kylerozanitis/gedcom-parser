@@ -35,8 +35,8 @@ Families
 +----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
 | ID |   Married   |   Divorced  | Husband ID |  Husband Name  | Wife ID |     Wife Name     |                                                     Children                                                    |
 +----+-------------+-------------+------------+----------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-| F1 | 26 NOV 1950 |      NA     |     I1     |  Jack Hackley  |    I2   |    Krista Shaw    |                                                      ['I3']                                                     |
-| F3 |  9 JUN 1986 |      NA     |     I3     |  Adam Hackley  |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36'] |
+| F1 | 24 NOV 1950 |      NA     |     I1     |  Jack Hackley  |    I2   |    Krista Shaw    |                                                      ['I3']                                                     |
+| F3 |  9 NOV 1986 |      NA     |     I3     |  Adam Hackley  |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36'] |
 | F4 | 29 OCT 1982 | 28 DEC 1980 |     I3     |  Adam Hackley  |    I5   |  Jackline Alfonso |                                                      ['I9']                                                     |
 | F5 | 18 AUG 1984 |      NA     |    I10     | Eric Locklear  |    I4   | Angelica Martinez |                                                        NA                                                       |
 | F6 |  7 SEP 1952 |      NA     |     I6     | Henry Martinez |    I7   |    Brenda Ordon   |                                                  ['I4', 'I37']                                                  |
@@ -97,3 +97,5 @@ Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 ANOMALY: FAMILY: US21: Spouse I2 in Family F1 gender listed as NA but expected F
 ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
 ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
+US39 - Total number of upcoming anniversaries within 30 days:  1
+US34 - Total number of upcoming anniversaries within 30 days:  1
