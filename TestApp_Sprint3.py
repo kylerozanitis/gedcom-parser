@@ -191,43 +191,46 @@ class TestHelperFunctions(unittest.TestCase):
 
         individual = individualPerson("I1")
         individual.uid = "I1"
-        individual.fams = ['F5']
+        individual.fams = ['F1']
         individual.famc = ["F4"]
         ind_dict[individual.uid] = individual
 
         individual2 = individualPerson("I2")
         individual2.uid = "I2"
-        individual2.fams = ['F2']
-        individual2.famc = ["F4"]
+        individual2.fams = ['F1']
+        individual2.famc = ["F5"]
         ind_dict[individual2.uid] = individual2
 
         family = familyClass("F1")
         family.husb_id = "I1"
         family.wife_id = "I2"
-        family.chil = ["I3", "I4"]
+        family.chil = ["I3", "I6"]
         fam_dict[family.fid] = family
 
         self.assertEqual(get_spouse(fam_dict, "F1", "I1"), "I2", True)
         self.assertEqual(get_spouse(fam_dict, "F1", "I2"), "I1", True)
 
         individual3 = individualPerson("I3")
-        individual3.fams = ['F5']
-        individual3.famc = ["F4"]
+        individual3.uid = "I3"
+        individual3.fams = ['F2']
+        individual3.famc = ["F1"]
         ind_dict[individual3.uid] = individual3
 
         individual4 = individualPerson("I4")
+        individual4.uid = "I4"
         individual4.fams = ['F2']
-        individual4.famc = ["F4"]
+        individual4.famc = ["F1"]
         ind_dict[individual4.uid] = individual4
 
         family = familyClass("F2")
         family.husb_id = "I1"
         family.wife_id = "I2"
-        family.chil = ["I1", "I2"]
+        family.chil = ["I5", "I7"]
         fam_dict[family.fid] = family
 
-        self.assertEqual(get_children(fam_dict, "F2"), ["I1", "I2"], True)
-        self.assertEqual(len(siblings_should_not_marry(fam_dict, ind_dict)), 2, True)
+        self.assertEqual(get_children(fam_dict, "F2"), ["I5", "I7"], True)
+        self.assertEqual(get_children(fam_dict, "F1"), ["I3", "I6"], True)
+        self.assertEqual(len(siblings_should_not_marry(fam_dict, ind_dict)), 0, True)
 
     def test_reject_illegal_dates(self):
         """ Test cases for US42 --- Reject Illegal date"""

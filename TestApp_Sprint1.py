@@ -392,7 +392,7 @@ class TestHelperFunctions(unittest.TestCase):
         indi_dict = {}
         i1 = individualPerson('I1')
         i1.uid = 'I1'
-        i1.deat = '29 SEP 2018'
+        i1.deat = '29 OCT 2018'
         indi_dict[i1.uid] = i1
 
         i2 = individualPerson('I2')
@@ -484,8 +484,8 @@ class TestHelperFunctions(unittest.TestCase):
         fam_dict[family.fid] = family
 
         value = check_marriage_status(fam_dict)
-        self.assertEqual(len(value), 1)
-        self.assertEqual(list(value.keys()), ["F1"])
+        self.assertEqual(len(value), 0)
+        self.assertEqual(value, [])
 
         family2 = familyClass("F2")
         family2.marr = "NA"
@@ -494,8 +494,8 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(list(fam_dict.keys()), ["F1", "F2"])
 
         value = check_marriage_status(fam_dict)
-        self.assertEqual(len(fam_dict), 1)
-        self.assertEqual(list(fam_dict.keys()), ["F1"])
+        self.assertEqual(len(fam_dict), 2)
+        self.assertEqual(list(fam_dict.keys()), ["F1", "F2"])
 
     def test_check_life_status(self):
         """ Unit test for checking a person's life status and whether their death date

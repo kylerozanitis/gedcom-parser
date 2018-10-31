@@ -138,7 +138,7 @@ def get_spouse(family_data, fam_id, ind_id):
 
     if person.husb_id == ind_id:
         return person.wife_id
-    else:
+    if person.wife_id == ind_id:
         return person.husb_id
 
 
@@ -153,6 +153,17 @@ def get_children(family_data, fam_id):
     return children.chil
 
 
+def get_parent(family_data, fam_id):
+    """Helper function to get the Children from family_data it takes family dictionary, family id"""
+
+    parent = family_data.get(fam_id, "NA")
+
+    if parent == "NA":
+        return None
+
+    return parent.husb_id
+
+
 def siblings_should_not_marry(family_data,  individual_data):
     """ US18 - Siblings should not marry
         This function will take family data and individual data as input
@@ -161,11 +172,15 @@ def siblings_should_not_marry(family_data,  individual_data):
     trouble_siblings = []
 
     for ind in individual_data.values():
-        for fam in ind.fams:
-            spouse = get_spouse(family_data, fam, ind.uid)
-            children = get_children(family_data, fam)
-            if spouse is not None and spouse in children:
-                trouble_siblings.append(ind)
+        for fam_id in ind.fams:
+            spouse = get_spouse(family_data, fam_id, ind.uid)
+
+            if ind.famc is not "NA" or ind.famc is not None:
+                for id in ind.famc:
+                    children = get_children(family_data, id)
+
+                if spouse is not None and children is not None and spouse in children:
+                    trouble_siblings.append(ind)
 
     return trouble_siblings
 
