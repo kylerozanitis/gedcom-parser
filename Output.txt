@@ -135,3 +135,5 @@ Name: Silas Hackley Age: 12
 Name: Milo Hackley Age: 12
 Name: Maia Hackley Age: 12
 Name: Isla Hackley Age: 12
+ERROR: FAMILY: US13 : F2 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart
+ERROR: FAMILY: US13 : F2 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart

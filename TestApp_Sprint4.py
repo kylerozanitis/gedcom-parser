@@ -70,7 +70,7 @@ class TestHelperFunctions(unittest.TestCase):
         family.chil = ["I3"]
         fam_dict[family.fid] = family
 
-        self.assertEqual(list_orphans(fam_dict, ind_dict),['I3'])
+        self.assertEqual(len(list_orphans(fam_dict, ind_dict)),1)
 
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
