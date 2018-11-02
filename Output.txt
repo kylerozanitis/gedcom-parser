@@ -137,3 +137,11 @@ Name: Maia Hackley Age: 12
 Name: Isla Hackley Age: 12
 ERROR: FAMILY: US13 : F2 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart
 ERROR: FAMILY: US13 : F2 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart
+ERROR: INDIVIDUAL: US07 : I34 : lived longer than 150 years
+ERROR: INDIVIDUAL: US07 : I34 : lived longer than 150 years
+ERROR: INDIVIDUAL: US06 : I11 : Death of Husband 2 MAR 2007 occurs before date of divorce 1 JAN 2009
+ERROR: INDIVIDUAL: US06 : I11 : Death of Husband 2 MAR 2007 occurs before date of divorce 1 JAN 2009
+ERROR: INDIVIDUAL: US07 : I34 : lived longer than 150 years
+ERROR: INDIVIDUAL: US07 : I34 : lived longer than 150 years
+ERROR: INDIVIDUAL: US06 : I11 : Death of Husband 2 MAR 2007 occurs before date of divorce 1 JAN 2009
+ERROR: INDIVIDUAL: US06 : I11 : Death of Husband 2 MAR 2007 occurs before date of divorce 1 JAN 2009

@@ -420,7 +420,7 @@ class TestHelperFunctions(unittest.TestCase):
         i3.birt = '30 SEP 2018'
         indi_dict[i3.uid] = i3
 
-        self.assertEqual(len(list_recent_births(indi_dict)),1,True)
+        self.assertEqual(len(list_recent_births(indi_dict)),0,True)
 
     def test_fewer_than15_siblings(self):
         "Test cases -- US15 -- There should be fewer than 15 siblings in a family"
