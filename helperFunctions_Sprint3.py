@@ -1,4 +1,4 @@
-""" This file includes the functions that were implemented in sprint 23 """
+""" This file includes the functions that were implemented in sprint 3 """
 
 # Lib Imports
 from helperFunctions_Sprint1 import validate_date_format, change_date_format, check_two_dates
