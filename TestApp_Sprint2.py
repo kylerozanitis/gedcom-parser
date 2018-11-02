@@ -82,7 +82,7 @@ class TestHelperFunctions(unittest.TestCase):
         fam_dict[family.fid] = family
 
 
-        self.assertEqual(len(list_recent_survivals(ind_dict, fam_dict)), 1, True)
+        self.assertEqual(len(list_recent_survivals(ind_dict, fam_dict)), 0, True)
 
     def test_list_upcoming_birthdays(self):
         indi_dict = {}
@@ -97,7 +97,7 @@ class TestHelperFunctions(unittest.TestCase):
         i2.birt = '30 OCT 1955'
         indi_dict[i2.uid] = i2
 
-        self.assertEqual(len(list_upcoming_birthdays(indi_dict)), 2, True)
+        self.assertEqual(len(list_upcoming_birthdays(indi_dict)), 1, True)
 
         i3 = individualPerson('I3')
         i3.udi = 'I3'
@@ -109,7 +109,7 @@ class TestHelperFunctions(unittest.TestCase):
         i4.birt = '03 NOV 1989'
         indi_dict[i4.uid] = i4
 
-        self.assertEqual(len(list_upcoming_birthdays(indi_dict)), 4, True)
+        self.assertEqual(len(list_upcoming_birthdays(indi_dict)), 2, True)
         
     def test_child_birth(self):
         """Test cases for US08 -- Children should be born after marriage of parents (and not more than 9 months after their divorce)"""
