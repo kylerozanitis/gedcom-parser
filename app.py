@@ -22,13 +22,10 @@ from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, 
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
-<<<<<<< HEAD
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role, unique_first_names, reject_illegal_dates
-=======
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
 from helperFunctions_Sprint4 import sibling_spacing, list_orphans
 
->>>>>>> US33
 
 import sys
 from datetime import datetime
@@ -377,7 +374,6 @@ def main():
             else:
                 print_both("ERROR: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
 
-<<<<<<< HEAD
     # US25 - No more than one child with the same name and birth date should appear in a family
     problem_children_list = unique_first_names(family_data, individual_data)
     
@@ -385,7 +381,6 @@ def main():
         for family in problem_children_list:
             print_both("ERROR: FAMILY: US25: Multiple children in Family {} have the same birthday and name".format(family))
 
-=======
     #US13
     sibling_spacing(family_data, individual_data)
 
@@ -396,7 +391,6 @@ def main():
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
 
     
->>>>>>> US33
 
 if __name__ == '__main__':
     main()

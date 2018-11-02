@@ -1,15 +1,14 @@
 GEDCOM Parser - Kyle Rozanitis, Jose Lara, Kshiti Rana, Pratik Shah 
  
 Individuals
-<<<<<<< HEAD
 +-----+-------------------+--------+-------------+-----+-------+-------------+---------+--------------+
 |  ID |        Name       | Gender |   Birthday  | Age | Alive |    Death    |  Child  |    Spouse    |
 +-----+-------------------+--------+-------------+-----+-------+-------------+---------+--------------+
 |  I1 |    Jack Hackley   |   M    |  7 MAY 1800 | 153 | False | 16 OCT 1953 |    NA   |    ['F1']    |
 |  I2 |    Krista Shaw    |   NA   | 24 OCT 1929 |  89 |  True |      NA     |    NA   | ['F1', 'F2'] |
-|  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  64 |  True |      NA     |  ['F1'] | ['F3', 'F4'] |
-|  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  58 |  True |      NA     |  ['F6'] | ['F3', 'F5'] |
-| I37 | Angelica Martinez |   M    | 30 NOV 1959 |  58 |  True |      NA     |  ['F6'] |      NA      |
+|  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  26 | False | 16 OCT 1980 |  ['F1'] | ['F3', 'F4'] |
+|  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  24 | False | 20 JUN 1984 |  ['F6'] | ['F3', 'F5'] |
+| I37 | Angelica Martinez |   M    | 27 NOV 1959 |  58 |  True |      NA     |  ['F6'] |      NA      |
 |  I5 |  Jackline Alfonso |   F    | 14 SEP 1955 |  24 | False | 14 NOV 1979 |    NA   |    ['F4']    |
 |  I6 |   Henry Martinez  |   F    | 15 MAY 1926 |  92 |  True |      NA     |    NA   |    ['F6']    |
 |  I7 |    Brenda Ordon   |   F    |  1 APR 1930 |  20 | False | 14 NOV 1950 |    NA   |    ['F6']    |
@@ -36,38 +35,6 @@ Individuals
 | I64 |   Veronica Marin  |   F    | 27 NOV 1954 |  63 | False | 29 OCT 2018 |    NA   |   ['F21']    |
 | I65 |  Vanessa Peterson |   F    |  8 NOV 1991 |  26 |  True |      NA     | ['F21'] |   ['F20']    |
 +-----+-------------------+--------+-------------+-----+-------+-------------+---------+--------------+
-=======
-+-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
-|  ID |        Name       | Gender |   Birthday  | Age | Alive |    Death    | Child  |    Spouse    |
-+-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
-|  I1 |    Jack Hackley   |   M    |  7 MAY 1800 | 153 | False | 16 OCT 1953 |   NA   |    ['F1']    |
-|  I2 |    Krista Shaw    |   NA   | 24 OCT 1929 |  89 |  True |      NA     |   NA   | ['F1', 'F2'] |
-|  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  26 | False | 16 OCT 1980 | ['F1'] | ['F3', 'F4'] |
-|  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  24 | False | 20 JUN 1984 | ['F6'] | ['F3', 'F5'] |
-| I37 | Angelica Martinez |   M    | 27 NOV 1959 |  58 |  True |      NA     | ['F6'] |      NA      |
-|  I5 |  Jackline Alfonso |   F    | 14 SEP 1955 |  24 | False | 14 NOV 1979 |   NA   |    ['F4']    |
-|  I6 |   Henry Martinez  |   F    | 15 MAY 1926 |  92 |  True |      NA     |   NA   |    ['F6']    |
-|  I7 |    Brenda Ordon   |   F    |  1 APR 1930 |  20 | False | 14 NOV 1950 |   NA   |    ['F6']    |
-|  I8 |   Maria Hackley   |   F    | 28 JUL 2020 |  -2 |  True |      NA     | ['F3'] |      NA      |
-| I22 |    Liam Hackley   |   M    | 28 JUL 2010 |  8  |  True |      NA     | ['F3'] |      NA      |
-| I23 |    Emma Hackley   |   F    | 28 JUL 2011 |  7  |  True |      NA     | ['F3'] |      NA      |
-| I24 |   Olivia Hackley  |   F    | 28 JUL 2012 |  6  |  True |      NA     | ['F3'] |      NA      |
-| I25 |    Ava Hackley    |   F    | 28 JUL 2013 |  5  |  True |      NA     | ['F3'] |      NA      |
-| I26 |   Logan Hackley   |   M    | 28 JUL 2014 |  4  |  True |      NA     | ['F3'] |      NA      |
-| I27 |   Mason Hackley   |   M    | 28 JUL 2015 |  3  |  True |      NA     | ['F3'] |      NA      |
-| I28 |    Mia Hackley    |   F    | 28 JUL 2009 |  9  |  True |      NA     | ['F3'] |      NA      |
-| I29 |   Sophia Hackley  |   F    | 28 JUL 2008 |  10 |  True |      NA     | ['F3'] |      NA      |
-| I30 |   Jacob Hackley   |   M    | 28 JUL 2007 |  11 |  True |      NA     | ['F3'] |      NA      |
-| I31 |   Amelia Hackley  |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
-| I32 |   Amara Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
-| I33 |   Silas Hackley   |   M    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
-| I34 |    Milo Hackley   |   M    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
-| I35 |    Maia Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
-| I36 |    Isla Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     | ['F3'] |      NA      |
-|  I9 |   Henry Martinez  |   M    |  4 SEP 1985 |  33 |  True |      NA     | ['F4'] |      NA      |
-| I10 |   Eric Locklear   |   M    | 05 OCT 2018 | -34 | False |  8 JUN 1985 |   NA   |    ['F5']    |
-+-----+-------------------+--------+-------------+-----+-------+-------------+--------+--------------+
->>>>>>> US33
 Families
 +-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
 |  ID |   Married   |   Divorced  | Husband ID |   Husband Name   | Wife ID |     Wife Name     |                                                     Children                                                    |
@@ -80,7 +47,7 @@ Families
 | F20 |      NA     |      NA     |    I62     | Armando Peterson |   I65   |  Vanessa Peterson |                                                        NA                                                       |
 | F21 |      NA     |      NA     |    I63     |  Jorge Peterson  |   I64   |   Veronica Marin  |                                                  ['I62', 'I65']                                                 |
 +-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 30 Oct 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 02 Nov 2018
 ERROR: Family: US01: F20 Not married 
 ERROR: Family: US01: F21 Not married 
 ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
@@ -93,11 +60,7 @@ ERROR: FAMILY: US05: F6: Wife death date 14 NOV 1950 occurs before marriage date
 ERROR: INDIVIDUAL: US06 : I3 : Death of Husband 16 OCT 1980 occurs before date of divorce 28 DEC 1980
 ERROR: INDIVIDUAL: US06 : I5 : Death of wife 14 NOV 1979 occurs before date of divorce 28 DEC 1980
 ERROR: INDIVIDUAL: US07 : I1 : lived longer than 150 years
-<<<<<<< HEAD
-US29 - Total number of deceased individuals:  5
-=======
-US29 - Total number of deceased individuals:  6
->>>>>>> US33
+US29 - Total number of deceased individuals:  7
 Name: Jack Hackley Date Passed: 16 OCT 1953
 Name: Adam Hackley Date Passed: 16 OCT 1980
 Name: Angelica Martinez Date Passed: 20 JUN 1984
@@ -133,7 +96,9 @@ Individual who passed: Veronica Marin, event happened on: 29 OCT 2018
  Survival Spouse: Jorge Peterson 
  Survivals Children: ['I62', 'I65']
                    
-US38 - Total number of Upcoming birthdays:  2
+US38 - Total number of Upcoming birthdays:  4
+Name: Angelica Martinez, Birth on: 30 NOV 1959
+Name: Angelica Martinez, Birth on: 27 NOV 1959
 Name: Veronica Marin, Birth on: 27 NOV 1954
 Name: Vanessa Peterson, Birth on: 8 NOV 1991
 US18 - Total number of marriage with their sibling:  2
@@ -152,9 +117,6 @@ Family id: F3 Birth on: 1 JUL 2006 Name: Maia Hackley
 Family id: F3 Birth on: 1 JUL 2006 Name: Isla Hackley
 ANOMALY: FAMILY: US21: Spouse I2 in Family F1 gender listed as NA but expected F
 ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
-<<<<<<< HEAD
-ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
-=======
 ERROR: FAMILY: US13 : F6 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart
 US33 - Total number of Orphans:  16
 Name: Maria Hackley Age: -2
@@ -173,4 +135,3 @@ Name: Silas Hackley Age: 12
 Name: Milo Hackley Age: 12
 Name: Maia Hackley Age: 12
 Name: Isla Hackley Age: 12
->>>>>>> US33
