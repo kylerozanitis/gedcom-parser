@@ -22,7 +22,10 @@ from helperFunctions_Sprint2 import list_recent_survivals, living_married_list, 
 from helperFunctions_Sprint2 import check_parents_not_too_old, check_multiple_births, marriage_after_14
 from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
-from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role, unique_first_names
+from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role, unique_first_names, reject_illegal_dates
+from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
+from helperFunctions_Sprint4 import sibling_spacing, list_orphans
+
 
 from JL_File import list_upcoming_anniversaries, list_spouse_large_age_difference
 
@@ -336,9 +339,20 @@ def main():
     print_both('US18 - Total number of marriage with their sibling: ', len(family))
     if len(family) > 0:
         for person in family:
-            print_both("""Individual Name who marry their sibling: {0}, """.format(person.name))
-        else:
-            print_both("No Siblings are married")
+            print_both("""Individual Name who marry their sibling: {0} """.format(person.name))
+    else:
+        print_both("No Siblings are married")
+
+    #US42 - Check for valid date
+    family = siblings_should_not_marry(family_data, individual_data)
+    print_both('US42 - Check for valid date: ')
+    print("US42 - check for 2/30/2018 is valid: ", reject_illegal_dates('2/30/2018'))
+    print("US42 - check for 2/29/2018 is valid: ", reject_illegal_dates('2/29/2018'))
+    print("US42 - check for 2/28/2018 is valid: ", reject_illegal_dates('2/28/2018'))
+    print("US42 - check for 11/31/2018 is valid: ", reject_illegal_dates('11/31/2018'))
+    print("US42 - check for 11/30/2018 is valid: ", reject_illegal_dates('11/30/2018'))
+    print("US42 - check for 12/31/2018 is valid: ", reject_illegal_dates('12/31/2018'))
+
 
     #US31 - List singles over 30
     single = single_over_30(family_data, individual_data)
@@ -369,6 +383,16 @@ def main():
         for family in problem_children_list:
             print_both("ERROR: FAMILY: US25: Multiple children in Family {} have the same birthday and name".format(family))
 
+    #US13
+    sibling_spacing(family_data, individual_data)
+
+    #US33
+    orphans = list_orphans(family_data, individual_data)
+    print_both('US33 - Total number of Orphans: ',len(orphans))
+    for person in orphans:
+        print_both("Name: {0} Age: {1}".format(person.name, person.age))
+
+    
 
 
 if __name__ == '__main__':

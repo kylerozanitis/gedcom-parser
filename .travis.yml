@@ -10,3 +10,4 @@ script:
  - python3 TestApp_Sprint1.py
  - python3 TestApp_Sprint2.py
  - python3 TestApp_Sprint3.py
+ - python3 TestApp_Sprint4.py

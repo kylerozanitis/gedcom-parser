@@ -72,7 +72,7 @@ def list_recent_survivals(individual_data, family_data):
                         fam['spouse_name'] = val.husb
                         fam['spouse_id'] = val.husb_id
                     survivals[ind.uid] = fam
-                del fam
+            del fam
 
     return survivals
 

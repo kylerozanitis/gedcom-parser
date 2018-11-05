@@ -193,7 +193,7 @@ def check_two_dates(first_Event, event_to_compare_date):
             return True
         return False
     else:
-        raise ValueError('check dates, format is invalid.')
+        return 'check dates, format is invalid.'
 
 
 def check_marriage_before_divorce(family_data):
@@ -430,10 +430,8 @@ def check_marriage_status(family_data):
     for family in family_data.values():
         if family.marr == "NA":
             problem_families.append(family.fid)
-    for family in problem_families:
-        family_data.pop(family)
 
-    return family_data
+    return problem_families
 
 
 def check_life_status(person, marriage_date):
