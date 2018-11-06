@@ -25,9 +25,7 @@ from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_ma
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role, unique_first_names, reject_illegal_dates
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
 from helperFunctions_Sprint4 import sibling_spacing, list_orphans
-
-
-from JL_File import list_upcoming_anniversaries, list_spouse_large_age_difference
+from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
 
 import sys
 from datetime import datetime
@@ -391,6 +389,28 @@ def main():
     print_both('US33 - Total number of Orphans: ',len(orphans))
     for person in orphans:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
+
+    spouse_list = list_spouse_large_age_difference(family_data, individual_data)
+    print_both('US34 - Total number of Spouses with twice as much age: ', len(spouse_list))
+    if len(spouse_list) > 0:
+        for family in spouse_list:
+            husb = individual_data.get(family.husb_id, "NA")
+            wife = individual_data.get(family.wife_id, "NA")
+            print("US34 - Spouses twice as much age: {}, age: {} and Spouse is {}, age {}".format(husb.name, husb.age, wife.name, wife.age))
+    else:
+        print("US34 - No spouses with twice as much age.")
+
+    anniversaries = list_upcoming_anniversaries(family_data, individual_data)
+    print_both('US39 - Total number of upcoming anniversaries within 30 days: ', len(anniversaries))
+    if len(anniversaries) > 0:
+        for family in anniversaries:
+            day, month, year = str(family.marr).split(" ")
+            date = month + " " + day
+            print("US39 - Next anniversary is for {} and {} on {}".format(family.husb, family.wife, date ))
+    else:
+        print("US39 - No anniversary in the next 30 days")
+
+
 
     
 

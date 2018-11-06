@@ -1,6 +1,7 @@
 """ This file includes the functions that were implemented in sprint 4 """
 
 from helperFunctions_Sprint1 import convert_str_to_date, print_both
+from helperFunctions_Sprint2 import is_anniversary_in_next_thirty_days
 import datetime
 from datetime import timedelta
 
@@ -73,3 +74,37 @@ def list_orphans(family_data, individual_data):
                 if child.age < 18:
                     orphans.append(child)
     return orphans
+
+
+def list_spouse_large_age_difference(family_data, individual_data):
+    """US34 - List all couples who were married when the older spouse was more than twice as old as the younger spouse"""
+    double_age_list = []
+
+    for data in family_data.values():
+        if data.div is not "NA" or data.div is not "":
+            husb = individual_data.get(data.husb_id, "NA")
+            wife = individual_data.get(data.wife_id, "NA")
+            husb.age = 190
+            if husb.age > wife.age and (husb.age / 2) > wife.age:
+                double_age_list.append(data)
+
+            if wife.age > husb.age and (wife.age / 2) > husb.age:
+                double_age_list.append(data)
+
+        return double_age_list
+
+
+def list_upcoming_anniversaries(family_data, individual_data):
+    """US39 - List all living couples in a GEDCOM file whose marriage anniversaries occur in the next 30 days"""
+    anniversaries = []
+    for data in family_data.values():
+        if data.div is not "NA" or data.div is not "":
+            husb = individual_data.get(data.husb_id, "NA")
+            wife = individual_data.get(data.wife_id, "NA")
+            if (husb is not "NA" and husb.is_alive()) and (wife is not "NA" and wife.is_alive()):
+                if (data.marr is not "NA") and is_anniversary_in_next_thirty_days(data.marr):
+                    anniversaries.append(data)
+
+    return anniversaries
+
+
