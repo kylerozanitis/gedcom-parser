@@ -89,7 +89,7 @@ class TestHelperFunctions(unittest.TestCase):
 
         i1 = individualPerson('I1')
         i1.uid = 'I1'
-        i1.birt = '11 NOV 2017'
+        i1.birt = '19 NOV 2017'
         indi_dict[i1.uid] = i1
 
         i2 = individualPerson('I2')
@@ -106,7 +106,7 @@ class TestHelperFunctions(unittest.TestCase):
 
         i4 = individualPerson('I4')
         i4.udi = 'I4'
-        i4.birt = '03 NOV 1989'
+        i4.birt = '29 NOV 1989'
         indi_dict[i4.uid] = i4
 
         self.assertEqual(len(list_upcoming_birthdays(indi_dict)), 2, True)

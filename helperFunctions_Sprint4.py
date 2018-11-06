@@ -84,7 +84,6 @@ def list_spouse_large_age_difference(family_data, individual_data):
         if data.div is not "NA" or data.div is not "":
             husb = individual_data.get(data.husb_id, "NA")
             wife = individual_data.get(data.wife_id, "NA")
-            husb.age = 190
             if husb.age > wife.age and (husb.age / 2) > wife.age:
                 double_age_list.append(data)
 
