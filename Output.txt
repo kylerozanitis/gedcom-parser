@@ -130,6 +130,10 @@ Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
 ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
 ERROR: FAMILY: US24: Family F22 and Family F23 have the same husband name, wife name, and marriage date
+ANNOUNCEMENT: FAMILY: US28: The children of Family F3 ordered by age: [['I31', '1 JUL 2006'], ['I32', '1 JUL 2006'], ['I33', '1 JUL 2006'], ['I34', '1 JUL 2006'], ['I35', '1 JUL 2006'], ['I36', '1 JUL 2006'], ['I30', '28 JUL 2007'], ['I29', '28 JUL 2008'], ['I28', '28 JUL 2009'], ['I22', '28 JUL 2010'], ['I23', '28 JUL 2011'], ['I24', '28 JUL 2012'], ['I25', '28 JUL 2013'], ['I26', '28 JUL 2014'], ['I27', '28 JUL 2015'], ['I8', '28 JUL 2020']]
+ANNOUNCEMENT: FAMILY: US28: Family F4 only has one child: [['I9', '4 SEP 1985']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F6 ordered by age: [['I4', '30 NOV 1959'], ['I37', '30 NOV 1959']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F21 ordered by age: [['I62', '29 JUN 1990'], ['I65', '8 NOV 1991']]
 US33 - Total number of Orphans:  16
 Name: Maria Hackley Age: -2
 Name: Liam Hackley Age: 8
