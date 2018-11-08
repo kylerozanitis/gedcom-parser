@@ -24,7 +24,7 @@ from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role, unique_first_names, reject_illegal_dates
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
-from helperFunctions_Sprint4 import sibling_spacing, list_orphans
+from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses
 from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
 
 import sys
@@ -384,6 +384,12 @@ def main():
     #US13
     sibling_spacing(family_data, individual_data)
 
+    # US24 - No more than one family with the same spouses by name and the same marriage date should appear in a GEDCOM file
+    non_unique_families = unique_families_by_spouses(family_data)
+    if len(non_unique_families) > 0:
+        for family in non_unique_families:
+            print_both("ERROR: FAMILY: US24: Family {} and Family {} have the same husband name, wife name, and marriage date".format(family[0], family[1]))
+
     #US33
     orphans = list_orphans(family_data, individual_data)
     print_both('US33 - Total number of Orphans: ',len(orphans))
@@ -396,9 +402,9 @@ def main():
         for family in spouse_list:
             husb = individual_data.get(family.husb_id, "NA")
             wife = individual_data.get(family.wife_id, "NA")
-            print("US34 - Spouses twice as much age: {}, age: {} and Spouse is {}, age {}".format(husb.name, husb.age, wife.name, wife.age))
+            print_both("US34 - Spouses twice as much age: {}, age: {} and Spouse is {}, age {}".format(husb.name, husb.age, wife.name, wife.age))
     else:
-        print("US34 - No spouses with twice as much age.")
+        print_both("US34 - No spouses with twice as much age.")
 
     anniversaries = list_upcoming_anniversaries(family_data, individual_data)
     print_both('US39 - Total number of upcoming anniversaries within 30 days: ', len(anniversaries))
@@ -406,9 +412,9 @@ def main():
         for family in anniversaries:
             day, month, year = str(family.marr).split(" ")
             date = month + " " + day
-            print("US39 - Next anniversary is for {} and {} on {}".format(family.husb, family.wife, date ))
+            print_both("US39 - Next anniversary is for {} and {} on {}".format(family.husb, family.wife, date ))
     else:
-        print("US39 - No anniversary in the next 30 days")
+        print_both("US39 - No anniversary in the next 30 days")
 
 
 

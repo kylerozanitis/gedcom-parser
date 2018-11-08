@@ -40,6 +40,32 @@ def sibling_spacing(family_data, individual_data):
             i += 1
     return flag
 
+def unique_families_by_spouses(family_data):
+    """ US24 - No more than one family with the same spouses by name and the
+    same marriage date should appear in a GEDCOM file """
+
+    problem_families = []
+    
+    for f1 in family_data.values():
+        family_id = f1.fid
+        husband = f1.husb
+        wife = f1.wife
+        marriage_date = f1.marr
+
+        for f2 in family_data.values():
+            family2_id = f2.fid
+            husband2 = f2.husb
+            wife2 = f2.wife
+            marriage_date2 = f2.marr
+
+            if family_id != family2_id:
+                if husband == husband2 and wife == wife2 and marriage_date == marriage_date2:
+                    families_list = [family_id, family2_id]
+                    if sorted(families_list) not in problem_families:
+                        problem_families.append(sorted(families_list))
+    
+    return problem_families
+
 def list_orphans(family_data, individual_data):
     """ US33 - List all orphans
     This function will take family data and individual data as input

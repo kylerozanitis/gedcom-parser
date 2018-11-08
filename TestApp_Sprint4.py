@@ -2,7 +2,7 @@
 
 import unittest
 from classes import individualPerson, familyClass
-from helperFunctions_Sprint4 import sibling_spacing, list_orphans
+from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses
 from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
 
 class TestHelperFunctions(unittest.TestCase):
@@ -44,6 +44,56 @@ class TestHelperFunctions(unittest.TestCase):
         fam_dict[family.fid] = family
 
         self.assertFalse(sibling_spacing(fam_dict, ind_dict))
+
+    def test_unique_families_by_spouses(self):
+        """ Unit tests for US24 - No more than one family with the same spouses
+        by name and the same marriage date should appear in a GEDCOM file """
+
+        fam_dict = {}
+
+        f1 = familyClass("F1")
+        f1.fid = "F1"
+        f1.husb = "Kyle"
+        f1.wife = "Eleni"
+        f1.marr = "1 JAN 2004"
+        fam_dict[f1.fid] = f1
+
+        f2 = familyClass("F2")
+        f2.fid = "F2"
+        f2.husb = "Kyle"
+        f2.wife = "Eleni"
+        f2.marr = "1 JAN 2004"
+        fam_dict[f2.fid] = f2
+
+        self.assertEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"]])
+        self.assertNotEqual(unique_families_by_spouses(fam_dict), [])
+
+        f3 = familyClass("F3")
+        f3.fid = "F3"
+        f3.husb = "Joe"
+        f3.wife = "Anna"
+        f3.marr = "1 JAN 2008"
+        fam_dict[f3.fid] = f3
+
+        f4 = familyClass("F4")
+        f4.fid = "F4"
+        f4.husb = "Joe"
+        f4.wife = "Anna"
+        f4.marr = "1 JAN 2008"
+        fam_dict[f4.fid] = f4
+
+        self.assertEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"], ["F3", "F4"]])
+        self.assertNotEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"]])
+
+        f5 = familyClass("F5")
+        f5.fid = "F5"
+        f5.husb = "Joe"
+        f5.wife = "Anna"
+        f5.marr = "1 JAN 2008"
+        fam_dict[f5.fid] = f5
+
+        self.assertEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"], ["F3", "F4"], ["F3", "F5"], ["F4", "F5"]])
+        self.assertNotEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"], ["F3", "F4"]])
 
     def test_list_orphans(self):
 
