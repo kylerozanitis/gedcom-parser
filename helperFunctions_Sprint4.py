@@ -1,6 +1,6 @@
 """ This file includes the functions that were implemented in sprint 4 """
 
-from helperFunctions_Sprint1 import convert_str_to_date, print_both
+from helperFunctions_Sprint1 import convert_str_to_date, print_both, check_two_dates
 from helperFunctions_Sprint2 import is_anniversary_in_next_thirty_days
 import datetime
 from datetime import timedelta
@@ -65,6 +65,50 @@ def unique_families_by_spouses(family_data):
                         problem_families.append(sorted(families_list))
     
     return problem_families
+
+def order_siblings_by_age(family_data, individual_data):
+    """ US28 - List siblings in families by decreasing age """
+
+    children_dict = dict() # key = family fid, value = list of list of ordered children & birthday
+
+    for family in family_data.values():
+        if family.chil != "NA":
+            children_list = family.chil
+
+            if len(children_list) > 1:
+                ordered_list = []
+                for i in children_list:
+                    child1 = individual_data[i]
+                    child1_birthday = child1.birt
+
+                    if len(ordered_list) == 0:
+                        ordered_list.append([child1.uid, child1_birthday])
+                    else:
+                        for j in ordered_list:
+                            child2 = individual_data[j[0]]
+                            child2_birthday = child2.birt
+                            if check_two_dates(child1_birthday, child2_birthday) == False:
+                                index = ordered_list.index(j)
+                                ordered_list.insert(index, [child1.uid, child1_birthday])
+                                break
+                            else:
+                                pass
+                        else:
+                            ordered_list.append([child1.uid, child1_birthday])
+
+                reversed_list = ordered_list[::-1]
+                children_dict[family.fid] = reversed_list
+
+            elif len(children_list) == 1:
+                for c in children_list:
+                    child = individual_data[c]
+                    child_birthday = child.birt
+                    children_dict[family.fid] = [[child.uid, child_birthday]]
+            else:
+                children_dict[family.fid] = []
+
+    return children_dict
+
 
 def list_orphans(family_data, individual_data):
     """ US33 - List all orphans
