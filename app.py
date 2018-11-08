@@ -24,7 +24,7 @@ from helperFunctions_Sprint2 import validate_childBirth_with_parentsDeath
 from helperFunctions_Sprint3 import single_over_30, multiple_births, validate_male_lastname, validate_unique_name_birthdate
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role, unique_first_names, reject_illegal_dates
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
-from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses
+from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses, order_siblings_by_age
 from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
 
 import sys
@@ -389,6 +389,16 @@ def main():
     if len(non_unique_families) > 0:
         for family in non_unique_families:
             print_both("ERROR: FAMILY: US24: Family {} and Family {} have the same husband name, wife name, and marriage date".format(family[0], family[1]))
+
+    # US28 - List siblings in families by decreasing age
+    children_dict = order_siblings_by_age(family_data, individual_data)
+    for k, v in children_dict.items():
+        if len(v) > 1:
+            print_both("ANNOUNCEMENT: FAMILY: US28: The children of Family {} ordered by age: {}".format(k, v))
+        elif len(v) == 1:
+            print_both("ANNOUNCEMENT: FAMILY: US28: Family {} only has one child: {}".format(k, v))
+        else:
+            print_both("ANNOUNCEMENT: FAMILY: US28: Family {} does not have any children".format(k))
 
     #US33
     orphans = list_orphans(family_data, individual_data)
