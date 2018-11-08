@@ -2,7 +2,7 @@
 
 import unittest
 from classes import individualPerson, familyClass
-from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses
+from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses, order_siblings_by_age
 from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
 
 class TestHelperFunctions(unittest.TestCase):
@@ -94,6 +94,75 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"], ["F3", "F4"], ["F3", "F5"], ["F4", "F5"]])
         self.assertNotEqual(unique_families_by_spouses(fam_dict), [["F1", "F2"], ["F3", "F4"]])
+
+    def test_order_siblings_by_age(self):
+        """ Unit tests for US28 - List siblings in families by decreasing age """
+
+        indi_dict = {}
+        fam_dict = {}
+
+        i1 = individualPerson("I1")
+        i1.uid = "I1"
+        i1.name = "Kyle"
+        i1.birt = "15 Jul 1992"
+
+        indi_dict[i1.uid] = i1
+
+        i2 = individualPerson("I2")
+        i2.uid = "I2"
+        i2.name = "Ryan"
+        i2.birt = "13 Apr 1994"
+
+        indi_dict[i2.uid] = i2
+
+        i3 = individualPerson("I3")
+        i3.uid = "I3"
+        i3.name = "Tyler"
+        i3.birt = "26 Oct 1995"
+
+        indi_dict[i3.uid] = i3
+
+        i4 = individualPerson("I4")
+        i4.uid = "I4"
+        i4.name = "Quinn"
+        i4.birt = "27 Oct 1997"
+        indi_dict[i4.uid] = i4
+
+        f1 = familyClass("F1")
+        f1.chil = ["I1", "I2", "I3", "I4"]
+        fam_dict[f1.fid] = f1
+
+        self.assertEqual(order_siblings_by_age(fam_dict, indi_dict), {"F1": [["I1", "15 Jul 1992"], ["I2", "13 Apr 1994"], ["I3", "26 Oct 1995"], ["I4", "27 Oct 1997"]]})
+        self.assertNotEqual(order_siblings_by_age(fam_dict, indi_dict), {"F1": [["I4", "27 Oct 1997"], ["I3", "26 Oct 1995"], ["I2", "13 Apr 1994"], ["I1", "15 Jul 1992"]]})
+
+        i5 = individualPerson("I5")
+        i5.uid = "I5"
+        i5.name = "Kyle"
+        i5.birt = "1 Jan 2003"
+
+        indi_dict[i5.uid] = i5
+
+        i6 = individualPerson("I6")
+        i6.uid = "I6"
+        i6.name = "Ryan"
+        i6.birt = "1 Jan 2002"
+
+        indi_dict[i6.uid] = i6
+
+        i7 = individualPerson("I7")
+        i7.uid = "I7"
+        i7.name = "Tyler"
+        i7.birt = "1 Jan 2001"
+
+        indi_dict[i7.uid] = i7
+
+        f2 = familyClass("F2")
+        f2.chil = ["I5", "I6", "I7"]
+        fam_dict[f2.fid] = f2
+
+        self.assertEqual(order_siblings_by_age(fam_dict, indi_dict), {"F1": [["I1", "15 Jul 1992"], ["I2", "13 Apr 1994"], ["I3", "26 Oct 1995"], ["I4", "27 Oct 1997"]], "F2": [["I7", "1 Jan 2001"], ["I6", "1 Jan 2002"], ["I5", "1 Jan 2003"]]})
+        self.assertNotEqual(order_siblings_by_age(fam_dict, indi_dict), {"F1": [["I4", "27 Oct 1997"], ["I3", "26 Oct 1995"], ["I2", "13 Apr 1994"], ["I1", "15 Jul 1992"]]})
+
 
     def test_list_orphans(self):
 
