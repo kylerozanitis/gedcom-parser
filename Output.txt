@@ -30,6 +30,18 @@ Individuals
 | I36 |    Isla Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     |  ['F3'] |      NA      |
 |  I9 |   Henry Martinez  |   M    |  4 SEP 1985 |  33 |  True |      NA     |  ['F4'] |      NA      |
 | I10 |   Eric Locklear   |   M    | 05 OCT 2018 | -34 | False |  8 JUN 1985 |    NA   |    ['F5']    |
+| I51 |    Louis George   |   M    |  7 MAY 1900 | 118 |  True |      NA     |    NA   |   ['F51']    |
+| I52 |   Donna Anthony   |   F    | 24 OCT 1901 | 117 |  True |      NA     |    NA   |   ['F51']    |
+| I53 |   Reymond George  |   M    | 16 AUG 1930 |  88 |  True |      NA     | ['F51'] |   ['F53']    |
+| I54 |     Joe George    |   M    |  7 MAY 1933 |  85 |  True |      NA     | ['F51'] |   ['F54']    |
+| I55 |    Jinne George   |   F    | 24 OCT 1935 |  83 |  True |      NA     | ['F51'] |   ['F58']    |
+| I56 |   Jhonsy Barbour  |   F    | 16 AUG 1932 |  86 |  True |      NA     |    NA   |   ['F53']    |
+| I57 |  Susana Paparozzi |   F    | 16 AUG 1935 |  83 |  True |      NA     |    NA   |   ['F54']    |
+| I58 |   Rodriguez Roy   |   M    | 16 AUG 1933 |  85 |  True |      NA     |    NA   |   ['F58']    |
+| I70 |   Austin George   |   M    | 16 JUL 1962 |  56 |  True |      NA     | ['F53'] |   ['F70']    |
+| I71 |   Martin George   |   M    | 16 OCT 1960 |  58 |  True |      NA     | ['F53'] |   ['F71']    |
+| I72 |    Daisy George   |   F    | 17 AUG 1960 |  58 |  True |      NA     | ['F54'] |   ['F70']    |
+| I73 |    Jeniffer Roy   |   F    | 10 MAY 1960 |  58 |  True |      NA     | ['F55'] |   ['F71']    |
 | I62 |  Armando Peterson |   M    | 29 JUN 1990 |  28 |  True |      NA     | ['F21'] |   ['F20']    |
 | I63 |   Jorge Peterson  |   M    |  3 JUN 1956 |  62 |  True |      NA     |    NA   |   ['F21']    |
 | I64 |   Veronica Marin  |   F    | 27 NOV 1954 |  63 | False | 29 OCT 2018 |    NA   |   ['F21']    |
@@ -43,6 +55,12 @@ Families
 +-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
 |  ID |   Married   |   Divorced  | Husband ID |   Husband Name   | Wife ID |     Wife Name     |                                                     Children                                                    |
 +-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
+| F51 | 26 NOV 1928 |      NA     |    I51     |   Louis George   |   I52   |   Donna Anthony   |                                              ['I53', 'I54', 'I55']                                              |
+| F53 | 26 OCT 1958 |      NA     |    I53     |  Reymond George  |   I56   |   Jhonsy Barbour  |                                                  ['I70', 'I71']                                                 |
+| F54 | 26 DEC 1958 |      NA     |    I54     |    Joe George    |   I57   |  Susana Paparozzi |                                                     ['I72']                                                     |
+| F58 | 26 SEP 1958 |      NA     |    I58     |  Rodriguez Roy   |   I55   |    Jinne George   |                                                     ['I73']                                                     |
+| F70 | 26 AUG 1988 |      NA     |    I70     |  Austin George   |   I72   |    Daisy George   |                                                        NA                                                       |
+| F71 | 26 SEP 1988 |      NA     |    I71     |  Martin George   |   I73   |    Jeniffer Roy   |                                                        NA                                                       |
 |  F1 | 26 NOV 2017 |      NA     |     I2     |  Pedro Martinez  |    I1   |    Alison Marin   |                                                        NA                                                       |
 |  F3 |  9 NOV 1986 |      NA     |     I3     |   Adam Hackley   |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36'] |
 |  F4 | 29 OCT 1982 | 28 DEC 1980 |     I3     |   Adam Hackley   |    I5   |  Jackline Alfonso |                                                      ['I9']                                                     |
@@ -87,12 +105,27 @@ ERROR: FAMILY: US09: F6: Birthday 30 NOV 1959 of child I37 should be born before
 ERROR: FAMILY: US09: F3: Birthday 1 JUL 2006 of child I36 should be born before 9 months after death 16 OCT 1980 of father I3
 ERROR: FAMILY: US09: F4: Birthday 4 SEP 1985 of child I9 should be born before 9 months after death 16 OCT 1980 of father I3
 ANOMALY: FAMILY: US10: Husband I10 in Family F5 is married before 14 years old
+ERROR: FAMILY: US11: Individual UID: I4: Angelica Martinez has 2 spouses -- I10: Eric Locklear, I3: Adam Hackley
 ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
 ERROR: FAMILY: US16: Lastname Martinez of I9 is not same as family's last name Hackley
-WARNING: Individual: US23: 6 individual(s) named Angelica Martinez born on 1959-11-30: I4, I37, I66, I68, I67, I69
-WARNING: Individual: US23: 6 individual(s) named John Claude born on 1970-01-01: I4, I37, I66, I68, I67, I69
-WARNING: Individual: US23: 6 individual(s) named Jaime Claude born on 1970-03-30: I4, I37, I66, I68, I67, I69
-US30 - Total number of living married:  7
+ERROR: FAMILY: US19: First cousins UID: I70 Austin George and I72 Daisy George are married to each other in Family: F70
+ERROR: FAMILY: US19: First cousins UID: I71 Martin George and I73 Jeniffer Roy are married to each other in Family: F71
+WARNING: Individual: US23: 2 individual(s) named Angelica Martinez born on 1959-11-30: I4, I37
+WARNING: Individual: US23: 2 individual(s) named John Claude born on 1970-01-01: I66, I68
+WARNING: Individual: US23: 2 individual(s) named Jaime Claude born on 1970-03-30: I67, I69
+US30 - Total number of living married:  19
+ID: I51 Name: Louis George
+ID: I52 Name: Donna Anthony
+ID: I53 Name: Reymond George
+ID: I56 Name: Jhonsy Barbour
+ID: I54 Name: Joe George
+ID: I57 Name: Susana Paparozzi
+ID: I58 Name: Rodriguez Roy
+ID: I55 Name: Jinne George
+ID: I70 Name: Austin George
+ID: I72 Name: Daisy George
+ID: I71 Name: Martin George
+ID: I73 Name: Jeniffer Roy
 ID: I2 Name: Pedro Martinez
 ID: I1 Name: Alison Marin
 ID: I6 Name: Henry Martinez
@@ -130,6 +163,10 @@ Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
 ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
 ERROR: FAMILY: US24: Family F22 and Family F23 have the same husband name, wife name, and marriage date
+ANNOUNCEMENT: FAMILY: US28: The children of Family F51 ordered by age: [['I53', '16 AUG 1930'], ['I54', '7 MAY 1933'], ['I55', '24 OCT 1935']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F53 ordered by age: [['I71', '16 OCT 1960'], ['I70', '16 JUL 1962']]
+ANNOUNCEMENT: FAMILY: US28: Family F54 only has one child: [['I72', '17 AUG 1960']]
+ANNOUNCEMENT: FAMILY: US28: Family F58 only has one child: [['I73', '10 MAY 1960']]
 ANNOUNCEMENT: FAMILY: US28: The children of Family F3 ordered by age: [['I31', '1 JUL 2006'], ['I32', '1 JUL 2006'], ['I33', '1 JUL 2006'], ['I34', '1 JUL 2006'], ['I35', '1 JUL 2006'], ['I36', '1 JUL 2006'], ['I30', '28 JUL 2007'], ['I29', '28 JUL 2008'], ['I28', '28 JUL 2009'], ['I22', '28 JUL 2010'], ['I23', '28 JUL 2011'], ['I24', '28 JUL 2012'], ['I25', '28 JUL 2013'], ['I26', '28 JUL 2014'], ['I27', '28 JUL 2015'], ['I8', '28 JUL 2020']]
 ANNOUNCEMENT: FAMILY: US28: Family F4 only has one child: [['I9', '4 SEP 1985']]
 ANNOUNCEMENT: FAMILY: US28: The children of Family F6 ordered by age: [['I4', '30 NOV 1959'], ['I37', '30 NOV 1959']]
@@ -151,9 +188,10 @@ Name: Silas Hackley Age: 12
 Name: Milo Hackley Age: 12
 Name: Maia Hackley Age: 12
 Name: Isla Hackley Age: 12
-US34 - Total number of Spouses with twice as much age:  1
-US34 - Spouses twice as much age: Pedro Martinez, age: 64 and Spouse is Alison Marin, age 24
-US39 - Total number of upcoming anniversaries within 30 days:  3
+US34 - Total number of Spouses with twice as much age:  0
+US34 - No spouses with twice as much age.
+US39 - Total number of upcoming anniversaries within 30 days:  4
+US39 - Next anniversary is for Louis George and Donna Anthony on NOV 26
 US39 - Next anniversary is for Pedro Martinez and Alison Marin on NOV 26
 US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
 US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
