@@ -28,9 +28,10 @@ Individuals
 | I34 |    Milo Hackley   |   M    |  1 JUL 2006 |  12 |  True |      NA     |  ['F3'] |      NA      |
 | I35 |    Maia Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     |  ['F3'] |      NA      |
 | I36 |    Isla Hackley   |   F    |  1 JUL 2006 |  12 |  True |      NA     |  ['F3'] |      NA      |
+| I38 |    Isla Hackley   |   F    |  5 JUL 2006 |  12 |  True |      NA     |  ['F3'] |      NA      |
 |  I9 |   Henry Martinez  |   M    |  4 SEP 1985 |  33 |  True |      NA     |  ['F4'] |      NA      |
-| I10 |   Eric Locklear   |   M    | 05 OCT 2018 | -34 | False |  8 JUN 1985 |    NA   |    ['F5']    |
-| I51 |    Louis George   |   M    |  7 MAY 1900 | 118 |  True |      NA     |    NA   |   ['F51']    |
+| I10 |   Eric Locklear   |   M    | 05 NOV 2018 |  0  |  True |      NA     |    NA   |    ['F5']    |
+| I51 |    Louis George   |   M    |  7 MAY 1858 | 160 |  True |      NA     |    NA   |   ['F51']    |
 | I52 |   Donna Anthony   |   F    | 24 OCT 1901 | 117 |  True |      NA     |    NA   |   ['F51']    |
 | I53 |   Reymond George  |   M    | 16 AUG 1930 |  88 |  True |      NA     | ['F51'] |   ['F53']    |
 | I54 |     Joe George    |   M    |  7 MAY 1933 |  85 |  True |      NA     | ['F51'] |   ['F54']    |
@@ -52,68 +53,78 @@ Individuals
 | I69 |    Jaime Claude   |   F    | 30 MAR 1970 |  48 |  True |      NA     |    NA   |   ['F23']    |
 +-----+-------------------+--------+-------------+-----+-------+-------------+---------+--------------+
 Families
-+-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-|  ID |   Married   |   Divorced  | Husband ID |   Husband Name   | Wife ID |     Wife Name     |                                                     Children                                                    |
-+-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-| F51 | 26 NOV 1928 |      NA     |    I51     |   Louis George   |   I52   |   Donna Anthony   |                                              ['I53', 'I54', 'I55']                                              |
-| F53 | 26 OCT 1958 |      NA     |    I53     |  Reymond George  |   I56   |   Jhonsy Barbour  |                                                  ['I70', 'I71']                                                 |
-| F54 | 26 DEC 1958 |      NA     |    I54     |    Joe George    |   I57   |  Susana Paparozzi |                                                     ['I72']                                                     |
-| F58 | 26 SEP 1958 |      NA     |    I58     |  Rodriguez Roy   |   I55   |    Jinne George   |                                                     ['I73']                                                     |
-| F70 | 26 AUG 1988 |      NA     |    I70     |  Austin George   |   I72   |    Daisy George   |                                                        NA                                                       |
-| F71 | 26 SEP 1988 |      NA     |    I71     |  Martin George   |   I73   |    Jeniffer Roy   |                                                        NA                                                       |
-|  F1 | 26 NOV 2017 |      NA     |     I2     |  Pedro Martinez  |    I1   |    Alison Marin   |                                                        NA                                                       |
-|  F3 |  9 NOV 1986 |      NA     |     I3     |   Adam Hackley   |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36'] |
-|  F4 | 29 OCT 1982 | 28 DEC 1980 |     I3     |   Adam Hackley   |    I5   |  Jackline Alfonso |                                                      ['I9']                                                     |
-|  F5 | 18 AUG 1984 |      NA     |    I10     |  Eric Locklear   |    I4   | Angelica Martinez |                                                        NA                                                       |
-|  F6 |  7 SEP 1952 |      NA     |     I6     |  Henry Martinez  |    I7   |    Brenda Ordon   |                                                  ['I4', 'I37']                                                  |
-| F20 |      NA     |      NA     |    I62     | Armando Peterson |   I65   |  Vanessa Peterson |                                                        NA                                                       |
-| F21 |      NA     |      NA     |    I63     |  Jorge Peterson  |   I64   |   Veronica Marin  |                                                  ['I62', 'I65']                                                 |
-| F22 | 30 NOV 2000 |      NA     |    I66     |   John Claude    |   I67   |    Jaime Claude   |                                                        NA                                                       |
-| F23 | 30 NOV 2000 |      NA     |    I68     |   John Claude    |   I69   |    Jaime Claude   |                                                        NA                                                       |
-+-----+-------------+-------------+------------+------------------+---------+-------------------+-----------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 08 Nov 2018
++-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
+|  ID |   Married   |   Divorced  | Husband ID |   Husband Name   | Wife ID |     Wife Name     |                                                        Children                                                        |
++-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
+| F51 | 26 NOV 1928 |      NA     |    I51     |   Louis George   |   I52   |   Donna Anthony   |                                                 ['I53', 'I54', 'I55']                                                  |
+| F53 | 26 OCT 1958 |      NA     |    I53     |  Reymond George  |   I56   |   Jhonsy Barbour  |                                                     ['I70', 'I71']                                                     |
+| F54 | 26 DEC 1958 |      NA     |    I54     |    Joe George    |   I57   |  Susana Paparozzi |                                                        ['I72']                                                         |
+| F58 | 26 SEP 1958 |      NA     |    I58     |  Rodriguez Roy   |   I55   |    Jinne George   |                                                        ['I73']                                                         |
+| F70 | 26 AUG 1988 |      NA     |    I70     |  Austin George   |   I72   |    Daisy George   |                                                           NA                                                           |
+| F71 | 26 SEP 1988 |      NA     |    I71     |  Martin George   |   I73   |    Jeniffer Roy   |                                                           NA                                                           |
+|  F1 | 26 NOV 2017 |      NA     |     I2     |  Pedro Martinez  |    I1   |    Alison Marin   |                                                           NA                                                           |
+|  F3 |  9 NOV 1986 |      NA     |     I3     |   Adam Hackley   |    I4   | Angelica Martinez | ['I8', 'I22', 'I23', 'I24', 'I25', 'I26', 'I27', 'I28', 'I29', 'I30', 'I31', 'I32', 'I33', 'I34', 'I35', 'I36', 'I38'] |
+|  F4 | 29 OCT 1982 | 28 DEC 1980 |     I3     |   Adam Hackley   |    I5   |  Jackline Alfonso |                                                         ['I9']                                                         |
+|  F5 | 18 AUG 1984 |      NA     |    I10     |  Eric Locklear   |    I4   | Angelica Martinez |                                                           NA                                                           |
+|  F6 |  7 SEP 1952 |      NA     |     I6     |  Henry Martinez  |    I7   |    Brenda Ordon   |                                                     ['I4', 'I37']                                                      |
+| F20 |      NA     |      NA     |    I62     | Armando Peterson |   I65   |  Vanessa Peterson |                                                           NA                                                           |
+| F21 |      NA     |      NA     |    I63     |  Jorge Peterson  |   I64   |   Veronica Marin  |                                                     ['I62', 'I65']                                                     |
+| F22 | 30 NOV 2000 |      NA     |    I66     |   John Claude    |   I67   |    Jaime Claude   |                                                           NA                                                           |
+| F23 | 30 NOV 2000 |      NA     |    I68     |   John Claude    |   I69   |    Jaime Claude   |                                                           NA                                                           |
++-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 09 Nov 2018
 ERROR: Family: US01: F20 Not married 
 ERROR: Family: US01: F21 Not married 
-ERROR: Individual: US03: I10 : Death date 8 JUN 1985 cannot occur before birthday 05 OCT 2018
 ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
 ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
 ERROR: FAMILY: US05: F3: Husband death date 16 OCT 1980 occurs before marriage date 9 NOV 1986
 ERROR: FAMILY: US05: F4: Husband death date 16 OCT 1980 occurs before marriage date 29 OCT 1982
-ERROR: FAMILY: US05: F5: Husband death date 8 JUN 1985 occurs before marriage date 18 AUG 1984
+ERROR: FAMILY: US05: F5: Wife death date 20 JUN 1984 occurs before marriage date 18 AUG 1984
 ERROR: FAMILY: US05: F6: Wife death date 14 NOV 1950 occurs before marriage date 7 SEP 1952
 ERROR: INDIVIDUAL: US06 : I3 : Death of Husband 16 OCT 1980 occurs before date of divorce 28 DEC 1980
 ERROR: INDIVIDUAL: US06 : I5 : Death of wife 14 NOV 1979 occurs before date of divorce 28 DEC 1980
-US29 - Total number of deceased individuals:  6
+ERROR: INDIVIDUAL: US07 : I51 : lived longer than 150 years
+ANOMALY: FAMILY: US08: F21: Birthday 8 NOV 1991 of child I65 occurs before marriage NA
+ANOMALY: FAMILY: US08: F4: Birthday 4 SEP 1985 of child I9 occurs after more than 9 months of divorce 28 DEC 1980
+ERROR: FAMILY: US09: F3: Birthday 5 JUL 2006 of child I38 should be born before death 20 JUN 1984 of mother I4
+ERROR: FAMILY: US09: F4: Birthday 4 SEP 1985 of child I9 should be born before death 14 NOV 1979 of mother I5
+ERROR: FAMILY: US09: F6: Birthday 30 NOV 1959 of child I37 should be born before death 14 NOV 1950 of mother I7
+ERROR: FAMILY: US09: F3: Birthday 5 JUL 2006 of child I38 should be born before 9 months after death 16 OCT 1980 of father I3
+ERROR: FAMILY: US09: F4: Birthday 4 SEP 1985 of child I9 should be born before 9 months after death 16 OCT 1980 of father I3
+ANOMALY: FAMILY: US10: Husband I10 in Family F5 is married before 14 years old
+ERROR: FAMILY: US11: Individual UID: I4: Angelica Martinez has 2 spouses -- I10: Eric Locklear, I3: Adam Hackley
+ERROR: FAMILY: US13 : F3 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart
+ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
+ERROR: FAMILY: US15: F3 has more than 15 siblings
+ERROR: FAMILY: US16: Lastname Martinez of I9 is not same as family's last name Hackley
+US18 - Total number of marriage with their sibling:  2
+Individual Name who marry their sibling: Armando Peterson 
+Individual Name who marry their sibling: Vanessa Peterson 
+ERROR: FAMILY: US19: First cousins UID: I70 Austin George and I72 Daisy George are married to each other in Family: F70
+ERROR: FAMILY: US19: First cousins UID: I71 Martin George and I73 Jeniffer Roy are married to each other in Family: F71
+ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
+ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
+ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
+WARNING: Individual: US23: 2 individual(s) named Angelica Martinez born on 1959-11-30: I4, I37
+WARNING: Individual: US23: 2 individual(s) named John Claude born on 1970-01-01: I66, I68
+WARNING: Individual: US23: 2 individual(s) named Jaime Claude born on 1970-03-30: I67, I69
+ERROR: FAMILY: US24: Family F22 and Family F23 have the same husband name, wife name, and marriage date
+ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
+ANNOUNCEMENT: FAMILY: US28: The children of Family F51 ordered by age: [['I53', '16 AUG 1930'], ['I54', '7 MAY 1933'], ['I55', '24 OCT 1935']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F53 ordered by age: [['I71', '16 OCT 1960'], ['I70', '16 JUL 1962']]
+ANNOUNCEMENT: FAMILY: US28: Family F54 only has one child: [['I72', '17 AUG 1960']]
+ANNOUNCEMENT: FAMILY: US28: Family F58 only has one child: [['I73', '10 MAY 1960']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F3 ordered by age: [['I31', '1 JUL 2006'], ['I32', '1 JUL 2006'], ['I33', '1 JUL 2006'], ['I34', '1 JUL 2006'], ['I35', '1 JUL 2006'], ['I36', '1 JUL 2006'], ['I38', '5 JUL 2006'], ['I30', '28 JUL 2007'], ['I29', '28 JUL 2008'], ['I28', '28 JUL 2009'], ['I22', '28 JUL 2010'], ['I23', '28 JUL 2011'], ['I24', '28 JUL 2012'], ['I25', '28 JUL 2013'], ['I26', '28 JUL 2014'], ['I27', '28 JUL 2015'], ['I8', '28 JUL 2020']]
+ANNOUNCEMENT: FAMILY: US28: Family F4 only has one child: [['I9', '4 SEP 1985']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F6 ordered by age: [['I4', '30 NOV 1959'], ['I37', '30 NOV 1959']]
+ANNOUNCEMENT: FAMILY: US28: The children of Family F21 ordered by age: [['I62', '29 JUN 1990'], ['I65', '8 NOV 1991']]
+US29 - Total number of deceased individuals:  5
 Name: Adam Hackley Date Passed: 16 OCT 1980
 Name: Angelica Martinez Date Passed: 20 JUN 1984
 Name: Jackline Alfonso Date Passed: 14 NOV 1979
 Name: Brenda Ordon Date Passed: 14 NOV 1950
-Name: Eric Locklear Date Passed: 8 JUN 1985
 Name: Veronica Marin Date Passed: 29 OCT 2018
-US35 - Total number of recent births:  0
-No recent Birth
-US36 - Total number of recent deaths:  1
-Name: Veronica Marin Death on: 29 OCT 2018
-ERROR: FAMILY: US15: F3 has more than 15 siblings
-ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
-ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
-ANOMALY: FAMILY: US08: F21: Birthday 8 NOV 1991 of child I65 occurs before marriage NA
-ANOMALY: FAMILY: US08: F4: Birthday 4 SEP 1985 of child I9 occurs after more than 9 months of divorce 28 DEC 1980
-ERROR: FAMILY: US09: F3: Birthday 1 JUL 2006 of child I36 should be born before death 20 JUN 1984 of mother I4
-ERROR: FAMILY: US09: F4: Birthday 4 SEP 1985 of child I9 should be born before death 14 NOV 1979 of mother I5
-ERROR: FAMILY: US09: F6: Birthday 30 NOV 1959 of child I37 should be born before death 14 NOV 1950 of mother I7
-ERROR: FAMILY: US09: F3: Birthday 1 JUL 2006 of child I36 should be born before 9 months after death 16 OCT 1980 of father I3
-ERROR: FAMILY: US09: F4: Birthday 4 SEP 1985 of child I9 should be born before 9 months after death 16 OCT 1980 of father I3
-ANOMALY: FAMILY: US10: Husband I10 in Family F5 is married before 14 years old
-ERROR: FAMILY: US11: Individual UID: I4: Angelica Martinez has 2 spouses -- I10: Eric Locklear, I3: Adam Hackley
-ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
-ERROR: FAMILY: US16: Lastname Martinez of I9 is not same as family's last name Hackley
-ERROR: FAMILY: US19: First cousins UID: I70 Austin George and I72 Daisy George are married to each other in Family: F70
-ERROR: FAMILY: US19: First cousins UID: I71 Martin George and I73 Jeniffer Roy are married to each other in Family: F71
-WARNING: Individual: US23: 2 individual(s) named Angelica Martinez born on 1959-11-30: I4, I37
-WARNING: Individual: US23: 2 individual(s) named John Claude born on 1970-01-01: I66, I68
-WARNING: Individual: US23: 2 individual(s) named Jaime Claude born on 1970-03-30: I67, I69
-US30 - Total number of living married:  19
+US30 - Total number of living married:  20
 ID: I51 Name: Louis George
 ID: I52 Name: Donna Anthony
 ID: I53 Name: Reymond George
@@ -128,26 +139,12 @@ ID: I71 Name: Martin George
 ID: I73 Name: Jeniffer Roy
 ID: I2 Name: Pedro Martinez
 ID: I1 Name: Alison Marin
+ID: I10 Name: Eric Locklear
 ID: I6 Name: Henry Martinez
 ID: I66 Name: John Claude
 ID: I67 Name: Jaime Claude
 ID: I68 Name: John Claude
 ID: I69 Name: Jaime Claude
-US37 - Total number of recent survivors:  1
-Survivals List:
-Individual who passed: Veronica Marin, event happened on: 29 OCT 2018
- Survival Spouse: Jorge Peterson 
- Survivals Children: ['I62', 'I65']
-                   
-US38 - Total number of Upcoming birthdays:  4
-Name: Angelica Martinez, Birth on: 30 NOV 1959
-Name: Angelica Martinez, Birth on: 30 NOV 1959
-Name: Veronica Marin, Birth on: 27 NOV 1954
-Name: Vanessa Peterson, Birth on: 8 NOV 1991
-US18 - Total number of marriage with their sibling:  2
-Individual Name who marry their sibling: Armando Peterson 
-Individual Name who marry their sibling: Vanessa Peterson 
-US42 - Check for valid date: 
 US31 - Total number of singles over 30:  2
 Name: Angelica Martinez Age: 58
 Name: Henry Martinez Age: 33
@@ -160,18 +157,7 @@ Family id: F3 Birth on: 1 JUL 2006 Name: Maia Hackley
 Family id: F3 Birth on: 1 JUL 2006 Name: Isla Hackley
 Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
 Family id: F6 Birth on: 30 NOV 1959 Name: Angelica Martinez
-ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
-ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
-ERROR: FAMILY: US24: Family F22 and Family F23 have the same husband name, wife name, and marriage date
-ANNOUNCEMENT: FAMILY: US28: The children of Family F51 ordered by age: [['I53', '16 AUG 1930'], ['I54', '7 MAY 1933'], ['I55', '24 OCT 1935']]
-ANNOUNCEMENT: FAMILY: US28: The children of Family F53 ordered by age: [['I71', '16 OCT 1960'], ['I70', '16 JUL 1962']]
-ANNOUNCEMENT: FAMILY: US28: Family F54 only has one child: [['I72', '17 AUG 1960']]
-ANNOUNCEMENT: FAMILY: US28: Family F58 only has one child: [['I73', '10 MAY 1960']]
-ANNOUNCEMENT: FAMILY: US28: The children of Family F3 ordered by age: [['I31', '1 JUL 2006'], ['I32', '1 JUL 2006'], ['I33', '1 JUL 2006'], ['I34', '1 JUL 2006'], ['I35', '1 JUL 2006'], ['I36', '1 JUL 2006'], ['I30', '28 JUL 2007'], ['I29', '28 JUL 2008'], ['I28', '28 JUL 2009'], ['I22', '28 JUL 2010'], ['I23', '28 JUL 2011'], ['I24', '28 JUL 2012'], ['I25', '28 JUL 2013'], ['I26', '28 JUL 2014'], ['I27', '28 JUL 2015'], ['I8', '28 JUL 2020']]
-ANNOUNCEMENT: FAMILY: US28: Family F4 only has one child: [['I9', '4 SEP 1985']]
-ANNOUNCEMENT: FAMILY: US28: The children of Family F6 ordered by age: [['I4', '30 NOV 1959'], ['I37', '30 NOV 1959']]
-ANNOUNCEMENT: FAMILY: US28: The children of Family F21 ordered by age: [['I62', '29 JUN 1990'], ['I65', '8 NOV 1991']]
-US33 - Total number of Orphans:  16
+US33 - Total number of Orphans:  17
 Name: Maria Hackley Age: -2
 Name: Liam Hackley Age: 8
 Name: Emma Hackley Age: 7
@@ -188,10 +174,26 @@ Name: Silas Hackley Age: 12
 Name: Milo Hackley Age: 12
 Name: Maia Hackley Age: 12
 Name: Isla Hackley Age: 12
+Name: Isla Hackley Age: 12
 US34 - Total number of Spouses with twice as much age:  0
 US34 - No spouses with twice as much age.
+US35 - Total number of recent births:  1
+Name: Eric Locklear Birth on: 05 NOV 2018
+US36 - Total number of recent deaths:  1
+Name: Veronica Marin Death on: 29 OCT 2018
+US37 - Total number of recent survivors:  1
+Survivals List:
+Individual who passed: Veronica Marin, event happened on: 29 OCT 2018
+ Survival Spouse: Jorge Peterson 
+ Survivals Children: ['I62', 'I65']
+                   
+US38 - Total number of Upcoming birthdays:  3
+Name: Angelica Martinez, Birth on: 30 NOV 1959
+Name: Angelica Martinez, Birth on: 30 NOV 1959
+Name: Veronica Marin, Birth on: 27 NOV 1954
 US39 - Total number of upcoming anniversaries within 30 days:  4
 US39 - Next anniversary is for Louis George and Donna Anthony on NOV 26
 US39 - Next anniversary is for Pedro Martinez and Alison Marin on NOV 26
 US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
 US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
+US42 - Check for valid date: 

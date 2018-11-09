@@ -202,57 +202,13 @@ def main():
     #US07 - age more than 150
     agemorethan_150(individual_data)
 
-    #US29 - Get list of individuals who passed
-    data = deceased_list(individual_data)
-    print_both('US29 - Total number of deceased individuals: ',len(data))
-    for person in deceased_list(individual_data):
-        print_both("Name: {1} Date Passed: {0}".format(person.deat, person.name ))
-    
-    #US35 - List recent birthdays
-    #print_both("\nRecent Birthday Data")
-    birth_recently = list_recent_births(individual_data)
-    print_both('US35 - Total number of recent births: ',len(birth_recently))
-    if len(birth_recently) == 0:
-        print_both("No recent Birth")
-    else:
-        for individual in birth_recently:
-            print_both("Name: {0} Birth on: {1}".format(individual.name, individual.birt))
-
-    #US36 - List recent deaths
-    #print_both("\nRecent Death Data")
-    death_recently = list_recent_death(individual_data)
-    print_both('US36 - Total number of recent deaths: ',len(death_recently))
-    if len(death_recently) == 0:
-        print_both("No recent Death")
-    else:
-        for individual in death_recently:
-            print_both("Name: {0} Death on: {1}".format(individual.name, individual.deat))
-
-    # US15 -- There should be fewer than 15 siblings in a family
-    fid_list = fewer_than15_siblings(family_data)
-    for fid in fid_list:
-        print_both("ERROR: FAMILY: US15: " + str(fid) + " has more than 15 siblings")
-
-    # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
-    problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
-    if len(problem_indis) > 0:
-        for individual in problem_indis:
-            print_both("ERROR: INDIVIDUAL: US22: {} has been used for more than one individual".format(individual))
-    else:
-        print_both("ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries")
-
-    if len(problem_fams) > 0:
-        for family in problem_fams:
-            print_both("ERROR: FAMILY: US22: {} has been used for more than one individual".format(family))
-    else:
-        print_both("ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries")
-
     # US08 - Children should be born after marriage of parents (and not more than 9 months after their divorce)
     marr_error_entries, div_error_entries = validate_child_birth(individual_data,family_data)
     for fid, uid in marr_error_entries.items():
         print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs before marriage " + str(family_data[fid].marr))
     for fid, uid in div_error_entries.items():
         print_both("ANOMALY: FAMILY: US08: " + str(fid) + ": Birthday " + str(individual_data[uid].birt) + " of child " + str(uid) + " occurs after more than 9 months of divorce " + str(family_data[fid].div))    
+    
     
     #US09 - Child should be born before death of mother and before nine months after death of father
     child_mother_error, child_father_error = validate_childBirth_with_parentsDeath(individual_data, family_data)
@@ -293,23 +249,64 @@ def main():
             else:
                 print_both("ERROR: FAMILY: US12: Parent {} named {} born on {} is more than 60 years older than child {} named {} born on {} in family {}".format(v[1], v[2], v[3], v[4], v[5], v[6], k))
 
+    #US13
+    sibling_spacing(family_data, individual_data)
+
     # US14 - Multiple Births <= 5 - No more than five siblings should be born at the same time
     problem_fams_dict = check_multiple_births(family_data, individual_data)
     if len(problem_fams_dict) > 0:
         for k, v in problem_fams_dict.items():
             print_both("ERROR: FAMILY: US14: Family {} has more than 5 siblings born on the same day: {}".format(k, v))
-            
+
+    # US15 -- There should be fewer than 15 siblings in a family
+    fid_list = fewer_than15_siblings(family_data)
+    for fid in fid_list:
+        print_both("ERROR: FAMILY: US15: " + str(fid) + " has more than 15 siblings")
+    
     # US16 --- All male members of the family should have the same last name
     invaild_lastname_error = validate_male_lastname(individual_data, family_data)
     for fid, details in invaild_lastname_error.items():
         print_both("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
-        
+
+    #US18 - List Siblings should not marry
+    family = siblings_should_not_marry(family_data, individual_data)
+    print_both('US18 - Total number of marriage with their sibling: ', len(family))
+    if len(family) > 0:
+        for person in family:
+            print_both("""Individual Name who marry their sibling: {0} """.format(person.name))
+    else:
+        print_both("No Siblings are married")
+    
     # US19 --- First cousins should not marry one another
     error_entries = not_to_marry_firstCousin(family_data)
     if len(error_entries) > 0:
         for fid, married_cousin_list in error_entries.items():
-            print_both("ERROR: FAMILY: US19: First cousins UID: " + str(married_cousin_list[0]) +" " +individual_data[married_cousin_list[0]].name +" and " + str(married_cousin_list[1]) +" " +individual_data[married_cousin_list[1]].name +" are married to each other in Family: " +str(fid))       
+            print_both("ERROR: FAMILY: US19: First cousins UID: " + str(married_cousin_list[0]) +" " +individual_data[married_cousin_list[0]].name +" and " + str(married_cousin_list[1]) +" " +individual_data[married_cousin_list[1]].name +" are married to each other in Family: " +str(fid))
+    
+    # US21 - Husband in family should be male and wife in family should be female
+    prob_fams_dict = correct_gender_for_role(family_data, individual_data)
 
+    if len(prob_fams_dict) > 0:
+        for k, v in prob_fams_dict.items():
+            if v[0] == "NA":
+                print_both("ANOMALY: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
+            else:
+                print_both("ERROR: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
+
+    # US22 Unique IDs - All individual IDs should be unique and all family IDs should be unique
+    problem_indis, problem_fams = check_unique_ids(individual_data, family_data)
+    if len(problem_indis) > 0:
+        for individual in problem_indis:
+            print_both("ERROR: INDIVIDUAL: US22: {} has been used for more than one individual".format(individual))
+    else:
+        print_both("ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries")
+
+    if len(problem_fams) > 0:
+        for family in problem_fams:
+            print_both("ERROR: FAMILY: US22: {} has been used for more than one individual".format(family))
+    else:
+        print_both("ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries")
+    
     # US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file
     error_entries = validate_unique_name_birthdate(individual_data)
     if len(error_entries) > 0:  
@@ -322,54 +319,41 @@ def main():
                 separate_uid += req_list[element] + ", "
             separate_uid = separate_uid + str(req_list[-1])
             print_both("WARNING: Individual: US23: " + str(len(req_list)) + " individual(s) named " + str(each_error_list[-2]) + " born on " + str(each_error_list[-1]) + ": " + str(separate_uid))        
-        
+
+    # US24 - No more than one family with the same spouses by name and the same marriage date should appear in a GEDCOM file
+    non_unique_families = unique_families_by_spouses(family_data)
+    if len(non_unique_families) > 0:
+        for family in non_unique_families:
+            print_both("ERROR: FAMILY: US24: Family {} and Family {} have the same husband name, wife name, and marriage date".format(family[0], family[1]))
+  
+    # US25 - No more than one child with the same name and birth date should appear in a family
+    problem_children_list = unique_first_names(family_data, individual_data)
+    
+    if len(problem_children_list) > 0:
+        for family in problem_children_list:
+            print_both("ERROR: FAMILY: US25: Multiple children in Family {} have the same birthday and name".format(family))
+
+    # US28 - List siblings in families by decreasing age
+    children_dict = order_siblings_by_age(family_data, individual_data)
+    for k, v in children_dict.items():
+        if len(v) > 1:
+            print_both("ANNOUNCEMENT: FAMILY: US28: The children of Family {} ordered by age: {}".format(k, v))
+        elif len(v) == 1:
+            print_both("ANNOUNCEMENT: FAMILY: US28: Family {} only has one child: {}".format(k, v))
+        else:
+            print_both("ANNOUNCEMENT: FAMILY: US28: Family {} does not have any children".format(k))
+
+    #US29 - Get list of individuals who passed
+    data = deceased_list(individual_data)
+    print_both('US29 - Total number of deceased individuals: ',len(data))
+    for person in deceased_list(individual_data):
+        print_both("Name: {1} Date Passed: {0}".format(person.deat, person.name ))
+
     #US30 - list living married
     living_married = living_married_list(family_data, individual_data)
     print_both('US30 - Total number of living married: ',len(living_married))
     for person in living_married:
         print_both("ID: {0} Name: {1}".format(person.uid ,person.name))
-
-    #US37 - survival from a recent death
-    #print_both("\nRecent Death Data")
-    data = list_recent_survivals(individual_data, family_data)
-    print_both('US37 - Total number of recent survivors: ',len(data))
-    if len(data) > 0:
-        print_both("Survivals List:")
-        for d in data.values():
-            print_both("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
-                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
-    else:
-        print_both("No Recent death with survivals within last 30 days")
-
-    #US38 - List of Upcoming Birthday
-    #print_both("Upcoming Birthday Data")
-    data = list_upcoming_birthdays(individual_data)
-    print_both('US38 - Total number of Upcoming birthdays: ',len(data))
-    if len(data) is not 0:
-        for birthdays in data:
-            print_both("Name: {0}, Birth on: {1}".format(birthdays.name, birthdays.birt))
-    else:
-        print_both('No upcoming birthday in the next 30 days.')
-
-    #US18 - List Siblings should not marry
-    family = siblings_should_not_marry(family_data, individual_data)
-    print_both('US18 - Total number of marriage with their sibling: ', len(family))
-    if len(family) > 0:
-        for person in family:
-            print_both("""Individual Name who marry their sibling: {0} """.format(person.name))
-    else:
-        print_both("No Siblings are married")
-
-    #US42 - Check for valid date
-    family = siblings_should_not_marry(family_data, individual_data)
-    print_both('US42 - Check for valid date: ')
-    print("US42 - check for 2/30/2018 is valid: ", reject_illegal_dates('2/30/2018'))
-    print("US42 - check for 2/29/2018 is valid: ", reject_illegal_dates('2/29/2018'))
-    print("US42 - check for 2/28/2018 is valid: ", reject_illegal_dates('2/28/2018'))
-    print("US42 - check for 11/31/2018 is valid: ", reject_illegal_dates('11/31/2018'))
-    print("US42 - check for 11/30/2018 is valid: ", reject_illegal_dates('11/30/2018'))
-    print("US42 - check for 12/31/2018 is valid: ", reject_illegal_dates('12/31/2018'))
-
 
     #US31 - List singles over 30
     single = single_over_30(family_data, individual_data)
@@ -383,48 +367,13 @@ def main():
     for person in list_multiple_birth:
         print_both("Family id: {0} Birth on: {2} Name: {1}".format(''.join(person.famc), person.name, person.birt))
 
-    # US21 - Husband in family should be male and wife in family should be female
-    prob_fams_dict = correct_gender_for_role(family_data, individual_data)
-
-    if len(prob_fams_dict) > 0:
-        for k, v in prob_fams_dict.items():
-            if v[0] == "NA":
-                print_both("ANOMALY: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
-            else:
-                print_both("ERROR: FAMILY: US21: Spouse {} in Family {} gender listed as {} but expected {}".format(v[2], k, v[0], v[1]))
-
-    # US25 - No more than one child with the same name and birth date should appear in a family
-    problem_children_list = unique_first_names(family_data, individual_data)
-    
-    if len(problem_children_list) > 0:
-        for family in problem_children_list:
-            print_both("ERROR: FAMILY: US25: Multiple children in Family {} have the same birthday and name".format(family))
-
-    #US13
-    sibling_spacing(family_data, individual_data)
-
-    # US24 - No more than one family with the same spouses by name and the same marriage date should appear in a GEDCOM file
-    non_unique_families = unique_families_by_spouses(family_data)
-    if len(non_unique_families) > 0:
-        for family in non_unique_families:
-            print_both("ERROR: FAMILY: US24: Family {} and Family {} have the same husband name, wife name, and marriage date".format(family[0], family[1]))
-
-    # US28 - List siblings in families by decreasing age
-    children_dict = order_siblings_by_age(family_data, individual_data)
-    for k, v in children_dict.items():
-        if len(v) > 1:
-            print_both("ANNOUNCEMENT: FAMILY: US28: The children of Family {} ordered by age: {}".format(k, v))
-        elif len(v) == 1:
-            print_both("ANNOUNCEMENT: FAMILY: US28: Family {} only has one child: {}".format(k, v))
-        else:
-            print_both("ANNOUNCEMENT: FAMILY: US28: Family {} does not have any children".format(k))
-
-    #US33
+    #US33 - List Orphans
     orphans = list_orphans(family_data, individual_data)
     print_both('US33 - Total number of Orphans: ',len(orphans))
     for person in orphans:
         print_both("Name: {0} Age: {1}".format(person.name, person.age))
 
+    #US34 - List large age Difference
     spouse_list = list_spouse_large_age_difference(family_data, individual_data)
     print_both('US34 - Total number of Spouses with twice as much age: ', len(spouse_list))
     if len(spouse_list) > 0:
@@ -435,6 +384,45 @@ def main():
     else:
         print_both("US34 - No spouses with twice as much age.")
 
+    #US35 - List recent birthdays
+    birth_recently = list_recent_births(individual_data)
+    print_both('US35 - Total number of recent births: ',len(birth_recently))
+    if len(birth_recently) == 0:
+        print_both("No recent Birth")
+    else:
+        for individual in birth_recently:
+            print_both("Name: {0} Birth on: {1}".format(individual.name, individual.birt))
+
+    #US36 - List recent deaths
+    death_recently = list_recent_death(individual_data)
+    print_both('US36 - Total number of recent deaths: ',len(death_recently))
+    if len(death_recently) == 0:
+        print_both("No recent Death")
+    else:
+        for individual in death_recently:
+            print_both("Name: {0} Death on: {1}".format(individual.name, individual.deat))
+    
+    #US37 - survival from a recent death
+    data = list_recent_survivals(individual_data, family_data)
+    print_both('US37 - Total number of recent survivors: ',len(data))
+    if len(data) > 0:
+        print_both("Survivals List:")
+        for d in data.values():
+            print_both("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
+                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
+    else:
+        print_both("No Recent death with survivals within last 30 days")
+
+    #US38 - List of Upcoming Birthday
+    data = list_upcoming_birthdays(individual_data)
+    print_both('US38 - Total number of Upcoming birthdays: ',len(data))
+    if len(data) is not 0:
+        for birthdays in data:
+            print_both("Name: {0}, Birth on: {1}".format(birthdays.name, birthdays.birt))
+    else:
+        print_both('No upcoming birthday in the next 30 days.')
+
+    #US39 - List upcoming anniversaries
     anniversaries = list_upcoming_anniversaries(family_data, individual_data)
     print_both('US39 - Total number of upcoming anniversaries within 30 days: ', len(anniversaries))
     if len(anniversaries) > 0:
@@ -444,6 +432,27 @@ def main():
             print_both("US39 - Next anniversary is for {} and {} on {}".format(family.husb, family.wife, date ))
     else:
         print_both("US39 - No anniversary in the next 30 days")
+    
+    #US42 - Check for valid date
+    family = siblings_should_not_marry(family_data, individual_data)
+    print_both('US42 - Check for valid date: ')
+    print("US42 - check for 2/30/2018 is valid: ", reject_illegal_dates('2/30/2018'))
+    print("US42 - check for 2/29/2018 is valid: ", reject_illegal_dates('2/29/2018'))
+    print("US42 - check for 2/28/2018 is valid: ", reject_illegal_dates('2/28/2018'))
+    print("US42 - check for 11/31/2018 is valid: ", reject_illegal_dates('11/31/2018'))
+    print("US42 - check for 11/30/2018 is valid: ", reject_illegal_dates('11/30/2018'))
+    print("US42 - check for 12/31/2018 is valid: ", reject_illegal_dates('12/31/2018'))
+
+
+    
+    
+    
+    
+
+    
+    
+ 
+    
 
 if __name__ == '__main__':
     main()
