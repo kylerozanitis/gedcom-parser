@@ -26,6 +26,7 @@ from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_fo
 from helperFunctions_Sprint3 import siblings_should_not_marry, correct_gender_for_role
 from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses, order_siblings_by_age
 from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
+from helperFunctions_Sprint4 import no_bigamy, not_to_marry_firstCousin
 
 import sys
 from datetime import datetime
@@ -268,6 +269,20 @@ def main():
                 print_both("ANOMALY: FAMILY: US10: Husband {} in Family {} is married before 14 years old".format(k, v[1]))
             else:
                 print_both("ANOMALY: FAMILY: US10: Wife {} in Family {} is married before 14 years old".format(k, v[1]))
+                
+    # US11 --- Marriage should not occur during marriage to another spouse
+    error_entries = no_bigamy(family_data)
+    if len(error_entries) > 0:
+        for uid, uid_spouse_list in error_entries.items():
+            organize_id_name = ""
+            req_list = []
+            for spouse_id in uid_spouse_list[:-1]:
+                req_list.append(spouse_id)
+            for element in range(len(req_list)):
+                organize_id_name += req_list[element] +": " + individual_data[req_list[element]].name + ", "
+            organize_id_name = organize_id_name + str(uid_spouse_list[-1]) + ": " + individual_data[uid_spouse_list[-1]].name
+
+            print("ERROR: FAMILY: US11: Individual UID: " +str(uid) +": " +individual_data[uid].name + " has " +str(len(uid_spouse_list)) +" spouses -- " +organize_id_name)                
     
     # US12 - Parents Not Too Old - Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
     problem_families_dict = check_parents_not_too_old(family_data, individual_data)
@@ -291,17 +306,15 @@ def main():
 
     # US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file
     error_entries = validate_unique_name_birthdate(individual_data)
-    if len(error_entries) > 0:
-        separate_uid = ""
-        req_list = []
-        for item in error_entries:
-            for uid in item[:-2]:
-                req_list.append(uid)
-        for element in range(len(req_list) - 1):
-            separate_uid += req_list[element] + ", "
-        separate_uid = separate_uid + str(req_list[-1])
-    
+    if len(error_entries) > 0:  
         for each_error_list in error_entries:
+            separate_uid = ""
+            req_list = []
+            for uid in each_error_list[:-2]:
+                req_list.append(uid)
+            for element in range(len(req_list) - 1):
+                separate_uid += req_list[element] + ", "
+            separate_uid = separate_uid + str(req_list[-1])
             print_both("WARNING: Individual: US23: " + str(len(req_list)) + " individual(s) named " + str(each_error_list[-2]) + " born on " + str(each_error_list[-1]) + ": " + str(separate_uid))        
         
     #US30 - list living married
