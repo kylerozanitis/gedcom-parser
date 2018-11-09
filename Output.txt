@@ -199,3 +199,9 @@ US39 - Next anniversary is for Pedro Martinez and Alison Marin on NOV 26
 US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
 US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
 US42 - Check for valid date: 
+US42 - check for 2/30/2018 is valid:  False
+US42 - check for 2/29/2018 is valid:  False
+US42 - check for 2/28/2018 is valid:  True
+US42 - check for 11/31/2018 is valid:  False
+US42 - check for 11/30/2018 is valid:  True
+US42 - check for 12/31/2018 is valid:  True
