@@ -191,3 +191,25 @@ def no_bigamy(family_data):
                 spouses.append(fam_obj.wife_id)
         
         family_spouses_ids[fid] = spouses
+
+    for family_id, family_spouses_list in family_spouses_ids.items():
+        for uids in family_spouses_list:
+            uids_spouse_list = list()
+            for uid in family_spouses_list:
+                if uid != uids:
+                    uids_spouse_list.append(uid)
+            for fid, spouses_list in family_spouses_ids.items():
+                if family_id == fid:
+                    continue
+                else:
+                    if uids in spouses_list:
+                        for indi_id in spouses_list:
+                            if indi_id != uids:
+                                uids_spouse_list.append(indi_id)
+            uids_with_more_spouses[uids] = uids_spouse_list
+    
+    for uid, uid_spouse_list in uids_with_more_spouses.items():
+        if len(uid_spouse_list) > 1:
+            error_entries[uid] = uid_spouse_list
+
+    return error_entries      
