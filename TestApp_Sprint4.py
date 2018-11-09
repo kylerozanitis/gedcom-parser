@@ -4,6 +4,7 @@ import unittest
 from classes import individualPerson, familyClass
 from helperFunctions_Sprint4 import sibling_spacing, list_orphans, unique_families_by_spouses, order_siblings_by_age
 from helperFunctions_Sprint4 import list_upcoming_anniversaries, list_spouse_large_age_difference
+from helperFunctions_Sprint4 import no_bigamy
 
 class TestHelperFunctions(unittest.TestCase):
     def test_sibling_spacing(self):
@@ -240,7 +241,58 @@ class TestHelperFunctions(unittest.TestCase):
 
         self.assertEqual(len(list_spouse_large_age_difference(fam_dict, ind_dict)), 1, True)
 
+    def test_no_bigamy(self):
+        """ Test cases for US11 --- Marriage should not occur during marriage to another spouse"""
+        fam_dict = {}
 
+        fam_F1 = familyClass("F1")
+        fam_F1.husb_id = "I1"
+        fam_F1.wife_id = "I2"
+        fam_dict[fam_F1.fid] = fam_F1
+
+        fam_F2 = familyClass("F2")
+        fam_F2.husb_id = "I1"
+        fam_F2.wife_id = "I3"
+        fam_dict[fam_F2.fid] = fam_F2
+
+        fam_F3 = familyClass("F3")
+        fam_F3.husb_id = "I1"
+        fam_F3.wife_id = "I4"
+        fam_dict[fam_F3.fid] = fam_F3
+
+        fam_F4 = familyClass("F4")
+        fam_F4.husb_id = "I5"
+        fam_F4.wife_id = "I3"
+        fam_dict[fam_F4.fid] = fam_F4    
+
+        fam_F5 = familyClass("F5")
+        fam_F5.husb_id = "I6"
+        fam_F5.wife_id = "I7"
+        fam_dict[fam_F5.fid] = fam_F5   
+
+        self.assertEqual(no_bigamy(fam_dict), ({'I1': ['I4', 'I2', 'I3'], 'I3': ['I5', 'I1']}))
+        self.assertNotEqual(no_bigamy(fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(no_bigamy(fam_dict))
+        self.assertIsNot(no_bigamy(fam_dict), {'F1':'I5'})
+        self.assertCountEqual(no_bigamy(fam_dict), ({'I1': ['I4', 'I2', 'I3'], 'I3': ['I5', 'I1']}))
+
+        fam_dict = {}
+
+        fam_F6 = familyClass("F6")
+        fam_F6.husb_id = "I8"
+        fam_F6.wife_id = "I9"
+        fam_dict[fam_F6.fid] = fam_F6
+
+        fam_F7 = familyClass("F7")
+        fam_F7.husb_id = "I10"
+        fam_F7.wife_id = "I11"
+        fam_dict[fam_F7.fid] = fam_F7
+
+        self.assertEqual(no_bigamy(fam_dict), ({}))
+        self.assertNotEqual(no_bigamy(fam_dict), {'F1':'I5'})
+        self.assertIsNotNone(no_bigamy(fam_dict))
+        self.assertIsNot(no_bigamy(fam_dict), {'F1':'I5'})
+        self.assertCountEqual(no_bigamy(fam_dict), ({}))
 
 if __name__ == '__main__':
     unittest.main(exit=False,verbosity=2)
