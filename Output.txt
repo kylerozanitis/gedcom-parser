@@ -175,8 +175,10 @@ Name: Milo Hackley Age: 12
 Name: Maia Hackley Age: 12
 Name: Isla Hackley Age: 12
 Name: Isla Hackley Age: 12
-US34 - Total number of Spouses with twice as much age:  0
-US34 - No spouses with twice as much age.
+US34 - Total number of Spouses with twice as much age:  3
+US34 - Spouses twice as much age: Pedro Martinez, age: 64 and Spouse is Alison Marin, age 24
+US34 - Spouses twice as much age: Eric Locklear, age: 0 and Spouse is Angelica Martinez, age 24
+US34 - Spouses twice as much age: Henry Martinez, age: 92 and Spouse is Brenda Ordon, age 20
 US35 - Total number of recent births:  1
 Name: Eric Locklear Birth on: 05 NOV 2018
 US36 - Total number of recent deaths:  1

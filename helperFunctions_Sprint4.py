@@ -160,7 +160,7 @@ def list_spouse_large_age_difference(family_data, individual_data):
             if wife.age > husb.age and (wife.age / 2) > husb.age:
                 double_age_list.append(data)
 
-        return double_age_list
+    return double_age_list
 
 
 def list_upcoming_anniversaries(family_data, individual_data):
