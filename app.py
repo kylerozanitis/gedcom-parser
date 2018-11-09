@@ -1,5 +1,5 @@
 #   File Name: app.py
-#   Assignment: # 3
+#  
 #
 #   Class: SSW 555 - Agile Methods for Software Engineering
 #
@@ -408,8 +408,7 @@ def main():
     if len(data) > 0:
         print_both("Survivals List:")
         for d in data.values():
-            print_both("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
-                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
+            print_both("""Individual who passed: {0}, \nevent happened on: {1} \nSurvival Spouse: {2} \nSurvivals Children: {3}""".format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
     else:
         print_both("No Recent death with survivals within last 30 days")
 
@@ -436,23 +435,12 @@ def main():
     #US42 - Check for valid date
     family = siblings_should_not_marry(family_data, individual_data)
     print_both('US42 - Check for valid date: ')
-    print("US42 - check for 2/30/2018 is valid: ", reject_illegal_dates('2/30/2018'))
-    print("US42 - check for 2/29/2018 is valid: ", reject_illegal_dates('2/29/2018'))
-    print("US42 - check for 2/28/2018 is valid: ", reject_illegal_dates('2/28/2018'))
-    print("US42 - check for 11/31/2018 is valid: ", reject_illegal_dates('11/31/2018'))
-    print("US42 - check for 11/30/2018 is valid: ", reject_illegal_dates('11/30/2018'))
-    print("US42 - check for 12/31/2018 is valid: ", reject_illegal_dates('12/31/2018'))
-
-
-    
-    
-    
-    
-
-    
-    
- 
-    
+    print_both("US42 - check for 2/30/2018 is valid: ", reject_illegal_dates('2/30/2018'))
+    print_both("US42 - check for 2/29/2018 is valid: ", reject_illegal_dates('2/29/2018'))
+    print_both("US42 - check for 2/28/2018 is valid: ", reject_illegal_dates('2/28/2018'))
+    print_both("US42 - check for 11/31/2018 is valid: ", reject_illegal_dates('11/31/2018'))
+    print_both("US42 - check for 11/30/2018 is valid: ", reject_illegal_dates('11/30/2018'))
+    print_both("US42 - check for 12/31/2018 is valid: ", reject_illegal_dates('12/31/2018'))
 
 if __name__ == '__main__':
     main()
