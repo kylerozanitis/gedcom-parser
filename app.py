@@ -282,7 +282,7 @@ def main():
                 organize_id_name += req_list[element] +": " + individual_data[req_list[element]].name + ", "
             organize_id_name = organize_id_name + str(uid_spouse_list[-1]) + ": " + individual_data[uid_spouse_list[-1]].name
 
-            print("ERROR: FAMILY: US11: Individual UID: " +str(uid) +": " +individual_data[uid].name + " has " +str(len(uid_spouse_list)) +" spouses -- " +organize_id_name)                
+            print_both("ERROR: FAMILY: US11: Individual UID: " +str(uid) +": " +individual_data[uid].name + " has " +str(len(uid_spouse_list)) +" spouses -- " +organize_id_name)                
     
     # US12 - Parents Not Too Old - Mother should be less than 60 years older than her children and father should be less than 80 years older than his children
     problem_families_dict = check_parents_not_too_old(family_data, individual_data)
@@ -303,6 +303,12 @@ def main():
     invaild_lastname_error = validate_male_lastname(individual_data, family_data)
     for fid, details in invaild_lastname_error.items():
         print_both("ERROR: FAMILY: US16: Lastname " + str(details[2]) + " of " + str(details[1]) + " is not same as family's last name " + str(details[0]))            
+        
+    # US19 --- First cousins should not marry one another
+    error_entries = not_to_marry_firstCousin(family_data)
+    if len(error_entries) > 0:
+        for fid, married_cousin_list in error_entries.items():
+            print_both("ERROR: FAMILY: US19: First cousins UID: " + str(married_cousin_list[0]) +" " +individual_data[married_cousin_list[0]].name +" and " + str(married_cousin_list[1]) +" " +individual_data[married_cousin_list[1]].name +" are married to each other in Family: " +str(fid))       
 
     # US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file
     error_entries = validate_unique_name_birthdate(individual_data)
@@ -438,11 +444,6 @@ def main():
             print_both("US39 - Next anniversary is for {} and {} on {}".format(family.husb, family.wife, date ))
     else:
         print_both("US39 - No anniversary in the next 30 days")
-
-
-
-    
-
 
 if __name__ == '__main__':
     main()

@@ -213,3 +213,33 @@ def no_bigamy(family_data):
             error_entries[uid] = uid_spouse_list
 
     return error_entries      
+
+def not_to_marry_firstCousin(family_data):
+    """ US19 --- First cousins should not marry one another"""
+    all_fam_cousins = dict()
+    for fid, fam_obj in family_data.items():
+        each_fam_cousins = list()
+        for child in fam_obj.chil:
+            for family_id, family_object in family_data.items():
+                if child == family_object.husb_id or child == family_object.wife_id:
+                    each_fam_cousins.extend(family_object.chil)
+        all_fam_cousins[fid] = each_fam_cousins
+    
+    error_entries = dict()
+    for fid, first_cousins in all_fam_cousins.items():
+        for indi_cousin in first_cousins:
+            for fam_id, f_obj in family_data.items():
+                married_cousin_list = list()
+                if indi_cousin == f_obj.husb_id:
+                    if f_obj.wife_id in first_cousins:
+                        married_cousin_list.append(f_obj.husb_id)
+                        married_cousin_list.append(f_obj.wife_id)
+                if indi_cousin == f_obj.wife_id:
+                    if f_obj.husb_id in first_cousins:
+                        married_cousin_list.append(f_obj.husb_id)
+                        married_cousin_list.append(f_obj.wife_id)
+                if len(married_cousin_list) < 1:
+                    continue
+                
+                error_entries[fam_id] = married_cousin_list
+    return error_entries
