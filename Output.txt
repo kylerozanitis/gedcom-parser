@@ -185,10 +185,10 @@ US36 - Total number of recent deaths:  1
 Name: Veronica Marin Death on: 29 OCT 2018
 US37 - Total number of recent survivors:  1
 Survivals List:
-Individual who passed: Veronica Marin, event happened on: 29 OCT 2018
- Survival Spouse: Jorge Peterson 
- Survivals Children: ['I62', 'I65']
-                   
+Individual who passed: Veronica Marin, 
+event happened on: 29 OCT 2018 
+Survival Spouse: Jorge Peterson 
+Survivals Children: ['I62', 'I65']
 US38 - Total number of Upcoming birthdays:  3
 Name: Angelica Martinez, Birth on: 30 NOV 1959
 Name: Angelica Martinez, Birth on: 30 NOV 1959
