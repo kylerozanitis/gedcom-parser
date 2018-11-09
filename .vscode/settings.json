@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.6/bin/python3",
+    "python.pythonPath": "C:\\Users\\shahr\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
