@@ -176,4 +176,18 @@ def list_upcoming_anniversaries(family_data, individual_data):
 
     return anniversaries
 
-
+def no_bigamy(family_data):
+    """ US11 --- Marriage should not occur during marriage to another spouse"""
+    family_spouses_ids = dict()
+    uids_with_more_spouses = dict()
+    error_entries = dict()
+    for fid, fam_obj in family_data.items():
+        spouses = list()
+        if fam_obj.div == "NA":
+            if fam_obj.husb_id != "NA":
+                spouses.append(fam_obj.husb_id)
+                
+            if fam_obj.wife_id != "NA":
+                spouses.append(fam_obj.wife_id)
+        
+        family_spouses_ids[fid] = spouses
