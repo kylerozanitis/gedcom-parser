@@ -408,8 +408,7 @@ def main():
     if len(data) > 0:
         print_both("Survivals List:")
         for d in data.values():
-            print_both("""Individual who passed: {0}, event happened on: {1}\n Survival Spouse: {2} \n Survivals Children: {3}
-                   """.format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
+            print_both("""Individual who passed: {0}, event happened on: {1}\nSurvival Spouse: {2} \nSurvivals Children: {3}""".format(d.get('name'), d.get('passed'), d.get('spouse_name'), d.get('children')))
     else:
         print_both("No Recent death with survivals within last 30 days")
 

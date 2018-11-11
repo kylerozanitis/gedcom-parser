@@ -72,7 +72,7 @@ Families
 | F22 | 30 NOV 2000 |      NA     |    I66     |   John Claude    |   I67   |    Jaime Claude   |                                                           NA                                                           |
 | F23 | 30 NOV 2000 |      NA     |    I68     |   John Claude    |   I69   |    Jaime Claude   |                                                           NA                                                           |
 +-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 09 Nov 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 10 Nov 2018
 ERROR: Individual: US03: I31 : Death date 14 NOV 1995 cannot occur before birthday 1 JUL 2006
 ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
 ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
@@ -191,9 +191,8 @@ Name: Veronica Marin Death on: 29 OCT 2018
 US37 - Total number of recent survivors:  1
 Survivals List:
 Individual who passed: Veronica Marin, event happened on: 29 OCT 2018
- Survival Spouse: Jorge Peterson 
- Survivals Children: ['I62', 'I65']
-                   
+Survival Spouse: Jorge Peterson 
+Survivals Children: ['I62', 'I65']
 US38 - Total number of Upcoming birthdays:  3
 Name: Angelica Martinez, Birth on: 30 NOV 1959
 Name: Angelica Martinez, Birth on: 30 NOV 1959
