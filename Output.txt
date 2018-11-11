@@ -47,10 +47,11 @@ Individuals
 | I63 |   Jorge Peterson  |   M    |  3 JUN 1956 |  62 |  True |      NA     |    NA   |   ['F21']    |
 | I64 |   Veronica Marin  |   F    | 27 NOV 1954 |  63 | False | 29 OCT 2018 |    NA   |   ['F21']    |
 | I65 |  Vanessa Peterson |   F    |  8 NOV 1991 |  27 |  True |      NA     | ['F21'] |   ['F20']    |
-| I66 |    John Claude    |   M    |  1 JAN 1970 |  48 |  True |      NA     |    NA   |   ['F22']    |
+| I66 |    John Claude    |   M    |  1 JAN 1935 |  83 |  True |      NA     |    NA   |   ['F22']    |
 | I67 |    Jaime Claude   |   F    | 30 MAR 1970 |  48 |  True |      NA     |    NA   |   ['F22']    |
-| I68 |    John Claude    |   M    | 1 JAN 1970  |  48 |  True |      NA     |    NA   |   ['F23']    |
+| I68 |    John Claude    |   M    |  1 JAN 1935 |  83 |  True |      NA     |    NA   |   ['F23']    |
 | I69 |    Jaime Claude   |   F    | 30 MAR 1970 |  48 |  True |      NA     |    NA   |   ['F23']    |
+| I74 |    Fred Claude    |   M    |  1 JUN 2017 |  1  |  True |      NA     | ['F23'] |      NA      |
 +-----+-------------------+--------+-------------+-----+-------+-------------+---------+--------------+
 Families
 +-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
@@ -70,9 +71,9 @@ Families
 | F20 | 11 AUG 1996 |      NA     |    I62     | Armando Peterson |   I65   |  Vanessa Peterson |                                                           NA                                                           |
 | F21 | 26 NOV 1995 |      NA     |    I63     |  Jorge Peterson  |   I64   |   Veronica Marin  |                                                     ['I62', 'I65']                                                     |
 | F22 | 30 NOV 2000 |      NA     |    I66     |   John Claude    |   I67   |    Jaime Claude   |                                                           NA                                                           |
-| F23 | 30 NOV 2000 |      NA     |    I68     |   John Claude    |   I69   |    Jaime Claude   |                                                           NA                                                           |
+| F23 | 30 NOV 2000 |      NA     |    I68     |   John Claude    |   I69   |    Jaime Claude   |                                                        ['I74']                                                         |
 +-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 10 Nov 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 11 Nov 2018
 ERROR: Individual: US03: I31 : Death date 14 NOV 1995 cannot occur before birthday 1 JUL 2006
 ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
 ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
@@ -94,6 +95,7 @@ ANOMALY: FAMILY: US10: Husband I10 in Family F5 is married before 14 years old
 ANOMALY: FAMILY: US10: Husband I62 in Family F20 is married before 14 years old
 ANOMALY: FAMILY: US10: Wife I65 in Family F20 is married before 14 years old
 ERROR: FAMILY: US11: Individual UID: I4: Angelica Martinez has 2 spouses -- I10: Eric Locklear, I3: Adam Hackley
+ERROR: FAMILY: US12: Parent I68 named John Claude born on 1 JAN 1935 is more than 80 years older than child I74 named Fred Claude born on 1 JUN 2017 in family F23
 ERROR: FAMILY: US13 : F3 : Birth dates of siblings should be less than 2 days apart or more than 8 months apart
 ERROR: FAMILY: US14: Family F3 has more than 5 siblings born on the same day: ['I31', 'I32', 'I33', 'I34', 'I35', 'I36']
 ERROR: FAMILY: US15: F3 has more than 15 siblings
@@ -107,7 +109,7 @@ ERROR: FAMILY: US21: Spouse I6 in Family F6 gender listed as F but expected M
 ANOMALY: INDIVIDUAL: US22: All individuals have unique UIDs due to data storage in dictionaries
 ANOMALY: FAMILY: US22: All families have unique FIDs due to data storage in dictionaries
 WARNING: Individual: US23: 2 individual(s) named Angelica Martinez born on 1959-11-30: I4, I37
-WARNING: Individual: US23: 2 individual(s) named John Claude born on 1970-01-01: I66, I68
+WARNING: Individual: US23: 2 individual(s) named John Claude born on 1935-01-01: I66, I68
 WARNING: Individual: US23: 2 individual(s) named Jaime Claude born on 1970-03-30: I67, I69
 ERROR: FAMILY: US24: Family F22 and Family F23 have the same husband name, wife name, and marriage date
 ERROR: FAMILY: US25: Multiple children in Family F6 have the same birthday and name
@@ -119,6 +121,7 @@ ANNOUNCEMENT: FAMILY: US28: The children of Family F3 ordered by age: [['I31', '
 ANNOUNCEMENT: FAMILY: US28: Family F4 only has one child: [['I9', '4 SEP 1985']]
 ANNOUNCEMENT: FAMILY: US28: The children of Family F6 ordered by age: [['I4', '30 NOV 1959'], ['I37', '30 NOV 1959']]
 ANNOUNCEMENT: FAMILY: US28: The children of Family F21 ordered by age: [['I62', '29 JUN 1990'], ['I65', '8 NOV 1991']]
+ANNOUNCEMENT: FAMILY: US28: Family F23 only has one child: [['I74', '1 JUN 2017']]
 US29 - Total number of deceased individuals:  6
 Name: Adam Hackley Date Passed: 16 OCT 1980
 Name: Angelica Martinez Date Passed: 20 JUN 1984
