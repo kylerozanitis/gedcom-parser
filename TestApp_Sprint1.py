@@ -76,7 +76,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(list(fam_dict.keys()), ["F1"])
 
     def test_deceased_list(self):
-        """Unit test to validate return of list of deceased people"""
+        """ US29 --- Unit test to validate return of list of deceased people"""
 
         ind_dict = dict()
 
@@ -105,7 +105,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(deceased_list(ind_dict)), 3, True)
 
     def test_agemorethan150(self):
-        """Unit test to validate if the person is more than 150 yrs old"""
+        """US07 --- Unit test to validate if the person is more than 150 yrs old"""
 
         individual_dict = {}
 
@@ -245,6 +245,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(check_marriage_before_death(fam_dict, ind_dict), ["F2", "F3"], True)
         
     def test_divorce_brfore_death(self):
+        """ US06 --- Tests cases for validating if divorce occured before death of both spouses """
         family_dict = {}
         individual_dict = {}
 
@@ -343,7 +344,7 @@ class TestHelperFunctions(unittest.TestCase):
 
 
     def test_birth_before_marriage(self):
-        """ Unit testing to check birth before marriages """
+        """ US02 --- Unit testing to check birth before marriages """
         fam_dict = {}
         ind_dict = {}
 
@@ -388,7 +389,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(birth_before_marriage(fam_dict, ind_dict)), 1, True)
 
     def test_recent_deaths(self):
-        """ Unit Test for Checking recent deaths """
+        """ US36 --- Unit Test for Checking recent deaths """
         indi_dict = {}
         i1 = individualPerson('I1')
         i1.uid = 'I1'
@@ -403,7 +404,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(list_recent_death(indi_dict)),1,True)
 
     def test_recent_births(self):
-        """ Unit Test for Checking recent births """
+        """ US35 --- Unit Test for Checking recent births """
         indi_dict = {}
         i1 = individualPerson('I11')
         i1.uid = 'I11'
