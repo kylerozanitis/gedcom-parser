@@ -9,6 +9,7 @@ class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
 
     def test_living_married(self):
+        """ US30 --- Test cases to validate living married"""
         fam_dict = {}
         ind_dict = {}
 
@@ -51,6 +52,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(living_married_list(fam_dict, ind_dict)), 4, True)
 
     def test_list_recent_survivals(self):
+        """ US37 --- Test cases to validate recent survivors """
         fam_dict = {}
         ind_dict = {}
 
@@ -85,6 +87,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(list_recent_survivals(ind_dict, fam_dict)), 0, True)
 
     def test_list_upcoming_birthdays(self):
+        """ US38 --- Test cases to validate upcoming birthdays """
         indi_dict = {}
 
         i1 = individualPerson('I1')
