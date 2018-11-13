@@ -7,6 +7,7 @@ from helperFunctions_Sprint3 import unique_first_names
 class TestHelperFunctions(unittest.TestCase):
     """Unit for HelperFunction File"""
     def test_single_over_30(self):
+        """ US31 --- Test cases for living singles """
         fam_dict = {}
         ind_dict = {}
 
@@ -43,6 +44,7 @@ class TestHelperFunctions(unittest.TestCase):
         self.assertEqual(len(single_over_30(fam_dict, ind_dict)), 2, True)
 
     def test_multiple_births(self):
+        """ US32 --- Test cases to validate multiple births """
         fam_dict = {}
         ind_dict = {}
 
