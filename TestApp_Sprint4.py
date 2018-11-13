@@ -8,6 +8,7 @@ from helperFunctions_Sprint4 import no_bigamy, not_to_marry_firstCousin
 
 class TestHelperFunctions(unittest.TestCase):
     def test_sibling_spacing(self):
+        """ US13 --- Test cases for validating sibling spacing """
         fam_dict = {}
         ind_dict = {}
 
@@ -166,6 +167,7 @@ class TestHelperFunctions(unittest.TestCase):
 
 
     def test_list_orphans(self):
+        """ US33 -- Test cases to validate the list of orphans """
 
         ind_dict = {}
         fam_dict = {}
