@@ -8,7 +8,7 @@ Individuals
 |  I2 |   Pedro Martinez  |   M    |  2 MAY 1954 |  64 |  True |      NA     |    NA   |    ['F1']    |
 |  I3 |    Adam Hackley   |   M    | 16 AUG 1954 |  26 | False | 16 OCT 1980 |  ['F1'] | ['F3', 'F4'] |
 |  I4 | Angelica Martinez |   F    | 30 NOV 1959 |  24 | False | 20 JUN 1984 |  ['F6'] | ['F3', 'F5'] |
-| I37 | Angelica Martinez |   M    | 30 NOV 1959 |  58 |  True |      NA     |  ['F6'] |      NA      |
+| I37 | Angelica Martinez |   M    | 30 NOV 1959 |  59 |  True |      NA     |  ['F6'] |      NA      |
 |  I5 |  Jackline Alfonso |   F    | 14 SEP 1955 |  24 | False | 14 NOV 1979 |    NA   |    ['F4']    |
 |  I6 |   Henry Martinez  |   F    | 15 MAY 1926 |  92 |  True |      NA     |    NA   |    ['F6']    |
 |  I7 |    Brenda Ordon   |   F    |  1 APR 1930 |  20 | False | 14 NOV 1950 |    NA   |    ['F6']    |
@@ -47,9 +47,9 @@ Individuals
 | I63 |   Jorge Peterson  |   M    |  3 JUN 1956 |  62 |  True |      NA     |    NA   |   ['F21']    |
 | I64 |   Veronica Marin  |   F    | 27 NOV 1954 |  63 | False | 29 OCT 2018 |    NA   |   ['F21']    |
 | I65 |  Vanessa Peterson |   F    |  8 NOV 1991 |  27 |  True |      NA     | ['F21'] |   ['F20']    |
-| I66 |    John Claude    |   M    |  1 JAN 1935 |  83 |  True |      NA     |    NA   |   ['F22']    |
+| I66 |    John Claude    |   M    |  1 JAN 1935 |  84 |  True |      NA     |    NA   |   ['F22']    |
 | I67 |    Jaime Claude   |   F    | 30 MAR 1970 |  48 |  True |      NA     |    NA   |   ['F22']    |
-| I68 |    John Claude    |   M    |  1 JAN 1935 |  83 |  True |      NA     |    NA   |   ['F23']    |
+| I68 |    John Claude    |   M    |  1 JAN 1935 |  84 |  True |      NA     |    NA   |   ['F23']    |
 | I69 |    Jaime Claude   |   F    | 30 MAR 1970 |  48 |  True |      NA     |    NA   |   ['F23']    |
 | I74 |    Fred Claude    |   M    |  1 JUN 2017 |  1  |  True |      NA     | ['F23'] |      NA      |
 +-----+-------------------+--------+-------------+-----+-------+-------------+---------+--------------+
@@ -73,7 +73,7 @@ Families
 | F22 | 30 NOV 2000 |      NA     |    I66     |   John Claude    |   I67   |    Jaime Claude   |                                                           NA                                                           |
 | F23 | 30 NOV 2000 |      NA     |    I68     |   John Claude    |   I69   |    Jaime Claude   |                                                        ['I74']                                                         |
 +-----+-------------+-------------+------------+------------------+---------+-------------------+------------------------------------------------------------------------------------------------------------------------+
-ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 11 Nov 2018
+ERROR: Individual: US01: I8 : Birthday 28 JUL 2020 cannot occur before current date 10 Jan 2019
 ERROR: Individual: US03: I31 : Death date 14 NOV 1995 cannot occur before birthday 1 JUL 2006
 ERROR: INDIVIDUAL: US02: F5 Birth occurs before marriage
 ERROR: FAMILY: US04: F4: Divorce date 28 DEC 1980 occurs before marriage date 29 OCT 1982
@@ -154,7 +154,7 @@ ID: I67 Name: Jaime Claude
 ID: I68 Name: John Claude
 ID: I69 Name: Jaime Claude
 US31 - Total number of singles over 30:  2
-Name: Angelica Martinez Age: 58
+Name: Angelica Martinez Age: 59
 Name: Henry Martinez Age: 33
 US32 - Total number of multiple births:  8
 Family id: F3 Birth on: 1 JUL 2006 Name: Amelia Hackley
@@ -187,24 +187,16 @@ US34 - Total number of Spouses with twice as much age:  3
 US34 - Spouses twice as much age: Pedro Martinez, age: 64 and Spouse is Alison Marin, age 24
 US34 - Spouses twice as much age: Eric Locklear, age: 0 and Spouse is Angelica Martinez, age 24
 US34 - Spouses twice as much age: Henry Martinez, age: 92 and Spouse is Brenda Ordon, age 20
-US35 - Total number of recent births:  1
-Name: Eric Locklear Birth on: 05 NOV 2018
-US36 - Total number of recent deaths:  1
-Name: Veronica Marin Death on: 29 OCT 2018
-US37 - Total number of recent survivors:  1
-Survivals List:
-Individual who passed: Veronica Marin, event happened on: 29 OCT 2018
-Survival Spouse: Jorge Peterson 
-Survivals Children: ['I62', 'I65']
-US38 - Total number of Upcoming birthdays:  3
-Name: Angelica Martinez, Birth on: 30 NOV 1959
-Name: Angelica Martinez, Birth on: 30 NOV 1959
-Name: Veronica Marin, Birth on: 27 NOV 1954
-US39 - Total number of upcoming anniversaries within 30 days:  4
-US39 - Next anniversary is for Louis George and Donna Anthony on NOV 26
-US39 - Next anniversary is for Pedro Martinez and Alison Marin on NOV 26
-US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
-US39 - Next anniversary is for John Claude and Jaime Claude on NOV 30
+US35 - Total number of recent births:  0
+No recent Birth
+US36 - Total number of recent deaths:  0
+No recent Death
+US37 - Total number of recent survivors:  0
+No Recent death with survivals within last 30 days
+US38 - Total number of Upcoming birthdays:  0
+No upcoming birthday in the next 30 days.
+US39 - Total number of upcoming anniversaries within 30 days:  0
+US39 - No anniversary in the next 30 days
 US42 - Check for valid date: 
 US42 - check for 2/30/2018 is valid:  False
 US42 - check for 2/29/2018 is valid:  False

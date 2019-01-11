@@ -71,7 +71,7 @@ def multiple_births(family_data, individual_data):
     return multiple_births
 
 def validate_male_lastname(individual_data, family_data):
-    # US16 --- All male members of the family should have the same last name
+    """US16 --- All male members of the family should have the same last name"""
     def firstname_lastname_list(name):
         names_list = name.split(" ")
         return names_list
@@ -92,7 +92,7 @@ def validate_male_lastname(individual_data, family_data):
     return invaild_lastname_error
 
 def validate_unique_name_birthdate(individual_data):
-    # US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file
+    """US23 --- No more than one individual with the same name and birth date should appear in a GEDCOM file"""
 
     all_names_birthdate_dict = dict()
     uniq_all_names_birthdate_dict = dict()
@@ -214,7 +214,7 @@ def correct_gender_for_role(family_data, individual_data):
 
 def unique_first_names(family_data, individual_data):
     """ US25 - No more than one child with the same name and birth date should
-    appear in a family """
+    appear in a family  add new"""
 
     problem_families = set()
 
