@@ -214,7 +214,7 @@ def correct_gender_for_role(family_data, individual_data):
 
 def unique_first_names(family_data, individual_data):
     """ US25 - No more than one child with the same name and birth date should
-    appear in a family  add new"""
+    appear in a family  """
 
     problem_families = set()
 
